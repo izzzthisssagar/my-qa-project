@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA Mastery — Don't watch testing. Do it.</title>
+<meta name="description" content="Learn QA by doing: hunt real bugs, design real tests, write real automation. Interactive lessons for future QA engineers and leads.">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-2: #161b22;
+    --card: #1c2330;
+    --border: #2d3748;
+    --text: #e6edf3;
+    --muted: #8b97a8;
+    --accent: #2dd4a7;
+    --accent-dark: #1aa583;
+    --red: #f4607a;
+    --amber: #f0b429;
+    --radius: 14px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 72px 0; }
+  h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.15; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .kicker { color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.12em; margin-bottom: 10px; }
+  .sub { color: var(--muted); font-size: 1.06rem; max-width: 640px; }
+  .btn { display: inline-block; background: var(--accent); color: #06281f; font-weight: 700; padding: 13px 26px; border-radius: 10px; text-decoration: none; border: none; font-size: 1rem; cursor: pointer; transition: transform .12s, background .12s; }
+  .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+  .pill { display: inline-block; background: var(--bg-2); border: 1px solid var(--border); color: var(--muted); border-radius: 999px; padding: 4px 12px; font-size: 0.8rem; margin: 0 6px 8px 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* Hero */
+  .hero { padding: 96px 0 72px; background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(45,212,167,.13), transparent); text-align: center; }
+  .hero .sub { margin: 18px auto 30px; }
+  .hero .hint { color: var(--muted); font-size: .85rem; margin-top: 14px; }
+
+  /* Boundary slider widget */
+  .numberline { position: relative; height: 14px; border-radius: 7px; background: #2a3242; margin: 26px 0 8px; overflow: hidden; }
+  .numberline .seg { position: absolute; top: 0; bottom: 0; opacity: .85; }
+  .nl-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: .8rem; margin-bottom: 18px; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+  .qty-demo { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 18px; }
+  .qty-box { font-size: 1.6rem; font-weight: 800; background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 22px; min-width: 92px; text-align: center; }
+  .verdict { font-size: 1.05rem; font-weight: 700; padding: 8px 16px; border-radius: 8px; }
+  .verdict.ok { background: rgba(45,212,167,.12); color: var(--accent); }
+  .verdict.bad { background: rgba(244,96,122,.12); color: var(--red); }
+  .bugbanner { display: none; margin-top: 20px; border: 1px solid var(--accent); background: rgba(45,212,167,.07); border-radius: 10px; padding: 16px 20px; }
+  .bugbanner.show { display: block; animation: pop .35s ease; }
+  @keyframes pop { 0% { transform: scale(.96); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+  .explored { color: var(--muted); font-size: .82rem; margin-top: 10px; }
+
+  /* Bug hunt form */
+  .form-row { margin-bottom: 14px; }
+  .form-row label { display: block; font-size: .86rem; color: var(--muted); margin-bottom: 5px; }
+  .form-row input { width: 100%; background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: 11px 13px; font-size: .95rem; }
+  .form-row input:focus { outline: none; border-color: var(--accent); }
+  .terms { display: flex; gap: 9px; align-items: center; font-size: .88rem; color: var(--muted); }
+  .formerr { color: var(--red); font-size: .82rem; min-height: 1.1em; margin-top: 4px; }
+  .hunt-status { margin-top: 16px; }
+  .found-list { list-style: none; margin-top: 10px; }
+  .found-list li { padding: 7px 12px; border-radius: 8px; margin-bottom: 6px; background: var(--bg-2); border: 1px solid var(--border); color: var(--muted); font-size: .88rem; }
+  .found-list li.got { border-color: var(--accent); color: var(--text); }
+  .success-msg { display: none; color: var(--accent); font-weight: 700; margin-top: 10px; }
+
+  /* Curriculum */
+  .mod { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .mod:last-child { border-bottom: none; }
+  .mod .n { color: var(--accent); font-weight: 800; min-width: 38px; }
+  .mod .d { color: var(--muted); font-size: .9rem; }
+
+  /* Waitlist */
+  .waitlist { text-align: center; background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .wl-form { display: flex; gap: 10px; max-width: 460px; margin: 26px auto 0; }
+  .wl-form input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; color: var(--text); padding: 13px 15px; font-size: 1rem; }
+  @media (max-width: 520px) { .wl-form { flex-direction: column; } }
+  footer { padding: 36px 0; text-align: center; color: var(--muted); font-size: .85rem; }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">QA Mastery · Early Access</div>
+    <h1>Don't watch testing.<br>Do it.</h1>
+    <p class="sub">Interactive QA lessons where you hunt real bugs, design real test cases, and write real Selenium + Java automation — and get graded like you would on the job. From zero to QA engineer, and eventually to QA lead.</p>
+    <a href="#waitlist" class="btn">Join the early-access waitlist</a>
+    <div class="hint">↓ Or try two real lessons below — no signup needed</div>
+  </div>
+</header>
+
+<!-- ============ WIDGET 1: BOUNDARY HUNTER ============ -->
+<section id="boundary">
+  <div class="wrap">
+    <div class="kicker">Free interactive demo · Lesson A3.3</div>
+    <h2>🎯 Boundary Hunter</h2>
+    <p class="sub">This quantity field is supposed to accept <strong>1–99</strong>. Bugs don't live in the middle — they live at the edges. Drag the slider and watch what the app actually accepts. Can you find the bug?</p>
+
+    <div class="card" style="margin-top:26px;">
+      <div class="qty-demo">
+        <div>
+          <label style="color:var(--muted);font-size:.82rem;">Quantity (allowed: 1–99)</label>
+          <div class="qty-box" id="qtyVal">50</div>
+        </div>
+        <div class="verdict ok" id="verdict">✓ Accepted</div>
+      </div>
+      <div style="margin-top:24px;">
+        <input type="range" id="qtySlider" min="0" max="100" value="50" step="1" aria-label="Quantity value to test">
+        <div class="numberline" id="numberline"></div>
+        <div class="nl-labels"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+      </div>
+      <div class="explored" id="explored">Values tested: 1 / 101 — a tester who tries every value needs 101 tests. A tester who knows BVA needs 4.</div>
+      <div class="bugbanner" id="bugBanner">
+        <strong>🐞 You just found a real bug.</strong><br>
+        <span style="color:var(--muted)">The spec says 1–99, but the app accepted <strong>0</strong> — a classic off-by-one: the developer wrote <code>qty &gt; -1</code> instead of <code>qty &gt;= 1</code>. Boundary Value Analysis finds this with just 4 tests: <strong>0, 1, 99, 100</strong>. That's what the full lesson teaches.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WIDGET 2: FIND THE BUG ============ -->
+<section id="bughunt" style="padding-top:0;">
+  <div class="wrap">
+    <div class="kicker">Free interactive demo · Lesson A4.4</div>
+    <h2>🔍 Find the Bug</h2>
+    <p class="sub">This signup form has <strong>3 real bugs</strong> hidden in it — the same bugs that ship to production every day. Test it like a QA would. Hints unlock if you get stuck.</p>
+
+    <div class="grid2" style="margin-top:26px;">
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Create your account <span style="color:var(--muted);font-weight:400;font-size:.8rem;">(demo store)</span></h3>
+        <form id="signupForm" novalidate>
+          <div class="form-row">
+            <label for="suName">Full name</label>
+            <input type="text" id="suName" autocomplete="off">
+            <div class="formerr" id="errName"></div>
+          </div>
+          <div class="form-row">
+            <label for="suEmail">Email</label>
+            <input type="text" id="suEmail" autocomplete="off">
+            <div class="formerr" id="errEmail"></div>
+          </div>
+          <div class="form-row">
+            <label for="suPass">Password</label>
+            <input type="password" id="suPass">
+            <div class="formerr" id="errPass"></div>
+          </div>
+          <div class="form-row">
+            <label for="suConfirm">Confirm password</label>
+            <input type="password" id="suConfirm">
+            <div class="formerr" id="errConfirm"></div>
+          </div>
+          <div class="form-row terms">
+            <input type="checkbox" id="suTerms" style="width:auto;">
+            <label for="suTerms" style="margin:0;">I accept the terms &amp; conditions</label>
+          </div>
+          <div class="formerr" id="errTerms"></div>
+          <button type="submit" class="btn" style="width:100%;margin-top:8px;">Create account</button>
+          <div class="success-msg" id="signupOk">✓ Account created (demo)</div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Your hunt</h3>
+        <p style="color:var(--muted);font-size:.9rem;margin-top:6px;">Bugs found: <strong id="foundCount">0</strong> / 3</p>
+        <ul class="found-list">
+          <li id="bug1">❓ Bug #1 — hidden in the email field</li>
+          <li id="bug2">❓ Bug #2 — hidden around the password pair</li>
+          <li id="bug3">❓ Bug #3 — hidden in how the form submits</li>
+        </ul>
+        <div style="margin-top:16px;">
+          <button class="btn ghost" type="button" id="hintBtn">Need a hint?</button>
+          <p id="hintText" style="color:var(--amber);font-size:.88rem;margin-top:10px;min-height:1.2em;"></p>
+        </div>
+        <div class="bugbanner" id="allFound">
+          <strong>🏆 3 / 3 — you think like a tester.</strong><br>
+          <span style="color:var(--muted)">In the full course you'd now write a graded bug report for each of these — title, repro steps, severity — and get feedback like a real dev team would give. <a href="#waitlist" style="color:var(--accent)">Join the waitlist →</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CURRICULUM ============ -->
+<section id="curriculum" style="padding-top:0;">
+  <div class="wrap">
+    <div class="kicker">What you'll learn</div>
+    <h2>A real path, not a playlist</h2>
+    <p class="sub">Two deep tracks at launch. Every lesson: see it visually → try it guided → do it on a real practice app → get graded.</p>
+    <div class="grid2" style="margin-top:26px;">
+      <div class="card">
+        <h3 style="margin-bottom:10px;">Track A — Manual Testing</h3>
+        <div class="mod"><div class="n">A1</div><div>How software is built (and breaks)<div class="d">SDLC · STLC · bug lifecycle · cost of bugs</div></div></div>
+        <div class="mod"><div class="n">A2</div><div>Testing fundamentals<div class="d">Levels · types · black/white box · 7 principles, live</div></div></div>
+        <div class="mod"><div class="n">A3</div><div>Test design techniques<div class="d">EP · BVA · decision tables · state transitions</div></div></div>
+        <div class="mod"><div class="n">A4</div><div>Test cases, bug reports &amp; tools<div class="d">Jira · triage · the graded Bug Hunt</div></div></div>
+        <div class="mod"><div class="n">A5</div><div>Real-world QA + capstone<div class="d">Exploratory · regression · full test cycle on a real release</div></div></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:10px;">Track B — Automation (Selenium + Java)</h3>
+        <div class="mod"><div class="n">B0</div><div>Just enough Java<div class="d">The OOP subset automation actually uses</div></div></div>
+        <div class="mod"><div class="n">B1</div><div>How automation works<div class="d">DOM · locators as a game · what WebDriver really does</div></div></div>
+        <div class="mod"><div class="n">B2</div><div>Selenium WebDriver core<div class="d">Write &amp; run real tests in your browser — zero setup</div></div></div>
+        <div class="mod"><div class="n">B3</div><div>TestNG + framework structure<div class="d">Page Object Model done right · Maven</div></div></div>
+        <div class="mod"><div class="n">B4</div><div>Good practices + capstone<div class="d">Data-driven · reporting · a 15-test graded suite</div></div></div>
+      </div>
+    </div>
+    <p style="margin-top:22px;">
+      <span class="pill">Coming later</span>
+      <span class="pill">API testing</span><span class="pill">Git &amp; GitHub</span><span class="pill">SQL / DB testing</span><span class="pill">CI/CD</span><span class="pill">Performance</span><span class="pill">Security</span><span class="pill">QA Lead track</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ WAITLIST ============ -->
+<section class="waitlist" id="waitlist">
+  <div class="wrap">
+    <div class="kicker">Early access</div>
+    <h2>Be a founding learner</h2>
+    <p class="sub" style="margin:10px auto 0;">Free early access for the first cohort, founding-member pricing forever, and a direct line to shape the curriculum. No spam — build updates only.</p>
+    <form class="wl-form" id="wlForm" action="https://formspree.io/f/xlgkpldj" method="POST">
+      <input type="email" name="email" id="wlEmail" placeholder="you@example.com" required aria-label="Email address">
+      <button class="btn" type="submit">Join the waitlist</button>
+    </form>
+    <p class="hint" style="color:var(--muted);font-size:.82rem;margin-top:12px;" id="wlNote"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">QA Mastery (working name) · Built by a QA, for future QAs · © 2026</div>
+</footer>
+
+<script>
+/* ================= Boundary Hunter ================= */
+(function () {
+  const slider = document.getElementById('qtySlider');
+  const qtyVal = document.getElementById('qtyVal');
+  const verdict = document.getElementById('verdict');
+  const numberline = document.getElementById('numberline');
+  const explored = document.getElementById('explored');
+  const bugBanner = document.getElementById('bugBanner');
+  const tested = new Set([50]);
+  let bugFound = false;
+
+  // THE SEEDED BUG (BS-007 class): spec says 1-99, but app accepts 0 (off-by-one).
+  function appAccepts(v) { return v > -1 && v <= 99; }   // dev wrote > -1 instead of >= 1
+  function specAccepts(v) { return v >= 1 && v <= 99; }
+
+  function paint() {
+    numberline.innerHTML = '';
+    tested.forEach(v => {
+      const seg = document.createElement('div');
+      seg.className = 'seg';
+      seg.style.left = (v / 100 * 100) + '%';
+      seg.style.width = '1%';
+      seg.style.background = appAccepts(v) ? 'var(--accent)' : 'var(--red)';
+      numberline.appendChild(seg);
+    });
+  }
+
+  function update() {
+    const v = parseInt(slider.value, 10);
+    tested.add(v);
+    qtyVal.textContent = v;
+    const ok = appAccepts(v);
+    verdict.textContent = ok ? '✓ Accepted' : '✗ Rejected';
+    verdict.className = 'verdict ' + (ok ? 'ok' : 'bad');
+    explored.textContent = 'Values tested: ' + tested.size + ' / 101 — a tester who tries every value needs 101 tests. A tester who knows BVA needs 4.';
+    paint();
+    // The reveal: app accepts a value the spec forbids
+    if (!bugFound && ok !== specAccepts(v)) {
+      bugFound = true;
+      bugBanner.classList.add('show');
+    }
+  }
+  slider.addEventListener('input', update);
+  update();
+})();
+
+/* ================= Find the Bug ================= */
+(function () {
+  const form = document.getElementById('signupForm');
+  const name = document.getElementById('suName');
+  const email = document.getElementById('suEmail');
+  const pass = document.getElementById('suPass');
+  const confirm = document.getElementById('suConfirm');
+  const terms = document.getElementById('suTerms');
+  const ok = document.getElementById('signupOk');
+  const found = { b1: false, b2: false, b3: false };
+  let confirmWasPasted = false;
+  let lastSubmitTs = 0;
+
+  confirm.addEventListener('paste', () => { confirmWasPasted = true; });
+  confirm.addEventListener('input', (e) => { if (e.inputType && e.inputType !== 'insertFromPaste') confirmWasPasted = false; });
+
+  function setErr(id, msg) { document.getElementById(id).textContent = msg || ''; }
+  function markFound(key, elId, label) {
+    if (found[key]) return;
+    found[key] = true;
+    const li = document.getElementById(elId);
+    li.classList.add('got');
+    li.textContent = '🐞 ' + label;
+    const n = Object.values(found).filter(Boolean).length;
+    document.getElementById('foundCount').textContent = n;
+    if (n === 3) document.getElementById('allFound').classList.add('show');
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    ok.style.display = 'none';
+    setErr('errName'); setErr('errEmail'); setErr('errPass'); setErr('errConfirm'); setErr('errTerms');
+    const now = Date.now();
+    const isDoubleClick = (now - lastSubmitTs) < 450;   // BUG 3 window
+    lastSubmitTs = now;
+
+    let valid = true;
+
+    if (!name.value.trim()) { setErr('errName', 'Name is required.'); valid = false; }
+
+    // BUG 1 (BS-001 class): naive regex — accepts "a@@b..com" etc.
+    const emailV = email.value.trim();
+    const naiveEmailOk = /\S+@\S+/.test(emailV);
+    if (!emailV) { setErr('errEmail', 'Email is required.'); valid = false; }
+    else if (!naiveEmailOk) { setErr('errEmail', 'Enter a valid email.'); valid = false; }
+    const emailObviouslyBroken = /@@|\.\.|@\.|\s/.test(emailV) || emailV.split('@').length > 2 || !/\.[a-z]{2,}$/i.test(emailV);
+
+    if (pass.value.length < 6) {
+      // intentional wrong-field message (BS-002 flavor, not counted in the 3)
+      setErr('errPass', 'Username is invalid.');
+      valid = false;
+    }
+
+    // BUG 2 (BS-003 class): paste into confirm bypasses the match check
+    if (!confirmWasPasted && confirm.value !== pass.value) {
+      setErr('errConfirm', 'Passwords do not match.');
+      valid = false;
+    }
+
+    // BUG 3 (BS-004 class): double-click submit bypasses terms check
+    if (!terms.checked && !isDoubleClick) {
+      setErr('errTerms', 'You must accept the terms.');
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    // "Account created" — now detect which bug (if any) the tester exploited
+    ok.style.display = 'block';
+    if (naiveEmailOk && emailObviouslyBroken) {
+      markFound('b1', 'bug1', 'Bug #1 — broken email validation accepted "' + emailV + '"');
+    }
+    if (confirmWasPasted && confirm.value !== pass.value) {
+      markFound('b2', 'bug2', 'Bug #2 — pasting into Confirm bypassed the match check');
+    }
+    if (!terms.checked) {
+      markFound('b3', 'bug3', 'Bug #3 — double-click submit skipped the terms check');
+    }
+  });
+
+  // Hints ladder
+  const hints = [
+    'Hint 1: Try being rude to the email field. What does a clearly-invalid email look like?',
+    'Hint 2: Type a password, then PASTE something different into Confirm password.',
+    'Hint 3: Leave the terms box unchecked and click Create account twice, fast.'
+  ];
+  let hintIdx = 0;
+  document.getElementById('hintBtn').addEventListener('click', () => {
+    document.getElementById('hintText').textContent = hints[Math.min(hintIdx, hints.length - 1)];
+    hintIdx++;
+  });
+})();
+
+/* ================= Waitlist note ================= */
+(function () {
+  const form = document.getElementById('wlForm');
+  if (form.action.includes('YOUR_FORM_ID')) {
+    document.getElementById('wlNote').textContent = '(Owner setup pending: connect Formspree — see README. Submissions are disabled until then.)';
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('wlNote').textContent = 'Form not connected yet — replace YOUR_FORM_ID in index.html with your Formspree ID (README has the 3-step guide).';
+    });
+  }
+})();
+</script>
+</body>
+</html>
