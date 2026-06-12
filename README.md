@@ -29,5 +29,5 @@ tester, plus the early plan for a QA learning platform I'm building.
 
 ## Knowledge graph
 
-The notes are indexed into a graph (142 concepts, 13 topic clusters). Open
+The notes are indexed into a graph (227 concepts, 15 topic clusters). Open
 `graphify-out/graph.html` in a browser to explore how the QA topics connect.

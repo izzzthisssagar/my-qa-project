@@ -1,8 +1,10 @@
 # My QA Project — Knowledge Base
 
 Personal QA learning knowledge base. **Not a code repo** — a corpus of study
-notes, roadmaps, and reference material for becoming a QA / automation tester.
-No build, no tests, no git (yet).
+notes, roadmaps, and reference material for becoming a QA / automation tester —
+plus an early product plan (`QA-Learning-Platform-Plan.md` + `Product/`) for a
+QA learning platform built from these notes. No build, no tests. Versioned in
+git, pushed to public GitHub repo `izzzthisssagar/my-qa-project`.
 
 ## What this is
 
@@ -62,9 +64,8 @@ My Qa Projecct/
 - `Resources/Unconfirmed 172025.crdownload` — 9.4MB partial/aborted Chrome
   download. Likely junk; confirm before removing.
 - `final CSS in Web Development (2).pdf` — byte-identical duplicate of `(1)`.
-- `.DS_Store` files — macOS cruft.
-- No git repo. If versioning is wanted: `git init` + a `.gitignore` for
-  `.DS_Store` / `*.crdownload`.
+- `.DS_Store` files — macOS cruft (gitignored).
+- Zips, partial downloads, duplicate site folder — gitignored, see `.gitignore`.
 
 ## Knowledge graph
 
