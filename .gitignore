@@ -7,6 +7,8 @@
 # Build / deploy artifacts (zips, temp deploy bundles)
 *.zip
 Product/ziuzDgtq
+# Duplicate of landing-site/ (extracted from qa-mastery-site.zip)
+Product/qa-mastery-site/
 
 # Duplicate file
 Resources/final CSS in Web Development (2).pdf
