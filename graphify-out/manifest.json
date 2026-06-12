@@ -5,9 +5,9 @@
     "semantic_hash": "eda209ec7abda6b05bd59217aa2eb566"
   },
   "/Users/sajanathapa/Desktop/My Qa Projecct/QA-Learning-Platform-Plan.md": {
-    "mtime": 1781197959.3053627,
-    "ast_hash": "71af896430c80aa2f7523d424ad62095",
-    "semantic_hash": "71af896430c80aa2f7523d424ad62095"
+    "mtime": 1781228929.4827924,
+    "ast_hash": "57214154ed32e8f4f22abcf03ef0a26b",
+    "semantic_hash": "57214154ed32e8f4f22abcf03ef0a26b"
   },
   "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/API.md": {
     "mtime": 1781196064.2551465,
@@ -25,9 +25,9 @@
     "semantic_hash": "20ce76ec6a59398ba4cb60f191fea592"
   },
   "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/HTTP Fundamentals for API Testing.md": {
-    "mtime": 1781196295.5696776,
-    "ast_hash": "18cce9158ad74ec4a64b9287ab108449",
-    "semantic_hash": "18cce9158ad74ec4a64b9287ab108449"
+    "mtime": 1781228875.9285169,
+    "ast_hash": "9ae76d48d8185c2c0bc8a51f8cbc5e7d",
+    "semantic_hash": "9ae76d48d8185c2c0bc8a51f8cbc5e7d"
   },
   "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/PHASE 1 \u2014 JAVA ESSENTIALS FOR SELENIUM.md": {
     "mtime": 1781196110.2311034,
@@ -83,5 +83,50 @@
     "mtime": 1781153165.808757,
     "ast_hash": "f21347502fa4476cafdedb995e74c207",
     "semantic_hash": "f21347502fa4476cafdedb995e74c207"
+  },
+  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/BuggyShop-Spec.md": {
+    "mtime": 1781228932.221353,
+    "ast_hash": "842bc22c24fc09480dc8a667b5c59928",
+    "semantic_hash": "842bc22c24fc09480dc8a667b5c59928"
+  },
+  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md": {
+    "mtime": 1781229025.3630044,
+    "ast_hash": "9f11b340afa24f70b5da843054c5039c",
+    "semantic_hash": "9f11b340afa24f70b5da843054c5039c"
+  },
+  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md": {
+    "mtime": 1781229072.5975156,
+    "ast_hash": "08e101aa8debeb87b07e30deed2a2d69",
+    "semantic_hash": "08e101aa8debeb87b07e30deed2a2d69"
+  },
+  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md": {
+    "mtime": 1781229118.998332,
+    "ast_hash": "5275caa5521b85ddc7813e779e42c437",
+    "semantic_hash": "5275caa5521b85ddc7813e779e42c437"
+  },
+  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Track-A-Manual-Testing-Outline.md": {
+    "mtime": 1781198086.8626435,
+    "ast_hash": "a92c3f279545b96c36b938b84fd4ad4e",
+    "semantic_hash": "a92c3f279545b96c36b938b84fd4ad4e"
+  },
+  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Week4-Promotion-Kit.md": {
+    "mtime": 1781230403.8296702,
+    "ast_hash": "5ddbd6e4f9a867e6cb7a9ae4e16e6419",
+    "semantic_hash": "5ddbd6e4f9a867e6cb7a9ae4e16e6419"
+  },
+  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/landing-site/README.md": {
+    "mtime": 1781229358.461763,
+    "ast_hash": "f45990d15c38fd8c19f097d4fcd36a19",
+    "semantic_hash": "f45990d15c38fd8c19f097d4fcd36a19"
+  },
+  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/landing-site/index.html": {
+    "mtime": 1781230109.48907,
+    "ast_hash": "1c3f6a54cac8ed3b459d8a6910232a2e",
+    "semantic_hash": "1c3f6a54cac8ed3b459d8a6910232a2e"
+  },
+  "/Users/sajanathapa/Desktop/My Qa Projecct/README.md": {
+    "mtime": 1781228694.5107653,
+    "ast_hash": "21d95f9c38fef14ab2bdbeca81ae99da",
+    "semantic_hash": "21d95f9c38fef14ab2bdbeca81ae99da"
   }
 }

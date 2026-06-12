@@ -4,133 +4,69 @@
   "graph": {
     "hyperedges": [
       {
-        "id": "rest_constraints_set",
-        "label": "REST Architectural Constraints",
+        "id": "bva_lesson_bs008_price_filter",
+        "label": "BVA lesson teaches BVA via BuggyShop price filter and BS-008",
         "nodes": [
-          "resources_api_rest",
-          "resources_api_stateless",
-          "resources_api_cacheable",
-          "resources_api_uniform_interface",
-          "resources_api_client_server"
-        ],
-        "relation": "form",
-        "confidence": "INFERRED",
-        "confidence_score": 0.95,
-        "source_file": "Resources/API.md"
-      },
-      {
-        "id": "defect_management_flow",
-        "label": "Defect Management Flow",
-        "nodes": [
-          "phase_2_core_testing_skills_days_21_45_defect",
-          "phase_2_core_testing_skills_days_21_45_bug_life_cycle",
-          "phase_2_core_testing_skills_days_21_45_severity",
-          "phase_2_core_testing_skills_days_21_45_priority",
-          "phase_2_core_testing_skills_days_21_45_bug_report",
-          "phase_2_core_testing_skills_days_21_45_jira"
+          "sample_lessons_lesson_1_bva_visual_concept_lesson",
+          "sample_lessons_lesson_1_bva_visual_concept_boundary_value_analysis",
+          "product_buggyshop_spec_bs_008"
         ],
         "relation": "participate_in",
         "confidence": "INFERRED",
         "confidence_score": 0.85,
-        "source_file": "Resources/PHASE 2_ CORE TESTING SKILLS (Days 21-45).md"
+        "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md"
       },
       {
-        "id": "test_planning_documents",
-        "label": "Test Planning Document Set",
+        "id": "a3_techniques_seeded_bugs",
+        "label": "A3 design techniques each surface a seeded BuggyShop bug",
         "nodes": [
-          "phase_2_core_testing_skills_days_21_45_test_strategy",
-          "phase_2_core_testing_skills_days_21_45_test_plan",
-          "phase_2_core_testing_skills_days_21_45_entry_criteria",
-          "phase_2_core_testing_skills_days_21_45_exit_criteria",
-          "phase_2_core_testing_skills_days_21_45_rtm"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "Resources/PHASE 2_ CORE TESTING SKILLS (Days 21-45).md"
-      },
-      {
-        "id": "automation_stack_flow",
-        "label": "Selenium Automation Stack (Java to CI/CD)",
-        "nodes": [
-          "resources_java_essentials",
-          "resources_selenium_webdriver",
-          "resources_testng",
-          "resources_page_object_model",
-          "resources_github_actions"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.95,
-        "source_file": "Resources/SELENIUM + JAVA AUTOMATION TESTING ROADMAP.md"
-      },
-      {
-        "id": "platform_v1_curriculum",
-        "label": "V1 Platform Curriculum Sourced from Roadmaps",
-        "nodes": [
-          "qa_learning_platform_plan_v1_scope",
-          "resources_qa_module",
-          "resources_selenium_roadmap",
-          "qa_learning_platform_plan_buggyshop"
-        ],
-        "relation": "form",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "QA-Learning-Platform-Plan.md"
-      },
-      {
-        "id": "ams_realtime_features",
-        "label": "AMS Real-Time Feature Test Focus",
-        "nodes": [
-          "resources_ams_notification_system",
-          "resources_ams_auto_refresh",
-          "resources_test_plan_ams"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "Resources/Test plan report  for AMS (1).md"
-      },
-      {
-        "id": "semantic_document_structure",
-        "label": "Semantic Document Structure and Accessibility",
-        "nodes": [
-          "resources_final_html_in_web_development_1_semantic_html",
-          "resources_final_html_in_web_development_1_semantic_elements",
-          "resources_final_html_in_web_development_1_accessibility",
-          "resources_final_html_in_web_development_1_seo"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "Resources/final HTML in Web Development (1).pdf"
-      },
-      {
-        "id": "css_layout_systems",
-        "label": "CSS Responsive Layout Systems",
-        "nodes": [
-          "resources_final_css_in_web_development_1_flexbox",
-          "resources_final_css_in_web_development_1_css_grid",
-          "resources_final_css_in_web_development_1_media_queries",
-          "resources_final_css_in_web_development_1_container_queries"
-        ],
-        "relation": "form",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "Resources/final CSS in Web Development (1).pdf"
-      },
-      {
-        "id": "html_css_ui_foundation",
-        "label": "HTML/CSS UI Foundation",
-        "nodes": [
-          "resources_final_html_in_web_development_1_html",
-          "resources_final_css_in_web_development_1_css",
-          "resources_final_css_in_web_development_1_separation_of_concerns"
+          "product_track_a_manual_testing_outline_module_a3",
+          "product_buggyshop_spec_seeded_bug",
+          "product_buggyshop_spec_buggyshop"
         ],
         "relation": "participate_in",
         "confidence": "INFERRED",
         "confidence_score": 0.75,
-        "source_file": "Resources/final CSS in Web Development (1).pdf"
+        "source_file": "Product/Track-A-Manual-Testing-Outline.md"
+      },
+      {
+        "id": "landing_site_validation_flow",
+        "label": "Landing-site validation loop (markets plan, drives waitlist, feeds kill/continue gate)",
+        "nodes": [
+          "landing_site_index_landing_page",
+          "qa_learning_platform_plan_positioning",
+          "qa_learning_platform_plan_validation_gate"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "Product/landing-site/README.md"
+      },
+      {
+        "id": "http_request_response_cycle",
+        "label": "HTTP request-response cycle (methods over client-server yielding status codes)",
+        "nodes": [
+          "resources_http_fundamentals_for_api_testing_http_methods",
+          "resources_http_fundamentals_for_api_testing_client_server_model",
+          "resources_http_fundamentals_for_api_testing_status_codes"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "Resources/HTTP Fundamentals for API Testing.md"
+      },
+      {
+        "id": "interactive_lesson_pattern",
+        "label": "Interactive lesson pattern (visual widget -> BuggyShop lab -> graded)",
+        "nodes": [
+          "qa_learning_platform_plan_differentiator",
+          "landing_site_index_boundary_hunter",
+          "landing_site_index_find_the_bug"
+        ],
+        "relation": "implement",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "Product/landing-site/index.html"
       }
     ]
   },
@@ -144,9 +80,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_full_modules_notes_for_qa_software_testing",
-      "community": 6,
-      "norm_label": "software testing"
+      "community": 8,
+      "norm_label": "software testing",
+      "id": "resources_full_modules_notes_for_qa_software_testing"
     },
     {
       "label": "Testing vs Debugging",
@@ -157,9 +93,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_full_modules_notes_for_qa_testing_vs_debugging",
-      "community": 6,
-      "norm_label": "testing vs debugging"
+      "community": 8,
+      "norm_label": "testing vs debugging",
+      "id": "resources_full_modules_notes_for_qa_testing_vs_debugging"
     },
     {
       "label": "Types of Defects",
@@ -170,9 +106,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_full_modules_notes_for_qa_defect_types",
-      "community": 0,
-      "norm_label": "types of defects"
+      "community": 2,
+      "norm_label": "types of defects",
+      "id": "resources_full_modules_notes_for_qa_defect_types"
     },
     {
       "label": "Role of QA in Modern Development",
@@ -183,9 +119,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_full_modules_notes_for_qa_qa_role",
-      "community": 6,
-      "norm_label": "role of qa in modern development"
+      "community": 8,
+      "norm_label": "role of qa in modern development",
+      "id": "resources_full_modules_notes_for_qa_qa_role"
     },
     {
       "label": "Software Development Life Cycle (SDLC)",
@@ -196,9 +132,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_full_modules_notes_for_qa_sdlc",
-      "community": 6,
-      "norm_label": "software development life cycle (sdlc)"
+      "community": 8,
+      "norm_label": "software development life cycle (sdlc)",
+      "id": "resources_full_modules_notes_for_qa_sdlc"
     },
     {
       "label": "Cost Multiplier of Defects",
@@ -209,9 +145,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_full_modules_notes_for_qa_cost_of_defect",
-      "community": 6,
-      "norm_label": "cost multiplier of defects"
+      "community": 8,
+      "norm_label": "cost multiplier of defects",
+      "id": "resources_full_modules_notes_for_qa_cost_of_defect"
     },
     {
       "label": "Shift-Left Testing",
@@ -222,9 +158,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_full_modules_notes_for_qa_shift_left",
-      "community": 6,
-      "norm_label": "shift-left testing"
+      "community": 8,
+      "norm_label": "shift-left testing",
+      "id": "resources_full_modules_notes_for_qa_shift_left"
     },
     {
       "label": "Shift-Right Testing",
@@ -235,9 +171,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_full_modules_notes_for_qa_shift_right",
-      "community": 6,
-      "norm_label": "shift-right testing"
+      "community": 8,
+      "norm_label": "shift-right testing",
+      "id": "resources_full_modules_notes_for_qa_shift_right"
     },
     {
       "label": "Test Plan",
@@ -248,9 +184,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_test_plan",
-      "community": 7,
-      "norm_label": "test plan"
+      "community": 6,
+      "norm_label": "test plan",
+      "id": "phase_2_core_testing_skills_days_21_45_test_plan"
     },
     {
       "label": "IEEE 829 Test Plan Template",
@@ -261,9 +197,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_ieee_829",
-      "community": 7,
-      "norm_label": "ieee 829 test plan template"
+      "community": 6,
+      "norm_label": "ieee 829 test plan template",
+      "id": "phase_2_core_testing_skills_days_21_45_ieee_829"
     },
     {
       "label": "Test Strategy",
@@ -274,9 +210,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_test_strategy",
-      "community": 6,
-      "norm_label": "test strategy"
+      "community": 8,
+      "norm_label": "test strategy",
+      "id": "phase_2_core_testing_skills_days_21_45_test_strategy"
     },
     {
       "label": "Entry Criteria",
@@ -287,9 +223,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_entry_criteria",
-      "community": 7,
-      "norm_label": "entry criteria"
+      "community": 6,
+      "norm_label": "entry criteria",
+      "id": "phase_2_core_testing_skills_days_21_45_entry_criteria"
     },
     {
       "label": "Exit Criteria",
@@ -300,9 +236,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_exit_criteria",
-      "community": 7,
-      "norm_label": "exit criteria"
+      "community": 6,
+      "norm_label": "exit criteria",
+      "id": "phase_2_core_testing_skills_days_21_45_exit_criteria"
     },
     {
       "label": "Suspension Criteria",
@@ -313,9 +249,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_suspension_criteria",
-      "community": 7,
-      "norm_label": "suspension criteria"
+      "community": 6,
+      "norm_label": "suspension criteria",
+      "id": "phase_2_core_testing_skills_days_21_45_suspension_criteria"
     },
     {
       "label": "Resumption Criteria",
@@ -326,9 +262,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_resumption_criteria",
-      "community": 7,
-      "norm_label": "resumption criteria"
+      "community": 6,
+      "norm_label": "resumption criteria",
+      "id": "phase_2_core_testing_skills_days_21_45_resumption_criteria"
     },
     {
       "label": "Risk-Based Testing",
@@ -339,9 +275,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_risk_based_testing",
-      "community": 6,
-      "norm_label": "risk-based testing"
+      "community": 8,
+      "norm_label": "risk-based testing",
+      "id": "phase_2_core_testing_skills_days_21_45_risk_based_testing"
     },
     {
       "label": "Risk Assessment Matrix",
@@ -352,9 +288,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_risk_assessment_matrix",
-      "community": 6,
-      "norm_label": "risk assessment matrix"
+      "community": 8,
+      "norm_label": "risk assessment matrix",
+      "id": "phase_2_core_testing_skills_days_21_45_risk_assessment_matrix"
     },
     {
       "label": "Requirements Traceability Matrix (RTM)",
@@ -365,9 +301,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_rtm",
-      "community": 0,
-      "norm_label": "requirements traceability matrix (rtm)"
+      "community": 6,
+      "norm_label": "requirements traceability matrix (rtm)",
+      "id": "phase_2_core_testing_skills_days_21_45_rtm"
     },
     {
       "label": "Requirements (BRS, FRS, SRS)",
@@ -378,9 +314,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_requirements_brs_frs_srs",
-      "community": 0,
-      "norm_label": "requirements (brs, frs, srs)"
+      "community": 6,
+      "norm_label": "requirements (brs, frs, srs)",
+      "id": "phase_2_core_testing_skills_days_21_45_requirements_brs_frs_srs"
     },
     {
       "label": "Defect / Bug",
@@ -391,9 +327,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_defect",
-      "community": 0,
-      "norm_label": "defect / bug"
+      "community": 9,
+      "norm_label": "defect / bug",
+      "id": "phase_2_core_testing_skills_days_21_45_defect"
     },
     {
       "label": "Bug Life Cycle",
@@ -404,9 +340,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_bug_life_cycle",
-      "community": 0,
-      "norm_label": "bug life cycle"
+      "community": 9,
+      "norm_label": "bug life cycle",
+      "id": "phase_2_core_testing_skills_days_21_45_bug_life_cycle"
     },
     {
       "label": "Severity",
@@ -417,9 +353,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_severity",
-      "community": 0,
-      "norm_label": "severity"
+      "community": 9,
+      "norm_label": "severity",
+      "id": "phase_2_core_testing_skills_days_21_45_severity"
     },
     {
       "label": "Priority",
@@ -430,9 +366,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_priority",
-      "community": 0,
-      "norm_label": "priority"
+      "community": 9,
+      "norm_label": "priority",
+      "id": "phase_2_core_testing_skills_days_21_45_priority"
     },
     {
       "label": "Bug Report",
@@ -443,9 +379,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_bug_report",
-      "community": 0,
-      "norm_label": "bug report"
+      "community": 9,
+      "norm_label": "bug report",
+      "id": "phase_2_core_testing_skills_days_21_45_bug_report"
     },
     {
       "label": "JIRA",
@@ -456,9 +392,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_jira",
-      "community": 0,
-      "norm_label": "jira"
+      "community": 9,
+      "norm_label": "jira",
+      "id": "phase_2_core_testing_skills_days_21_45_jira"
     },
     {
       "label": "Defect Metrics & KPIs",
@@ -469,9 +405,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_defect_metrics",
-      "community": 0,
-      "norm_label": "defect metrics & kpis"
+      "community": 9,
+      "norm_label": "defect metrics & kpis",
+      "id": "phase_2_core_testing_skills_days_21_45_defect_metrics"
     },
     {
       "label": "Smoke Testing",
@@ -482,9 +418,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_smoke_testing",
-      "community": 12,
-      "norm_label": "smoke testing"
+      "community": 14,
+      "norm_label": "smoke testing",
+      "id": "phase_2_core_testing_skills_days_21_45_smoke_testing"
     },
     {
       "label": "Sanity Testing",
@@ -495,9 +431,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_sanity_testing",
-      "community": 12,
-      "norm_label": "sanity testing"
+      "community": 14,
+      "norm_label": "sanity testing",
+      "id": "phase_2_core_testing_skills_days_21_45_sanity_testing"
     },
     {
       "label": "Regression Testing",
@@ -508,9 +444,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_regression_testing",
-      "community": 0,
-      "norm_label": "regression testing"
+      "community": 9,
+      "norm_label": "regression testing",
+      "id": "phase_2_core_testing_skills_days_21_45_regression_testing"
     },
     {
       "label": "Retesting",
@@ -521,9 +457,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_retesting",
-      "community": 0,
-      "norm_label": "retesting"
+      "community": 9,
+      "norm_label": "retesting",
+      "id": "phase_2_core_testing_skills_days_21_45_retesting"
     },
     {
       "label": "Test Environment & Test Data",
@@ -534,9 +470,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_test_environment",
-      "community": 0,
-      "norm_label": "test environment & test data"
+      "community": 6,
+      "norm_label": "test environment & test data",
+      "id": "phase_2_core_testing_skills_days_21_45_test_environment"
     },
     {
       "label": "Test Execution & Reporting",
@@ -547,9 +483,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_test_execution",
-      "community": 0,
-      "norm_label": "test execution & reporting"
+      "community": 6,
+      "norm_label": "test execution & reporting",
+      "id": "phase_2_core_testing_skills_days_21_45_test_execution"
     },
     {
       "label": "User Acceptance Testing (UAT)",
@@ -560,9 +496,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_uat",
-      "community": 7,
-      "norm_label": "user acceptance testing (uat)"
+      "community": 6,
+      "norm_label": "user acceptance testing (uat)",
+      "id": "phase_2_core_testing_skills_days_21_45_uat"
     },
     {
       "label": "Agile & Scrum",
@@ -573,9 +509,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_agile_scrum",
-      "community": 11,
-      "norm_label": "agile & scrum"
+      "community": 13,
+      "norm_label": "agile & scrum",
+      "id": "phase_2_core_testing_skills_days_21_45_agile_scrum"
     },
     {
       "label": "User Stories & Acceptance Criteria",
@@ -586,9 +522,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_user_stories",
-      "community": 11,
-      "norm_label": "user stories & acceptance criteria"
+      "community": 13,
+      "norm_label": "user stories & acceptance criteria",
+      "id": "phase_2_core_testing_skills_days_21_45_user_stories"
     },
     {
       "label": "Equivalence Partitioning",
@@ -599,9 +535,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_equivalence_partitioning",
-      "community": 7,
-      "norm_label": "equivalence partitioning"
+      "community": 6,
+      "norm_label": "equivalence partitioning",
+      "id": "phase_2_core_testing_skills_days_21_45_equivalence_partitioning"
     },
     {
       "label": "Boundary Value Analysis (BVA)",
@@ -612,9 +548,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_bva",
-      "community": 7,
-      "norm_label": "boundary value analysis (bva)"
+      "community": 6,
+      "norm_label": "boundary value analysis (bva)",
+      "id": "phase_2_core_testing_skills_days_21_45_bva"
     },
     {
       "label": "Decision Table Testing",
@@ -625,9 +561,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_decision_table",
-      "community": 0,
-      "norm_label": "decision table testing"
+      "community": 6,
+      "norm_label": "decision table testing",
+      "id": "phase_2_core_testing_skills_days_21_45_decision_table"
     },
     {
       "label": "Test Case",
@@ -638,9 +574,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "phase_2_core_testing_skills_days_21_45_test_case",
-      "community": 0,
-      "norm_label": "test case"
+      "community": 6,
+      "norm_label": "test case",
+      "id": "phase_2_core_testing_skills_days_21_45_test_case"
     },
     {
       "label": "API (Application Programming Interface)",
@@ -651,9 +587,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_api",
       "community": 2,
-      "norm_label": "api (application programming interface)"
+      "norm_label": "api (application programming interface)",
+      "id": "resources_api_api"
     },
     {
       "label": "Client-Server Architecture",
@@ -664,9 +600,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_client_server",
       "community": 2,
-      "norm_label": "client-server architecture"
+      "norm_label": "client-server architecture",
+      "id": "resources_api_client_server"
     },
     {
       "label": "REST API",
@@ -677,9 +613,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_rest",
       "community": 2,
-      "norm_label": "rest api"
+      "norm_label": "rest api",
+      "id": "resources_api_rest"
     },
     {
       "label": "REST Constraints",
@@ -690,9 +626,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_rest_constraints",
       "community": 2,
-      "norm_label": "rest constraints"
+      "norm_label": "rest constraints",
+      "id": "resources_api_rest_constraints"
     },
     {
       "label": "Stateless",
@@ -703,9 +639,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_stateless",
       "community": 2,
-      "norm_label": "stateless"
+      "norm_label": "stateless",
+      "id": "resources_api_stateless"
     },
     {
       "label": "Cacheable",
@@ -716,9 +652,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_cacheable",
       "community": 2,
-      "norm_label": "cacheable"
+      "norm_label": "cacheable",
+      "id": "resources_api_cacheable"
     },
     {
       "label": "Uniform Interface",
@@ -729,9 +665,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_uniform_interface",
       "community": 2,
-      "norm_label": "uniform interface"
+      "norm_label": "uniform interface",
+      "id": "resources_api_uniform_interface"
     },
     {
       "label": "SOAP API",
@@ -742,9 +678,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_soap",
       "community": 2,
-      "norm_label": "soap api"
+      "norm_label": "soap api",
+      "id": "resources_api_soap"
     },
     {
       "label": "GraphQL API",
@@ -755,9 +691,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_graphql",
       "community": 2,
-      "norm_label": "graphql api"
+      "norm_label": "graphql api",
+      "id": "resources_api_graphql"
     },
     {
       "label": "WebSocket",
@@ -768,9 +704,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_websocket",
       "community": 2,
-      "norm_label": "websocket"
+      "norm_label": "websocket",
+      "id": "resources_api_websocket"
     },
     {
       "label": "RPC / gRPC",
@@ -781,9 +717,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_grpc",
       "community": 2,
-      "norm_label": "rpc / grpc"
+      "norm_label": "rpc / grpc",
+      "id": "resources_api_grpc"
     },
     {
       "label": "Public API",
@@ -794,9 +730,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_public_api",
       "community": 2,
-      "norm_label": "public api"
+      "norm_label": "public api",
+      "id": "resources_api_public_api"
     },
     {
       "label": "Partner API",
@@ -807,9 +743,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_partner_api",
       "community": 2,
-      "norm_label": "partner api"
+      "norm_label": "partner api",
+      "id": "resources_api_partner_api"
     },
     {
       "label": "Internal API",
@@ -820,9 +756,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_internal_api",
       "community": 2,
-      "norm_label": "internal api"
+      "norm_label": "internal api",
+      "id": "resources_api_internal_api"
     },
     {
       "label": "Composite API",
@@ -833,9 +769,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_composite_api",
       "community": 2,
-      "norm_label": "composite api"
+      "norm_label": "composite api",
+      "id": "resources_api_composite_api"
     },
     {
       "label": "HTTP Methods",
@@ -846,9 +782,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_http_methods",
-      "community": 0,
-      "norm_label": "http methods"
+      "community": 2,
+      "norm_label": "http methods",
+      "id": "resources_api_http_methods"
     },
     {
       "label": "HTTP Status Codes",
@@ -859,9 +795,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_status_codes",
-      "community": 0,
-      "norm_label": "http status codes"
+      "community": 2,
+      "norm_label": "http status codes",
+      "id": "resources_api_status_codes"
     },
     {
       "label": "HTTP vs HTTPS (SSL/TLS)",
@@ -872,9 +808,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_http_vs_https",
-      "community": 0,
-      "norm_label": "http vs https (ssl/tls)"
+      "community": 2,
+      "norm_label": "http vs https (ssl/tls)",
+      "id": "resources_api_http_vs_https"
     },
     {
       "label": "Headers",
@@ -885,9 +821,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_request_headers",
       "community": 2,
-      "norm_label": "headers"
+      "norm_label": "headers",
+      "id": "resources_api_request_headers"
     },
     {
       "label": "Response Body",
@@ -898,9 +834,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_response_body",
       "community": 2,
-      "norm_label": "response body"
+      "norm_label": "response body",
+      "id": "resources_api_response_body"
     },
     {
       "label": "Request Parameters (Path, Query, Header, Body)",
@@ -911,9 +847,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_request_parameters",
-      "community": 0,
-      "norm_label": "request parameters (path, query, header, body)"
+      "community": 2,
+      "norm_label": "request parameters (path, query, header, body)",
+      "id": "resources_api_request_parameters"
     },
     {
       "label": "Postman",
@@ -924,9 +860,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_postman",
-      "community": 0,
-      "norm_label": "postman"
+      "community": 2,
+      "norm_label": "postman",
+      "id": "resources_api_postman"
     },
     {
       "label": "API URL Structure",
@@ -937,9 +873,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_url_structure",
       "community": 2,
-      "norm_label": "api url structure"
+      "norm_label": "api url structure",
+      "id": "resources_api_url_structure"
     },
     {
       "label": "API Security Testing",
@@ -950,9 +886,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_api_security_testing",
-      "community": 0,
-      "norm_label": "api security testing"
+      "community": 2,
+      "norm_label": "api security testing",
+      "id": "resources_api_api_security_testing"
     },
     {
       "label": "Overfetching & Underfetching",
@@ -963,9 +899,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_api_overfetching_underfetching",
       "community": 2,
-      "norm_label": "overfetching & underfetching"
+      "norm_label": "overfetching & underfetching",
+      "id": "resources_api_overfetching_underfetching"
     },
     {
       "label": "My QA Project Knowledge Base",
@@ -976,9 +912,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_knowledge_base",
-      "community": 1,
-      "norm_label": "my qa project knowledge base"
+      "community": 5,
+      "norm_label": "my qa project knowledge base",
+      "id": "claude_knowledge_base"
     },
     {
       "label": "The Two Roadmaps (Project Spine)",
@@ -989,9 +925,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_two_roadmaps",
-      "community": 1,
-      "norm_label": "the two roadmaps (project spine)"
+      "community": 5,
+      "norm_label": "the two roadmaps (project spine)",
+      "id": "claude_two_roadmaps"
     },
     {
       "label": "Notes Conventions (Teaching Not Shipping)",
@@ -1002,9 +938,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_conventions",
-      "community": 1,
-      "norm_label": "notes conventions (teaching not shipping)"
+      "community": 5,
+      "norm_label": "notes conventions (teaching not shipping)",
+      "id": "claude_conventions"
     },
     {
       "label": "QA Mastery Platform Plan",
@@ -1015,9 +951,9 @@
       "captured_at": null,
       "author": "Sagar",
       "contributor": null,
-      "id": "qa_learning_platform_plan",
-      "community": 8,
-      "norm_label": "qa mastery platform plan"
+      "community": 1,
+      "norm_label": "qa mastery platform plan",
+      "id": "qa_learning_platform_plan"
     },
     {
       "label": "Core Differentiator (Visual + Hands-on + Graded)",
@@ -1028,9 +964,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_differentiator",
-      "community": 8,
-      "norm_label": "core differentiator (visual + hands-on + graded)"
+      "community": 1,
+      "norm_label": "core differentiator (visual + hands-on + graded)",
+      "id": "qa_learning_platform_plan_differentiator"
     },
     {
       "label": "Positioning (You Do It, Not Watch It)",
@@ -1041,9 +977,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_positioning",
-      "community": 8,
-      "norm_label": "positioning (you do it, not watch it)"
+      "community": 1,
+      "norm_label": "positioning (you do it, not watch it)",
+      "id": "qa_learning_platform_plan_positioning"
     },
     {
       "label": "Competitors (TAU, Udemy, Guru99, BrowserStack)",
@@ -1054,9 +990,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_competitors",
-      "community": 8,
-      "norm_label": "competitors (tau, udemy, guru99, browserstack)"
+      "community": 1,
+      "norm_label": "competitors (tau, udemy, guru99, browserstack)",
+      "id": "qa_learning_platform_plan_competitors"
     },
     {
       "label": "BuggyShop Practice App (The Moat)",
@@ -1067,9 +1003,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_buggyshop",
-      "community": 8,
-      "norm_label": "buggyshop practice app (the moat)"
+      "community": 1,
+      "norm_label": "buggyshop practice app (the moat)",
+      "id": "qa_learning_platform_plan_buggyshop"
     },
     {
       "label": "V1 Scope (Manual + Automation)",
@@ -1080,9 +1016,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_v1_scope",
-      "community": 5,
-      "norm_label": "v1 scope (manual + automation)"
+      "community": 1,
+      "norm_label": "v1 scope (manual + automation)",
+      "id": "qa_learning_platform_plan_v1_scope"
     },
     {
       "label": "Lesson Engine (See/Try/Do/Prove/Show)",
@@ -1093,9 +1029,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_lesson_engine",
-      "community": 8,
-      "norm_label": "lesson engine (see/try/do/prove/show)"
+      "community": 1,
+      "norm_label": "lesson engine (see/try/do/prove/show)",
+      "id": "qa_learning_platform_plan_lesson_engine"
     },
     {
       "label": "Monetization (Free + Pro Subscription)",
@@ -1106,9 +1042,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_monetization",
-      "community": 8,
-      "norm_label": "monetization (free + pro subscription)"
+      "community": 1,
+      "norm_label": "monetization (free + pro subscription)",
+      "id": "qa_learning_platform_plan_monetization"
     },
     {
       "label": "Track A \u2014 Manual Testing Foundation",
@@ -1119,9 +1055,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_track_a",
-      "community": 5,
-      "norm_label": "track a \u2014 manual testing foundation"
+      "community": 1,
+      "norm_label": "track a \u2014 manual testing foundation",
+      "id": "qa_learning_platform_plan_track_a"
     },
     {
       "label": "Track B \u2014 Automation Foundation",
@@ -1132,9 +1068,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_track_b",
-      "community": 1,
-      "norm_label": "track b \u2014 automation foundation"
+      "community": 5,
+      "norm_label": "track b \u2014 automation foundation",
+      "id": "qa_learning_platform_plan_track_b"
     },
     {
       "label": "Tech Stack (Next.js, Supabase, Vercel)",
@@ -1145,9 +1081,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_tech_stack",
-      "community": 8,
-      "norm_label": "tech stack (next.js, supabase, vercel)"
+      "community": 1,
+      "norm_label": "tech stack (next.js, supabase, vercel)",
+      "id": "qa_learning_platform_plan_tech_stack"
     },
     {
       "label": "Java as Primary Teaching Language (Decision Locked)",
@@ -1158,9 +1094,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "qa_learning_platform_plan_java_primary",
-      "community": 1,
-      "norm_label": "java as primary teaching language (decision locked)"
+      "community": 5,
+      "norm_label": "java as primary teaching language (decision locked)",
+      "id": "qa_learning_platform_plan_java_primary"
     },
     {
       "label": "HTTP Fundamentals for API Testing",
@@ -1171,9 +1107,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_http_fundamentals",
-      "community": 10,
-      "norm_label": "http fundamentals for api testing"
+      "community": 7,
+      "norm_label": "http fundamentals for api testing",
+      "id": "resources_http_fundamentals"
     },
     {
       "label": "HTTP Methods (GET, POST, PUT, DELETE)",
@@ -1184,9 +1120,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_http_methods",
-      "community": 10,
-      "norm_label": "http methods (get, post, put, delete)"
+      "community": 7,
+      "norm_label": "http methods (get, post, put, delete)",
+      "id": "resources_http_methods"
     },
     {
       "label": "Client-Server Model",
@@ -1197,9 +1133,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_client_server_model",
-      "community": 10,
-      "norm_label": "client-server model"
+      "community": 7,
+      "norm_label": "client-server model",
+      "id": "resources_client_server_model"
     },
     {
       "label": "Phase 1 \u2014 Java Essentials for Selenium",
@@ -1210,9 +1146,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_java_essentials",
-      "community": 1,
-      "norm_label": "phase 1 \u2014 java essentials for selenium"
+      "community": 5,
+      "norm_label": "phase 1 \u2014 java essentials for selenium",
+      "id": "resources_java_essentials"
     },
     {
       "label": "Java OOP (Classes, Objects, Inheritance, Interfaces)",
@@ -1223,9 +1159,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_java_oop",
-      "community": 1,
-      "norm_label": "java oop (classes, objects, inheritance, interfaces)"
+      "community": 5,
+      "norm_label": "java oop (classes, objects, inheritance, interfaces)",
+      "id": "resources_java_oop"
     },
     {
       "label": "Java Collections (List, HashMap)",
@@ -1236,9 +1172,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_java_collections",
-      "community": 1,
-      "norm_label": "java collections (list, hashmap)"
+      "community": 5,
+      "norm_label": "java collections (list, hashmap)",
+      "id": "resources_java_collections"
     },
     {
       "label": "Java Exception Handling",
@@ -1249,9 +1185,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_java_exception_handling",
-      "community": 1,
-      "norm_label": "java exception handling"
+      "community": 5,
+      "norm_label": "java exception handling",
+      "id": "resources_java_exception_handling"
     },
     {
       "label": "Selenium + Java Automation Roadmap (65 Days)",
@@ -1262,9 +1198,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_selenium_roadmap",
-      "community": 1,
-      "norm_label": "selenium + java automation roadmap (65 days)"
+      "community": 5,
+      "norm_label": "selenium + java automation roadmap (65 days)",
+      "id": "resources_selenium_roadmap"
     },
     {
       "label": "Selenium WebDriver",
@@ -1275,9 +1211,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_selenium_webdriver",
-      "community": 1,
-      "norm_label": "selenium webdriver"
+      "community": 5,
+      "norm_label": "selenium webdriver",
+      "id": "resources_selenium_webdriver"
     },
     {
       "label": "TestNG",
@@ -1288,9 +1224,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_testng",
-      "community": 1,
-      "norm_label": "testng"
+      "community": 5,
+      "norm_label": "testng",
+      "id": "resources_testng"
     },
     {
       "label": "Page Object Model (POM)",
@@ -1301,9 +1237,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_page_object_model",
-      "community": 1,
-      "norm_label": "page object model (pom)"
+      "community": 5,
+      "norm_label": "page object model (pom)",
+      "id": "resources_page_object_model"
     },
     {
       "label": "Maven",
@@ -1314,9 +1250,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_maven",
-      "community": 1,
-      "norm_label": "maven"
+      "community": 5,
+      "norm_label": "maven",
+      "id": "resources_maven"
     },
     {
       "label": "GitHub Actions CI/CD",
@@ -1327,9 +1263,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_github_actions",
-      "community": 1,
-      "norm_label": "github actions ci/cd"
+      "community": 5,
+      "norm_label": "github actions ci/cd",
+      "id": "resources_github_actions"
     },
     {
       "label": "Locators (XPath, CSS Selectors)",
@@ -1340,9 +1276,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_locators",
-      "community": 1,
-      "norm_label": "locators (xpath, css selectors)"
+      "community": 5,
+      "norm_label": "locators (xpath, css selectors)",
+      "id": "resources_locators"
     },
     {
       "label": "Selenium Waits (Implicit, Explicit, Fluent)",
@@ -1353,9 +1289,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_waits",
-      "community": 1,
-      "norm_label": "selenium waits (implicit, explicit, fluent)"
+      "community": 5,
+      "norm_label": "selenium waits (implicit, explicit, fluent)",
+      "id": "resources_waits"
     },
     {
       "label": "Practice Sites (DemoQA, OrangeHRM, SauceDemo, The Internet)",
@@ -1366,9 +1302,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_practice_sites",
-      "community": 8,
-      "norm_label": "practice sites (demoqa, orangehrm, saucedemo, the internet)"
+      "community": 1,
+      "norm_label": "practice sites (demoqa, orangehrm, saucedemo, the internet)",
+      "id": "resources_practice_sites"
     },
     {
       "label": "Selenium Topic List",
@@ -1379,9 +1315,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_selenium_topic_list",
-      "community": 1,
-      "norm_label": "selenium topic list"
+      "community": 5,
+      "norm_label": "selenium topic list",
+      "id": "resources_selenium_topic_list"
     },
     {
       "label": "Selenium vs Playwright vs Cypress",
@@ -1392,9 +1328,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_selenium_vs_playwright_cypress",
-      "community": 1,
-      "norm_label": "selenium vs playwright vs cypress"
+      "community": 5,
+      "norm_label": "selenium vs playwright vs cypress",
+      "id": "resources_selenium_vs_playwright_cypress"
     },
     {
       "label": "Test Plan for Attendance Management System (AMS)",
@@ -1405,9 +1341,9 @@
       "captured_at": null,
       "author": "Sagar Thapa",
       "contributor": null,
-      "id": "resources_test_plan_ams",
-      "community": 5,
-      "norm_label": "test plan for attendance management system (ams)"
+      "community": 11,
+      "norm_label": "test plan for attendance management system (ams)",
+      "id": "resources_test_plan_ams"
     },
     {
       "label": "AMS Automated Notification System (3/45-Day Alerts)",
@@ -1418,9 +1354,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_ams_notification_system",
-      "community": 5,
-      "norm_label": "ams automated notification system (3/45-day alerts)"
+      "community": 11,
+      "norm_label": "ams automated notification system (3/45-day alerts)",
+      "id": "resources_ams_notification_system"
     },
     {
       "label": "AMS Auto-Refresh (WebSocket/Polling)",
@@ -1431,9 +1367,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_ams_auto_refresh",
-      "community": 5,
-      "norm_label": "ams auto-refresh (websocket/polling)"
+      "community": 11,
+      "norm_label": "ams auto-refresh (websocket/polling)",
+      "id": "resources_ams_auto_refresh"
     },
     {
       "label": "Entry and Exit Criteria",
@@ -1444,9 +1380,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_entry_exit_criteria",
-      "community": 5,
-      "norm_label": "entry and exit criteria"
+      "community": 11,
+      "norm_label": "entry and exit criteria",
+      "id": "resources_entry_exit_criteria"
     },
     {
       "label": "Test Environment (QA, Stage, Preprod, Production)",
@@ -1457,9 +1393,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_test_environment",
-      "community": 5,
-      "norm_label": "test environment (qa, stage, preprod, production)"
+      "community": 11,
+      "norm_label": "test environment (qa, stage, preprod, production)",
+      "id": "resources_test_environment"
     },
     {
       "label": "QA Guide for Testing UI/UX Designs",
@@ -1470,9 +1406,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_ui_ux_testing_guide",
-      "community": 9,
-      "norm_label": "qa guide for testing ui/ux designs"
+      "community": 12,
+      "norm_label": "qa guide for testing ui/ux designs",
+      "id": "resources_ui_ux_testing_guide"
     },
     {
       "label": "Heuristic Evaluation (Nielsen's 10 Heuristics)",
@@ -1483,9 +1419,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_heuristic_evaluation",
-      "community": 9,
-      "norm_label": "heuristic evaluation (nielsen's 10 heuristics)"
+      "community": 12,
+      "norm_label": "heuristic evaluation (nielsen's 10 heuristics)",
+      "id": "resources_heuristic_evaluation"
     },
     {
       "label": "Accessibility (a11y) Testing",
@@ -1496,9 +1432,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_accessibility_testing",
-      "community": 9,
-      "norm_label": "accessibility (a11y) testing"
+      "community": 12,
+      "norm_label": "accessibility (a11y) testing",
+      "id": "resources_accessibility_testing"
     },
     {
       "label": "Design System / Style Guide",
@@ -1509,9 +1445,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_design_system",
-      "community": 9,
-      "norm_label": "design system / style guide"
+      "community": 12,
+      "norm_label": "design system / style guide",
+      "id": "resources_design_system"
     },
     {
       "label": "QA Module (90-Day Manual QA Roadmap)",
@@ -1522,9 +1458,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_qa_module",
-      "community": 5,
-      "norm_label": "qa module (90-day manual qa roadmap)"
+      "community": 11,
+      "norm_label": "qa module (90-day manual qa roadmap)",
+      "id": "resources_qa_module"
     },
     {
       "label": "Test Design Techniques (EP, BVA, Decision Table)",
@@ -1535,9 +1471,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_test_design_techniques",
-      "community": 5,
-      "norm_label": "test design techniques (ep, bva, decision table)"
+      "community": 11,
+      "norm_label": "test design techniques (ep, bva, decision table)",
+      "id": "resources_test_design_techniques"
     },
     {
       "label": "STLC (Software Testing Life Cycle)",
@@ -1548,9 +1484,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_stlc",
-      "community": 5,
-      "norm_label": "stlc (software testing life cycle)"
+      "community": 11,
+      "norm_label": "stlc (software testing life cycle)",
+      "id": "resources_stlc"
     },
     {
       "label": "Books Every Software Tester",
@@ -1561,9 +1497,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resources_books_software_tester",
-      "community": 5,
-      "norm_label": "books every software tester"
+      "community": 11,
+      "norm_label": "books every software tester",
+      "id": "resources_books_software_tester"
     },
     {
       "label": "HTML (HyperText Markup Language)",
@@ -1575,9 +1511,9 @@
       "author": "Sagar Thapa",
       "contributor": null,
       "rationale": "Standard markup language defining structure, content, and semantic meaning of web documents; serves as the universal interface between server-side logic and client-side presentation, providing standardization, accessibility, SEO, and separation of concerns.",
-      "id": "resources_final_html_in_web_development_1_html",
-      "community": 3,
-      "norm_label": "html (hypertext markup language)"
+      "community": 0,
+      "norm_label": "html (hypertext markup language)",
+      "id": "resources_final_html_in_web_development_1_html"
     },
     {
       "label": "Semantic HTML",
@@ -1589,9 +1525,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Uses elements that convey meaning about content rather than appearance, improving accessibility, SEO, and code maintainability through clear landmarks for assistive technologies.",
-      "id": "resources_final_html_in_web_development_1_semantic_html",
-      "community": 3,
-      "norm_label": "semantic html"
+      "community": 0,
+      "norm_label": "semantic html",
+      "id": "resources_final_html_in_web_development_1_semantic_html"
     },
     {
       "label": "Semantic HTML5 Structural Elements",
@@ -1603,9 +1539,9 @@
       "author": null,
       "contributor": null,
       "rationale": "header, nav, main, article, section, aside, footer provide standardized vocabulary for webpage components and create implicit heading contexts.",
-      "id": "resources_final_html_in_web_development_1_semantic_elements",
-      "community": 3,
-      "norm_label": "semantic html5 structural elements"
+      "community": 0,
+      "norm_label": "semantic html5 structural elements",
+      "id": "resources_final_html_in_web_development_1_semantic_elements"
     },
     {
       "label": "Document Object Model (DOM)",
@@ -1617,9 +1553,9 @@
       "author": null,
       "contributor": null,
       "rationale": "HTML documents represented as tree-like structures that can be manipulated programmatically, enabling dynamic web applications.",
-      "id": "resources_final_html_in_web_development_1_dom",
-      "community": 3,
-      "norm_label": "document object model (dom)"
+      "community": 0,
+      "norm_label": "document object model (dom)",
+      "id": "resources_final_html_in_web_development_1_dom"
     },
     {
       "label": "DOCTYPE Declaration",
@@ -1631,9 +1567,9 @@
       "author": null,
       "contributor": null,
       "rationale": "<!DOCTYPE html> instructs the browser to render in standards mode, preventing quirks mode and ensuring consistent cross-browser behavior.",
-      "id": "resources_final_html_in_web_development_1_doctype_declaration",
-      "community": 3,
-      "norm_label": "doctype declaration"
+      "community": 0,
+      "norm_label": "doctype declaration",
+      "id": "resources_final_html_in_web_development_1_doctype_declaration"
     },
     {
       "label": "Meta Tags and Document Head",
@@ -1645,9 +1581,9 @@
       "author": null,
       "contributor": null,
       "rationale": "charset=UTF-8 ensures proper character encoding; viewport meta tag enables responsive scaling on mobile devices.",
-      "id": "resources_final_html_in_web_development_1_meta_tags",
-      "community": 3,
-      "norm_label": "meta tags and document head"
+      "community": 0,
+      "norm_label": "meta tags and document head",
+      "id": "resources_final_html_in_web_development_1_meta_tags"
     },
     {
       "label": "HTML Forms",
@@ -1659,9 +1595,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Native HTML5 form features (input, select, textarea, fieldset, legend) provide structured user input with grouping and labeling for accessibility.",
-      "id": "resources_final_html_in_web_development_1_html_forms",
-      "community": 3,
-      "norm_label": "html forms"
+      "community": 0,
+      "norm_label": "html forms",
+      "id": "resources_final_html_in_web_development_1_html_forms"
     },
     {
       "label": "HTML5 Input Types",
@@ -1673,9 +1609,9 @@
       "author": null,
       "contributor": null,
       "rationale": "email, tel, url, number, date, color, range provide native browser validation and device-appropriate keyboards/controls.",
-      "id": "resources_final_html_in_web_development_1_input_types",
-      "community": 3,
-      "norm_label": "html5 input types"
+      "community": 0,
+      "norm_label": "html5 input types",
+      "id": "resources_final_html_in_web_development_1_input_types"
     },
     {
       "label": "HTML5 Form Validation Attributes",
@@ -1687,9 +1623,9 @@
       "author": null,
       "contributor": null,
       "rationale": "required, pattern, min, max, step, maxlength, novalidate enable client-side validation without JavaScript while supporting progressive enhancement.",
-      "id": "resources_final_html_in_web_development_1_form_validation",
-      "community": 3,
-      "norm_label": "html5 form validation attributes"
+      "community": 0,
+      "norm_label": "html5 form validation attributes",
+      "id": "resources_final_html_in_web_development_1_form_validation"
     },
     {
       "label": "HTML Accessibility (ARIA, WCAG 2.1)",
@@ -1701,9 +1637,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Proper heading hierarchies, alt text, label/for relationships, ARIA landmarks and roles enhance assistive technology compatibility per WCAG 2.1.",
-      "id": "resources_final_html_in_web_development_1_accessibility",
-      "community": 3,
-      "norm_label": "html accessibility (aria, wcag 2.1)"
+      "community": 0,
+      "norm_label": "html accessibility (aria, wcag 2.1)",
+      "id": "resources_final_html_in_web_development_1_accessibility"
     },
     {
       "label": "Progressive Enhancement",
@@ -1715,9 +1651,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Ensures basic functionality works with HTML alone, providing a resilient foundation that gracefully degrades and supports enhanced experiences when CSS/JS available.",
-      "id": "resources_final_html_in_web_development_1_progressive_enhancement",
-      "community": 3,
-      "norm_label": "progressive enhancement"
+      "community": 0,
+      "norm_label": "progressive enhancement",
+      "id": "resources_final_html_in_web_development_1_progressive_enhancement"
     },
     {
       "label": "Responsive Design",
@@ -1729,9 +1665,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Integrates viewport and media capabilities to create adaptable interfaces across screen sizes and devices.",
-      "id": "resources_final_html_in_web_development_1_responsive_design",
-      "community": 3,
-      "norm_label": "responsive design"
+      "community": 0,
+      "norm_label": "responsive design",
+      "id": "resources_final_html_in_web_development_1_responsive_design"
     },
     {
       "label": "Search Engine Optimization (SEO)",
@@ -1743,9 +1679,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Structured semantic data and heading hierarchy let search engines analyze, index, and understand content importance effectively.",
-      "id": "resources_final_html_in_web_development_1_seo",
-      "community": 3,
-      "norm_label": "search engine optimization (seo)"
+      "community": 0,
+      "norm_label": "search engine optimization (seo)",
+      "id": "resources_final_html_in_web_development_1_seo"
     },
     {
       "label": "HTML Multimedia Elements",
@@ -1757,9 +1693,9 @@
       "author": null,
       "contributor": null,
       "rationale": "audio, video, img, picture, figure/figcaption, iframe enable native media integration with cross-browser source formats, lazy loading, and fallbacks.",
-      "id": "resources_final_html_in_web_development_1_multimedia_elements",
-      "community": 3,
-      "norm_label": "html multimedia elements"
+      "community": 0,
+      "norm_label": "html multimedia elements",
+      "id": "resources_final_html_in_web_development_1_multimedia_elements"
     },
     {
       "label": "HTML Entities",
@@ -1771,9 +1707,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Encode special characters (&lt;, &gt;, &amp;, &copy;, currency, quotes) ensuring correct rendering across browsers and platforms.",
-      "id": "resources_final_html_in_web_development_1_html_entities",
-      "community": 3,
-      "norm_label": "html entities"
+      "community": 0,
+      "norm_label": "html entities",
+      "id": "resources_final_html_in_web_development_1_html_entities"
     },
     {
       "label": "Custom Data Attributes (data-*)",
@@ -1785,9 +1721,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Store application-specific information on elements, supporting microdata and web components foundations while preserving semantics.",
-      "id": "resources_final_html_in_web_development_1_data_attributes",
-      "community": 3,
-      "norm_label": "custom data attributes (data-*)"
+      "community": 0,
+      "norm_label": "custom data attributes (data-*)",
+      "id": "resources_final_html_in_web_development_1_data_attributes"
     },
     {
       "label": "CSS (Cascading Style Sheets)",
@@ -1799,9 +1735,9 @@
       "author": "Sagar Thapa",
       "contributor": null,
       "rationale": "Declarative stylesheet language using selectors, properties, and values to describe presentation and layout; separates visual presentation from HTML content structure.",
-      "id": "resources_final_css_in_web_development_1_css",
-      "community": 4,
-      "norm_label": "css (cascading style sheets)"
+      "community": 0,
+      "norm_label": "css (cascading style sheets)",
+      "id": "resources_final_css_in_web_development_1_css"
     },
     {
       "label": "CSS Box Model",
@@ -1813,9 +1749,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Foundational concept governing element sizing/spacing via content, padding, border, and margin; box-sizing: border-box includes padding and border in dimensions.",
-      "id": "resources_final_css_in_web_development_1_box_model",
-      "community": 4,
-      "norm_label": "css box model"
+      "community": 0,
+      "norm_label": "css box model",
+      "id": "resources_final_css_in_web_development_1_box_model"
     },
     {
       "label": "Specificity and the Cascade",
@@ -1827,9 +1763,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Establishes how style declarations are prioritized when multiple rules target an element, creating predictable hierarchies; efficient selectors avoid performance impact.",
-      "id": "resources_final_css_in_web_development_1_specificity_cascade",
-      "community": 4,
-      "norm_label": "specificity and the cascade"
+      "community": 0,
+      "norm_label": "specificity and the cascade",
+      "id": "resources_final_css_in_web_development_1_specificity_cascade"
     },
     {
       "label": "CSS Flexbox",
@@ -1841,9 +1777,9 @@
       "author": null,
       "contributor": null,
       "rationale": "One-dimensional layout system ideal for navigation bars and component arrangements; flex: 1 1 200px combines flex-grow, flex-shrink, flex-basis for responsive distribution and alignment.",
-      "id": "resources_final_css_in_web_development_1_flexbox",
-      "community": 4,
-      "norm_label": "css flexbox"
+      "community": 0,
+      "norm_label": "css flexbox",
+      "id": "resources_final_css_in_web_development_1_flexbox"
     },
     {
       "label": "CSS Grid",
@@ -1855,9 +1791,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Two-dimensional layout system for page-level layouts; repeat(auto-fit, minmax(250px, 1fr)) creates responsive grids that adapt without media queries.",
-      "id": "resources_final_css_in_web_development_1_css_grid",
-      "community": 4,
-      "norm_label": "css grid"
+      "community": 0,
+      "norm_label": "css grid",
+      "id": "resources_final_css_in_web_development_1_css_grid"
     },
     {
       "label": "CSS Selectors",
@@ -1869,9 +1805,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Class, pseudo-selectors (:hover, :focus), and efficient selector strategies provide predictable cascade behavior and target elements for styling.",
-      "id": "resources_final_css_in_web_development_1_css_selectors",
-      "community": 4,
-      "norm_label": "css selectors"
+      "community": 0,
+      "norm_label": "css selectors",
+      "id": "resources_final_css_in_web_development_1_css_selectors"
     },
     {
       "label": "CSS Custom Properties (Variables)",
@@ -1883,9 +1819,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Defined at :root for global theming; enable dynamic theming, design tokens, and runtime style modifications through JavaScript integration.",
-      "id": "resources_final_css_in_web_development_1_custom_properties",
-      "community": 4,
-      "norm_label": "css custom properties (variables)"
+      "community": 0,
+      "norm_label": "css custom properties (variables)",
+      "id": "resources_final_css_in_web_development_1_custom_properties"
     },
     {
       "label": "Media Queries and Responsive Design",
@@ -1897,9 +1833,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Mobile-first breakpoints (min-width 768px, 1200px), prefers-reduced-motion, and prefers-color-scheme adapt interfaces to viewport and user preferences.",
-      "id": "resources_final_css_in_web_development_1_media_queries",
-      "community": 4,
-      "norm_label": "media queries and responsive design"
+      "community": 0,
+      "norm_label": "media queries and responsive design",
+      "id": "resources_final_css_in_web_development_1_media_queries"
     },
     {
       "label": "Container Queries",
@@ -1911,9 +1847,9 @@
       "author": null,
       "contributor": null,
       "rationale": "container-type: inline-size and @container rules enable component-responsive design based on container size rather than viewport, supporting modular layouts.",
-      "id": "resources_final_css_in_web_development_1_container_queries",
-      "community": 4,
-      "norm_label": "container queries"
+      "community": 0,
+      "norm_label": "container queries",
+      "id": "resources_final_css_in_web_development_1_container_queries"
     },
     {
       "label": "clamp() Fluid Typography",
@@ -1925,9 +1861,9 @@
       "author": null,
       "contributor": null,
       "rationale": "clamp() scales typography smoothly between minimum and maximum values based on viewport, reducing media query complexity.",
-      "id": "resources_final_css_in_web_development_1_clamp_fluid_typography",
-      "community": 4,
-      "norm_label": "clamp() fluid typography"
+      "community": 0,
+      "norm_label": "clamp() fluid typography",
+      "id": "resources_final_css_in_web_development_1_clamp_fluid_typography"
     },
     {
       "label": "aspect-ratio Property",
@@ -1939,9 +1875,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Provides proportional sizing (e.g. 16/9) maintaining visual consistency, eliminating the legacy padding-top percentage hack.",
-      "id": "resources_final_css_in_web_development_1_aspect_ratio",
-      "community": 4,
-      "norm_label": "aspect-ratio property"
+      "community": 0,
+      "norm_label": "aspect-ratio property",
+      "id": "resources_final_css_in_web_development_1_aspect_ratio"
     },
     {
       "label": "CSS Positioning",
@@ -1953,9 +1889,9 @@
       "author": null,
       "contributor": null,
       "rationale": "static, relative, absolute, fixed, sticky provide precise placement; sticky enables persistent headers and sidebars without JavaScript.",
-      "id": "resources_final_css_in_web_development_1_css_positioning",
-      "community": 4,
-      "norm_label": "css positioning"
+      "community": 0,
+      "norm_label": "css positioning",
+      "id": "resources_final_css_in_web_development_1_css_positioning"
     },
     {
       "label": "CSS Animations and Transitions",
@@ -1967,9 +1903,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Animating transform and opacity triggers GPU acceleration for smooth performance; respects prefers-reduced-motion for accessibility.",
-      "id": "resources_final_css_in_web_development_1_animations_transitions",
-      "community": 4,
-      "norm_label": "css animations and transitions"
+      "community": 0,
+      "norm_label": "css animations and transitions",
+      "id": "resources_final_css_in_web_development_1_animations_transitions"
     },
     {
       "label": "CSS Architecture Methodologies (BEM, OOCSS, SMACSS)",
@@ -1981,9 +1917,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Organizational frameworks addressing specificity management, component reusability, and naming conventions for scalable, maintainable CSS.",
-      "id": "resources_final_css_in_web_development_1_css_architecture",
-      "community": 4,
-      "norm_label": "css architecture methodologies (bem, oocss, smacss)"
+      "community": 0,
+      "norm_label": "css architecture methodologies (bem, oocss, smacss)",
+      "id": "resources_final_css_in_web_development_1_css_architecture"
     },
     {
       "label": "Mobile-First Methodology",
@@ -1995,9 +1931,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Prioritizes performance/accessibility by establishing baseline functionality for constrained devices, then progressively enhancing for larger screens.",
-      "id": "resources_final_css_in_web_development_1_mobile_first",
-      "community": 4,
-      "norm_label": "mobile-first methodology"
+      "community": 0,
+      "norm_label": "mobile-first methodology",
+      "id": "resources_final_css_in_web_development_1_mobile_first"
     },
     {
       "label": "Separation of Concerns (HTML/CSS)",
@@ -2009,9 +1945,1114 @@
       "author": null,
       "contributor": null,
       "rationale": "Separating content structure (HTML) from visual presentation (CSS) enables maintainable, scalable, accessible web applications.",
-      "id": "resources_final_css_in_web_development_1_separation_of_concerns",
+      "community": 0,
+      "norm_label": "separation of concerns (html/css)",
+      "id": "resources_final_css_in_web_development_1_separation_of_concerns"
+    },
+    {
+      "label": "BuggyShop Practice App",
+      "file_type": "document",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "Sagar",
+      "contributor": null,
+      "id": "product_buggyshop_spec_buggyshop",
       "community": 3,
-      "norm_label": "separation of concerns (html/css)"
+      "norm_label": "buggyshop practice app"
+    },
+    {
+      "label": "Bug Manifest",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bug_manifest",
+      "community": 3,
+      "norm_label": "bug manifest"
+    },
+    {
+      "label": "Seeded Bug (BS-###)",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_seeded_bug",
+      "community": 3,
+      "norm_label": "seeded bug (bs-###)"
+    },
+    {
+      "label": "BuggyShop v1.0 Release",
+      "file_type": "document",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_release_v1_0",
+      "community": 3,
+      "norm_label": "buggyshop v1.0 release"
+    },
+    {
+      "label": "BuggyShop v1.1 Release (Wishlist + Regressions)",
+      "file_type": "document",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_release_v1_1",
+      "community": 10,
+      "norm_label": "buggyshop v1.1 release (wishlist + regressions)"
+    },
+    {
+      "label": "BuggyShop v2.0 Release (Coupon + Capstone Bugs)",
+      "file_type": "document",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_release_v2_0",
+      "community": 10,
+      "norm_label": "buggyshop v2.0 release (coupon + capstone bugs)"
+    },
+    {
+      "label": "Deals Page Locator Gym",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_deals_locator_gym",
+      "community": 3,
+      "norm_label": "deals page locator gym"
+    },
+    {
+      "label": "data-testid Stable Selectors",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_data_testid",
+      "community": 3,
+      "norm_label": "data-testid stable selectors"
+    },
+    {
+      "label": "BS-001 Broken Email Regex",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_001",
+      "community": 3,
+      "norm_label": "bs-001 broken email regex"
+    },
+    {
+      "label": "BS-002 Wrong-Field Password Error Message",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_002",
+      "community": 3,
+      "norm_label": "bs-002 wrong-field password error message"
+    },
+    {
+      "label": "BS-003 Paste Bypasses Confirm-Password Match",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_003",
+      "community": 3,
+      "norm_label": "bs-003 paste bypasses confirm-password match"
+    },
+    {
+      "label": "BS-004 Double-Click Bypasses Terms Checkbox",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_004",
+      "community": 3,
+      "norm_label": "bs-004 double-click bypasses terms checkbox"
+    },
+    {
+      "label": "BS-007 Quantity Field Accepts 0",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_007",
+      "community": 4,
+      "norm_label": "bs-007 quantity field accepts 0"
+    },
+    {
+      "label": "BS-008 Price Filter Excludes Max Boundary",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_008",
+      "community": 4,
+      "norm_label": "bs-008 price filter excludes max boundary"
+    },
+    {
+      "label": "BS-011 Payment Decision-Table Rule Conflict",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_011",
+      "community": 4,
+      "norm_label": "bs-011 payment decision-table rule conflict"
+    },
+    {
+      "label": "BS-012 Free Shipping Off-By-One at Boundary",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_012",
+      "community": 3,
+      "norm_label": "bs-012 free shipping off-by-one at boundary"
+    },
+    {
+      "label": "BS-014 Cancel After Shipped (Invalid State Transition)",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_014",
+      "community": 4,
+      "norm_label": "bs-014 cancel after shipped (invalid state transition)"
+    },
+    {
+      "label": "BS-016 PIN/ZIP Accepts Letters",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_016",
+      "community": 3,
+      "norm_label": "bs-016 pin/zip accepts letters"
+    },
+    {
+      "label": "BS-018 Intermittent Subtotal Bug",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_018",
+      "community": 3,
+      "norm_label": "bs-018 intermittent subtotal bug"
+    },
+    {
+      "label": "BS-019 Profile Email Re-validation Missing",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_019",
+      "community": 3,
+      "norm_label": "bs-019 profile email re-validation missing"
+    },
+    {
+      "label": "BS-020 Order History Data Leak",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_020",
+      "community": 3,
+      "norm_label": "bs-020 order history data leak"
+    },
+    {
+      "label": "BS-021 Wishlist Move-to-Cart Regression",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_021",
+      "community": 10,
+      "norm_label": "bs-021 wishlist move-to-cart regression"
+    },
+    {
+      "label": "BS-022 Heart Icon Blocks Add-to-Cart Regression",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_022",
+      "community": 10,
+      "norm_label": "bs-022 heart icon blocks add-to-cart regression"
+    },
+    {
+      "label": "BS-023 Mobile Place-Order Button Hidden",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_bs_023",
+      "community": 10,
+      "norm_label": "bs-023 mobile place-order button hidden"
+    },
+    {
+      "label": "Coupon System (v2.0)",
+      "file_type": "concept",
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_buggyshop_spec_coupon_system",
+      "community": 10,
+      "norm_label": "coupon system (v2.0)"
+    },
+    {
+      "label": "Lesson 1 \u2014 BVA Visual Concept (A3.3)",
+      "file_type": "document",
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_1_bva_visual_concept_lesson",
+      "community": 4,
+      "norm_label": "lesson 1 \u2014 bva visual concept (a3.3)"
+    },
+    {
+      "label": "Boundary Value Analysis (BVA)",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_1_bva_visual_concept_boundary_value_analysis",
+      "community": 4,
+      "norm_label": "boundary value analysis (bva)"
+    },
+    {
+      "label": "Off-By-One Error",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_1_bva_visual_concept_off_by_one",
+      "community": 4,
+      "norm_label": "off-by-one error"
+    },
+    {
+      "label": "boundary-slider Widget",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_1_bva_visual_concept_boundary_slider",
+      "community": 4,
+      "norm_label": "boundary-slider widget"
+    },
+    {
+      "label": "Boundary Hunter Public Demo",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_1_bva_visual_concept_boundary_hunter",
+      "community": 4,
+      "norm_label": "boundary hunter public demo"
+    },
+    {
+      "label": "Lesson 2 \u2014 First Real Bug Report (A4.4)",
+      "file_type": "document",
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson",
+      "community": 3,
+      "norm_label": "lesson 2 \u2014 first real bug report (a4.4)"
+    },
+    {
+      "label": "Bug Report Anatomy",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_2_bug_hunt_manual_lab_bug_report",
+      "community": 3,
+      "norm_label": "bug report anatomy"
+    },
+    {
+      "label": "Severity vs Priority",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_2_bug_hunt_manual_lab_severity_priority",
+      "community": 3,
+      "norm_label": "severity vs priority"
+    },
+    {
+      "label": "Lesson 3 \u2014 First Selenium Test (B2.1)",
+      "file_type": "document",
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_3_first_selenium_test_lesson",
+      "community": 3,
+      "norm_label": "lesson 3 \u2014 first selenium test (b2.1)"
+    },
+    {
+      "label": "Selenium WebDriver",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_3_first_selenium_test_selenium",
+      "community": 3,
+      "norm_label": "selenium webdriver"
+    },
+    {
+      "label": "Stable Locator Strategy",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_3_first_selenium_test_locator_strategy",
+      "community": 3,
+      "norm_label": "stable locator strategy"
+    },
+    {
+      "label": "Navigate-Act-Assert Pattern",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_3_first_selenium_test_navigate_act_assert",
+      "community": 3,
+      "norm_label": "navigate-act-assert pattern"
+    },
+    {
+      "label": "Selenium Waits / Race Conditions",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_3_first_selenium_test_waits",
+      "community": 3,
+      "norm_label": "selenium waits / race conditions"
+    },
+    {
+      "label": "driver-pipeline / locator-xray Widgets",
+      "file_type": "concept",
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sample_lessons_lesson_3_first_selenium_test_driver_pipeline",
+      "community": 3,
+      "norm_label": "driver-pipeline / locator-xray widgets"
+    },
+    {
+      "label": "Track A \u2014 Manual Testing Foundation",
+      "file_type": "document",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "Sagar",
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_track_a",
+      "community": 4,
+      "norm_label": "track a \u2014 manual testing foundation"
+    },
+    {
+      "label": "Module A1 \u2014 How Software Is Built (and Breaks)",
+      "file_type": "document",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_module_a1",
+      "community": 4,
+      "norm_label": "module a1 \u2014 how software is built (and breaks)"
+    },
+    {
+      "label": "Module A2 \u2014 Testing Fundamentals",
+      "file_type": "document",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_module_a2",
+      "community": 4,
+      "norm_label": "module a2 \u2014 testing fundamentals"
+    },
+    {
+      "label": "Module A3 \u2014 Test Design Techniques",
+      "file_type": "document",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_module_a3",
+      "community": 4,
+      "norm_label": "module a3 \u2014 test design techniques"
+    },
+    {
+      "label": "Module A4 \u2014 Test Cases, Bug Reports & Tools",
+      "file_type": "document",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_module_a4",
+      "community": 4,
+      "norm_label": "module a4 \u2014 test cases, bug reports & tools"
+    },
+    {
+      "label": "Module A5 \u2014 Real-World Manual QA",
+      "file_type": "document",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_module_a5",
+      "community": 10,
+      "norm_label": "module a5 \u2014 real-world manual qa"
+    },
+    {
+      "label": "Equivalence Partitioning (A3.2)",
+      "file_type": "concept",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_equivalence_partitioning",
+      "community": 4,
+      "norm_label": "equivalence partitioning (a3.2)"
+    },
+    {
+      "label": "Decision Tables (A3.4)",
+      "file_type": "concept",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_decision_tables",
+      "community": 4,
+      "norm_label": "decision tables (a3.4)"
+    },
+    {
+      "label": "State Transition Testing (A3.5)",
+      "file_type": "concept",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_state_transition",
+      "community": 4,
+      "norm_label": "state transition testing (a3.5)"
+    },
+    {
+      "label": "Error Guessing (A3.6)",
+      "file_type": "concept",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_error_guessing",
+      "community": 4,
+      "norm_label": "error guessing (a3.6)"
+    },
+    {
+      "label": "Exploratory Testing & SBTM (A5.1)",
+      "file_type": "concept",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_exploratory_testing",
+      "community": 3,
+      "norm_label": "exploratory testing & sbtm (a5.1)"
+    },
+    {
+      "label": "Smoke/Sanity/Retest/Regression (A5.2)",
+      "file_type": "concept",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_regression",
+      "community": 10,
+      "norm_label": "smoke/sanity/retest/regression (a5.2)"
+    },
+    {
+      "label": "A4.6 Bug Hunt I (Graded Milestone)",
+      "file_type": "document",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_bug_hunt_i",
+      "community": 4,
+      "norm_label": "a4.6 bug hunt i (graded milestone)"
+    },
+    {
+      "label": "A5.6 Capstone \u2014 Full Test Cycle on v2.0",
+      "file_type": "document",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_capstone",
+      "community": 10,
+      "norm_label": "a5.6 capstone \u2014 full test cycle on v2.0"
+    },
+    {
+      "label": "See it / Try it / Do it / Prove it Pattern",
+      "file_type": "concept",
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_track_a_manual_testing_outline_see_try_do_prove",
+      "community": 4,
+      "norm_label": "see it / try it / do it / prove it pattern"
+    },
+    {
+      "label": "Week 4 Promotion Kit",
+      "file_type": "document",
+      "source_file": "Product/Week4-Promotion-Kit.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_week4_promotion_kit_kit",
+      "community": 4,
+      "norm_label": "week 4 promotion kit"
+    },
+    {
+      "label": "Find-the-Bug Public Challenge",
+      "file_type": "concept",
+      "source_file": "Product/Week4-Promotion-Kit.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_week4_promotion_kit_find_the_bug_challenge",
+      "community": 4,
+      "norm_label": "find-the-bug public challenge"
+    },
+    {
+      "label": "Waitlist Signup Validation Gate",
+      "file_type": "concept",
+      "source_file": "Product/Week4-Promotion-Kit.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "product_week4_promotion_kit_waitlist_gate",
+      "community": 4,
+      "norm_label": "waitlist signup validation gate"
+    },
+    {
+      "label": "Track B \u2014 Automation (Selenium + Java + TestNG)",
+      "file_type": "concept",
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a75 Track B",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "qa_learning_platform_plan_track_b_automation",
+      "community": 1,
+      "norm_label": "track b \u2014 automation (selenium + java + testng)"
+    },
+    {
+      "label": "Boundary Value Analysis (BVA)",
+      "file_type": "concept",
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a75 Module A3",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "qa_learning_platform_plan_bva",
+      "community": 1,
+      "norm_label": "boundary value analysis (bva)"
+    },
+    {
+      "label": "Test Automation University (competitor)",
+      "file_type": "concept",
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a72 Competitors",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "qa_learning_platform_plan_competitor_tau",
+      "community": 1,
+      "norm_label": "test automation university (competitor)"
+    },
+    {
+      "label": "Udemy QA courses (competitor)",
+      "file_type": "concept",
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a72 Competitors",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "qa_learning_platform_plan_competitor_udemy",
+      "community": 1,
+      "norm_label": "udemy qa courses (competitor)"
+    },
+    {
+      "label": "Guru99 / Software Testing Help (competitor)",
+      "file_type": "concept",
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a72 Competitors",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "qa_learning_platform_plan_competitor_guru99",
+      "community": 1,
+      "norm_label": "guru99 / software testing help (competitor)"
+    },
+    {
+      "label": "BrowserStack/LambdaTest academies (competitor)",
+      "file_type": "concept",
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a72 Competitors",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "qa_learning_platform_plan_competitor_browserstack",
+      "community": 1,
+      "norm_label": "browserstack/lambdatest academies (competitor)"
+    },
+    {
+      "label": "Codecademy/Exercism interactive model (to copy)",
+      "file_type": "concept",
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a72 Competitors",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "qa_learning_platform_plan_codecademy_model",
+      "community": 1,
+      "norm_label": "codecademy/exercism interactive model (to copy)"
+    },
+    {
+      "label": "Phase 0 Kill/Continue Validation Gate",
+      "file_type": "concept",
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a74 Phase 0 / \u00a712",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "qa_learning_platform_plan_validation_gate",
+      "community": 1,
+      "norm_label": "phase 0 kill/continue validation gate"
+    },
+    {
+      "label": "QA Mastery Validation Landing Site",
+      "file_type": "document",
+      "source_file": "Product/landing-site/index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "landing_site_index_landing_page",
+      "community": 1,
+      "norm_label": "qa mastery validation landing site"
+    },
+    {
+      "label": "Hero Section \u2014 Don't watch testing. Do it.",
+      "file_type": "concept",
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "header.hero",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "landing_site_index_hero",
+      "community": 1,
+      "norm_label": "hero section \u2014 don't watch testing. do it."
+    },
+    {
+      "label": "Hero CTA \u2014 Join the early-access waitlist",
+      "file_type": "concept",
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "header.hero a.btn",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "landing_site_index_hero_cta",
+      "community": 1,
+      "norm_label": "hero cta \u2014 join the early-access waitlist"
+    },
+    {
+      "label": "Boundary Hunter Widget (Lesson A3.3)",
+      "file_type": "concept",
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "#boundary",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "landing_site_index_boundary_hunter",
+      "community": 1,
+      "norm_label": "boundary hunter widget (lesson a3.3)"
+    },
+    {
+      "label": "Find the Bug Widget (Lesson A4.4)",
+      "file_type": "concept",
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "#bughunt",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "landing_site_index_find_the_bug",
+      "community": 1,
+      "norm_label": "find the bug widget (lesson a4.4)"
+    },
+    {
+      "label": "Curriculum Preview \u2014 Tracks A & B",
+      "file_type": "concept",
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "#curriculum",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "landing_site_index_curriculum_preview",
+      "community": 1,
+      "norm_label": "curriculum preview \u2014 tracks a & b"
+    },
+    {
+      "label": "Waitlist Form (Formspree)",
+      "file_type": "concept",
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "#waitlist",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "landing_site_index_waitlist_form",
+      "community": 1,
+      "norm_label": "waitlist form (formspree)"
+    },
+    {
+      "label": "Landing Site README \u2014 Formspree/Netlify setup & QA checklist",
+      "file_type": "document",
+      "source_file": "Product/landing-site/README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "landing_site_readme_setup",
+      "community": 1,
+      "norm_label": "landing site readme \u2014 formspree/netlify setup & qa checklist"
+    },
+    {
+      "label": "My QA Project Knowledge Base README",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_overview",
+      "community": 7,
+      "norm_label": "my qa project knowledge base readme"
+    },
+    {
+      "label": "HTTP (Hypertext Transfer Protocol)",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a7 HTTP",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_http",
+      "community": 7,
+      "norm_label": "http (hypertext transfer protocol)"
+    },
+    {
+      "label": "HTTP Methods (GET/POST/PUT/DELETE/PATCH/HEAD/OPTIONS)",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71 HTTP Methods",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_http_methods",
+      "community": 7,
+      "norm_label": "http methods (get/post/put/delete/patch/head/options)"
+    },
+    {
+      "label": "GET Method",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_get_method",
+      "community": 7,
+      "norm_label": "get method"
+    },
+    {
+      "label": "POST Method",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_post_method",
+      "community": 7,
+      "norm_label": "post method"
+    },
+    {
+      "label": "PUT Method",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_put_method",
+      "community": 7,
+      "norm_label": "put method"
+    },
+    {
+      "label": "DELETE Method",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_delete_method",
+      "community": 7,
+      "norm_label": "delete method"
+    },
+    {
+      "label": "PATCH Method",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_patch_method",
+      "community": 7,
+      "norm_label": "patch method"
+    },
+    {
+      "label": "HTTP Status Codes (2xx/3xx/4xx/5xx)",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a77 Status Codes",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_status_codes",
+      "community": 7,
+      "norm_label": "http status codes (2xx/3xx/4xx/5xx)"
+    },
+    {
+      "label": "HTTP Authentication (Basic/Digest/Bearer)",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a73 Authentication",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_authentication",
+      "community": 7,
+      "norm_label": "http authentication (basic/digest/bearer)"
+    },
+    {
+      "label": "URL (Uniform Resource Locator)",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a75 URL",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_url",
+      "community": 7,
+      "norm_label": "url (uniform resource locator)"
+    },
+    {
+      "label": "HTTP Request & Response Structure",
+      "file_type": "concept",
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a78 Request and Response Structure",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "resources_http_fundamentals_for_api_testing_request_response",
+      "community": 7,
+      "norm_label": "http request & response structure"
     }
   ],
   "links": [
@@ -2806,14 +3847,34 @@
       "target": "qa_learning_platform_plan"
     },
     {
-      "relation": "rationale_for",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "see it visually -> try it guided -> real practice app -> get graded",
+      "weight": 1.0,
+      "source": "landing_site_index_landing_page",
+      "target": "qa_learning_platform_plan_differentiator"
+    },
+    {
+      "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "QA-Learning-Platform-Plan.md",
-      "source_location": null,
+      "source_location": "BuggyShop is the moat, enables graded feedback",
       "weight": 1.0,
-      "source": "qa_learning_platform_plan_buggyshop",
-      "target": "qa_learning_platform_plan_differentiator"
+      "source": "qa_learning_platform_plan_differentiator",
+      "target": "qa_learning_platform_plan_buggyshop"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "interactive in-browser practice model to copy for QA",
+      "weight": 0.85,
+      "source": "qa_learning_platform_plan_differentiator",
+      "target": "qa_learning_platform_plan_codecademy_model"
     },
     {
       "relation": "conceptually_related_to",
@@ -2826,6 +3887,56 @@
       "target": "qa_learning_platform_plan_positioning"
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "title/hero copy 'Don't watch testing. Do it.'",
+      "weight": 1.0,
+      "source": "landing_site_index_landing_page",
+      "target": "qa_learning_platform_plan_positioning"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a72 competitor table",
+      "weight": 1.0,
+      "source": "qa_learning_platform_plan_positioning",
+      "target": "qa_learning_platform_plan_competitor_browserstack"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a72 competitor table",
+      "weight": 1.0,
+      "source": "qa_learning_platform_plan_positioning",
+      "target": "qa_learning_platform_plan_competitor_guru99"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a72 competitor table",
+      "weight": 1.0,
+      "source": "qa_learning_platform_plan_positioning",
+      "target": "qa_learning_platform_plan_competitor_tau"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a72 competitor table",
+      "weight": 1.0,
+      "source": "qa_learning_platform_plan_positioning",
+      "target": "qa_learning_platform_plan_competitor_udemy"
+    },
+    {
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -2834,6 +3945,36 @@
       "weight": 1.0,
       "source": "qa_learning_platform_plan_positioning",
       "target": "qa_learning_platform_plan_competitors"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a712 metrics gate validates the angle",
+      "weight": 0.75,
+      "source": "qa_learning_platform_plan_validation_gate",
+      "target": "qa_learning_platform_plan_positioning"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "QA-Learning-Platform-Plan.md row",
+      "weight": 1.0,
+      "source": "readme_overview",
+      "target": "qa_learning_platform_plan_positioning"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "demo store signup form with seeded bugs mirrors BuggyShop",
+      "weight": 1.0,
+      "source": "landing_site_index_find_the_bug",
+      "target": "qa_learning_platform_plan_buggyshop"
     },
     {
       "relation": "semantically_similar_to",
@@ -2860,7 +4001,37 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "QA-Learning-Platform-Plan.md",
-      "source_location": null,
+      "source_location": "labs target BuggyShop",
+      "weight": 1.0,
+      "source": "qa_learning_platform_plan_track_a",
+      "target": "qa_learning_platform_plan_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "Selenium runs against BuggyShop",
+      "weight": 1.0,
+      "source": "qa_learning_platform_plan_track_b_automation",
+      "target": "qa_learning_platform_plan_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "markets the platform described in the plan",
+      "weight": 1.0,
+      "source": "landing_site_index_landing_page",
+      "target": "qa_learning_platform_plan_v1_scope"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a75",
       "weight": 1.0,
       "source": "qa_learning_platform_plan_v1_scope",
       "target": "qa_learning_platform_plan_track_a"
@@ -2874,6 +4045,66 @@
       "weight": 1.0,
       "source": "qa_learning_platform_plan_v1_scope",
       "target": "qa_learning_platform_plan_track_b"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "\u00a75",
+      "weight": 1.0,
+      "source": "qa_learning_platform_plan_v1_scope",
+      "target": "qa_learning_platform_plan_track_b_automation"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "founding-member pricing forever",
+      "weight": 1.0,
+      "source": "landing_site_index_waitlist_form",
+      "target": "qa_learning_platform_plan_monetization"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "Lesson A3.3",
+      "weight": 1.0,
+      "source": "landing_site_index_boundary_hunter",
+      "target": "qa_learning_platform_plan_track_a"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "Track A \u2014 Manual Testing",
+      "weight": 1.0,
+      "source": "landing_site_index_curriculum_preview",
+      "target": "qa_learning_platform_plan_track_a"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "Lesson A4.4 \u2014 graded bug report",
+      "weight": 1.0,
+      "source": "landing_site_index_find_the_bug",
+      "target": "qa_learning_platform_plan_track_a"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "QA-Learning-Platform-Plan.md",
+      "source_location": "Module A3",
+      "weight": 1.0,
+      "source": "qa_learning_platform_plan_track_a",
+      "target": "qa_learning_platform_plan_bva"
     },
     {
       "relation": "references",
@@ -2944,6 +4175,26 @@
       "weight": 1.0,
       "source": "resources_http_fundamentals",
       "target": "resources_http_methods"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "client sends request, server returns response",
+      "weight": 1.0,
+      "source": "resources_client_server_model",
+      "target": "resources_http_fundamentals_for_api_testing_request_response"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a72",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http",
+      "target": "resources_client_server_model"
     },
     {
       "relation": "references",
@@ -3674,137 +4925,1134 @@
       "weight": 1.0,
       "source": "resources_final_css_in_web_development_1_media_queries",
       "target": "resources_final_css_in_web_development_1_mobile_first"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_buggyshop",
+      "target": "product_buggyshop_spec_bug_manifest"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_buggyshop",
+      "target": "product_buggyshop_spec_data_testid"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_buggyshop",
+      "target": "product_buggyshop_spec_seeded_bug"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_deals_locator_gym",
+      "target": "product_buggyshop_spec_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_1",
+      "target": "product_buggyshop_spec_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v2_0",
+      "target": "product_buggyshop_spec_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_track_a",
+      "target": "product_buggyshop_spec_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_lesson",
+      "target": "product_buggyshop_spec_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson",
+      "target": "product_buggyshop_spec_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_3_first_selenium_test_lesson",
+      "target": "product_buggyshop_spec_buggyshop"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_bug_manifest",
+      "target": "product_buggyshop_spec_seeded_bug"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson",
+      "target": "product_buggyshop_spec_bug_manifest"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_001"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_002"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_003"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_004"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_007"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_008"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_011"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_012"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_014"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_016"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_018"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_019"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_0",
+      "target": "product_buggyshop_spec_bs_020"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_bug_hunt_i",
+      "target": "product_buggyshop_spec_release_v1_0"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_1",
+      "target": "product_buggyshop_spec_bs_021"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_1",
+      "target": "product_buggyshop_spec_bs_022"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v1_1",
+      "target": "product_buggyshop_spec_bs_023"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_release_v2_0",
+      "target": "product_buggyshop_spec_coupon_system"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_capstone",
+      "target": "product_buggyshop_spec_release_v2_0"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_3_first_selenium_test_locator_strategy",
+      "target": "product_buggyshop_spec_deals_locator_gym"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_3_first_selenium_test_locator_strategy",
+      "target": "product_buggyshop_spec_data_testid"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson",
+      "target": "product_buggyshop_spec_bs_001"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson",
+      "target": "product_buggyshop_spec_bs_002"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson",
+      "target": "product_buggyshop_spec_bs_003"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson",
+      "target": "product_buggyshop_spec_bs_004"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/BuggyShop-Spec.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_buggyshop_spec_bs_021",
+      "target": "product_buggyshop_spec_bs_007"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_equivalence_partitioning",
+      "target": "product_buggyshop_spec_bs_007"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_lesson",
+      "target": "product_buggyshop_spec_bs_007"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_boundary_value_analysis",
+      "target": "product_buggyshop_spec_bs_008"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_lesson",
+      "target": "product_buggyshop_spec_bs_008"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_decision_tables",
+      "target": "product_buggyshop_spec_bs_011"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_state_transition",
+      "target": "product_buggyshop_spec_bs_014"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_exploratory_testing",
+      "target": "product_buggyshop_spec_bs_019"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_exploratory_testing",
+      "target": "product_buggyshop_spec_bs_020"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_regression",
+      "target": "product_buggyshop_spec_bs_021"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_regression",
+      "target": "product_buggyshop_spec_bs_022"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_boundary_hunter",
+      "target": "sample_lessons_lesson_1_bva_visual_concept_lesson"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_lesson",
+      "target": "product_track_a_manual_testing_outline_equivalence_partitioning"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_lesson",
+      "target": "product_track_a_manual_testing_outline_see_try_do_prove"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_lesson",
+      "target": "sample_lessons_lesson_1_bva_visual_concept_boundary_slider"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_lesson",
+      "target": "sample_lessons_lesson_1_bva_visual_concept_boundary_value_analysis"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_1_bva_visual_concept_lesson",
+      "target": "sample_lessons_lesson_1_bva_visual_concept_off_by_one"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_equivalence_partitioning",
+      "target": "sample_lessons_lesson_1_bva_visual_concept_boundary_value_analysis"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_module_a3",
+      "target": "sample_lessons_lesson_1_bva_visual_concept_boundary_value_analysis"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "Product/Week4-Promotion-Kit.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_week4_promotion_kit_find_the_bug_challenge",
+      "target": "sample_lessons_lesson_1_bva_visual_concept_boundary_hunter"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Product/Week4-Promotion-Kit.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_week4_promotion_kit_find_the_bug_challenge",
+      "target": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson",
+      "target": "sample_lessons_lesson_2_bug_hunt_manual_lab_bug_report"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_2_bug_hunt_manual_lab_lesson",
+      "target": "sample_lessons_lesson_2_bug_hunt_manual_lab_severity_priority"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_3_first_selenium_test_lesson",
+      "target": "sample_lessons_lesson_3_first_selenium_test_driver_pipeline"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_3_first_selenium_test_lesson",
+      "target": "sample_lessons_lesson_3_first_selenium_test_locator_strategy"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_3_first_selenium_test_lesson",
+      "target": "sample_lessons_lesson_3_first_selenium_test_navigate_act_assert"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_3_first_selenium_test_lesson",
+      "target": "sample_lessons_lesson_3_first_selenium_test_selenium"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "sample_lessons_lesson_3_first_selenium_test_lesson",
+      "target": "sample_lessons_lesson_3_first_selenium_test_waits"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_track_a",
+      "target": "product_track_a_manual_testing_outline_module_a1"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_track_a",
+      "target": "product_track_a_manual_testing_outline_module_a2"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_track_a",
+      "target": "product_track_a_manual_testing_outline_module_a3"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_track_a",
+      "target": "product_track_a_manual_testing_outline_module_a4"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_track_a",
+      "target": "product_track_a_manual_testing_outline_module_a5"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_track_a",
+      "target": "product_track_a_manual_testing_outline_see_try_do_prove"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_module_a3",
+      "target": "product_track_a_manual_testing_outline_decision_tables"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_module_a3",
+      "target": "product_track_a_manual_testing_outline_equivalence_partitioning"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_module_a3",
+      "target": "product_track_a_manual_testing_outline_error_guessing"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_module_a3",
+      "target": "product_track_a_manual_testing_outline_state_transition"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_module_a4",
+      "target": "product_track_a_manual_testing_outline_bug_hunt_i"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_module_a5",
+      "target": "product_track_a_manual_testing_outline_capstone"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_module_a5",
+      "target": "product_track_a_manual_testing_outline_exploratory_testing"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_track_a_manual_testing_outline_module_a5",
+      "target": "product_track_a_manual_testing_outline_regression"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Week4-Promotion-Kit.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_week4_promotion_kit_kit",
+      "target": "product_week4_promotion_kit_find_the_bug_challenge"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/Week4-Promotion-Kit.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_week4_promotion_kit_kit",
+      "target": "product_week4_promotion_kit_waitlist_gate"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "Track B \u2014 Automation (Selenium + Java)",
+      "weight": 1.0,
+      "source": "landing_site_index_curriculum_preview",
+      "target": "qa_learning_platform_plan_track_b_automation"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "off-by-one bug, BVA finds with 4 tests",
+      "weight": 1.0,
+      "source": "landing_site_index_boundary_hunter",
+      "target": "qa_learning_platform_plan_bva"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/README.md",
+      "source_location": "kill/continue gate (plan \u00a712), 50-100 signups",
+      "weight": 1.0,
+      "source": "landing_site_readme_setup",
+      "target": "qa_learning_platform_plan_validation_gate"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "#boundary",
+      "weight": 1.0,
+      "source": "landing_site_index_landing_page",
+      "target": "landing_site_index_boundary_hunter"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "#curriculum",
+      "weight": 1.0,
+      "source": "landing_site_index_landing_page",
+      "target": "landing_site_index_curriculum_preview"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "#bughunt",
+      "weight": 1.0,
+      "source": "landing_site_index_landing_page",
+      "target": "landing_site_index_find_the_bug"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "header.hero",
+      "weight": 1.0,
+      "source": "landing_site_index_landing_page",
+      "target": "landing_site_index_hero"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "#waitlist",
+      "weight": 1.0,
+      "source": "landing_site_index_landing_page",
+      "target": "landing_site_index_waitlist_form"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/README.md",
+      "source_location": "index.html setup guide",
+      "weight": 1.0,
+      "source": "landing_site_readme_setup",
+      "target": "landing_site_index_landing_page"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "README.md",
+      "source_location": "Product/ curriculum outlines for the platform",
+      "weight": 1.0,
+      "source": "readme_overview",
+      "target": "landing_site_index_landing_page"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "a.btn -> #waitlist",
+      "weight": 1.0,
+      "source": "landing_site_index_hero",
+      "target": "landing_site_index_hero_cta"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Product/landing-site/index.html",
+      "source_location": "href=#waitlist",
+      "weight": 1.0,
+      "source": "landing_site_index_hero_cta",
+      "target": "landing_site_index_waitlist_form"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "HTTP Fundamentals API & HTTP testing references row",
+      "weight": 1.0,
+      "source": "readme_overview",
+      "target": "resources_http_fundamentals_for_api_testing_http"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a73",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http",
+      "target": "resources_http_fundamentals_for_api_testing_authentication"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http",
+      "target": "resources_http_fundamentals_for_api_testing_http_methods"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a78",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http",
+      "target": "resources_http_fundamentals_for_api_testing_request_response"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a77",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http",
+      "target": "resources_http_fundamentals_for_api_testing_status_codes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a75",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http",
+      "target": "resources_http_fundamentals_for_api_testing_url"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http_methods",
+      "target": "resources_http_fundamentals_for_api_testing_delete_method"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http_methods",
+      "target": "resources_http_fundamentals_for_api_testing_get_method"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http_methods",
+      "target": "resources_http_fundamentals_for_api_testing_patch_method"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http_methods",
+      "target": "resources_http_fundamentals_for_api_testing_post_method"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "\u00a71",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_http_methods",
+      "target": "resources_http_fundamentals_for_api_testing_put_method"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md",
+      "source_location": "response includes a status code",
+      "weight": 1.0,
+      "source": "resources_http_fundamentals_for_api_testing_request_response",
+      "target": "resources_http_fundamentals_for_api_testing_status_codes"
     }
   ],
   "hyperedges": [
     {
-      "id": "rest_constraints_set",
-      "label": "REST Architectural Constraints",
+      "id": "bva_lesson_bs008_price_filter",
+      "label": "BVA lesson teaches BVA via BuggyShop price filter and BS-008",
       "nodes": [
-        "resources_api_rest",
-        "resources_api_stateless",
-        "resources_api_cacheable",
-        "resources_api_uniform_interface",
-        "resources_api_client_server"
-      ],
-      "relation": "form",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "Resources/API.md"
-    },
-    {
-      "id": "defect_management_flow",
-      "label": "Defect Management Flow",
-      "nodes": [
-        "phase_2_core_testing_skills_days_21_45_defect",
-        "phase_2_core_testing_skills_days_21_45_bug_life_cycle",
-        "phase_2_core_testing_skills_days_21_45_severity",
-        "phase_2_core_testing_skills_days_21_45_priority",
-        "phase_2_core_testing_skills_days_21_45_bug_report",
-        "phase_2_core_testing_skills_days_21_45_jira"
+        "sample_lessons_lesson_1_bva_visual_concept_lesson",
+        "sample_lessons_lesson_1_bva_visual_concept_boundary_value_analysis",
+        "product_buggyshop_spec_bs_008"
       ],
       "relation": "participate_in",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
-      "source_file": "Resources/PHASE 2_ CORE TESTING SKILLS (Days 21-45).md"
+      "source_file": "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md"
     },
     {
-      "id": "test_planning_documents",
-      "label": "Test Planning Document Set",
+      "id": "a3_techniques_seeded_bugs",
+      "label": "A3 design techniques each surface a seeded BuggyShop bug",
       "nodes": [
-        "phase_2_core_testing_skills_days_21_45_test_strategy",
-        "phase_2_core_testing_skills_days_21_45_test_plan",
-        "phase_2_core_testing_skills_days_21_45_entry_criteria",
-        "phase_2_core_testing_skills_days_21_45_exit_criteria",
-        "phase_2_core_testing_skills_days_21_45_rtm"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "Resources/PHASE 2_ CORE TESTING SKILLS (Days 21-45).md"
-    },
-    {
-      "id": "automation_stack_flow",
-      "label": "Selenium Automation Stack (Java to CI/CD)",
-      "nodes": [
-        "resources_java_essentials",
-        "resources_selenium_webdriver",
-        "resources_testng",
-        "resources_page_object_model",
-        "resources_github_actions"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "Resources/SELENIUM + JAVA AUTOMATION TESTING ROADMAP.md"
-    },
-    {
-      "id": "platform_v1_curriculum",
-      "label": "V1 Platform Curriculum Sourced from Roadmaps",
-      "nodes": [
-        "qa_learning_platform_plan_v1_scope",
-        "resources_qa_module",
-        "resources_selenium_roadmap",
-        "qa_learning_platform_plan_buggyshop"
-      ],
-      "relation": "form",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "QA-Learning-Platform-Plan.md"
-    },
-    {
-      "id": "ams_realtime_features",
-      "label": "AMS Real-Time Feature Test Focus",
-      "nodes": [
-        "resources_ams_notification_system",
-        "resources_ams_auto_refresh",
-        "resources_test_plan_ams"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "Resources/Test plan report  for AMS (1).md"
-    },
-    {
-      "id": "semantic_document_structure",
-      "label": "Semantic Document Structure and Accessibility",
-      "nodes": [
-        "resources_final_html_in_web_development_1_semantic_html",
-        "resources_final_html_in_web_development_1_semantic_elements",
-        "resources_final_html_in_web_development_1_accessibility",
-        "resources_final_html_in_web_development_1_seo"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "Resources/final HTML in Web Development (1).pdf"
-    },
-    {
-      "id": "css_layout_systems",
-      "label": "CSS Responsive Layout Systems",
-      "nodes": [
-        "resources_final_css_in_web_development_1_flexbox",
-        "resources_final_css_in_web_development_1_css_grid",
-        "resources_final_css_in_web_development_1_media_queries",
-        "resources_final_css_in_web_development_1_container_queries"
-      ],
-      "relation": "form",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "Resources/final CSS in Web Development (1).pdf"
-    },
-    {
-      "id": "html_css_ui_foundation",
-      "label": "HTML/CSS UI Foundation",
-      "nodes": [
-        "resources_final_html_in_web_development_1_html",
-        "resources_final_css_in_web_development_1_css",
-        "resources_final_css_in_web_development_1_separation_of_concerns"
+        "product_track_a_manual_testing_outline_module_a3",
+        "product_buggyshop_spec_seeded_bug",
+        "product_buggyshop_spec_buggyshop"
       ],
       "relation": "participate_in",
       "confidence": "INFERRED",
       "confidence_score": 0.75,
-      "source_file": "Resources/final CSS in Web Development (1).pdf"
+      "source_file": "Product/Track-A-Manual-Testing-Outline.md"
+    },
+    {
+      "id": "landing_site_validation_flow",
+      "label": "Landing-site validation loop (markets plan, drives waitlist, feeds kill/continue gate)",
+      "nodes": [
+        "landing_site_index_landing_page",
+        "qa_learning_platform_plan_positioning",
+        "qa_learning_platform_plan_validation_gate"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Product/landing-site/README.md"
+    },
+    {
+      "id": "http_request_response_cycle",
+      "label": "HTTP request-response cycle (methods over client-server yielding status codes)",
+      "nodes": [
+        "resources_http_fundamentals_for_api_testing_http_methods",
+        "resources_http_fundamentals_for_api_testing_client_server_model",
+        "resources_http_fundamentals_for_api_testing_status_codes"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Resources/HTTP Fundamentals for API Testing.md"
+    },
+    {
+      "id": "interactive_lesson_pattern",
+      "label": "Interactive lesson pattern (visual widget -> BuggyShop lab -> graded)",
+      "nodes": [
+        "qa_learning_platform_plan_differentiator",
+        "landing_site_index_boundary_hunter",
+        "landing_site_index_find_the_bug"
+      ],
+      "relation": "implement",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Product/landing-site/index.html"
     }
-  ]
+  ],
+  "built_at_commit": "f216ccb64903f9cb26ce738276ac9d6f0bb824c9"
 }
