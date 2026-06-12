@@ -165,7 +165,7 @@ Every lesson follows one repeatable pattern — build the engine once, reuse for
 |---|---|---|
 | Web app | **Next.js (React) + Tailwind** | Largest ecosystem, best AI-assistance support, one framework for site + app |
 | Backend/DB/Auth | **Supabase** (Postgres, auth, storage) | Managed, generous free tier, no server ops; you already have Supabase MCP access |
-| Payments | Stripe (global) / Razorpay (if India-first) | Standard |
+| Payments | Merchant-of-record (Paddle / Lemon Squeezy) | One integration serves India + global with localized pricing; provider handles GST/VAT. Verify India support at build time |
 | Code-runner for labs | **Server-side Java runner from day one** (judge0 self-hosted or hosted API; Selenium jobs run headless in a containerized runner) | Java can't execute in-browser — this is the project's one real piece of infrastructure. Fallback if it stalls: "run locally in IntelliJ, submit repo + report" with auto-checks on the repo |
 | BuggyShop | Separate small Next.js app, versioned releases, bug manifest JSON for grading | Isolated from main platform |
 | Interactive visuals | React components (custom) + Excalidraw/Mermaid-style diagrams | Reusable lesson widgets |
@@ -195,7 +195,7 @@ Every lesson follows one repeatable pattern — build the engine once, reuse for
 ## 9. Monetization
 
 - **Free tier:** Module A1 + B0/B1 + interview flashcards (the hook; also your SEO/social funnel).
-- **Pro subscription:** everything + grading + certificate + portfolio. Price test at **₹999–1,499/mo or ₹6,999–9,999/yr** (India-first assumption; ~$15/mo, ~$99/yr international). Decide your primary geography in Phase 0 — it changes pricing, payment rails, and whether Selenium/Java or Playwright/JS leads.
+- **Pro subscription:** everything + grading + certificate + portfolio. **Geography decision (locked June 12, 2026): both markets from day one, implemented via a merchant-of-record provider** (Paddle / Lemon Squeezy — verify current India support during build week) — one integration, localized pricing (**₹999–1,499/mo or ₹6,999–9,999/yr** in India; **~$15/mo / ~$99/yr** elsewhere), tax compliance handled by the provider. Hard rule: no dual payment-rail builds (Razorpay + Stripe separately) in v1.
 - **Later:** cohort-based Lead Bootcamp (Phase 4, premium ₹25–50k), B2B team licenses for service companies training freshers (real money in India's IT-services market), placement partnerships.
 - **Do NOT promise jobs.** Promise skills + portfolio + interview readiness. Job guarantees create legal and reputational debt.
 

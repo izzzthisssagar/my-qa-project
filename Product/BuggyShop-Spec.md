@@ -127,8 +127,8 @@ Twelve fresh bugs across validation/boundary/logic/state/calc/UI — **manifest 
 
 ---
 
-## 8. Open Questions (decide before build)
+## 8. Decisions (locked June 12, 2026)
 
-1. One shared BuggyShop with per-learner data rows vs per-learner ephemeral instance? → **Start shared + sandboxed rows; revisit if learners collide.**
-2. Structured bug-report form (dropdown page/category → easy exact matching) vs free-text + AI matching? → **Structured in v1; AI matching Phase 1.5.**
-3. Currency ₹ vs $ — follows the Phase 0 geography decision (plan §9).
+1. **Architecture:** One shared BuggyShop, per-learner sandboxed data rows. Revisit only if learners collide.
+2. **Bug reports:** Structured form (dropdown page/category + described behavior) → exact manifest matching in v1. Free-text + AI matching is a Phase 1.5 upgrade.
+3. **Currency:** Platform sells in both markets via merchant-of-record (plan §9). BuggyShop itself displays **$** as a neutral demo currency — it's fake-shop data, unrelated to billing. (Note: bug descriptions using ₹ examples, e.g. BS-008/BS-012, read as $ values — thresholds unchanged.)
