@@ -4,6 +4,10 @@
 # Partial / aborted downloads
 *.crdownload
 
+# Build / deploy artifacts (zips, temp deploy bundles)
+*.zip
+Product/ziuzDgtq
+
 # Duplicate file
 Resources/final CSS in Web Development (2).pdf
 
