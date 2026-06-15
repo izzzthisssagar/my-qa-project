@@ -59,6 +59,10 @@ A web platform (Android app in a later phase) where aspiring testers learn QA **
 - **Kill/continue gate:** If <50 people care after 4 weeks of honest promotion, rework the angle before spending months building.
 
 ### Phase 1 — Web MVP: Manual + Automation (Months 2–6)
+> **✅ Built — June 2026.** Code-complete and green; publishing is now a config
+> step (Vercel + Supabase). The platform lives in `qa-mastery/` (its own repo);
+> a full plan-vs-shipped report is in [`PHASE-1-REPORT.md`](./PHASE-1-REPORT.md).
+
 Ship a responsive web app with:
 1. **Two complete tracks** (Section 5): Manual Testing (Foundation) and Automation Testing (Selenium + Playwright basics).
 2. **The Practice App** ("BuggyShop") — a deliberately flawed e-commerce demo app embedded in the platform. Every lab targets it. It has seeded bugs with known IDs so submissions can be auto-graded.

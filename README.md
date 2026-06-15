@@ -2,7 +2,9 @@
 
 My personal Quality Assurance knowledge base — the notes, roadmaps, and
 reference material I'm using to go from beginner to job-ready QA / automation
-tester, plus the early plan for a QA learning platform I'm building.
+tester, plus the QA learning platform I'm building from them. **Phase 1 of the
+platform is built** (code-complete + green, deploy-ready) — see
+[`PHASE-1-REPORT.md`](./PHASE-1-REPORT.md).
 
 ## What's inside
 
@@ -16,6 +18,8 @@ tester, plus the early plan for a QA learning platform I'm building.
 | `Resources/Test plan report  for AMS (1).md` | Sample test plan (Attendance Management System) |
 | `Resources/*.pdf` | HTML & CSS web-development references |
 | `QA-Learning-Platform-Plan.md` | Product & execution plan for the QA learning platform |
+| `PHASE-1-REPORT.md` | Phase 1 completion report (plan → what shipped) |
+| `qa-mastery/` | The built platform (its own git repo) — Phase 1 |
 | `Product/` | Curriculum outlines for the platform |
 | `graphify-out/` | Knowledge graph of all notes — open `graph.html`, read `GRAPH_REPORT.md` |
 
