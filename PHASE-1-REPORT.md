@@ -13,7 +13,7 @@ report maps the plan's Phase 1 deliverables to what shipped.
 | Two complete tracks (Manual + Automation) | ✅ | 59 lessons — Track A (manual) ×30, Track B (automation, Selenium+Java) ×29 — as MDX with server-only quiz keys |
 | Practice app "BuggyShop" with seeded, auto-gradable bugs | ✅ | Embedded e-commerce app; release-flagged seeded bugs with known IDs; bug reports matched to a server-only manifest |
 | Lesson engine: concept → demo → lab → quiz → graded submission | ✅ | "See it / Try it / Do it / Prove it" flow; interactive widgets; graded quizzes, bug-report labs, rubric capstone, and a live code runner |
-| Progress tracking, streaks, certificates | ◑ | XP + progress dashboard, spaced-repetition review queue, completion markers (certificates not yet) |
+| Progress tracking, streaks, certificates | ✅ | XP + progress dashboard, spaced-repetition review queue, and per-track completion certificates |
 | Free tier + paid tier | ✅ | Free lessons + Pro entitlements with a lock badge; Paddle checkout wired (config-gated) |
 
 ## Beyond the plan (built this phase)
@@ -28,6 +28,15 @@ Going live is now a **config checklist, not code** — `qa-mastery/DEPLOYMENT.md
 import the two Vercel projects, set the Supabase + tutor env, optionally enable
 Paddle billing, and rotate any shared keys. CI is green and the codebase is
 feature-complete.
+
+## Minor gaps — now closed
+
+The gaps flagged at first report are done: per-track **completion certificates**
+shipped; **evidence uploads** are scoped to the uploader's own storage folder;
+and **UI-wiring e2e** now covers the tutor dialog + code-runner lab. The only
+remaining caveat is honest and infra-bound: the code-runner and tutor *runtime
+round-trips* aren't end-to-end tested (they need Judge0/Docker and an LLM, which
+CI doesn't run) — the guards and validators behind them are unit-tested.
 
 ## Next: Phase 2
 
