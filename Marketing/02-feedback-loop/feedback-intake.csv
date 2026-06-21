@@ -1,0 +1,4 @@
+id,date,source,user_segment,type,raw_text,theme,reach,impact,confidence,effort,status
+1,2026-06-20,reddit,career_switcher,feature,"Wish there was an API testing track with Postman",api-track,800,high,medium,l,new
+2,2026-06-20,in_app,manual_tester,ux,"Grading on lab 3 felt too strict, rejected a valid bug",grading-strictness,400,high,high,s,new
+3,2026-06-20,tally,career_switcher,content,"Need a clearer roadmap of what to learn first",onboarding-path,1000,medium,high,m,new

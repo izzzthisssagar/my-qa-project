@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>QA Mastery — Launch Post</title>
+<meta name="hz:slide-selector" content=".social" />
+<meta name="hz:canvas-width" content="1080" />
+<meta name="hz:canvas-height" content="1080" />
+<link rel="stylesheet" href="https://use.typekit.net/hmj5gxj.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #18181b; }
+
+  /* Real brand: zinc-950 base, teal accent #2dd4a7, amber "bug" #f5b948 */
+  .social {
+    position: relative;
+    width: 1080px;
+    height: 1080px;
+    background: radial-gradient(120% 120% at 50% -10%, #0c2e29 0%, #09090b 55%, #050505 100%);
+    overflow: hidden;
+    font-family: "roboto", sans-serif;
+    color: #f4f4f5;
+  }
+
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(244,244,245,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244,244,245,0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .tag {
+    position: absolute; top: 80px; left: 90px;
+    font-family: monospace;
+    font-size: 26px; letter-spacing: 2px;
+    color: #2dd4a7;
+  }
+
+  .badge {
+    position: absolute; top: 74px; right: 90px;
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 22px;
+    border: 1px solid rgba(45,212,167,0.5);
+    border-radius: 999px;
+    background: rgba(45,212,167,0.12);
+    font-family: monospace; font-size: 22px; letter-spacing: 1px;
+    color: #2dd4a7;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: #2dd4a7; box-shadow: 0 0 12px #2dd4a7; }
+
+  .headline {
+    position: absolute; top: 250px; left: 90px; right: 90px;
+    font-family: "bebas-neue-v14-deprecated", sans-serif;
+    font-weight: 400;
+    font-size: 200px;
+    line-height: 0.9;
+    letter-spacing: 2px;
+  }
+  .headline .live { color: #2dd4a7; }
+
+  .sub {
+    position: absolute; top: 700px; left: 92px; right: 150px;
+    font-size: 38px; line-height: 1.35; color: #d4d4d8; font-weight: 400;
+  }
+  .sub b { color: #ffffff; font-weight: 700; }
+
+  .motif { position: absolute; top: 250px; right: 70px; opacity: 0.95; }
+
+  .footer {
+    position: absolute; left: 90px; right: 90px; bottom: 78px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(161,161,170,0.25); padding-top: 26px;
+  }
+  .cta {
+    font-family: "bebas-neue-v14-deprecated", sans-serif;
+    font-size: 40px; letter-spacing: 1.5px; color: #f4f4f5;
+  }
+  .cta span { color: #2dd4a7; }
+  .domain { font-family: monospace; font-size: 26px; color: #a1a1aa; }
+</style>
+</head>
+<body>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1080">
+    <div class="grid"></div>
+
+    <div class="tag">// learn-by-doing</div>
+    <div class="badge"><span class="dot"></span> NOW LIVE</div>
+
+    <!-- bug (amber) caught in a teal checkmark -->
+    <svg class="motif" width="150" height="150" viewBox="0 0 100 100" fill="none">
+      <path d="M20 55 L42 78 L84 26" stroke="#2dd4a7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <g transform="translate(60,60)">
+        <ellipse cx="0" cy="0" rx="11" ry="14" fill="#f5b948"/>
+        <line x1="-11" y1="-6" x2="-22" y2="-12" stroke="#f5b948" stroke-width="3" stroke-linecap="round"/>
+        <line x1="-13" y1="2" x2="-25" y2="2" stroke="#f5b948" stroke-width="3" stroke-linecap="round"/>
+        <line x1="-11" y1="9" x2="-21" y2="16" stroke="#f5b948" stroke-width="3" stroke-linecap="round"/>
+        <line x1="0" y1="-14" x2="0" y2="-22" stroke="#f5b948" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </svg>
+
+    <h1 class="headline">QA MASTERY<br><span class="live">IS LIVE.</span></h1>
+
+    <p class="sub">Stop watching testing tutorials. <b>Find real bugs on a real app, file real reports, and get graded</b> — like an actual QA job.</p>
+
+    <div class="footer">
+      <div class="cta">FREE FIRST MODULE <span>→</span></div>
+      <div class="domain">qa-mastery-platform.vercel.app</div>
+    </div>
+  </div>
+</body>
+</html>

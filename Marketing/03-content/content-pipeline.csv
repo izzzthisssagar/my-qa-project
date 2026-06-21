@@ -1,0 +1,4 @@
+id,pillar,channel,planned_date,status,hook,body_link,cta,repurposed_from,posted_url,impressions,comments,clicks,signups
+1,teach,linkedin,2026-06-22,scheduled,"7 fields every bug report needs",post-templates.md#1,free lab link in comments,,,,,,
+2,differentiate,linkedin,2026-06-24,draft,"QA Mastery is live — here's why I built it",post-templates.md#2,try free module,,,,,,
+3,engage,linkedin,2026-06-26,idea,"What stopped you learning automation?",,poll,,,,,,

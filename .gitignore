@@ -21,3 +21,8 @@ graphify-out/.graphify_labels.json
 
 # Separate platform codebase — has own git repo + own GitHub remote
 qa-mastery/
+
+# node + remotion build artifacts
+node_modules/
+Marketing/06-video/out/
+Marketing/06-video/.cache/

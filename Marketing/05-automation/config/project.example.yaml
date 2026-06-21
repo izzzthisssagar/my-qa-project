@@ -1,0 +1,30 @@
+# Reusable project config. Copy to project.<name>.yaml for each project.
+# The scripts work without this file (they take paths as args); this is a
+# convenience manifest so you can run the same toolkit across projects.
+
+project:
+  name: QA Mastery
+  north_star: weekly_activated_learners   # signup + >=1 graded lab
+  domain: ""                              # fill when live
+
+paths:
+  feedback_csv: ../../02-feedback-loop/feedback-intake.csv
+  content_csv:  ../../03-content/content-pipeline.csv
+
+content:
+  cadence_per_week: 3
+  post_days: [Mon, Wed, Fri]
+  pillars: [teach, differentiate, build-public, proof, engage]
+  channels: [linkedin, reddit, mot, devto, blog, youtube]
+
+feedback:
+  channels: [in_app, tally, reddit, linkedin, discord, dm, email]
+  rice:
+    impact:     {massive: 3, high: 2, medium: 1, low: 0.5, minimal: 0.25}
+    confidence: {high: 1.0, medium: 0.8, low: 0.5}
+    effort:     {xs: 0.25, s: 0.5, m: 1, l: 2, xl: 3}
+
+# To reuse for another project:
+#   1. cp project.example.yaml project.myapp.yaml ; edit name/pillars/channels
+#   2. start fresh feedback + content CSVs with the same headers
+#   3. point scripts at the new CSV paths

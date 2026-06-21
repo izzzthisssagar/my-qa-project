@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>QA Mastery — You Asked, We Built It (template)</title>
+<meta name="hz:slide-selector" content=".social" />
+<meta name="hz:canvas-width" content="1080" />
+<meta name="hz:canvas-height" content="1080" />
+<link rel="stylesheet" href="https://use.typekit.net/hmj5gxj.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #18181b; }
+
+  /* Light variant — uses accent-soft #1f6f5c for readable teal on near-white */
+  .social {
+    position: relative; width: 1080px; height: 1080px;
+    background: #fafafa; overflow: hidden;
+    font-family: "roboto", sans-serif; color: #18181b;
+  }
+  .tag {
+    position: absolute; top: 78px; left: 90px;
+    font-family: monospace; font-size: 26px; letter-spacing: 2px; color: #1f6f5c;
+  }
+  .brand {
+    position: absolute; top: 70px; right: 90px;
+    font-family: "bebas-neue-v14-deprecated", sans-serif;
+    font-size: 40px; letter-spacing: 1.5px; color: #18181b;
+  }
+  .card-asked {
+    position: absolute; top: 200px; left: 90px; right: 90px;
+    background: #ffffff; border: 1px solid #e4e4e7; border-left: 10px solid #1f6f5c;
+    border-radius: 16px; padding: 42px 46px;
+    box-shadow: 0 10px 30px rgba(9,9,11,0.06);
+  }
+  .label-asked { font-family: monospace; font-size: 26px; letter-spacing: 1px; color: #1f6f5c; margin-bottom: 14px; }
+  .req { font-size: 46px; line-height: 1.25; font-weight: 700; color: #18181b; }
+  .arrow {
+    position: absolute; top: 540px; left: 50%; transform: translateX(-50%);
+    font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 64px; color: #a1a1aa;
+  }
+  .card-built {
+    position: absolute; top: 630px; left: 90px; right: 90px;
+    background: #06241f; border-radius: 16px; padding: 42px 46px;
+    border-left: 10px solid #2dd4a7;
+  }
+  .label-built { display:flex; align-items:center; gap:12px; font-family: monospace; font-size: 26px; letter-spacing: 1px; color: #2dd4a7; margin-bottom: 14px; }
+  .built { font-size: 44px; line-height: 1.25; font-weight: 700; color: #d1fae5; }
+  .footer {
+    position: absolute; left: 90px; right: 90px; bottom: 70px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .foot-note { font-size: 28px; color: #52525b; }
+  .foot-note b { color: #18181b; }
+  .domain { font-family: monospace; font-size: 26px; color: #a1a1aa; }
+</style>
+</head>
+<body>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1080">
+    <div class="tag">// built-with-you</div>
+    <div class="brand">QA MASTERY</div>
+
+    <div class="card-asked">
+      <div class="label-asked">YOU ASKED 💬</div>
+      <div class="req">“Add an API testing track with Postman.”</div>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="card-built">
+      <div class="label-built">✅ WE BUILT IT</div>
+      <div class="built">The API Testing track is now live — practice real requests on BuggyShop's API.</div>
+    </div>
+
+    <div class="footer">
+      <div class="foot-note">You talk. <b>We ship.</b> What's next? → link in comments</div>
+      <div class="domain">qa-mastery-platform.vercel.app</div>
+    </div>
+  </div>
+</body>
+</html>

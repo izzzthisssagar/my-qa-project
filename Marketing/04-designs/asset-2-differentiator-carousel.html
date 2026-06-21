@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>QA Mastery — Differentiator (carousel)</title>
+<meta name="hz:slide-selector" content=".social" />
+<meta name="hz:canvas-width" content="1080" />
+<meta name="hz:canvas-height" content="1350" />
+<link rel="stylesheet" href="https://use.typekit.net/hmj5gxj.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; flex-direction: column; align-items: center; gap: 30px; padding: 30px; background: #18181b; }
+  .social { position: relative; width: 1080px; height: 1350px; overflow: hidden; font-family: "roboto", sans-serif; }
+  .dark { background: radial-gradient(120% 120% at 100% 0%, #0c2e29 0%, #09090b 60%, #050505 100%); color: #f4f4f5; }
+  .light { background: #fafafa; color: #18181b; }
+  .green { background: #06241f; color: #d1fae5; }
+  .kicker { position: absolute; top: 90px; left: 100px; font-family: monospace; font-size: 28px; letter-spacing: 2px; }
+  .kicker.v { color: #2dd4a7; } .kicker.g { color: #2dd4a7; } .kicker.d { color: #1f6f5c; }
+  .brandmark { position: absolute; top: 84px; right: 100px; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 42px; letter-spacing: 1.5px; opacity: 0.8; }
+  .big { position: absolute; top: 360px; left: 100px; right: 100px; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 150px; line-height: 0.88; letter-spacing: 1px; }
+  .big.small { font-size: 120px; }
+  .amber { color: #f5b948; } .teal { color: #2dd4a7; }
+  .note { position: absolute; left: 102px; right: 130px; bottom: 230px; font-size: 40px; line-height: 1.4; opacity: 0.85; }
+  .swipe { position: absolute; bottom: 80px; left: 100px; font-family: monospace; font-size: 26px; color: #2dd4a7; }
+  .pageno { position: absolute; bottom: 80px; right: 100px; font-family: monospace; font-size: 26px; opacity: 0.5; }
+  .pill { position: absolute; bottom: 220px; left: 100px; display: inline-block; padding: 24px 44px; border-radius: 999px; background: #2dd4a7; color: #06241f; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 46px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+  <div class="social dark" data-canvas-width="1080" data-canvas-height="1350"><div class="kicker v">// hard-truth</div><div class="brandmark">QA MASTERY</div><h1 class="big">100 HOURS OF TUTORIALS.<br><span class="amber">STILL FROZE</span> ON DAY ONE.</h1><p class="note">Most QA courses are video. You finish them and still can't actually test.</p><div class="swipe">swipe →</div><div class="pageno">1 / 5</div></div>
+  <div class="social light" data-canvas-width="1080" data-canvas-height="1350"><div class="kicker d">// why</div><div class="brandmark" style="color:#18181b">QA MASTERY</div><h1 class="big">BECAUSE<br>WATCHING <span style="color:#f5b948">≠</span><br>DOING.</h1><p class="note" style="color:#52525b">No one grades your work. No one tells you what to test. So nothing sticks.</p><div class="swipe" style="color:#1f6f5c">swipe →</div><div class="pageno">2 / 5</div></div>
+  <div class="social dark" data-canvas-width="1080" data-canvas-height="1350"><div class="kicker v">// meet</div><div class="brandmark">QA MASTERY</div><h1 class="big small">MEET <span class="amber">BUGGYSHOP</span> — A SHOP FULL OF REAL, SEEDED BUGS.</h1><p class="note">A deliberately broken e-commerce app built into the platform. Every lab targets it.</p><div class="swipe">swipe →</div><div class="pageno">3 / 5</div></div>
+  <div class="social green" data-canvas-width="1080" data-canvas-height="1350"><div class="kicker g">// the-loop</div><div class="brandmark">QA MASTERY</div><h1 class="big">FIND THEM.<br>FILE REPORTS.<br><span class="teal">GET GRADED.</span></h1><p class="note" style="color:#99f6e4">Server-side grading against a real answer key. The credential actually means something.</p><div class="swipe">swipe →</div><div class="pageno">4 / 5</div></div>
+  <div class="social dark" data-canvas-width="1080" data-canvas-height="1350"><div class="kicker v">// bottom-line</div><div class="brandmark">QA MASTERY</div><h1 class="big">YOU DON'T<br>WATCH TESTING.<br><span class="teal">YOU DO IT.</span></h1><div class="pill">START FREE → link in comments</div><div class="pageno">5 / 5</div></div>
+</body>
+</html>

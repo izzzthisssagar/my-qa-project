@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>QA Mastery — 7 Fields of a Great Bug Report (carousel)</title>
+<meta name="hz:slide-selector" content=".social" />
+<meta name="hz:canvas-width" content="1080" />
+<meta name="hz:canvas-height" content="1350" />
+<link rel="stylesheet" href="https://use.typekit.net/hmj5gxj.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; flex-direction: column; align-items: center; gap: 30px; padding: 30px; background: #18181b; }
+
+  .social {
+    position: relative; width: 1080px; height: 1350px;
+    background: #09090b; overflow: hidden;
+    font-family: "roboto", sans-serif; color: #f4f4f5;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(244,244,245,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244,244,245,0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .kicker { position: absolute; top: 90px; left: 100px; font-family: monospace; font-size: 28px; letter-spacing: 2px; color: #2dd4a7; }
+  .brandmark { position: absolute; top: 84px; right: 100px; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 42px; letter-spacing: 1.5px; color: #d4d4d8; }
+  .pageno { position: absolute; bottom: 80px; right: 100px; font-family: monospace; font-size: 26px; color: #71717a; }
+  .swipe { position: absolute; bottom: 80px; left: 100px; font-family: monospace; font-size: 26px; color: #2dd4a7; }
+  .cover-title { position: absolute; top: 360px; left: 100px; right: 100px; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 175px; line-height: 0.88; letter-spacing: 2px; }
+  .cover-title .hl { color: #f5b948; }
+  .cover-sub { position: absolute; top: 980px; left: 102px; right: 140px; font-size: 38px; line-height: 1.4; color: #d4d4d8; }
+  .num { position: absolute; top: 300px; left: 100px; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 230px; line-height: 0.8; color: #27272a; }
+  .field { position: absolute; top: 470px; left: 100px; right: 100px; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 130px; line-height: 0.9; letter-spacing: 1px; color: #f4f4f5; }
+  .desc { position: absolute; top: 700px; left: 102px; right: 120px; font-size: 42px; line-height: 1.4; color: #d4d4d8; }
+  .example { position: absolute; left: 100px; right: 100px; bottom: 200px; background: #050505; border-left: 8px solid #2dd4a7; border-radius: 12px; padding: 34px 38px; font-family: monospace; font-size: 30px; line-height: 1.5; color: #5eead4; }
+  .example .lbl { color: #71717a; }
+  .cta-title { position: absolute; top: 420px; left: 100px; right: 100px; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 150px; line-height: 0.9; letter-spacing: 1px; }
+  .cta-title .hl { color: #2dd4a7; }
+  .cta-sub { position: absolute; top: 820px; left: 102px; right: 140px; font-size: 42px; line-height: 1.4; color: #d4d4d8; }
+  .cta-sub b { color: #fff; }
+  .cta-pill { position: absolute; bottom: 230px; left: 100px; display: inline-block; padding: 24px 44px; border-radius: 999px; background: #2dd4a7; color: #09090b; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 46px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1350"><div class="grid"></div><div class="kicker">// bug-report-101</div><div class="brandmark">QA MASTERY</div><h1 class="cover-title">7 FIELDS<br>EVERY <span class="hl">BUG REPORT</span><br>NEEDS</h1><p class="cover-sub">Miss one and your report gets ignored. Save this before your next one. →</p><div class="swipe">swipe →</div><div class="pageno">1 / 9</div></div>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1350"><div class="grid"></div><div class="kicker">// field</div><div class="brandmark">QA MASTERY</div><div class="num">01</div><div class="field">A CLEAR TITLE</div><p class="desc">One line: what's broken + where. A dev should grasp it without opening the ticket.</p><div class="example"><span class="lbl">good:</span> Checkout — "Pay" button does nothing on mobile Safari</div><div class="swipe">swipe →</div><div class="pageno">2 / 9</div></div>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1350"><div class="grid"></div><div class="kicker">// field</div><div class="brandmark">QA MASTERY</div><div class="num">02</div><div class="field">STEPS TO<br>REPRODUCE</div><p class="desc">Numbered, exact, repeatable. If they can't reproduce it, they can't fix it.</p><div class="example"><span class="lbl">1.</span> Add item to cart  <span class="lbl">2.</span> Go to checkout  <span class="lbl">3.</span> Tap "Pay"</div><div class="swipe">swipe →</div><div class="pageno">3 / 9</div></div>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1350"><div class="grid"></div><div class="kicker">// field</div><div class="brandmark">QA MASTERY</div><div class="num">03</div><div class="field">EXPECTED<br>RESULT</div><p class="desc">What should happen. This is the contract the bug is breaking.</p><div class="example"><span class="lbl">expected:</span> Order is placed, confirmation page shows</div><div class="swipe">swipe →</div><div class="pageno">4 / 9</div></div>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1350"><div class="grid"></div><div class="kicker">// field</div><div class="brandmark">QA MASTERY</div><div class="num">04</div><div class="field">ACTUAL<br>RESULT</div><p class="desc">What actually happens. State it plainly — no guessing at the cause.</p><div class="example"><span class="lbl">actual:</span> Button click does nothing, no error, stays on page</div><div class="swipe">swipe →</div><div class="pageno">5 / 9</div></div>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1350"><div class="grid"></div><div class="kicker">// field</div><div class="brandmark">QA MASTERY</div><div class="num">05</div><div class="field">SEVERITY &<br>PRIORITY</div><p class="desc">How bad + how urgent. They're different. A typo can be high-visibility; a rare crash can be critical.</p><div class="example"><span class="lbl">severity:</span> Critical  ·  <span class="lbl">priority:</span> High (blocks all purchases)</div><div class="swipe">swipe →</div><div class="pageno">6 / 9</div></div>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1350"><div class="grid"></div><div class="kicker">// field</div><div class="brandmark">QA MASTERY</div><div class="num">06</div><div class="field">ENVIRONMENT</div><p class="desc">Where you saw it: device, OS, browser + version, build/env. "Works on my machine" dies here.</p><div class="example"><span class="lbl">env:</span> iPhone 14, iOS 18, Safari, build 2.3.1, staging</div><div class="swipe">swipe →</div><div class="pageno">7 / 9</div></div>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1350"><div class="grid"></div><div class="kicker">// field</div><div class="brandmark">QA MASTERY</div><div class="num">07</div><div class="field">EVIDENCE</div><p class="desc">Screenshot, screen recording, console logs, network trace. Proof shrinks the back-and-forth to zero.</p><div class="example"><span class="lbl">attached:</span> screen-recording.mov, console-error.log</div><div class="swipe">swipe →</div><div class="pageno">8 / 9</div></div>
+  <div class="social" data-canvas-width="1080" data-canvas-height="1350"><div class="grid"></div><div class="kicker">// your-turn</div><div class="brandmark">QA MASTERY</div><h2 class="cta-title">NOW GO<br><span class="hl">FILE ONE.</span></h2><p class="cta-sub">Practice on a real buggy app and get your bug reports <b>graded</b> — free first module on QA Mastery.</p><div class="cta-pill">START FREE → link in comments</div><div class="pageno">9 / 9</div></div>
+</body>
+</html>

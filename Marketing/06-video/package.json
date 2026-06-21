@@ -1,0 +1,22 @@
+{
+  "name": "qa-mastery-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Free Remotion pipeline for QA Mastery short-form videos (TikTok / Reels / Shorts).",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render Short out/short.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.395",
+    "@remotion/google-fonts": "^4.0.395",
+    "@remotion/transitions": "^4.0.395",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.395"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}

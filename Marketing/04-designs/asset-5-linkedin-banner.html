@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>QA Mastery — LinkedIn Banner</title>
+<meta name="hz:slide-selector" content=".banner" />
+<meta name="hz:canvas-width" content="1584" />
+<meta name="hz:canvas-height" content="396" />
+<link rel="stylesheet" href="https://use.typekit.net/hmj5gxj.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #18181b; }
+  .banner { position: relative; width: 1584px; height: 396px; overflow: hidden; background: radial-gradient(120% 200% at 0% 0%, #0c2e29 0%, #09090b 55%, #050505 100%); font-family: "roboto", sans-serif; color: #f4f4f5; }
+  .grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(244,244,245,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(244,244,245,0.04) 1px, transparent 1px); background-size: 56px 56px; }
+  .tag { position: absolute; top: 64px; left: 90px; font-family: monospace; font-size: 24px; letter-spacing: 2px; color: #2dd4a7; }
+  .title { position: absolute; top: 110px; left: 88px; right: 520px; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 110px; line-height: 0.9; letter-spacing: 1px; }
+  .title .hl { color: #2dd4a7; }
+  .keywords { position: absolute; bottom: 60px; left: 90px; display: flex; gap: 16px; }
+  .kw { font-family: monospace; font-size: 24px; color: #d4d4d8; border: 1px solid rgba(161,161,170,0.3); border-radius: 999px; padding: 8px 20px; }
+  .domain { position: absolute; right: 90px; bottom: 60px; font-family: "bebas-neue-v14-deprecated", sans-serif; font-size: 40px; letter-spacing: 1px; color: #2dd4a7; }
+  .motif { position: absolute; right: 110px; top: 80px; opacity: 0.95; }
+</style>
+</head>
+<body>
+  <div class="banner" data-canvas-width="1584" data-canvas-height="396">
+    <div class="grid"></div>
+    <div class="tag">// learn-by-doing</div>
+    <h1 class="title">QA MASTERY — LEARN TESTING<br>BY <span class="hl">DOING IT.</span></h1>
+
+    <svg class="motif" width="150" height="150" viewBox="0 0 100 100" fill="none">
+      <path d="M20 55 L42 78 L84 26" stroke="#2dd4a7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <g transform="translate(60,60)">
+        <ellipse cx="0" cy="0" rx="11" ry="14" fill="#f5b948"/>
+        <line x1="-11" y1="-6" x2="-22" y2="-12" stroke="#f5b948" stroke-width="3" stroke-linecap="round"/>
+        <line x1="-13" y1="2" x2="-25" y2="2" stroke="#f5b948" stroke-width="3" stroke-linecap="round"/>
+        <line x1="-11" y1="9" x2="-21" y2="16" stroke="#f5b948" stroke-width="3" stroke-linecap="round"/>
+        <line x1="0" y1="-14" x2="0" y2="-22" stroke="#f5b948" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </svg>
+
+    <div class="keywords">
+      <span class="kw">practice on a real app</span>
+      <span class="kw">graded bug reports</span>
+      <span class="kw">job-ready portfolio</span>
+    </div>
+    <div class="domain">qa-mastery-platform.vercel.app</div>
+  </div>
+</body>
+</html>

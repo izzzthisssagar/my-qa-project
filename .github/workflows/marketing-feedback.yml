@@ -1,0 +1,61 @@
+name: Weekly feedback triage
+
+# Pulls in-app feedback from Supabase into the master CSV, re-ranks it with RICE,
+# commits the updated CSV, and posts the ranked backlog to a Slack/Discord webhook.
+# Runs every Friday; also runnable on demand.
+#
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   SUPABASE_URL                 https://xxxx.supabase.co
+#   SUPABASE_SERVICE_ROLE_KEY    service role secret (server-only)
+#   NOTIFY_WEBHOOK               Slack/Discord incoming webhook URL (optional)
+
+on:
+  schedule:
+    - cron: "0 4 * * 5"   # 04:00 UTC Friday (≈ 09:45 Nepal). Adjust to taste.
+  workflow_dispatch: {}
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # to commit the refreshed CSV
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pull feedback from Supabase → master CSV
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          python Marketing/05-automation/scripts/export_supabase_feedback.py
+
+      - name: Re-rank backlog
+        id: triage
+        run: |
+          OUT=$(python Marketing/05-automation/scripts/feedback_triage.py \
+                Marketing/02-feedback-loop/feedback-intake.csv)
+          echo "$OUT"
+          echo "body<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$OUT" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Commit refreshed CSV
+        run: |
+          git config user.name "feedback-bot"
+          git config user.email "actions@github.com"
+          git add Marketing/02-feedback-loop/feedback-intake.csv
+          git diff --cached --quiet || git commit -m "chore(marketing): weekly feedback sync"
+          git push || echo "nothing to push"
+
+      - name: Notify (optional)
+        if: ${{ secrets.NOTIFY_WEBHOOK != '' }}
+        env:
+          B: ${{ steps.triage.outputs.body }}
+        run: |
+          curl -s -X POST -H 'Content-type: application/json' \
+            --data "$(python -c 'import json,os;print(json.dumps({"text":"Weekly QA Mastery feedback backlog:\n```\n"+os.environ["B"][:3500]+"\n```"}))')" \
+            "${{ secrets.NOTIFY_WEBHOOK }}"
