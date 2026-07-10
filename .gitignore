@@ -26,3 +26,12 @@ qa-mastery/
 node_modules/
 Marketing/06-video/out/
 Marketing/06-video/.cache/
+
+# Obsidian vault — commit settings + plugins, ignore per-machine/transient state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# Raw screen recordings (90MB+ .mov) — sources for 06-video cuts, too big for git
+Marketing/Screen recording/

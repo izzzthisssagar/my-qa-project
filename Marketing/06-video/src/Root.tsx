@@ -3,6 +3,7 @@ import { Intro, INTRO_DURATION } from "./Intro";
 import { WhyDifferent, WHY_DURATION } from "./WhyDifferent";
 import { TalentLaunch, TALENT_DURATION } from "./TalentLaunch";
 import { TalentShort, SHORT_DURATION } from "./TalentShort";
+import { NotesInteractive, NOTES_DURATION } from "./NotesInteractive";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -43,6 +44,14 @@ export const RemotionRoot: React.FC = () => {
         id="TalentShort"
         component={TalentShort}
         durationInFrames={SHORT_DURATION}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="NotesInteractive"
+        component={NotesInteractive}
+        durationInFrames={NOTES_DURATION}
         fps={30}
         width={1080}
         height={1920}
