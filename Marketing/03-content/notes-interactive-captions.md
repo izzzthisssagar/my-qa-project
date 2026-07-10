@@ -1,8 +1,15 @@
 # "Notes That Fight Back" — launch captions (NotesInteractive reel)
 
 **Asset:** `06-video/out/notes-interactive.mp4` (1080×1920, ~52s, VO + captions
-baked in — sound-off friendly). Hosted copy (after deploy):
-`https://qa-mastery-platform.vercel.app/marketing/video/notes-interactive.mp4`
+baked in — sound-off friendly).
+
+> ⚠️ **The hosted copy is gone.** The 28 MB mp4 was removed from the platform's
+> `public/` folder on 2026-07-10 — everything in `public/` is bundled into every
+> Vercel build, and nothing in the app referenced it. It is preserved in git
+> (`git show eb30574:apps/platform/public/marketing/video/notes-interactive.mp4 > notes-interactive.mp4`).
+> **Every platform below takes a native upload anyway**, so this changes nothing
+> about posting. If you ever need a URL, host it on Vercel Blob / S3 / YouTube —
+> do not put it back in `public/`.
 
 One reel, five platforms. Post in this order (native upload everywhere — never
 paste a link to another platform's video).
