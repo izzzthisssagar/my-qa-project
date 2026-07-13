@@ -1,132 +1,812 @@
 {
-  "/Users/sajanathapa/Desktop/My Qa Projecct/CLAUDE.md": {
+  ".claude/settings.local.json": {
+    "mtime": 1781526350.0354245,
+    "ast_hash": "664e2bf0ffb66c73ca561c8f4040d683",
+    "semantic_hash": ""
+  },
+  ".obsidian/app.json": {
+    "mtime": 1783656171.6434238,
+    "ast_hash": "21fb7ffe322d5236c176d41d06e232b9",
+    "semantic_hash": ""
+  },
+  ".obsidian/appearance.json": {
+    "mtime": 1783656171.6439278,
+    "ast_hash": "99914b932bd37a50b983c5e7c90ae93b",
+    "semantic_hash": ""
+  },
+  ".obsidian/community-plugins.json": {
+    "mtime": 1783655129.4867206,
+    "ast_hash": "f33c39581bff877341f808a84c1c4d2c",
+    "semantic_hash": ""
+  },
+  ".obsidian/core-plugins.json": {
+    "mtime": 1783656171.2825718,
+    "ast_hash": "037d56e29c7f12d2eb319427edb909cc",
+    "semantic_hash": ""
+  },
+  ".obsidian/graph.json": {
+    "mtime": 1783683873.467999,
+    "ast_hash": "a98d03e277814946959f00c5173cf8a0",
+    "semantic_hash": ""
+  },
+  ".obsidian/plugins/obsidian-git/main.js": {
+    "mtime": 1783655116.1489027,
+    "ast_hash": "71ec12c13f2c145d7accb3c109854e83",
+    "semantic_hash": ""
+  },
+  ".obsidian/plugins/obsidian-git/manifest.json": {
+    "mtime": 1783655117.164633,
+    "ast_hash": "39355b86b9df909f1fac90c94d03a737",
+    "semantic_hash": ""
+  },
+  ".obsidian/plugins/obsidian-git/obsidian_askpass.sh": {
+    "mtime": 1783656174.0961728,
+    "ast_hash": "f662d5f216d371e86d1b108ba5d22a5f",
+    "semantic_hash": ""
+  },
+  "Curriculum/generator-gap-check.py": {
+    "mtime": 1783611764.999362,
+    "ast_hash": "18127e637e3a54aa7e5aeb6ddb45e8a4",
+    "semantic_hash": ""
+  },
+  "Curriculum/generator-master-map.py": {
+    "mtime": 1783611764.9990337,
+    "ast_hash": "8c0adb430d12d7480f3166d3298daa06",
+    "semantic_hash": ""
+  },
+  "Marketing/02-feedback-loop/supabase-feedback-schema.sql": {
+    "mtime": 1781971610.3797863,
+    "ast_hash": "c061c6fc4b4b0bcd7df0b41c5d81bba2",
+    "semantic_hash": ""
+  },
+  "Marketing/05-automation/scripts/content_scheduler.py": {
+    "mtime": 1781971759.5817113,
+    "ast_hash": "f5651c0bc35170557d39d525b3b403f8",
+    "semantic_hash": ""
+  },
+  "Marketing/05-automation/scripts/export_supabase_feedback.py": {
+    "mtime": 1781998496.7806783,
+    "ast_hash": "20892d41e16d366d714e3f39ab96b090",
+    "semantic_hash": ""
+  },
+  "Marketing/05-automation/scripts/feedback_triage.py": {
+    "mtime": 1781971743.0713558,
+    "ast_hash": "51e6dd204efddbf9d294a03596771ecc",
+    "semantic_hash": ""
+  },
+  "Marketing/05-automation/scripts/review_aggregator.py": {
+    "mtime": 1781971778.1030352,
+    "ast_hash": "4e062fd0e1a0e4d723f1163707bced11",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/make-reel.sh": {
+    "mtime": 1782007052.1328862,
+    "ast_hash": "e5d69d1642d25dabcd04ba88f95d3681",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/package.json": {
+    "mtime": 1782008200.283999,
+    "ast_hash": "0accbb32f8c236499debce3e1e7ebadc",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/src/Intro.tsx": {
+    "mtime": 1782028753.019267,
+    "ast_hash": "af89c76f0f1f43f96abb50aae4737c9c",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/src/NotesInteractive.tsx": {
+    "mtime": 1783674391.5123303,
+    "ast_hash": "e296889afe5a8e7ec19b0a165df8682f",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/src/Root.tsx": {
+    "mtime": 1783662118.7325587,
+    "ast_hash": "8afc88b67b5cde2ad3c24fdca77739c2",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/src/TalentLaunch.tsx": {
+    "mtime": 1782398763.2749016,
+    "ast_hash": "f7256f0e23e3862a8a7b17d309148134",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/src/TalentShort.tsx": {
+    "mtime": 1782399014.5365531,
+    "ast_hash": "8d6306cce1b932ab6a39ef9eb29387bc",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/src/WhyDifferent.tsx": {
+    "mtime": 1782110266.2003944,
+    "ast_hash": "f0fd9352dc96722b420d3bf429c57f10",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/src/index.ts": {
+    "mtime": 1782008331.310664,
+    "ast_hash": "d92d9dee1ab16aa44a75ae7fbfb843ca",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/tsconfig.json": {
+    "mtime": 1782008484.9701579,
+    "ast_hash": "ac36a879902336ede9c2c0316bbee602",
+    "semantic_hash": ""
+  },
+  "Product/notes-v3-previews/curriculum-map-generator.py": {
+    "mtime": 1783595003.8495708,
+    "ast_hash": "c5159a138ebf65c31efcc4af96f687fc",
+    "semantic_hash": ""
+  },
+  ".github/workflows/marketing-feedback.yml": {
+    "mtime": 1781998532.714715,
+    "ast_hash": "9483ad24632dba5ef05fb227837f3436",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
     "mtime": 1781248162.585975,
     "ast_hash": "bf26ba59d023cb7117958d371dba8012",
-    "semantic_hash": "bf26ba59d023cb7117958d371dba8012"
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/QA-Learning-Platform-Plan.md": {
-    "mtime": 1781228929.4827924,
-    "ast_hash": "57214154ed32e8f4f22abcf03ef0a26b",
-    "semantic_hash": "57214154ed32e8f4f22abcf03ef0a26b"
+  "Claude Coordination.md": {
+    "mtime": 1783914585.4679482,
+    "ast_hash": "b8271c16f781a9aad4463c2263950470",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/API.md": {
-    "mtime": 1781196064.2551465,
-    "ast_hash": "eb24207bd26e2b12deef5c1e5f20d1cf",
-    "semantic_hash": "eb24207bd26e2b12deef5c1e5f20d1cf"
+  "Curriculum/01-master-curriculum-map.html": {
+    "mtime": 1783611764.9966676,
+    "ast_hash": "caf89da8ccbb32cba0f29cb500b1f7aa",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/Books Every Software Tester.md": {
-    "mtime": 1781196347.0609653,
-    "ast_hash": "9108f34fc050866d188ebfa6de2f9176",
-    "semantic_hash": "9108f34fc050866d188ebfa6de2f9176"
+  "Curriculum/02-sample-rich-note.html": {
+    "mtime": 1783595616.286963,
+    "ast_hash": "596adffdb4d644fd755a58ac8dc3b3a2",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/FULL MODULES NOTES FOR QA.md": {
-    "mtime": 1781196178.8184726,
-    "ast_hash": "20ce76ec6a59398ba4cb60f191fea592",
-    "semantic_hash": "20ce76ec6a59398ba4cb60f191fea592"
+  "Curriculum/03-deep-dive-additions-v3-1.html": {
+    "mtime": 1783595616.287413,
+    "ast_hash": "e4747839c74c25b58a4bed1854125b3c",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/HTTP Fundamentals for API Testing.md": {
-    "mtime": 1781228875.9285169,
-    "ast_hash": "9ae76d48d8185c2c0bc8a51f8cbc5e7d",
-    "semantic_hash": "9ae76d48d8185c2c0bc8a51f8cbc5e7d"
+  "Curriculum/04-final-gap-check-v3-2.html": {
+    "mtime": 1783611764.998062,
+    "ast_hash": "c3f69db409125c6202ae152ca151e2da",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/PHASE 1 \u2014 JAVA ESSENTIALS FOR SELENIUM.md": {
-    "mtime": 1781196110.2311034,
-    "ast_hash": "580ec8f58a5c88db8822570ca5036d07",
-    "semantic_hash": "580ec8f58a5c88db8822570ca5036d07"
+  "Curriculum/README.md": {
+    "mtime": 1783595616.2885005,
+    "ast_hash": "b53845cf573204a4b73e6f5743136f51",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/PHASE 2_ CORE TESTING SKILLS (Days 21-45).md": {
-    "mtime": 1781196160.1798947,
-    "ast_hash": "a59266f10c6ce5af7e53015175716701",
-    "semantic_hash": "a59266f10c6ce5af7e53015175716701"
+  "Curriculum/index.html": {
+    "mtime": 1783611742.321133,
+    "ast_hash": "1a54eed786e84da7290cdc73656ca6ac",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/QA module.md": {
-    "mtime": 1781196135.6912627,
-    "ast_hash": "eaf383f8f5d1d94259b351c76d200fce",
-    "semantic_hash": "eaf383f8f5d1d94259b351c76d200fce"
+  "Home.md": {
+    "mtime": 1783914889.8712373,
+    "ast_hash": "606463ee9ceb8bbe3b7aac80a68a21dd",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/SELENIUM + JAVA AUTOMATION TESTING ROADMAP.md": {
-    "mtime": 1781196090.1528037,
-    "ast_hash": "938f3dae8c2a1745ff4e2eda0af0276a",
-    "semantic_hash": "938f3dae8c2a1745ff4e2eda0af0276a"
+  "Logs/2026-07-10 \u2014 QA Mastery Notes v2 build.md": {
+    "mtime": 1783656281.463087,
+    "ast_hash": "7b0b81d4f80d21826c9e5da5f8f0a03d",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/Selenium Topic List.md": {
-    "mtime": 1781196196.6410642,
-    "ast_hash": "a132bc2f5baeb955f034267da76be185",
-    "semantic_hash": "a132bc2f5baeb955f034267da76be185"
+  "Logs/2026-07-10.md": {
+    "mtime": 1783693301.9665618,
+    "ast_hash": "b40b68c84c4c478f489b3ac1c70dd2e6",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/Test plan report  for AMS (1).md": {
-    "mtime": 1781196049.079953,
-    "ast_hash": "3dc1bafbe1427913f5f743b523551b73",
-    "semantic_hash": "3dc1bafbe1427913f5f743b523551b73"
+  "Logs/2026-07-13.md": {
+    "mtime": 1783914844.1157682,
+    "ast_hash": "9af220019e78ee1a9311aa372969ada0",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/What is Test Environment _ QA, Stage, Preprod and Production.md": {
-    "mtime": 1781196391.7361262,
-    "ast_hash": "56e09f3fc2bfca17e7a8287ae501b2f9",
-    "semantic_hash": "56e09f3fc2bfca17e7a8287ae501b2f9"
+  "Marketing/01-action-plan/30-60-90-plan.md": {
+    "mtime": 1781971525.852401,
+    "ast_hash": "d5781946a372ed889537d644da6a0853",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/_QA Guide for Testing UI_UX Designs.md": {
-    "mtime": 1781196312.8656282,
-    "ast_hash": "75487dcc9f9c757f9de6519127b2ba94",
-    "semantic_hash": "75487dcc9f9c757f9de6519127b2ba94"
+  "Marketing/01-action-plan/channels-playbook.md": {
+    "mtime": 1781971538.0862916,
+    "ast_hash": "e2e7b5413a383fb990c7739b93893891",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/final CSS in Web Development (1).pdf": {
-    "mtime": 1781153200.7773564,
-    "ast_hash": "54390b52c7ec92f5f3fa5213ad0d4f8b",
-    "semantic_hash": "54390b52c7ec92f5f3fa5213ad0d4f8b"
+  "Marketing/01-action-plan/targets-and-metrics.md": {
+    "mtime": 1781971548.2096603,
+    "ast_hash": "702b6f3507411cb1e4bd805945146bb0",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/final CSS in Web Development (2).pdf": {
-    "mtime": 1781153203.7544289,
-    "ast_hash": "54390b52c7ec92f5f3fa5213ad0d4f8b",
-    "semantic_hash": "54390b52c7ec92f5f3fa5213ad0d4f8b"
+  "Marketing/02-feedback-loop/feedback-system.md": {
+    "mtime": 1781971579.812394,
+    "ast_hash": "0e12c1f6dbbe422a5f23f08e8db9633f",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Resources/final HTML in Web Development (1).pdf": {
-    "mtime": 1781153165.808757,
-    "ast_hash": "f21347502fa4476cafdedb995e74c207",
-    "semantic_hash": "f21347502fa4476cafdedb995e74c207"
+  "Marketing/02-feedback-loop/forms/feedback-form-spec.md": {
+    "mtime": 1781971622.9544578,
+    "ast_hash": "097019f8ad3e4a0aaad96121956d8f19",
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/BuggyShop-Spec.md": {
+  "Marketing/02-feedback-loop/rice-scoring.md": {
+    "mtime": 1781971597.050454,
+    "ast_hash": "b97f3e2f5ab49e5a85f5f6d5d9d6f805",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/content-calendar.md": {
+    "mtime": 1781971659.8113081,
+    "ast_hash": "c90a4a62385d6f868717bae68d89004b",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/content-management-system.md": {
+    "mtime": 1781971696.692237,
+    "ast_hash": "268869192d2acc6c87b87eee70c239e3",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/design-briefs.md": {
+    "mtime": 1781971714.7418616,
+    "ast_hash": "2948967fe0b4d725d60b35820d22457f",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/email-course-5-day.md": {
+    "mtime": 1781998970.0268836,
+    "ast_hash": "79b02a2adbdbcddee06ff693b58655a0",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/launch-week-calendar.md": {
+    "mtime": 1782398650.165406,
+    "ast_hash": "c4278adc6f5b46fbe638612ce18cfa79",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/notes-interactive-captions.md": {
+    "mtime": 1783682312.6257155,
+    "ast_hash": "03c84fbc0ef8f5c9d60d3fb1f953c841",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/post-templates.md": {
+    "mtime": 1781971679.7896526,
+    "ast_hash": "c05b01cdc972fd04b4b01d653ff9a273",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/seo/README.md": {
+    "mtime": 1781997676.1800365,
+    "ast_hash": "ce1bf99fd74889a5693175b7a9e889de",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/seo/api-testing-postman-beginners.md": {
+    "mtime": 1781998970.0298545,
+    "ast_hash": "510d4d5d9dbbc1831138f888812b0151",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/seo/become-qa-tester-no-experience.md": {
+    "mtime": 1781998970.0405831,
+    "ast_hash": "050ea1dfb909e6aced8d5808885fbc9a",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/seo/free-practice-sites-software-testing.md": {
+    "mtime": 1781998970.03277,
+    "ast_hash": "66b7be7ab58e271bfb765e0cbb0cbdd1",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/seo/how-to-write-a-bug-report.md": {
+    "mtime": 1781998970.038002,
+    "ast_hash": "e9e105d898f816031716eb23c07a7ec9",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/seo/manual-testing-roadmap-2026.md": {
+    "mtime": 1781998970.0354276,
+    "ast_hash": "8bd4df4d8712c869e2e7e57e4ec8da61",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/seo/selenium-java-beginners.md": {
+    "mtime": 1781988556.648751,
+    "ast_hash": "3d07287e938b4a39120214a8a13f1702",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/social-queue-README.md": {
+    "mtime": 1783692559.4519248,
+    "ast_hash": "98a9d44a1a1b771ba793d0bfa9d07ef6",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/talent-launch-captions.md": {
+    "mtime": 1782382428.8290005,
+    "ast_hash": "cccc7a0bff92c20a50fa36c2f61a746a",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/track-a-launch-posts.md": {
+    "mtime": 1783682382.7466779,
+    "ast_hash": "fd765a1665097f2f5b4d29ff88e7292d",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/week-1-posts.md": {
+    "mtime": 1781972263.2480397,
+    "ast_hash": "1026ce37015b8bd452b5cd50a5ac9f54",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/weeks-2-4-posts.md": {
+    "mtime": 1781998970.023924,
+    "ast_hash": "60ad219f84b87af433a4ad1c8e2a2c57",
+    "semantic_hash": ""
+  },
+  "Marketing/03-content/weeks-5-8-posts.md": {
+    "mtime": 1783661691.2853832,
+    "ast_hash": "fcc00689e73f3de0c1c9548c37c3e8c6",
+    "semantic_hash": ""
+  },
+  "Marketing/04-designs/README.md": {
+    "mtime": 1781973000.7101057,
+    "ast_hash": "36e33d6db5170de29b1dd777d4a1a8c3",
+    "semantic_hash": ""
+  },
+  "Marketing/04-designs/asset-1-launch.html": {
+    "mtime": 1781998663.8657966,
+    "ast_hash": "4f021a821413584b313c3f3e911cbfc5",
+    "semantic_hash": ""
+  },
+  "Marketing/04-designs/asset-2-differentiator-carousel.html": {
+    "mtime": 1781998747.5810366,
+    "ast_hash": "32c8ef95efc48cf146837a68d93a2deb",
+    "semantic_hash": ""
+  },
+  "Marketing/04-designs/asset-3-you-asked.html": {
+    "mtime": 1781998684.0964618,
+    "ast_hash": "89dbb24b52a6412861d3c4fe6a30bdf9",
+    "semantic_hash": ""
+  },
+  "Marketing/04-designs/asset-4-bugreport-carousel.html": {
+    "mtime": 1781998723.4213238,
+    "ast_hash": "5a5619ce632ccc6702ff1f73c53e95eb",
+    "semantic_hash": ""
+  },
+  "Marketing/04-designs/asset-5-linkedin-banner.html": {
+    "mtime": 1781998766.6300757,
+    "ast_hash": "e7ce1ca1b704d36aef075182275489e1",
+    "semantic_hash": ""
+  },
+  "Marketing/05-automation/automation-overview.md": {
+    "mtime": 1781998552.0532522,
+    "ast_hash": "d32074e885865c3e5f596722a30ff198",
+    "semantic_hash": ""
+  },
+  "Marketing/05-automation/config/project.example.yaml": {
+    "mtime": 1781971784.8287776,
+    "ast_hash": "d84822c093daeb2862761c6b85643892",
+    "semantic_hash": ""
+  },
+  "Marketing/05-automation/wiring-setup-guide.md": {
+    "mtime": 1781972588.866016,
+    "ast_hash": "f1fa363f1d1c53969ee2346c40d9b67d",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/ONE-PERSON-launch-film.md": {
+    "mtime": 1782382384.8947577,
+    "ast_hash": "364230f81a8d7d5d40281cbdd4e4eddb",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/README.md": {
+    "mtime": 1782007065.3407254,
+    "ast_hash": "2e230264dcff370c805d9a099e01c9e8",
+    "semantic_hash": ""
+  },
+  "Marketing/README.md": {
+    "mtime": 1781998995.8224876,
+    "ast_hash": "4259ad6a563a1e6cac06942c4eacaf1f",
+    "semantic_hash": ""
+  },
+  "PHASE-1-REPORT.md": {
+    "mtime": 1781525983.3610678,
+    "ast_hash": "b6443431efe0253f88c195bf78396e55",
+    "semantic_hash": ""
+  },
+  "Product/BuggyShop-Spec.md": {
     "mtime": 1781228932.221353,
     "ast_hash": "842bc22c24fc09480dc8a667b5c59928",
-    "semantic_hash": "842bc22c24fc09480dc8a667b5c59928"
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md": {
+  "Product/QA-Marketplace-Architecture.md": {
+    "mtime": 1782309678.053985,
+    "ast_hash": "3b24a9b2724e03e1cb4058aa21550f78",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-Backend-Spec.md": {
+    "mtime": 1782310366.2927928,
+    "ast_hash": "6949a9c4e0f0a31bcaaacbbbb1e32be4",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-Build-Plan.md": {
+    "mtime": 1782310181.1532197,
+    "ast_hash": "dcc82b6ef2c9da055c8425ebe397a375",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-Data-Engineering.md": {
+    "mtime": 1782309845.8658524,
+    "ast_hash": "2e08949f4e576e34d1abe3b3f7a2414f",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-Design-System.md": {
+    "mtime": 1782310015.3192093,
+    "ast_hash": "b2daee88c7f099cd65d4d2fc5a7af104",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-DevOps-Spec.md": {
+    "mtime": 1782310740.9312122,
+    "ast_hash": "7bd13f578bdeab0d8bd3d2737f56c27e",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-Frontend-Spec.md": {
+    "mtime": 1782310493.713201,
+    "ast_hash": "763b8c04e492ab749adc24f697660f09",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-INDEX.md": {
+    "mtime": 1782311117.3070621,
+    "ast_hash": "c60a1afe41d0aabac108a8429ed64c00",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-PRD.md": {
+    "mtime": 1782309329.0805287,
+    "ast_hash": "907150f022f01b88e4dff4721581488d",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-Security-Spec.md": {
+    "mtime": 1782310623.302879,
+    "ast_hash": "a1b7ddc9b4c53fbc97b942e94e934afe",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-Test-Plan.md": {
+    "mtime": 1782310891.1829822,
+    "ast_hash": "3ea30b8b86f15495314228f91b350a23",
+    "semantic_hash": ""
+  },
+  "Product/QA-Marketplace-UX-Research.md": {
+    "mtime": 1782309502.9837558,
+    "ast_hash": "871aca461c060cc1d4942543891b296a",
+    "semantic_hash": ""
+  },
+  "Product/Sample-Lessons/Lesson-1-BVA-Visual-Concept.md": {
     "mtime": 1781229025.3630044,
     "ast_hash": "9f11b340afa24f70b5da843054c5039c",
-    "semantic_hash": "9f11b340afa24f70b5da843054c5039c"
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md": {
+  "Product/Sample-Lessons/Lesson-2-Bug-Hunt-Manual-Lab.md": {
     "mtime": 1781229072.5975156,
     "ast_hash": "08e101aa8debeb87b07e30deed2a2d69",
-    "semantic_hash": "08e101aa8debeb87b07e30deed2a2d69"
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md": {
+  "Product/Sample-Lessons/Lesson-3-First-Selenium-Test.md": {
     "mtime": 1781229118.998332,
     "ast_hash": "5275caa5521b85ddc7813e779e42c437",
-    "semantic_hash": "5275caa5521b85ddc7813e779e42c437"
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Track-A-Manual-Testing-Outline.md": {
+  "Product/Track-A-Manual-Testing-Outline.md": {
     "mtime": 1781198086.8626435,
     "ast_hash": "a92c3f279545b96c36b938b84fd4ad4e",
-    "semantic_hash": "a92c3f279545b96c36b938b84fd4ad4e"
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/Week4-Promotion-Kit.md": {
+  "Product/Week4-Promotion-Kit.md": {
     "mtime": 1781230403.8296702,
     "ast_hash": "5ddbd6e4f9a867e6cb7a9ae4e16e6419",
-    "semantic_hash": "5ddbd6e4f9a867e6cb7a9ae4e16e6419"
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/landing-site/README.md": {
+  "Product/landing-site/README.md": {
     "mtime": 1781229358.461763,
     "ast_hash": "f45990d15c38fd8c19f097d4fcd36a19",
-    "semantic_hash": "f45990d15c38fd8c19f097d4fcd36a19"
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/Product/landing-site/index.html": {
+  "Product/landing-site/index.html": {
     "mtime": 1781230109.48907,
     "ast_hash": "1c3f6a54cac8ed3b459d8a6910232a2e",
-    "semantic_hash": "1c3f6a54cac8ed3b459d8a6910232a2e"
+    "semantic_hash": ""
   },
-  "/Users/sajanathapa/Desktop/My Qa Projecct/README.md": {
-    "mtime": 1781248123.307028,
-    "ast_hash": "e9228de8a0f377b27ea6a3236d9b3831",
-    "semantic_hash": "e9228de8a0f377b27ea6a3236d9b3831"
+  "Product/notes-v3-previews/notes-curriculum-preview.html": {
+    "mtime": 1783611764.9974158,
+    "ast_hash": "caf89da8ccbb32cba0f29cb500b1f7aa",
+    "semantic_hash": ""
+  },
+  "Product/notes-v3-previews/notes-v3-1-delta.html": {
+    "mtime": 1783594710.7926738,
+    "ast_hash": "e4747839c74c25b58a4bed1854125b3c",
+    "semantic_hash": ""
+  },
+  "Product/notes-v3-previews/notes-v3-2-final-check.html": {
+    "mtime": 1783611764.9986286,
+    "ast_hash": "c3f69db409125c6202ae152ca151e2da",
+    "semantic_hash": ""
+  },
+  "Product/notes-v3-previews/sample-rich-note.html": {
+    "mtime": 1783593892.9021175,
+    "ast_hash": "596adffdb4d644fd755a58ac8dc3b3a2",
+    "semantic_hash": ""
+  },
+  "QA-Learning-Platform-Plan.md": {
+    "mtime": 1781519306.5782413,
+    "ast_hash": "baf09d31a6b38d940c4bb3bf50a35efe",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1781519353.2134,
+    "ast_hash": "f7a1dea54444d657c11d17a690aa08bf",
+    "semantic_hash": ""
+  },
+  "Resources/API.md": {
+    "mtime": 1781196064.2551465,
+    "ast_hash": "eb24207bd26e2b12deef5c1e5f20d1cf",
+    "semantic_hash": ""
+  },
+  "Resources/Books Every Software Tester.md": {
+    "mtime": 1781196347.0609653,
+    "ast_hash": "9108f34fc050866d188ebfa6de2f9176",
+    "semantic_hash": ""
+  },
+  "Resources/FULL MODULES NOTES FOR QA.md": {
+    "mtime": 1781196178.8184726,
+    "ast_hash": "20ce76ec6a59398ba4cb60f191fea592",
+    "semantic_hash": ""
+  },
+  "Resources/HTTP Fundamentals for API Testing.md": {
+    "mtime": 1781228875.9285169,
+    "ast_hash": "9ae76d48d8185c2c0bc8a51f8cbc5e7d",
+    "semantic_hash": ""
+  },
+  "Resources/PHASE 1 \u2014 JAVA ESSENTIALS FOR SELENIUM.md": {
+    "mtime": 1781196110.2311034,
+    "ast_hash": "580ec8f58a5c88db8822570ca5036d07",
+    "semantic_hash": ""
+  },
+  "Resources/PHASE 2_ CORE TESTING SKILLS (Days 21-45).md": {
+    "mtime": 1781196160.1798947,
+    "ast_hash": "a59266f10c6ce5af7e53015175716701",
+    "semantic_hash": ""
+  },
+  "Resources/QA module.md": {
+    "mtime": 1781196135.6912627,
+    "ast_hash": "eaf383f8f5d1d94259b351c76d200fce",
+    "semantic_hash": ""
+  },
+  "Resources/SELENIUM + JAVA AUTOMATION TESTING ROADMAP.md": {
+    "mtime": 1781196090.1528037,
+    "ast_hash": "938f3dae8c2a1745ff4e2eda0af0276a",
+    "semantic_hash": ""
+  },
+  "Resources/Selenium Topic List.md": {
+    "mtime": 1781196196.6410642,
+    "ast_hash": "a132bc2f5baeb955f034267da76be185",
+    "semantic_hash": ""
+  },
+  "Resources/Test plan report  for AMS (1).md": {
+    "mtime": 1781196049.079953,
+    "ast_hash": "3dc1bafbe1427913f5f743b523551b73",
+    "semantic_hash": ""
+  },
+  "Resources/What is Test Environment _ QA, Stage, Preprod and Production.md": {
+    "mtime": 1781196391.7361262,
+    "ast_hash": "56e09f3fc2bfca17e7a8287ae501b2f9",
+    "semantic_hash": ""
+  },
+  "Resources/_QA Guide for Testing UI_UX Designs.md": {
+    "mtime": 1781196312.8656282,
+    "ast_hash": "75487dcc9f9c757f9de6519127b2ba94",
+    "semantic_hash": ""
+  },
+  "_CLAUDE.md": {
+    "mtime": 1783655443.1172962,
+    "ast_hash": "6fbfbdbb3443d5bfabb8db3dbace8cd6",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/QA Mastery Marketing Strategy_9c97d24c.md": {
+    "mtime": 1783915297.4967315,
+    "ast_hash": "be61e94ee95db9f67707b09aa3cf0b93",
+    "semantic_hash": ""
+  },
+  "index.md": {
+    "mtime": 1783914860.8147218,
+    "ast_hash": "57934955926bc63ba8c32b4b49559ca8",
+    "semantic_hash": ""
+  },
+  "log.md": {
+    "mtime": 1783914871.0365067,
+    "ast_hash": "400b68e799b21255fa81a52cb4484810",
+    "semantic_hash": ""
+  },
+  "Resources/final CSS in Web Development (1).pdf": {
+    "mtime": 1781153200.7773564,
+    "ast_hash": "54390b52c7ec92f5f3fa5213ad0d4f8b",
+    "semantic_hash": ""
+  },
+  "Resources/final HTML in Web Development (1).pdf": {
+    "mtime": 1781153165.808757,
+    "ast_hash": "f21347502fa4476cafdedb995e74c207",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/bed.mp3": {
+    "mtime": 1782008508.5987997,
+    "ast_hash": "280c38685942d85cb7f3574333620d51",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/chime.mp3": {
+    "mtime": 1782110184.1562786,
+    "ast_hash": "0632891c756fd0241c1407089a7e1754",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/impact.mp3": {
+    "mtime": 1782110184.1892781,
+    "ast_hash": "56af9605734d2baf24cf85de0de20033",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-clip-code.mp4": {
+    "mtime": 1783662031.0161397,
+    "ast_hash": "bf2e22f532c265a7e1bdd3de6448d544",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-clip-flow.mp4": {
+    "mtime": 1783662030.6342564,
+    "ast_hash": "3c26a68cf47e8c4eaf199e75c29f995b",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-clip-hook.mp4": {
+    "mtime": 1783662023.670254,
+    "ast_hash": "f19a0f2c3103d94929f0b22b9ad4ddc2",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-clip-hotspot1.mp4": {
+    "mtime": 1783662023.9663916,
+    "ast_hash": "d72bc1ed6e9c8556fef3364ea7777b67",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-clip-hotspot2.mp4": {
+    "mtime": 1783662023.469731,
+    "ast_hash": "bd7a1faf81a64acafff05a784d79e23b",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-clip-quiz.mp4": {
+    "mtime": 1783662286.2252681,
+    "ast_hash": "34a89ffb8da6faeb0d83e17e0f0685a9",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-clip-xp.mp4": {
+    "mtime": 1783662029.2794814,
+    "ast_hash": "891f4af12d3a9a1ba86cd2a950eba554",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-vo-1.mp3": {
+    "mtime": 1783674356.024809,
+    "ast_hash": "4c9deb4377e8f2b29f5866545dc9f556",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-vo-2.mp3": {
+    "mtime": 1783674359.2975082,
+    "ast_hash": "7fd8b7ece93151c5d28467ac5761ef3d",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-vo-3.mp3": {
+    "mtime": 1783674362.0648553,
+    "ast_hash": "710b755cb10f132a01a548e127b6abc1",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-vo-4.mp3": {
+    "mtime": 1783674365.928896,
+    "ast_hash": "8bc55435e9f51ee0f7dfaec9f7d94479",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-vo-5.mp3": {
+    "mtime": 1783674369.0093753,
+    "ast_hash": "4e07de07cf16f3ccdcb67bb72acc034c",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-vo-6.mp3": {
+    "mtime": 1783674372.0112264,
+    "ast_hash": "725e92189975cc2c2bdabb1f2c00249d",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/notes-vo-7.mp3": {
+    "mtime": 1783674376.163121,
+    "ast_hash": "a3ae7820eecb330bf47af4af2f137dba",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vo-1.mp3": {
+    "mtime": 1782028713.001937,
+    "ast_hash": "af633cb720033747d2159b5545e8f681",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vo-2.mp3": {
+    "mtime": 1782028717.8378286,
+    "ast_hash": "d13e980d0a937bc4a3a8dd7459163366",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vo-3.mp3": {
+    "mtime": 1782028723.3456104,
+    "ast_hash": "23b7e3959002379367c86bde6c8015d7",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vo-4.mp3": {
+    "mtime": 1782028727.7318811,
+    "ast_hash": "1e8ec2c61e88804744d91a70bc2fd98f",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vo-5.mp3": {
+    "mtime": 1782028733.405851,
+    "ast_hash": "1a96afad3817646ed9c85015a3f86238",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vo-6.mp3": {
+    "mtime": 1782028736.9921486,
+    "ast_hash": "964f2c4951e4799509c7f9a916ef3c36",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vo-7.mp3": {
+    "mtime": 1782028743.7805035,
+    "ast_hash": "f658dbadad0115d5796120cfd9182d1f",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vot-1.mp3": {
+    "mtime": 1782398704.7159872,
+    "ast_hash": "e13b4734286113fd9d63d32a704dc9b3",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vot-2.mp3": {
+    "mtime": 1782398706.5459485,
+    "ast_hash": "2d858b462d02fe87e702853f76a7f192",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vot-3.mp3": {
+    "mtime": 1782398708.2561524,
+    "ast_hash": "0b29bc74600b98310b877a2aba28f224",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vot-4.mp3": {
+    "mtime": 1782398709.923493,
+    "ast_hash": "9a3a33e04312f552acfdd38aa90e5a80",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vot-5.mp3": {
+    "mtime": 1782398712.52322,
+    "ast_hash": "08b8cb29ccb1d120cf9144cb447e4818",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/vot-6.mp3": {
+    "mtime": 1782398714.4397418,
+    "ast_hash": "6b5ccef42c160e31fb3ce007d555163e",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/whoosh.mp3": {
+    "mtime": 1782008508.4066293,
+    "ast_hash": "ec4e7855fba804cbad095003fb56a751",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/why-1.mp3": {
+    "mtime": 1782109766.9600468,
+    "ast_hash": "e8989a355fa839644a2646b8f0cf2e22",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/why-2.mp3": {
+    "mtime": 1782109769.1522024,
+    "ast_hash": "ec1f734d4d75b65370f60fcc4a2fa626",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/why-3.mp3": {
+    "mtime": 1782109770.8676717,
+    "ast_hash": "553ad76428c0c22e4d9601932384f272",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/why-4.mp3": {
+    "mtime": 1782109772.7599976,
+    "ast_hash": "2de4523d6519df51b63d8fd46aeeb37f",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/why-5.mp3": {
+    "mtime": 1782109775.058372,
+    "ast_hash": "48d164d1cfad809afd7fc61a933bfa50",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/why-6.mp3": {
+    "mtime": 1782109777.3734179,
+    "ast_hash": "1b447d7f8a4faea06e09a207ab6c147e",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/why-7.mp3": {
+    "mtime": 1782109779.7763495,
+    "ast_hash": "cda45a041f69a3199260693e52883e9d",
+    "semantic_hash": ""
+  },
+  "Marketing/06-video/public/why-8.mp3": {
+    "mtime": 1782109782.0074515,
+    "ast_hash": "2986958876a2af81328cfd63c4c58bef",
+    "semantic_hash": ""
   }
 }
