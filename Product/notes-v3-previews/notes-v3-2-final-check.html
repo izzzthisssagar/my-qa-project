@@ -1,0 +1,255 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><title>Notes Curriculum — Final Gap Check (v3.2)</title>
+<style>
+  :root {
+    --ground:#f4f7f6; --surface:#ffffff; --ink:#141a18; --muted:#5b6663;
+    --faint:#87928e; --border:#dfe6e3; --accent:#0f9b78; --accent-ink:#0b7a5f;
+    --accent-soft:#e3f4ee; --new:#b4540a; --new-soft:#fcefe2; --chip:#eef2f0;
+    --core:#0f9b78; --core-soft:#e3f4ee;
+  }
+  @media (prefers-color-scheme: dark) { :root {
+    --ground:#0c1110; --surface:#131a18; --ink:#e6edea; --muted:#9aa8a3;
+    --faint:#6e7b76; --border:#243029; --accent:#2dd4a7; --accent-ink:#2dd4a7;
+    --accent-soft:#12352b; --new:#f0954a; --new-soft:#3a2413; --chip:#1b2420;
+    --core:#2dd4a7; --core-soft:#12352b;
+  } }
+  :root[data-theme="dark"] {
+    --ground:#0c1110; --surface:#131a18; --ink:#e6edea; --muted:#9aa8a3;
+    --faint:#6e7b76; --border:#243029; --accent:#2dd4a7; --accent-ink:#2dd4a7;
+    --accent-soft:#12352b; --new:#f0954a; --new-soft:#3a2413; --chip:#1b2420;
+    --core:#2dd4a7; --core-soft:#12352b;
+  }
+  :root[data-theme="light"] {
+    --ground:#f4f7f6; --surface:#ffffff; --ink:#141a18; --muted:#5b6663;
+    --faint:#87928e; --border:#dfe6e3; --accent:#0f9b78; --accent-ink:#0b7a5f;
+    --accent-soft:#e3f4ee; --new:#b4540a; --new-soft:#fcefe2; --chip:#eef2f0;
+    --core:#0f9b78; --core-soft:#e3f4ee;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.55; }
+  .wrap { max-width:960px; margin:0 auto; padding:40px 24px 80px; }
+  h1,h2,h3 { text-wrap:balance; margin:0; }
+  a { color:var(--accent-ink); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  a:focus-visible { outline:2px solid var(--accent-ink); outline-offset:2px; border-radius:2px; }
+  .eyebrow { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--new); font-weight:700; }
+  header.top h1 { font-size:28px; letter-spacing:-.01em; margin:6px 0 10px; }
+  header.top p { color:var(--muted); max-width:72ch; margin:0 0 20px; }
+  .stats { display:flex; flex-wrap:wrap; gap:12px; }
+  .stat { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:11px 18px; }
+  .stat b { display:block; font-size:22px; font-variant-numeric:tabular-nums; color:var(--new); }
+  .stat span { font-size:12.5px; color:var(--muted); }
+  section { margin-top:42px; }
+  section > h2 { font-size:20px; margin-bottom:6px; }
+  section > p.sub { color:var(--muted); font-size:14px; margin:0 0 16px; max-width:80ch; }
+  .gap { background:var(--surface); border:1px solid var(--new); border-radius:12px; padding:16px 18px; margin-bottom:12px; }
+  .gap-head { display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; }
+  .gap-head h3 { font-size:15.5px; }
+  .where { font-size:12px; color:var(--faint); }
+  .where b { color:var(--accent-ink); font-weight:600; }
+  .topics { display:flex; flex-wrap:wrap; gap:6px; margin:9px 0; }
+  .topic { background:var(--chip); border-radius:6px; padding:2px 9px; font-size:12.5px; color:var(--muted); }
+  .why { font-size:13px; color:var(--muted); margin:0; max-width:84ch; }
+  .module-card { background:var(--surface); border:2px solid var(--new); border-radius:12px; padding:18px 20px; }
+  .module-card .kind { color:var(--new); background:var(--new-soft); padding:2px 10px; border-radius:99px; font-weight:700; font-size:11.5px; letter-spacing:.06em; }
+  table.chapters { width:100%; border-collapse:collapse; margin-top:10px; }
+  .chapters td { padding:7px 0; vertical-align:top; border-top:1px solid var(--border); font-size:13.5px; }
+  .chapters td.ch { width:230px; font-weight:600; padding-right:14px; }
+  .lib { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px; margin-bottom:12px; }
+  .lib h3 { font-size:15px; margin-bottom:8px; }
+  .lib ul { margin:0; padding-left:18px; }
+  .lib li { font-size:13.5px; margin-bottom:5px; color:var(--muted); }
+  .lib li b { color:var(--ink); font-weight:600; }
+  .covered { background:var(--accent-soft); border-radius:12px; padding:16px 20px; }
+  .covered h2 { color:var(--accent-ink); font-size:17px; margin-bottom:8px; }
+  .covered li { font-size:13.5px; color:var(--muted); margin-bottom:6px; }
+  .cta { background:var(--surface); border:1px solid var(--accent); border-radius:12px; padding:18px 22px; margin-top:40px; }
+  .cta p { margin:0; font-size:14.5px; }
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Final gap check · v3.2 proposal · the last additions before writing begins</div>
+  <h1>The exhaustive sweep: what was still missing — and the resource library</h1>
+  <p>Cross-checked the whole map against the ISTQB v4.0 syllabus, testing-history sources, 2026 skills surveys,
+  AI-testing guides, and the community’s big resource lists. Result: <b>2 new modules, 9 new chapters</b>
+  slotted into existing modules, the QA-history background you asked for, and a <b>39-link resource library</b>
+  that becomes a permanent page in the wiki.</p>
+  <div class="stats">
+    <div class="stat"><b>2</b><span>new modules (system design · AI)</span></div>
+    <div class="stat"><b>+18</b><span>chapters</span></div>
+    <div class="stat"><b>+72</b><span>topics</span></div>
+    <div class="stat"><b>39</b><span>curated links</span></div>
+  </div>
+</header>
+
+<section>
+  <h2>📜 The background you asked for — where QA came from</h2>
+  <p class="sub">Becomes a full chapter early in QA foundations, written as a story: the 1947 Mark II moth
+  Grace Hopper’s team taped into the logbook (“first actual case of bug being found” — and why the story is
+  half-myth: “bug” predates it, even Edison used it) · Gelperin &amp; Hetzel’s five eras — debugging-oriented
+  (pre-1956) → demonstration (prove it works) → destruction (Myers 1979: a good test <i>finds</i> bugs) →
+  evaluation → prevention (1988→) · the pioneers: Myers, Weinberg, Kaner’s context-driven school, Bach &amp;
+  Bolton’s testing-vs-checking, Crispin &amp; Gregory’s agile testing · then how agile (2001), DevOps, and now
+  AI keep reshaping the tester’s job.</p>
+</section>
+
+<section>
+  <h2>🧩 Gaps found — new chapters slotted into existing modules</h2>
+  <p class="sub">Each card names the exact module it joins. Nothing else in the approved map moves.</p>
+<div class="gap">
+    <div class="gap-head"><h3>Where QA came from</h3>
+      <span class="where">→ Track <b>C</b> · module “<b>QA foundations</b>”</span></div>
+    <div class="topics"><span class="topic">the 1947 moth story (and the myth)</span><span class="topic">five eras: debugging → prevention</span><span class="topic">the pioneers & their big ideas</span><span class="topic">how agile, DevOps & AI reshaped QA</span></div>
+    <p class="why">You asked for the full background — who/when/why/how QA started and developed. Gelperin & Hetzel's five eras (debugging-oriented pre-1956 → demonstration → destruction (Myers 1979: a good test FINDS bugs) → evaluation → prevention from 1988) is the standard frame; pioneers covered: Grace Hopper, Glenford Myers, Cem Kaner (context-driven), James Bach & Michael Bolton (testing vs checking), Lisa Crispin & Janet Gregory (Agile Testing).</p>
+  </div>
+<div class="gap">
+    <div class="gap-head"><h3>The tester’s mind</h3>
+      <span class="where">→ Track <b>C</b> · module “<b>QA foundations</b>”</span></div>
+    <div class="topics"><span class="topic">critical thinking for testers</span><span class="topic">cognitive biases (confirmation, overconfidence…)</span><span class="topic">curiosity & questioning</span><span class="topic">psychology of tester–developer relations</span></div>
+    <p class="why">Recurring in every 2026 skills survey and a Ministry of Testing course subject — testers prize critical thinking but fall for the same biases as everyone; naming them makes better testers.</p>
+  </div>
+<div class="gap">
+    <div class="gap-head"><h3>Static testing & reviews</h3>
+      <span class="where">→ Track <b>C</b> · module “<b>Levels & types of testing</b>”</span></div>
+    <div class="topics"><span class="topic">static vs dynamic, properly</span><span class="topic">reviews: informal → walkthrough → inspection</span><span class="topic">static analysis tools</span><span class="topic">review checklists that work</span></div>
+    <p class="why">A whole ISTQB Foundation chapter (Ch. 3) that the map only brushed — reviews find defects cheaper than any test execution.</p>
+  </div>
+<div class="gap">
+    <div class="gap-head"><h3>Localization & i18n</h3>
+      <span class="where">→ Track <b>C</b> · module “<b>Non-functional testing (intro)</b>”</span></div>
+    <div class="topics"><span class="topic">i18n vs l10n in plain words</span><span class="topic">text expansion, truncation & RTL</span><span class="topic">dates, currencies & formats</span><span class="topic">pseudo-localization tricks</span></div>
+    <p class="why">Standard specialization missing from the map; Applitools/localization guides show the classic bug families (overflow, hard-coded strings) every tester meets on global products.</p>
+  </div>
+<div class="gap">
+    <div class="gap-head"><h3>Visual regression testing</h3>
+      <span class="where">→ Track <b>D</b> · module “<b>Playwright</b>”</span></div>
+    <div class="topics"><span class="topic">pixel vs AI diffing</span><span class="topic">Playwright snapshots</span><span class="topic">Percy / Applitools / BackstopJS</span><span class="topic">taming false positives</span></div>
+    <p class="why">2026 tooling reviews show visual testing split into AI-diffing platforms vs framework snapshot libraries — a distinct skill job posts now name.</p>
+  </div>
+<div class="gap">
+    <div class="gap-head"><h3>Mocking & service virtualization</h3>
+      <span class="where">→ Track <b>E</b> · module “<b>API test automation</b>”</span></div>
+    <div class="topics"><span class="topic">stubs, mocks & fakes</span><span class="topic">WireMock hands-on</span><span class="topic">record & playback</span><span class="topic">simulating errors, latency & chaos</span></div>
+    <p class="why">Testing without waiting on real dependencies (third-party APIs, payment gateways) — WireMock-style virtualization is how teams unblock QA and test failure scenarios safely.</p>
+  </div>
+<div class="gap">
+    <div class="gap-head"><h3>Environments & test data</h3>
+      <span class="where">→ Track <b>F</b> · module “<b>Test management & reporting</b>”</span></div>
+    <div class="topics"><span class="topic">dev / QA / staging / prod</span><span class="topic">environment parity & config</span><span class="topic">test data management & anonymization</span><span class="topic">GDPR & sensitive data in tests</span></div>
+    <p class="why">Test-data management and environment strategy surfaced as the classic “nobody teaches this” gap — and it's daily friction in real teams.</p>
+  </div>
+<div class="gap">
+    <div class="gap-head"><h3>Risk & estimation</h3>
+      <span class="where">→ Track <b>F</b> · module “<b>Test management & reporting</b>”</span></div>
+    <div class="topics"><span class="topic">risk-based testing</span><span class="topic">prioritizing what to test first</span><span class="topic">test estimation techniques</span><span class="topic">saying no with data</span></div>
+    <p class="why">ISTQB Ch. 5 territory the map under-covered; estimation and risk-ranking are the skills that separate seniors from juniors.</p>
+  </div>
+<div class="gap">
+    <div class="gap-head"><h3>Domains & specializations</h3>
+      <span class="where">→ Track <b>G</b> · module “<b>Your first 90 days</b>”</span></div>
+    <div class="topics"><span class="topic">payments & fintech testing</span><span class="topic">ERP / CRM & enterprise</span><span class="topic">games, IoT & embedded</span><span class="topic">picking a niche deliberately</span></div>
+    <p class="why">Domain knowledge is a hiring multiplier — payment-domain interview banks and IoT/ERP testing guides show each domain has its own bug families worth a taster tour.</p>
+  </div>
+</section>
+<section>
+  <h2>🆕 Two genuinely new modules</h2>
+<div class="module-card" style="margin-bottom:14px">
+    <div class="gap-head"><h3>How systems are built — system design for testers</h3><span class="kind">NEW MODULE</span>
+      <span class="where">Track C · new module after “API testing fundamentals”</span></div>
+    <p class="why" style="margin-top:8px">Your call: testers must know the system they test, not just its screens. System-design guides (ByteByteGo, System Design Handbook, web-architecture 2026 references) show the request lifecycle — load balancer → server → cache → DB → queue — and each hop is a bug family a tester should recognize. It also doubles as developer knowledge and interview material.</p>
+    <table class="chapters">
+<tr><td class="ch">The big picture</td><td><div class="topics" style="margin:0"><span class="topic">frontend, backend & the database</span><span class="topic">life of a request, end to end</span><span class="topic">client-side vs server-side rendering</span><span class="topic">reading an architecture diagram</span></div></td></tr>
+<tr><td class="ch">Architecture styles</td><td><div class="topics" style="margin:0"><span class="topic">monolith vs microservices</span><span class="topic">layers & MVC, gently</span><span class="topic">APIs as the glue</span><span class="topic">third-party services & webhooks</span></div></td></tr>
+<tr><td class="ch">Scaling building blocks</td><td><div class="topics" style="margin:0"><span class="topic">load balancers</span><span class="topic">caching (Redis) & its bugs</span><span class="topic">message queues & async work</span><span class="topic">CDNs & static assets</span></div></td></tr>
+<tr><td class="ch">Where bugs live, layer by layer</td><td><div class="topics" style="margin:0"><span class="topic">UI-layer bug families</span><span class="topic">API & integration bug families</span><span class="topic">data-layer bug families</span><span class="topic">infra & config bug families</span></div></td></tr>
+<tr><td class="ch">From architecture to test strategy</td><td><div class="topics" style="margin:0"><span class="topic">what to test at which layer</span><span class="topic">integration points = risk</span><span class="topic">asking devs the right questions</span><span class="topic">drawing the system before testing it</span></div></td></tr>
+</table></div>
+<div class="module-card" style="margin-bottom:14px">
+    <div class="gap-head"><h3>AI & the modern tester</h3><span class="kind">NEW MODULE</span>
+      <span class="where">Track F · new module after “Test management & reporting”</span></div>
+    <p class="why" style="margin-top:8px">The biggest 2026 shift the map didn't cover. Two sides: using AI to test better, and testing systems that contain AI. Sources: qaskills.sh 2026 guides, awesome-ai-testing list, DeepEval/RAGAS docs — self-healing and LLM test generation are already mainstream (~9× faster authoring, ~88% less maintenance claimed).</p>
+    <table class="chapters">
+<tr><td class="ch">AI as your testing copilot</td><td><div class="topics" style="margin:0"><span class="topic">LLMs for test ideas & cases</span><span class="topic">prompting for QA work</span><span class="topic">generating test data with AI</span><span class="topic">reviewing AI output critically</span></div></td></tr>
+<tr><td class="ch">AI-powered test automation</td><td><div class="topics" style="margin:0"><span class="topic">self-healing tests</span><span class="topic">AI test generation tools</span><span class="topic">autonomous testing agents</span><span class="topic">when AI automation lies</span></div></td></tr>
+<tr><td class="ch">Testing AI systems</td><td><div class="topics" style="margin:0"><span class="topic">why AI apps break differently</span><span class="topic">evaluating LLM outputs (DeepEval / RAGAS ideas)</span><span class="topic">hallucinations, bias & safety</span><span class="topic">regression for prompts & models</span></div></td></tr>
+<tr><td class="ch">Staying employable in the AI era</td><td><div class="topics" style="margin:0"><span class="topic">what AI won't replace</span><span class="topic">the tester's judgment premium</span><span class="topic">learning loop for new tools</span><span class="topic">AI on your resume, honestly</span></div></td></tr>
+</table></div>
+</section>
+
+<section>
+  <h2>🔗 The resource library — a permanent wiki page</h2>
+  <p class="sub">Beyond per-topic links, the wiki gets one living “Library” page. Starting stock, all free:</p>
+<div class="lib"><h3>🎯 Practice apps (beyond BuggyShop & BuggyAPI)</h3><ul>
+<li><b><a href="https://the-internet.herokuapp.com" target="_blank" rel="noopener">the-internet (Heroku)</a></b> — every tricky UI element in one place</li>
+<li><b><a href="https://demoqa.com" target="_blank" rel="noopener">DemoQA</a></b> — forms, alerts, frames, widgets to automate</li>
+<li><b><a href="https://www.saucedemo.com" target="_blank" rel="noopener">SauceDemo</a></b> — the classic practice shop for UI suites</li>
+<li><b><a href="https://restful-booker.herokuapp.com" target="_blank" rel="noopener">Restful-Booker</a></b> — CRUD API with auth — API testing playground</li>
+<li><b><a href="https://parabank.parasoft.com" target="_blank" rel="noopener">ParaBank</a></b> — demo bank — fintech-flavored practice</li>
+<li><b><a href="https://owasp.org/www-project-juice-shop/" target="_blank" rel="noopener">OWASP Juice Shop</a></b> — deliberately insecure shop — security practice</li>
+<li><b><a href="https://opensource-demo.orangehrmlive.com" target="_blank" rel="noopener">OrangeHRM demo</a></b> — realistic HR system for E2E flows</li>
+<li><b><a href="https://github.com/BMayhew/awesome-sites-to-test-on" target="_blank" rel="noopener">awesome-sites-to-test-on</a></b> — curated GitHub list of practice targets</li>
+</ul></div>
+<div class="lib"><h3>📚 Books that shaped the craft</h3><ul>
+<li><b><a href="https://en.wikipedia.org/wiki/Glenford_Myers" target="_blank" rel="noopener">The Art of Software Testing — Glenford Myers</a></b> — 1979 classic: a good test finds bugs</li>
+<li><b><a href="https://www.wiley.com/en-us/Lessons+Learned+in+Software+Testing-p-9780471081128" target="_blank" rel="noopener">Lessons Learned in Software Testing — Kaner, Bach, Pettichord</a></b> — 293 lessons from the context-driven school</li>
+<li><b><a href="https://agiletester.ca" target="_blank" rel="noopener">Agile Testing — Lisa Crispin & Janet Gregory</a></b> — the agile-team testing bible</li>
+<li><b><a href="https://pragprog.com/titles/ehxta/explore-it/" target="_blank" rel="noopener">Explore It! — Elisabeth Hendrickson</a></b> — the exploratory testing playbook</li>
+<li><b><a href="https://www.pearson.com/en-us/subject-catalog/p/how-google-tests-software/P200000009424" target="_blank" rel="noopener">How Google Tests Software — Whittaker et al.</a></b> — engineering-culture view of QA at scale</li>
+<li><b><a href="https://leanpub.com/perfectsoftware" target="_blank" rel="noopener">Perfect Software & Other Illusions — Gerald Weinberg</a></b> — why testing exists, by a field pioneer</li>
+<li><b><a href="https://www.ministryoftesting.com/collections/software-testing-books" target="_blank" rel="noopener">MoT book collection</a></b> — community-curated reading list</li>
+</ul></div>
+<div class="lib"><h3>🎓 Free courses & structured learning</h3><ul>
+<li><b><a href="https://testautomationu.applitools.com" target="_blank" rel="noopener">Test Automation University</a></b> — free, per-tool courses in Java/Python/JS</li>
+<li><b><a href="https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" target="_blank" rel="noopener">ISTQB CTFL v4.0 syllabus (free PDF)</a></b> — the certification skeleton — free to study</li>
+<li><b><a href="https://www.ministryoftesting.com" target="_blank" rel="noopener">Ministry of Testing</a></b> — courses, articles, The Club forum, MoTaverse</li>
+<li><b><a href="https://github.com/PaulWaltersDev/FreeLearningResourcesForSoftwareTesters" target="_blank" rel="noopener">FreeLearningResourcesForSoftwareTesters</a></b> — huge GitHub link collection</li>
+<li><b><a href="https://www.ministryoftesting.com/insights/99-essential-resources-to-help-software-testers" target="_blank" rel="noopener">MoT: 99 essential resources</a></b> — one-stop meta-list</li>
+</ul></div>
+<div class="lib"><h3>📝 Blogs & people to follow</h3><ul>
+<li><b><a href="https://developsense.com" target="_blank" rel="noopener">DevelopSense — Michael Bolton</a></b> — testing vs checking; deep craft thinking</li>
+<li><b><a href="https://www.satisfice.com/blog" target="_blank" rel="noopener">Satisfice — James Bach</a></b> — context-driven testing's home</li>
+<li><b><a href="https://automationpanda.com" target="_blank" rel="noopener">Automation Panda — Andy Knight</a></b> — clear automation & BDD writing</li>
+<li><b><a href="https://testguild.com" target="_blank" rel="noopener">TestGuild — Joe Colantonio</a></b> — blog + the biggest automation podcast</li>
+<li><b><a href="https://www.softwaretestinghelp.com" target="_blank" rel="noopener">Software Testing Help</a></b> — encyclopedic tutorials</li>
+<li><b><a href="https://www.guru99.com/software-testing.html" target="_blank" rel="noopener">Guru99 testing</a></b> — beginner-friendly tutorials</li>
+<li><b><a href="https://angiejones.tech" target="_blank" rel="noopener">Angie Jones</a></b> — automation & career inspiration</li>
+</ul></div>
+<div class="lib"><h3>🎙 Podcasts & channels</h3><ul>
+<li><b><a href="https://testguild.com/podcasts/" target="_blank" rel="noopener">TestGuild podcast</a></b> — weekly automation interviews</li>
+<li><b><a href="https://www.ministryoftesting.com" target="_blank" rel="noopener">MoTaverse podcast</a></b> — people & systems shaping quality</li>
+<li><b><a href="https://www.angryweasel.com/ABTesting/" target="_blank" rel="noopener">AB Testing — Bach/Bolton adjacent</a></b> — modern testing philosophy</li>
+<li><b><a href="https://www.youtube.com/@RahulShettyAcademy" target="_blank" rel="noopener">Rahul Shetty Academy (YouTube)</a></b> — hands-on Selenium/API walkthroughs</li>
+<li><b><a href="https://www.youtube.com/@naveenautomationlabs" target="_blank" rel="noopener">Naveen AutomationLabs (YouTube)</a></b> — Java + Selenium deep dives</li>
+</ul></div>
+<div class="lib"><h3>🤖 AI-era tool lists</h3><ul>
+<li><b><a href="https://github.com/tugkanboz/awesome-ai-testing" target="_blank" rel="noopener">awesome-ai-testing</a></b> — curated AI testing tools & resources</li>
+<li><b><a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener">DeepEval</a></b> — open-source LLM evaluation framework</li>
+<li><b><a href="https://promptfoo.dev" target="_blank" rel="noopener">Promptfoo</a></b> — test your prompts like code</li>
+</ul></div>
+<div class="lib"><h3>🌐 Communities</h3><ul>
+<li><b><a href="https://reddit.com/r/QualityAssurance" target="_blank" rel="noopener">r/QualityAssurance</a></b> — career threads & honest advice</li>
+<li><b><a href="https://reddit.com/r/softwaretesting" target="_blank" rel="noopener">r/softwaretesting</a></b> — practitioner Q&A</li>
+<li><b><a href="https://club.ministryoftesting.com" target="_blank" rel="noopener">MoT The Club</a></b> — the friendliest testing forum</li>
+<li><b><a href="https://www.utest.com" target="_blank" rel="noopener">uTest community</a></b> — crowdtesting — real paid practice</li>
+</ul></div>
+</section>
+<section class="covered">
+  <h2>✅ Checked and already covered (no action needed)</h2>
+  <ul style="margin:0; padding-left:18px">
+<li>ISTQB CTFL v4.0 cross-check: Ch1 fundamentals ✓, Ch2 SDLC/levels ✓, Ch4 techniques ✓, Ch6 tools ✓ — Ch3 static testing & Ch5 risk/estimation were the only gaps (now added above)</li>
+<li>Exploratory & session-based testing ✓ (Track C) · Accessibility ✓ (non-functional + toolbox) · Compatibility/cross-browser ✓</li>
+<li>Performance, security (OWASP), mobile/Appium ✓ (Track E) · BDD/Cucumber ✓ · contract testing ✓</li>
+<li>Microservices & resilience: contract testing already in Track E; chaos engineering + observability & shift-right folded into the new AI/modern-era additions and Docker/K8s modules’ CI chapters</li>
+<li>Agile/Scrum/Kanban, shift-left, test management tools, metrics & reporting ✓ (Track F)</li>
+<li>Portfolio, résumé, interviews, first 90 days, working solo ✓ (Track G)</li>
+</ul>
+</section>
+
+<section class="cta">
+  <p><b>This is the completeness ceiling</b> — the map has now been checked against the certification syllabus,
+  the history, the 2026 tool landscape, and the community’s own resource lists. Approve and the master map
+  becomes final at roughly <b>43 modules / ~194 chapters / ~770 topics</b> — and the next step is writing
+  Track A · Module 1.</p>
+</section>
+</div></body></html>

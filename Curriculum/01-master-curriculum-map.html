@@ -1,0 +1,823 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><title>Notes Wiki — Curriculum v4</title>
+<style>
+  :root {
+    --ground:#f4f7f6; --surface:#ffffff; --ink:#141a18; --muted:#5b6663;
+    --faint:#87928e; --border:#dfe6e3; --accent:#0f9b78; --accent-ink:#0b7a5f;
+    --accent-soft:#e3f4ee; --new:#b4540a; --new-soft:#fcefe2;
+    --beginner:#b06d12; --beginner-soft:#fbf0dd;
+    --core:#0f9b78; --core-soft:#e3f4ee;
+    --advanced:#6d5bd0; --advanced-soft:#edeafb;
+    --spine:#0f9b78; --chip:#eef2f0;
+  }
+  @media (prefers-color-scheme: dark) { :root {
+    --ground:#0c1110; --surface:#131a18; --ink:#e6edea; --muted:#9aa8a3;
+    --faint:#6e7b76; --border:#243029; --accent:#2dd4a7; --accent-ink:#2dd4a7;
+    --accent-soft:#12352b; --new:#f0954a; --new-soft:#3a2413;
+    --beginner:#e8b04e; --beginner-soft:#33270f;
+    --core:#2dd4a7; --core-soft:#12352b;
+    --advanced:#a78bfa; --advanced-soft:#251d45;
+    --spine:#2dd4a7; --chip:#1b2420;
+  } }
+  :root[data-theme="dark"] {
+    --ground:#0c1110; --surface:#131a18; --ink:#e6edea; --muted:#9aa8a3;
+    --faint:#6e7b76; --border:#243029; --accent:#2dd4a7; --accent-ink:#2dd4a7;
+    --accent-soft:#12352b; --new:#f0954a; --new-soft:#3a2413;
+    --beginner:#e8b04e; --beginner-soft:#33270f;
+    --core:#2dd4a7; --core-soft:#12352b;
+    --advanced:#a78bfa; --advanced-soft:#251d45;
+    --spine:#2dd4a7; --chip:#1b2420;
+  }
+  :root[data-theme="light"] {
+    --ground:#f4f7f6; --surface:#ffffff; --ink:#141a18; --muted:#5b6663;
+    --faint:#87928e; --border:#dfe6e3; --accent:#0f9b78; --accent-ink:#0b7a5f;
+    --accent-soft:#e3f4ee; --new:#b4540a; --new-soft:#fcefe2;
+    --beginner:#b06d12; --beginner-soft:#fbf0dd;
+    --core:#0f9b78; --core-soft:#e3f4ee;
+    --advanced:#6d5bd0; --advanced-soft:#edeafb;
+    --spine:#0f9b78; --chip:#eef2f0;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.55; }
+  .wrap { max-width:1060px; margin:0 auto; padding:40px 24px 80px; }
+  h1,h2,h3 { text-wrap:balance; margin:0; }
+  .eyebrow { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink); font-weight:700; }
+  header.top h1 { font-size:30px; letter-spacing:-.01em; margin:6px 0 10px; }
+  header.top p.lede { color:var(--muted); max-width:68ch; margin:0 0 22px; }
+  .stats { display:flex; flex-wrap:wrap; gap:12px; }
+  .stat { background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    padding:12px 18px; min-width:110px; }
+  .stat b { display:block; font-size:24px; font-variant-numeric:tabular-nums; color:var(--accent-ink); }
+  .stat span { font-size:12.5px; color:var(--muted); }
+  .stat.delta b { color:var(--new); }
+  section { margin-top:44px; }
+  .panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:22px 24px; }
+  .panel h2 { font-size:19px; margin-bottom:4px; }
+  .panel p.sub { color:var(--muted); font-size:14px; margin:0 0 16px; max-width:75ch; }
+  .choices { display:flex; flex-wrap:wrap; gap:8px 22px; font-size:14px; }
+  .choices b { color:var(--accent-ink); font-weight:600; }
+  .changes { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:12px; margin-top:14px; }
+  .change { border:1px solid var(--border); border-radius:10px; padding:14px 16px; background:var(--ground); }
+  .change h3 { font-size:14.5px; margin-bottom:4px; }
+  .change p { font-size:13px; color:var(--muted); margin:0; }
+  .anatomy { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px; margin-top:14px; }
+  .an { display:flex; gap:10px; align-items:flex-start; border:1px solid var(--border);
+    border-radius:10px; padding:10px 12px; background:var(--ground); }
+  .an .em { font-size:17px; line-height:1.3; }
+  .an b { font-size:13.5px; display:block; }
+  .an span { font-size:12.5px; color:var(--muted); }
+  .legend { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin:26px 0 6px; font-size:12.5px; color:var(--muted); }
+  .lv { padding:2px 10px; border-radius:99px; font-weight:600; font-size:12px; }
+  .lv.Beginner { color:var(--beginner); background:var(--beginner-soft); }
+  .lv.CoreQA { color:var(--core); background:var(--core-soft); }
+  .lv.Advanced { color:var(--advanced); background:var(--advanced-soft); }
+  .badge-new { color:var(--new); background:var(--new-soft); padding:2px 10px; border-radius:99px; font-weight:700; font-size:11.5px; letter-spacing:.06em; }
+  .track { margin-top:34px; }
+  .track-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; padding-bottom:10px; }
+  .track-id { font-size:13px; font-weight:800; letter-spacing:.1em; color:var(--accent-ink);
+    background:var(--accent-soft); padding:3px 12px; border-radius:99px; }
+  .track-head h2 { font-size:21px; }
+  .track-head .tag { color:var(--faint); font-size:13.5px; }
+  .track > p.desc { color:var(--muted); font-size:14px; margin:2px 0 16px; max-width:78ch; }
+  .module { background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    padding:18px 20px; margin-bottom:14px; }
+  .module.is-new { border-color:var(--new); }
+  .mod-head { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:4px; }
+  .mod-num { font-size:12px; font-weight:700; color:var(--faint); font-variant-numeric:tabular-nums; }
+  .mod-head h3 { font-size:16.5px; }
+  .mod-note { font-size:13px; color:var(--muted); background:var(--new-soft); border-radius:8px;
+    padding:8px 12px; margin:8px 0 4px; }
+  .mod-meta { font-size:12px; color:var(--faint); margin-top:10px; }
+  table.chapters { width:100%; border-collapse:collapse; margin-top:10px; }
+  .chapters td { padding:7px 0; vertical-align:top; border-top:1px solid var(--border); font-size:13.5px; }
+  .chapters td.ch { width:230px; font-weight:600; padding-right:14px; }
+  .chapters td.ch .nb { color:var(--new); font-size:10.5px; font-weight:800; letter-spacing:.08em; margin-left:6px; }
+  .topics { display:flex; flex-wrap:wrap; gap:6px; }
+  .topic { background:var(--chip); border-radius:6px; padding:2px 9px; font-size:12.5px; color:var(--muted); }
+  .stat.hire b { color:var(--accent-ink); }
+  .stat.hire { border-color:var(--accent); background:var(--accent-soft); }
+  .scope-note { font-size:12.5px; color:var(--muted); margin:14px 0 0; max-width:82ch; }
+  .scope-note b { color:var(--ink); }
+  .milestone { display:flex; gap:14px; align-items:flex-start; margin:6px 0 30px;
+    background:var(--accent-soft); border:1px solid var(--accent); border-radius:12px; padding:16px 20px; }
+  .ms-badge { font-size:12.5px; font-weight:800; letter-spacing:.04em; color:#fff; background:var(--accent-ink);
+    padding:6px 12px; border-radius:99px; white-space:nowrap; }
+  :root[data-theme="dark"] .ms-badge, .milestone .ms-badge { color:#06110d; }
+  .milestone b { font-size:15.5px; display:block; margin-bottom:3px; }
+  .milestone p { margin:0; font-size:13.5px; color:var(--muted); max-width:84ch; }
+  .milestone.light { background:transparent; border-style:dashed; }
+  .milestone.light .ms-badge { color:var(--accent-ink); background:var(--accent-soft); }
+  :root[data-theme="dark"] .milestone.light .ms-badge { color:var(--accent-ink); }
+  .milestone.light b { font-size:14.5px; }
+  .checkpoint { border-left:3px solid var(--spine); background:var(--surface); border-radius:0 12px 12px 0;
+    padding:14px 18px; margin:4px 0 10px; }
+  .checkpoint b { color:var(--accent-ink); font-size:14px; }
+  .checkpoint p { margin:4px 0 0; font-size:13.5px; color:var(--muted); max-width:82ch; }
+  .sources li { font-size:13.5px; color:var(--muted); margin-bottom:8px; }
+  .sources b { color:var(--ink); }
+  .cta { margin-top:40px; border:1px solid var(--accent); }
+  .cta p { margin:0; font-size:14.5px; }
+  @media (max-width:640px){ .chapters td.ch { width:135px; } }
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Notes Wiki · Curriculum v4.1 · senior-QA review round 2 applied</div>
+  <h1>From zero to your first QA job — the full note map</h1>
+  <p class="lede">The complete, finalized curriculum: v3 (market-validated) + v3.1 deep-dives (databases to engineer level, NoSQL, Linux,
+  Docker &amp; Kubernetes, CI systems, DevTools, tester’s toolbox) + v3.2 final sweep (QA history &amp; the pioneers, system design
+  for testers, AI &amp; the modern tester, static testing, risk &amp; estimation, i18n, visual regression, mocking, environments &amp;
+  test data, domains, 39-link resource library) + v3.3 (UI/UX design QA — laws of UX, color theory, Figma-vs-build discipline — plus the web platform for testers and requirements testing). Every topic gets the full mentor-note format.
+  Build order: taxonomy first, then Track A · Module 1 for review, then onward.</p>
+  <div class="stats">
+    <div class="stat hire"><b>Track C</b><span>hireable as junior QA</span></div>
+    <div class="stat hire"><b>Track D</b><span>+ automation roles</span></div>
+    <div class="stat"><b>7</b><span>tracks, zero → job</span></div>
+    <div class="stat delta"><b>6</b><span>portfolio checkpoints</span></div>
+  </div>
+  <p class="scope-note">Full reference scope: 48 modules · 219 chapters · ~876 topics.
+  You do <b>not</b> do them all before applying — the reference is deep on purpose; the <b>path</b> to a job is short (see the
+  “employable” markers below). Learner-facing pages show only “what’s next”, never the total count.</p>
+</header>
+
+<section class="panel">
+  <h2>Your locked choices</h2>
+  <div class="choices" style="margin-top:8px">
+    <span>Start: <b>true zero (Track A kept)</b></span>
+    <span>Languages: <b>Java + Python</b>, <b>JS/TS for Playwright</b></span>
+    <span>Depth: <b>full lessons, 3–5 topics/chapter</b></span>
+    <span>Format: <b>approved sample note + your “add more” extras</b></span>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>What changed in v3</h2>
+  <p class="sub">Each change traces to the validation research — nothing moved on taste alone.</p>
+  <div class="changes">
+<div class="change"><h3>Mentor anatomy in every note</h3><p>Every topic is written as “the senior QA you don’t have to ask”: setup steps, troubleshooting, where to verify, and how to ask the community. This is the approved sample-note format plus your “add more” extras.</p></div>
+<div class="change"><h3>API testing moved early</h3><p>New Track C module — HTTP, Postman, auth, and a first API bug hunt during manual testing. 2026 roadmaps put Postman in months 1–3; it’s “the highest-use skill most QAs underinvest in”.</p></div>
+<div class="change"><h3>SQL moved early</h3><p>New Track C module — SELECT/JOIN and verifying the app against the DB, before any automation. Every roadmap we validated sequences SQL pre-code.</p></div>
+<div class="change"><h3>BDD / Cucumber added</h3><p>New Track D module (Gherkin, Cucumber + Java, behave/pytest-bdd). Every best-selling course ships it and job posts list it.</p></div>
+<div class="change"><h3>API automation upgraded</h3><p>Track E module rebuilt around REST Assured, pytest + requests, and contract/schema testing against OpenAPI.</p></div>
+<div class="change"><h3>NEW Track G — Your First Job</h3><p>Four modules: the 3-repo portfolio employers screen for, résumé/ATS, interview rounds (manual + SQL + API + behavioral), and your first 90 days — including working solo without a senior.</p></div>
+<div class="change"><h3>Project spine checkpoints</h3><p>After each track, a guided checkpoint on the real BuggyShop + BuggyAPI apps builds the portfolio piece by piece — manual → UI automation → API → DB → security.</p></div>
+<div class="change"><h3>Setup + resources per module</h3><p>Every module opens with a 🔧 setup guide and closes with 3–5 curated free resources — the fragmentation pain, solved in place.</p></div>
+</div>
+</section>
+
+<section class="panel">
+  <h2>Anatomy of every note — “the senior QA you don’t have to ask”</h2>
+  <p class="sub">The approved sample-note format, extended with your requested additions. Every one of the topics below is authored on this skeleton.</p>
+  <div class="anatomy">
+<div class="an"><span class="em">🎣</span><div><b>Hook</b><span>a curiosity opener that makes you need the answer</span></div></div>
+<div class="an"><span class="em">🏙</span><div><b>Real-life analogy</b><span>the concept in everyday terms first</span></div></div>
+<div class="an"><span class="em">📊</span><div><b>Animated figure</b><span>a diagram you can play, not a static image</span></div></div>
+<div class="an"><span class="em">🔧</span><div><b>First time? Do this</b><span>exact setup steps, nothing assumed</span></div></div>
+<div class="an"><span class="em">⚠️</span><div><b>When it breaks</b><span>the errors you’ll actually hit + fixes</span></div></div>
+<div class="an"><span class="em">🔎</span><div><b>Where & how to check</b><span>logs, network tab, DB — concrete verification</span></div></div>
+<div class="an"><span class="em">🙋</span><div><b>How & whom to ask</b><span>frame a good question → posts to the Community</span></div></div>
+<div class="an"><span class="em">🎛</span><div><b>Try it</b><span>an interactive tool or runnable code (Wandbox)</span></div></div>
+<div class="an"><span class="em">📋</span><div><b>Worked example</b><span>a real case walked through</span></div></div>
+<div class="an"><span class="em">📖</span><div><b>Glossary terms</b><span>hover any jargon for plain English</span></div></div>
+<div class="an"><span class="em">🧠</span><div><b>Quiz + challenge</b><span>instant-feedback quiz mid-note, challenge at the end</span></div></div>
+<div class="an"><span class="em">🃏</span><div><b>Flashcards</b><span>key terms, wired to spaced repetition</span></div></div>
+<div class="an"><span class="em">⚡</span><div><b>Common mistakes</b><span>what beginners get wrong, preempted</span></div></div>
+<div class="an"><span class="em">✅</span><div><b>Takeaways + XP</b><span>mark complete, earn XP, keep the streak</span></div></div>
+</div>
+</section>
+
+<div class="legend">Level:
+  <span class="lv Beginner">Beginner</span>
+  <span class="lv CoreQA">Core QA</span>
+  <span class="lv Advanced">Advanced</span>
+  <span style="margin-left:10px" class="badge-new">NEW / UPGRADED since v2</span>
+</div>
+
+<section class="track">
+  <div class="track-head"><span class="track-id">Track A</span><h2>Computer & Digital Foundations</h2></div>
+  <p class="desc">Absolute zero — what a computer is, how to drive it, and how the internet works.</p>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M1</span><h3>How a computer works</h3>
+      <span class="lv Beginner">Beginner</span></div>
+<table class="chapters">
+<tr><td class="ch">The parts of a computer</td><td><div class="topics"><span class="topic">tower & laptop anatomy</span><span class="topic">monitor, keyboard, mouse</span><span class="topic">ports & cables</span><span class="topic">turning it on safely</span></div></td></tr>
+<tr><td class="ch">CPU, memory & storage</td><td><div class="topics"><span class="topic">what the CPU does</span><span class="topic">RAM vs storage</span><span class="topic">GHz, GB, TB</span><span class="topic">why computers slow down</span></div></td></tr>
+<tr><td class="ch">Input & output devices</td><td><div class="topics"><span class="topic">input devices</span><span class="topic">output devices</span><span class="topic">peripherals</span><span class="topic">connecting a device</span></div></td></tr>
+<tr><td class="ch">How software runs</td><td><div class="topics"><span class="topic">hardware vs software</span><span class="topic">programs & processes</span><span class="topic">booting up</span><span class="topic">apps vs the OS</span></div></td></tr>
+<tr><td class="ch">Types of computers</td><td><div class="topics"><span class="topic">desktops & laptops</span><span class="topic">phones & tablets</span><span class="topic">servers</span><span class="topic">smart devices</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M2</span><h3>Operating systems & files</h3>
+      <span class="lv Beginner">Beginner</span></div>
+<table class="chapters">
+<tr><td class="ch">What an OS does</td><td><div class="topics"><span class="topic">role of the OS</span><span class="topic">the desktop & UI</span><span class="topic">managing hardware</span><span class="topic">common OS tasks</span></div></td></tr>
+<tr><td class="ch">Windows, macOS & Linux</td><td><div class="topics"><span class="topic">Windows tour</span><span class="topic">macOS tour</span><span class="topic">Linux & open source</span><span class="topic">choosing one</span></div></td></tr>
+<tr><td class="ch">Files, folders & paths</td><td><div class="topics"><span class="topic">files & file types</span><span class="topic">folders & organizing</span><span class="topic">file paths</span><span class="topic">search & shortcuts</span></div></td></tr>
+<tr><td class="ch">Installing & managing software</td><td><div class="topics"><span class="topic">installing apps</span><span class="topic">updates</span><span class="topic">uninstalling</span><span class="topic">app stores vs downloads</span></div></td></tr>
+<tr><td class="ch">First look at the command line</td><td><div class="topics"><span class="topic">what a terminal is</span><span class="topic">basic commands</span><span class="topic">navigating folders</span><span class="topic">why testers use it</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M3</span><h3>The internet & the web</h3>
+      <span class="lv Beginner">Beginner</span></div>
+<table class="chapters">
+<tr><td class="ch">How the internet works</td><td><div class="topics"><span class="topic">networks & the internet</span><span class="topic">ISPs & connections</span><span class="topic">IP addresses</span><span class="topic">Wi-Fi vs wired</span></div></td></tr>
+<tr><td class="ch">Browsers & page loading</td><td><div class="topics"><span class="topic">what a browser is</span><span class="topic">how a page loads</span><span class="topic">tabs, history, bookmarks</span><span class="topic">a peek at dev tools</span></div></td></tr>
+<tr><td class="ch">Client, server & HTTP</td><td><div class="topics"><span class="topic">client vs server</span><span class="topic">request & response</span><span class="topic">HTTP in plain words</span><span class="topic">what a site is made of</span></div></td></tr>
+<tr><td class="ch">What “the cloud” is</td><td><div class="topics"><span class="topic">the cloud explained</span><span class="topic">cloud storage</span><span class="topic">web apps</span><span class="topic">SaaS</span></div></td></tr>
+<tr><td class="ch">Domains, URLs & hosting</td><td><div class="topics"><span class="topic">anatomy of a URL</span><span class="topic">domains & DNS</span><span class="topic">hosting</span><span class="topic">HTTPS & the padlock</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M4</span><h3>The web platform for testers</h3>
+      <span class="lv Beginner">Beginner</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Moved to Track A in v4 (senior-QA review) — reading HTML/CSS/JS is a tester superpower: the DOM is where locators live, the box model is why layouts break, and JS errors are bug evidence.</div>
+<table class="chapters">
+<tr><td class="ch">HTML essentials</td><td><div class="topics"><span class="topic">structure & semantic tags</span><span class="topic">forms & inputs</span><span class="topic">ids, classes & attributes</span><span class="topic">why semantics matter (a11y & locators)</span></div></td></tr>
+<tr><td class="ch">CSS essentials</td><td><div class="topics"><span class="topic">selectors — the locator superpower</span><span class="topic">the box model</span><span class="topic">flexbox & grid, gently</span><span class="topic">why layouts break</span></div></td></tr>
+<tr><td class="ch">JavaScript for readers</td><td><div class="topics"><span class="topic">what JS does on a page</span><span class="topic">events & handlers</span><span class="topic">async & loading, gently</span><span class="topic">reading errors & stack traces</span></div></td></tr>
+<tr><td class="ch">How browsers render</td><td><div class="topics"><span class="topic">DOM & the render tree</span><span class="topic">reflow & repaint, gently</span><span class="topic">network + render = page load</span><span class="topic">Core Web Vitals awareness</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M5</span><h3>Digital literacy & safety</h3>
+      <span class="lv Beginner">Beginner</span></div>
+<table class="chapters">
+<tr><td class="ch">Accounts, passwords & 2FA</td><td><div class="topics"><span class="topic">accounts & sign-in</span><span class="topic">strong passwords</span><span class="topic">password managers</span><span class="topic">two-factor auth</span></div></td></tr>
+<tr><td class="ch">Staying safe online</td><td><div class="topics"><span class="topic">phishing & scams</span><span class="topic">safe downloads</span><span class="topic">privacy basics</span><span class="topic">updates & antivirus</span></div></td></tr>
+<tr><td class="ch">Keyboard & typing</td><td><div class="topics"><span class="topic">keyboard layout</span><span class="topic">shortcuts</span><span class="topic">touch typing</span><span class="topic">efficiency tips</span></div></td></tr>
+<tr><td class="ch">Everyday tools</td><td><div class="topics"><span class="topic">documents</span><span class="topic">spreadsheets</span><span class="topic">email</span><span class="topic">collaboration tools</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="checkpoint"><b>🚀 Checkpoint · Set up your QA workstation</b><p>Create your accounts (GitHub, QA Mastery), install a browser + dev tools, organize a study folder, learn the shortcuts you’ll use every day.</p></div>
+</section>
+<section class="track">
+  <div class="track-head"><span class="track-id">Track B</span><h2>Thinking Like a Programmer</h2><span class="tag">· Java & Python</span></div>
+  <p class="desc">The logic and coding foundation a tester needs before automating — taught in Java and Python side by side.</p>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M6</span><h3>Programming basics</h3>
+      <span class="lv Beginner">Beginner</span></div>
+<table class="chapters">
+<tr><td class="ch">What is code & a program</td><td><div class="topics"><span class="topic">what code is</span><span class="topic">languages overview</span><span class="topic">Java vs Python for beginners</span><span class="topic">your first program</span></div></td></tr>
+<tr><td class="ch">Variables & data types</td><td><div class="topics"><span class="topic">variables</span><span class="topic">numbers, text, booleans</span><span class="topic">types in Java & Python</span><span class="topic">naming</span></div></td></tr>
+<tr><td class="ch">Operators & expressions</td><td><div class="topics"><span class="topic">arithmetic</span><span class="topic">comparison</span><span class="topic">logical operators</span><span class="topic">expressions</span></div></td></tr>
+<tr><td class="ch">Input & output</td><td><div class="topics"><span class="topic">printing output</span><span class="topic">reading input</span><span class="topic">comments</span><span class="topic">formatting</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M7</span><h3>Logic & control flow</h3>
+      <span class="lv Beginner">Beginner</span></div>
+<table class="chapters">
+<tr><td class="ch">Conditions</td><td><div class="topics"><span class="topic">if / else</span><span class="topic">comparison & logic</span><span class="topic">nested conditions</span><span class="topic">switch / match</span></div></td></tr>
+<tr><td class="ch">Loops</td><td><div class="topics"><span class="topic">for loops</span><span class="topic">while loops</span><span class="topic">break & continue</span><span class="topic">iterating collections</span></div></td></tr>
+<tr><td class="ch">Functions</td><td><div class="topics"><span class="topic">defining functions</span><span class="topic">parameters & return</span><span class="topic">scope</span><span class="topic">reuse & DRY</span></div></td></tr>
+<tr><td class="ch">First bugs & debugging</td><td><div class="topics"><span class="topic">reading errors</span><span class="topic">print debugging</span><span class="topic">using a debugger</span><span class="topic">common mistakes</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M8</span><h3>Working with data</h3>
+      <span class="lv Beginner">Beginner</span></div>
+<table class="chapters">
+<tr><td class="ch">Strings & text</td><td><div class="topics"><span class="topic">string basics</span><span class="topic">common methods</span><span class="topic">formatting</span><span class="topic">parsing</span></div></td></tr>
+<tr><td class="ch">Lists / arrays</td><td><div class="topics"><span class="topic">creating lists</span><span class="topic">add / remove</span><span class="topic">iterating</span><span class="topic">sort & search</span></div></td></tr>
+<tr><td class="ch">Key–value data</td><td><div class="topics"><span class="topic">maps / dictionaries</span><span class="topic">objects</span><span class="topic">nesting</span><span class="topic">when to use which</span></div></td></tr>
+<tr><td class="ch">Simple algorithms</td><td><div class="topics"><span class="topic">problem-solving steps</span><span class="topic">looping over data</span><span class="topic">basic sort / search</span><span class="topic">practice katas</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M9</span><h3>A first language, deeper</h3>
+      <span class="lv CoreQA">Core QA</span></div>
+<table class="chapters">
+<tr><td class="ch">Setup & IDE</td><td><div class="topics"><span class="topic">installing the JDK</span><span class="topic">installing Python</span><span class="topic">IntelliJ / VS Code</span><span class="topic">running programs</span></div></td></tr>
+<tr><td class="ch">Syntax essentials</td><td><div class="topics"><span class="topic">Java syntax tour</span><span class="topic">Python syntax tour</span><span class="topic">key differences</span><span class="topic">style conventions</span></div></td></tr>
+<tr><td class="ch">Object-oriented basics</td><td><div class="topics"><span class="topic">classes & objects</span><span class="topic">methods & fields</span><span class="topic">inheritance</span><span class="topic">encapsulation</span></div></td></tr>
+<tr><td class="ch">Collections & exceptions</td><td><div class="topics"><span class="topic">lists / maps / sets</span><span class="topic">exceptions & try-catch</span><span class="topic">file I/O</span><span class="topic">packages & modules</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M10</span><h3>Version control with Git</h3>
+      <span class="lv CoreQA">Core QA</span></div>
+<table class="chapters">
+<tr><td class="ch">Why version control</td><td><div class="topics"><span class="topic">the problem it solves</span><span class="topic">what Git is</span><span class="topic">repositories</span><span class="topic">local vs remote</span></div></td></tr>
+<tr><td class="ch">Git basics</td><td><div class="topics"><span class="topic">init / clone</span><span class="topic">add & commit</span><span class="topic">status & log</span><span class="topic">.gitignore</span></div></td></tr>
+<tr><td class="ch">Branches & merging</td><td><div class="topics"><span class="topic">branches</span><span class="topic">switching</span><span class="topic">merging</span><span class="topic">resolving conflicts</span></div></td></tr>
+<tr><td class="ch">GitHub & pull requests</td><td><div class="topics"><span class="topic">pushing to GitHub</span><span class="topic">pull requests</span><span class="topic">code review</span><span class="topic">collaboration flow</span></div></td></tr>
+<tr><td class="ch">Reading code as a tester<span class="nb">NEW</span></td><td><div class="topics"><span class="topic">reading a diff / pull request</span><span class="topic">understanding blast radius</span><span class="topic">white-box awareness (not writing unit tests)</span><span class="topic">spotting risky changes to test</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M11</span><h3>Linux for testers</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v3.1 — servers, CI runners and Docker images are all Linux; log-digging over SSH is week-one QA work.</div>
+<table class="chapters">
+<tr><td class="ch">Linux essentials</td><td><div class="topics"><span class="topic">why servers run Linux</span><span class="topic">distros & the filesystem layout</span><span class="topic">the shell, properly</span><span class="topic">man pages & getting help</span></div></td></tr>
+<tr><td class="ch">Everyday commands</td><td><div class="topics"><span class="topic">navigating & managing files</span><span class="topic">find & wildcards</span><span class="topic">viewing files (cat/less/head/tail)</span><span class="topic">pipes & redirection</span></div></td></tr>
+<tr><td class="ch">Logs & investigation</td><td><div class="topics"><span class="topic">tail -f a live log</span><span class="topic">grep + basic regex</span><span class="topic">cut / sort / uniq / wc</span><span class="topic">from log line to bug report</span></div></td></tr>
+<tr><td class="ch">Remote servers</td><td><div class="topics"><span class="topic">SSH & keys</span><span class="topic">scp / rsync</span><span class="topic">tmux basics</span><span class="topic">collecting evidence remotely</span></div></td></tr>
+<tr><td class="ch">Permissions & processes</td><td><div class="topics"><span class="topic">chmod & chown in plain words</span><span class="topic">ps / top / kill</span><span class="topic">disk & memory (df/du/free)</span><span class="topic">environment variables</span></div></td></tr>
+<tr><td class="ch">Bash scripting for QA</td><td><div class="topics"><span class="topic">variables, ifs & loops</span><span class="topic">your first useful script</span><span class="topic">cron scheduling</span><span class="topic">automating repetitive checks</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="checkpoint"><b>🚀 Checkpoint · Code kata + your first repo</b><p>Solve small katas in Java and Python, put them in a clean GitHub repo with a real README — your very first public artifact.</p></div>
+</section>
+<section class="track">
+  <div class="track-head"><span class="track-id">Track C</span><h2>QA & Manual Testing</h2></div>
+  <p class="desc">The heart of the path — how professional testing thinks and works. API and SQL now live here, early, where the market says they belong.</p>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M12</span><h3>QA foundations</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">UPGRADED</span></div>
+<div class="mod-note">Expanded in v3.2 — the full QA-history background (who/when/why it started) and the psychology of testing.</div>
+<table class="chapters">
+<tr><td class="ch">What is QA</td><td><div class="topics"><span class="topic">QA vs QC vs testing</span><span class="topic">the tester’s mindset</span><span class="topic">quality defined</span><span class="topic">roles on a team</span></div></td></tr>
+<tr><td class="ch">Where QA came from</td><td><div class="topics"><span class="topic">the 1947 moth story (and the myth)</span><span class="topic">five eras: debugging → prevention</span><span class="topic">the pioneers & their big ideas</span><span class="topic">how agile, DevOps & AI reshaped QA</span></div></td></tr>
+<tr><td class="ch">Why testing matters</td><td><div class="topics"><span class="topic">cost of defects</span><span class="topic">famous failures</span><span class="topic">risk & value</span><span class="topic">when to stop</span></div></td></tr>
+<tr><td class="ch">The seven principles</td><td><div class="topics"><span class="topic">the 7 principles</span><span class="topic">applying them</span><span class="topic">testing myths</span><span class="topic">defect clustering</span></div></td></tr>
+<tr><td class="ch">The tester’s mind</td><td><div class="topics"><span class="topic">critical thinking for testers</span><span class="topic">cognitive biases (confirmation, overconfidence…)</span><span class="topic">curiosity & questioning</span><span class="topic">psychology of tester–developer relations</span></div></td></tr>
+<tr><td class="ch">SDLC & STLC</td><td><div class="topics"><span class="topic">SDLC phases</span><span class="topic">STLC phases</span><span class="topic">where testing fits</span><span class="topic">entry / exit criteria</span></div></td></tr>
+<tr><td class="ch">Models</td><td><div class="topics"><span class="topic">waterfall</span><span class="topic">agile</span><span class="topic">V-model</span><span class="topic">choosing a model</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M13</span><h3>Browser DevTools mastery</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Pulled early in v4 (senior-QA review): manual testers live in DevTools from week one — the tester’s microscope, taught panel by panel as how / what / when / why.</div>
+<table class="chapters">
+<tr><td class="ch">Elements & styles</td><td><div class="topics"><span class="topic">inspecting the DOM</span><span class="topic">editing HTML/CSS live</span><span class="topic">finding locators</span><span class="topic">debugging layout & spacing</span></div></td></tr>
+<tr><td class="ch">Console</td><td><div class="topics"><span class="topic">reading JS errors</span><span class="topic">warnings vs errors</span><span class="topic">filtering the noise</span><span class="topic">what to paste into a bug report</span></div></td></tr>
+<tr><td class="ch">Network</td><td><div class="topics"><span class="topic">anatomy of a request</span><span class="topic">status, timing & headers</span><span class="topic">copy as cURL</span><span class="topic">HAR export as bug evidence</span></div></td></tr>
+<tr><td class="ch">Throttling & emulation</td><td><div class="topics"><span class="topic">slow 3G & offline mode</span><span class="topic">device emulation</span><span class="topic">geolocation & sensors</span><span class="topic">testing what users really feel</span></div></td></tr>
+<tr><td class="ch">Application & storage</td><td><div class="topics"><span class="topic">cookies & local storage</span><span class="topic">session & cache</span><span class="topic">clearing state properly</span><span class="topic">service workers, gently</span></div></td></tr>
+<tr><td class="ch">Audits & performance</td><td><div class="topics"><span class="topic">Lighthouse reports</span><span class="topic">accessibility signals</span><span class="topic">performance recording, gently</span><span class="topic">when to escalate to devs</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M14</span><h3>Test design techniques</h3>
+      <span class="lv CoreQA">Core QA</span></div>
+<table class="chapters">
+<tr><td class="ch">Equivalence partitioning</td><td><div class="topics"><span class="topic">valid & invalid classes</span><span class="topic">picking representatives</span><span class="topic">worked example</span><span class="topic">pitfalls</span></div></td></tr>
+<tr><td class="ch">Boundary value analysis</td><td><div class="topics"><span class="topic">why edges fail</span><span class="topic">2- & 3-value</span><span class="topic">worked example</span><span class="topic">combining with EP</span></div></td></tr>
+<tr><td class="ch">Decision tables</td><td><div class="topics"><span class="topic">conditions & actions</span><span class="topic">building a table</span><span class="topic">collapsing rules</span><span class="topic">worked example</span></div></td></tr>
+<tr><td class="ch">State transition</td><td><div class="topics"><span class="topic">states & events</span><span class="topic">diagrams & tables</span><span class="topic">valid vs invalid</span><span class="topic">worked example</span></div></td></tr>
+<tr><td class="ch">Error guessing & use cases</td><td><div class="topics"><span class="topic">error guessing</span><span class="topic">experience-based</span><span class="topic">use-case testing</span><span class="topic">exploratory link</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M15</span><h3>Test artifacts</h3>
+      <span class="lv CoreQA">Core QA</span></div>
+<table class="chapters">
+<tr><td class="ch">Scenarios & cases</td><td><div class="topics"><span class="topic">scenarios vs cases</span><span class="topic">anatomy of a case</span><span class="topic">writing good cases</span><span class="topic">positive & negative</span></div></td></tr>
+<tr><td class="ch">Test plans & strategy</td><td><div class="topics"><span class="topic">what’s in a plan</span><span class="topic">test strategy</span><span class="topic">entry / exit criteria</span><span class="topic">lightweight plans</span></div></td></tr>
+<tr><td class="ch">Traceability</td><td><div class="topics"><span class="topic">the RTM</span><span class="topic">coverage</span><span class="topic">linking to requirements</span><span class="topic">finding gaps</span></div></td></tr>
+<tr><td class="ch">Test data</td><td><div class="topics"><span class="topic">what test data is</span><span class="topic">preparing data</span><span class="topic">data-driven thinking</span><span class="topic">managing data</span></div></td></tr>
+<tr><td class="ch">Testing requirements & user stories<span class="nb">NEW</span></td><td><div class="topics"><span class="topic">ambiguous requirements & how to spot them</span><span class="topic">testable acceptance criteria</span><span class="topic">questioning requirements early</span><span class="topic">user stories & the three amigos</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M16</span><h3>Levels & types of testing</h3>
+      <span class="lv CoreQA">Core QA</span></div>
+<table class="chapters">
+<tr><td class="ch">Test levels</td><td><div class="topics"><span class="topic">unit</span><span class="topic">integration</span><span class="topic">system</span><span class="topic">acceptance (UAT)</span></div></td></tr>
+<tr><td class="ch">Functional & regression</td><td><div class="topics"><span class="topic">functional testing</span><span class="topic">regression</span><span class="topic">retest vs regression</span><span class="topic">impact analysis</span></div></td></tr>
+<tr><td class="ch">Smoke & sanity</td><td><div class="topics"><span class="topic">smoke testing</span><span class="topic">sanity testing</span><span class="topic">when to run each</span><span class="topic">build acceptance</span></div></td></tr>
+<tr><td class="ch">Box & approach</td><td><div class="topics"><span class="topic">black vs white box</span><span class="topic">gray box</span><span class="topic">static vs dynamic</span><span class="topic">positive / negative</span></div></td></tr>
+<tr><td class="ch">Static testing & reviews<span class="nb">NEW</span></td><td><div class="topics"><span class="topic">static vs dynamic, properly</span><span class="topic">reviews: informal → walkthrough → inspection</span><span class="topic">static analysis tools</span><span class="topic">review checklists that work</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M17</span><h3>Exploratory testing</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Promoted to its own module in v4 (senior-QA review) — the highest-leverage manual skill; was one buried sub-topic.</div>
+<table class="chapters">
+<tr><td class="ch">The exploratory mindset</td><td><div class="topics"><span class="topic">scripted vs exploratory</span><span class="topic">learn–design–execute at once</span><span class="topic">when exploratory wins</span><span class="topic">exploratory ≠ ad-hoc</span></div></td></tr>
+<tr><td class="ch">Heuristics & tours</td><td><div class="topics"><span class="topic">testing heuristics (SFDPOT…)</span><span class="topic">tours (the feature tour, the money tour…)</span><span class="topic">oracles: how you know it’s a bug</span><span class="topic">cheat-sheets that travel</span></div></td></tr>
+<tr><td class="ch">Session-based test management</td><td><div class="topics"><span class="topic">charters</span><span class="topic">time-boxed sessions</span><span class="topic">note-taking under pressure</span><span class="topic">debriefing & coverage</span></div></td></tr>
+<tr><td class="ch">Reporting exploratory work</td><td><div class="topics"><span class="topic">making it visible to managers</span><span class="topic">bugs + coverage from a session</span><span class="topic">pairing & ensemble testing</span><span class="topic">when to switch to scripted</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M18</span><h3>Defect management</h3>
+      <span class="lv CoreQA">Core QA</span></div>
+<table class="chapters">
+<tr><td class="ch">The bug life cycle</td><td><div class="topics"><span class="topic">states of a bug</span><span class="topic">the workflow</span><span class="topic">reopen & duplicate</span><span class="topic">triage</span></div></td></tr>
+<tr><td class="ch">Writing bug reports</td><td><div class="topics"><span class="topic">anatomy of a report</span><span class="topic">repro steps</span><span class="topic">evidence</span><span class="topic">clarity</span></div></td></tr>
+<tr><td class="ch">Severity vs priority</td><td><div class="topics"><span class="topic">severity</span><span class="topic">priority</span><span class="topic">combinations</span><span class="topic">who sets what</span></div></td></tr>
+<tr><td class="ch">Tools</td><td><div class="topics"><span class="topic">JIRA basics</span><span class="topic">Bugzilla</span><span class="topic">test management tools</span><span class="topic">dashboards</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M19</span><h3>The tester’s toolbox</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v3.1 — organized by tool family (specific tools rotate, the families don’t); every topic teaches how / what / when / why + the current best free pick.</div>
+<table class="chapters">
+<tr><td class="ch">Edge-case & form data</td><td><div class="topics"><span class="topic">Bug Magnet (tricky inputs)</span><span class="topic">form fillers</span><span class="topic">test credit cards & emails</span><span class="topic">generating data: Mockaroo & Faker</span></div></td></tr>
+<tr><td class="ch">Link, page & UI checks</td><td><div class="topics"><span class="topic">Check My Links</span><span class="topic">GoFullPage & screenshot tools</span><span class="topic">Window Resizer / responsive checks</span><span class="topic">WhatFont, PerfectPixel, Page Ruler</span></div></td></tr>
+<tr><td class="ch">Cookies, JSON & sessions</td><td><div class="topics"><span class="topic">cookie editors</span><span class="topic">JSON formatters</span><span class="topic">Clear Cache</span><span class="topic">managing multi-account testing</span></div></td></tr>
+<tr><td class="ch">Locator & recorder helpers</td><td><div class="topics"><span class="topic">SelectorsHub</span><span class="topic">CSS selector helpers</span><span class="topic">recorder extensions</span><span class="topic">from recorder to real script</span></div></td></tr>
+<tr><td class="ch">Accessibility & quality</td><td><div class="topics"><span class="topic">WAVE</span><span class="topic">axe DevTools</span><span class="topic">contrast & screen-reader checks</span><span class="topic">Lighthouse as an extension of QA</span></div></td></tr>
+<tr><td class="ch">Beyond the browser</td><td><div class="topics"><span class="topic">debugging proxies (Requestly / Charles / mitmproxy)</span><span class="topic">email testing (Mailinator / Mailpit)</span><span class="topic">tunnels (ngrok) & sharing localhost</span><span class="topic">screen recorders for bug repro</span></div></td></tr>
+<tr><td class="ch">Choosing tools wisely</td><td><div class="topics"><span class="topic">how / what / when / why framework</span><span class="topic">free vs paid honestly</span><span class="topic">tool sprawl & when to stop</span><span class="topic">keeping your kit current</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M20</span><h3>UI/UX design QA</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v3.3 (user-requested) — verifying the design, not just the function: the laws, the color theory, and the Figma-vs-build discipline. Sources: Nielsen’s heuristics, Laws of UX, WCAG contrast rules, 2026 design-QA process guides.</div>
+<table class="chapters">
+<tr><td class="ch">Design principles & the laws of UX</td><td><div class="topics"><span class="topic">Nielsen’s 10 usability heuristics</span><span class="topic">Fitts, Hick, Miller & Jakob</span><span class="topic">Gestalt principles (proximity, similarity…)</span><span class="topic">heuristics = what to check, laws = why</span></div></td></tr>
+<tr><td class="ch">Color theory for testers</td><td><div class="topics"><span class="topic">hue, saturation & value</span><span class="topic">color harmony (complementary, triadic…)</span><span class="topic">contrast & WCAG ratios (4.5:1 / 3:1)</span><span class="topic">color blindness & semantic color</span></div></td></tr>
+<tr><td class="ch">Typography & spacing</td><td><div class="topics"><span class="topic">type hierarchy (size, weight, line-height)</span><span class="topic">readable line lengths</span><span class="topic">grids & the 8pt system</span><span class="topic">alignment & white space</span></div></td></tr>
+<tr><td class="ch">Design QA in practice</td><td><div class="topics"><span class="topic">reading a Figma spec</span><span class="topic">pixel-perfect vs pragmatic</span><span class="topic">checking spacing, states & breakpoints</span><span class="topic">design bugs devs respect (exact px + selector + frame)</span></div></td></tr>
+<tr><td class="ch">Usability evaluation</td><td><div class="topics"><span class="topic">running a heuristic evaluation</span><span class="topic">usability testing basics</span><span class="topic">microcopy & UX-writing checks</span><span class="topic">dark patterns to flag</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M21</span><h3>API testing fundamentals</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Moved early from Track E — every 2026 roadmap teaches Postman in the first months, and manual API testing is now a core manual-tester skill.</div>
+<table class="chapters">
+<tr><td class="ch">HTTP for testers</td><td><div class="topics"><span class="topic">request & response anatomy</span><span class="topic">methods (GET/POST/PUT/DELETE)</span><span class="topic">headers & bodies</span><span class="topic">JSON & XML</span></div></td></tr>
+<tr><td class="ch">Status codes & REST</td><td><div class="topics"><span class="topic">2xx / 4xx / 5xx families</span><span class="topic">REST in plain words</span><span class="topic">idempotency & safety</span><span class="topic">reading API docs & Swagger</span></div></td></tr>
+<tr><td class="ch">Postman & curl</td><td><div class="topics"><span class="topic">curl basics</span><span class="topic">Postman requests</span><span class="topic">collections & environments</span><span class="topic">Postman tests & variables</span></div></td></tr>
+<tr><td class="ch">Auth, manually</td><td><div class="topics"><span class="topic">API keys</span><span class="topic">Basic auth</span><span class="topic">Bearer / JWT</span><span class="topic">OAuth2, what a tester needs</span></div></td></tr>
+<tr><td class="ch">Finding API bugs</td><td><div class="topics"><span class="topic">testing without a UI</span><span class="topic">negative API tests</span><span class="topic">validating against the spec</span><span class="topic">your first API bug hunt (BuggyAPI)</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M22</span><h3>How systems are built — system design for testers</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v3.2 — testers must know the system they test, not just its screens; doubles as developer knowledge and interview material.</div>
+<table class="chapters">
+<tr><td class="ch">The big picture</td><td><div class="topics"><span class="topic">frontend, backend & the database</span><span class="topic">life of a request, end to end</span><span class="topic">client-side vs server-side rendering</span><span class="topic">reading an architecture diagram</span></div></td></tr>
+<tr><td class="ch">Architecture styles</td><td><div class="topics"><span class="topic">monolith vs microservices</span><span class="topic">layers & MVC, gently</span><span class="topic">APIs as the glue</span><span class="topic">third-party services & webhooks</span></div></td></tr>
+<tr><td class="ch">Scaling building blocks</td><td><div class="topics"><span class="topic">load balancers</span><span class="topic">caching (Redis) & its bugs</span><span class="topic">message queues & async work</span><span class="topic">CDNs & static assets</span></div></td></tr>
+<tr><td class="ch">Where bugs live, layer by layer</td><td><div class="topics"><span class="topic">UI-layer bug families</span><span class="topic">API & integration bug families</span><span class="topic">data-layer bug families</span><span class="topic">infra & config bug families</span></div></td></tr>
+<tr><td class="ch">From architecture to test strategy</td><td><div class="topics"><span class="topic">what to test at which layer</span><span class="topic">integration points = risk</span><span class="topic">asking devs the right questions</span><span class="topic">drawing the system before testing it</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M23</span><h3>SQL & databases for testers</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Moved early from Track E — the market is unanimous: SQL comes before automation, because verifying data is daily manual-QA work.</div>
+<table class="chapters">
+<tr><td class="ch">Databases in plain words</td><td><div class="topics"><span class="topic">what a database is</span><span class="topic">tables, rows, columns</span><span class="topic">relational vs NoSQL</span><span class="topic">where your app’s data lives</span></div></td></tr>
+<tr><td class="ch">Reading data</td><td><div class="topics"><span class="topic">SELECT & WHERE</span><span class="topic">sorting & limits</span><span class="topic">JOINs, gently</span><span class="topic">aggregates & GROUP BY</span></div></td></tr>
+<tr><td class="ch">Verifying the app against the DB</td><td><div class="topics"><span class="topic">UI action → DB check</span><span class="topic">CRUD verification</span><span class="topic">finding data bugs</span><span class="topic">test data setup & cleanup</span></div></td></tr>
+<tr><td class="ch">Tools & habits</td><td><div class="topics"><span class="topic">DB clients (DBeaver, TablePlus)</span><span class="topic">connecting safely</span><span class="topic">read-only discipline</span><span class="topic">query snippets library</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M24</span><h3>Non-functional testing (intro)</h3>
+      <span class="lv CoreQA">Core QA</span></div>
+<table class="chapters">
+<tr><td class="ch">Performance</td><td><div class="topics"><span class="topic">what it measures</span><span class="topic">load vs stress</span><span class="topic">key metrics</span><span class="topic">tools overview</span></div></td></tr>
+<tr><td class="ch">Security</td><td><div class="topics"><span class="topic">why it matters</span><span class="topic">common risks</span><span class="topic">a tester’s role</span><span class="topic">OWASP preview</span></div></td></tr>
+<tr><td class="ch">Usability & accessibility</td><td><div class="topics"><span class="topic">usability testing</span><span class="topic">UX heuristics</span><span class="topic">accessibility (WCAG)</span><span class="topic">assistive tech</span></div></td></tr>
+<tr><td class="ch">Compatibility</td><td><div class="topics"><span class="topic">cross-browser</span><span class="topic">cross-device</span><span class="topic">OS / versions</span><span class="topic">responsive checks</span></div></td></tr>
+<tr><td class="ch">Localization & i18n<span class="nb">NEW</span></td><td><div class="topics"><span class="topic">i18n vs l10n in plain words</span><span class="topic">text expansion, truncation & RTL</span><span class="topic">dates, currencies & formats</span><span class="topic">pseudo-localization tricks</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="checkpoint"><b>🚀 Checkpoint · Manual test cycle on BuggyShop + BuggyAPI</b><p>Write a real test plan, 50 test cases, and graded bug reports on BuggyShop — then hunt the 5 seeded API bugs in BuggyAPI with Postman. This becomes portfolio repo #1: your documented manual project.</p></div>
+</section>
+<div class="milestone"><span class="ms-badge">🎓 EMPLOYABLE — Junior Manual QA</span><div><b>You are hireable now.</b><p>Tracks A–C give you everything a junior manual / light-automation QA role asks for in 2026: testing fundamentals, design &amp; API &amp; SQL &amp; DevTools skills, a documented portfolio project, and the mindset. Everything after this is how you grow and specialize — not a requirement to apply. Apply when you finish here.</p></div></div>
+<section class="track">
+  <div class="track-head"><span class="track-id">Track D</span><h2>Test Automation</h2><span class="tag">· Selenium · Playwright · Cucumber</span></div>
+  <p class="desc">Turning manual know-how into code — Selenium in Java & Python, Playwright in JS/TS, and BDD the way teams actually use it.</p>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M25</span><h3>Automation foundations</h3>
+      <span class="lv Advanced">Advanced</span></div>
+<table class="chapters">
+<tr><td class="ch">Why & when to automate</td><td><div class="topics"><span class="topic">benefits</span><span class="topic">what to automate</span><span class="topic">what NOT to</span><span class="topic">manual vs automated</span></div></td></tr>
+<tr><td class="ch">The automation pyramid</td><td><div class="topics"><span class="topic">unit / integration / E2E</span><span class="topic">ice-cream-cone anti-pattern</span><span class="topic">balancing the suite</span><span class="topic">ROI</span></div></td></tr>
+<tr><td class="ch">The tool landscape</td><td><div class="topics"><span class="topic">Selenium</span><span class="topic">Playwright</span><span class="topic">Cypress</span><span class="topic">choosing a tool</span></div></td></tr>
+<tr><td class="ch">Pitfalls</td><td><div class="topics"><span class="topic">flaky tests</span><span class="topic">maintenance cost</span><span class="topic">over-automation</span><span class="topic">false confidence</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M26</span><h3>Selenium WebDriver</h3>
+      <span class="lv Advanced">Advanced</span></div>
+<table class="chapters">
+<tr><td class="ch">Setup & architecture</td><td><div class="topics"><span class="topic">WebDriver architecture</span><span class="topic">drivers & Selenium Manager</span><span class="topic">first script (Java)</span><span class="topic">first script (Python)</span></div></td></tr>
+<tr><td class="ch">Locators</td><td><div class="topics"><span class="topic">id / name / css / xpath</span><span class="topic">locator strategy</span><span class="topic">relative locators</span><span class="topic">robust selectors</span></div></td></tr>
+<tr><td class="ch">Waits & sync</td><td><div class="topics"><span class="topic">implicit vs explicit</span><span class="topic">fluent waits</span><span class="topic">avoiding sleeps</span><span class="topic">handling async</span></div></td></tr>
+<tr><td class="ch">Actions & navigation</td><td><div class="topics"><span class="topic">clicks & input</span><span class="topic">dropdowns & alerts</span><span class="topic">frames & windows</span><span class="topic">Actions API</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M27</span><h3>Test frameworks</h3>
+      <span class="lv Advanced">Advanced</span></div>
+<table class="chapters">
+<tr><td class="ch">Lifecycle & annotations</td><td><div class="topics"><span class="topic">setup / teardown hooks</span><span class="topic">@Test</span><span class="topic">TestNG vs JUnit</span><span class="topic">pytest fixtures</span></div></td></tr>
+<tr><td class="ch">Assertions</td><td><div class="topics"><span class="topic">assertions</span><span class="topic">soft assertions</span><span class="topic">custom messages</span><span class="topic">matchers</span></div></td></tr>
+<tr><td class="ch">Groups & parameters</td><td><div class="topics"><span class="topic">grouping tests</span><span class="topic">parameters</span><span class="topic">ordering</span><span class="topic">suites</span></div></td></tr>
+<tr><td class="ch">Data-driven testing</td><td><div class="topics"><span class="topic">data providers</span><span class="topic">parameterized tests</span><span class="topic">external data (CSV/Excel)</span><span class="topic">reuse</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M28</span><h3>Framework design</h3>
+      <span class="lv Advanced">Advanced</span></div>
+<table class="chapters">
+<tr><td class="ch">Page Object Model</td><td><div class="topics"><span class="topic">the POM pattern</span><span class="topic">page classes</span><span class="topic">returning pages</span><span class="topic">component objects</span></div></td></tr>
+<tr><td class="ch">Reusable components</td><td><div class="topics"><span class="topic">base classes</span><span class="topic">utilities</span><span class="topic">waits wrapper</span><span class="topic">driver factory</span></div></td></tr>
+<tr><td class="ch">Config & data</td><td><div class="topics"><span class="topic">config files</span><span class="topic">environments</span><span class="topic">test data</span><span class="topic">secrets</span></div></td></tr>
+<tr><td class="ch">Logging & reporting</td><td><div class="topics"><span class="topic">logging (Log4j)</span><span class="topic">ExtentReports</span><span class="topic">Allure</span><span class="topic">screenshots on failure</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M29</span><h3>BDD with Cucumber</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Every best-selling QA course ships Cucumber — and job posts ask for it. Gherkin in Java (Cucumber) and Python (behave / pytest-bdd).</div>
+<table class="chapters">
+<tr><td class="ch">BDD in plain words</td><td><div class="topics"><span class="topic">what BDD solves</span><span class="topic">Given / When / Then</span><span class="topic">BDD vs test scripts</span><span class="topic">the three amigos</span></div></td></tr>
+<tr><td class="ch">Gherkin & feature files</td><td><div class="topics"><span class="topic">writing scenarios</span><span class="topic">scenario outlines & examples</span><span class="topic">backgrounds & tags</span><span class="topic">good vs bad Gherkin</span></div></td></tr>
+<tr><td class="ch">Step definitions</td><td><div class="topics"><span class="topic">glue code (Java)</span><span class="topic">behave / pytest-bdd (Python)</span><span class="topic">data tables</span><span class="topic">hooks & context</span></div></td></tr>
+<tr><td class="ch">BDD in a framework</td><td><div class="topics"><span class="topic">Cucumber + Selenium</span><span class="topic">reports & living documentation</span><span class="topic">when BDD helps</span><span class="topic">when it hurts</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M30</span><h3>Playwright</h3>
+      <span class="lv Advanced">Advanced</span></div>
+<table class="chapters">
+<tr><td class="ch">Setup & auto-waiting</td><td><div class="topics"><span class="topic">install Playwright</span><span class="topic">TypeScript setup</span><span class="topic">first test</span><span class="topic">auto-waiting explained</span></div></td></tr>
+<tr><td class="ch">Locators & fixtures</td><td><div class="topics"><span class="topic">user-facing locators</span><span class="topic">getByRole / Label / TestId</span><span class="topic">fixtures</span><span class="topic">test isolation</span></div></td></tr>
+<tr><td class="ch">Tracing & debugging</td><td><div class="topics"><span class="topic">trace viewer</span><span class="topic">codegen</span><span class="topic">debugging</span><span class="topic">screenshots & video</span></div></td></tr>
+<tr><td class="ch">Parallel & cross-browser</td><td><div class="topics"><span class="topic">projects & browsers</span><span class="topic">parallelism & sharding</span><span class="topic">retries</span><span class="topic">config</span></div></td></tr>
+<tr><td class="ch">Visual regression testing<span class="nb">NEW</span></td><td><div class="topics"><span class="topic">pixel vs AI diffing</span><span class="topic">Playwright snapshots</span><span class="topic">Percy / Applitools / BackstopJS</span><span class="topic">taming false positives</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M31</span><h3>Automation in CI/CD</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">UPGRADED</span></div>
+<div class="mod-note">Upgraded in v3.1 — Jenkins and GitLab CI + quality gates added so all three major CI systems are covered.</div>
+<table class="chapters">
+<tr><td class="ch">Running tests in CI</td><td><div class="topics"><span class="topic">what CI is</span><span class="topic">running the suite</span><span class="topic">headless mode</span><span class="topic">artifacts</span></div></td></tr>
+<tr><td class="ch">GitHub Actions</td><td><div class="topics"><span class="topic">workflow basics</span><span class="topic">triggers</span><span class="topic">matrix runs</span><span class="topic">caching</span></div></td></tr>
+<tr><td class="ch">Jenkins</td><td><div class="topics"><span class="topic">jobs & the classic UI</span><span class="topic">Jenkinsfile — pipeline as code</span><span class="topic">agents & plugins</span><span class="topic">when teams still pick Jenkins</span></div></td></tr>
+<tr><td class="ch">GitLab CI & quality gates</td><td><div class="topics"><span class="topic">stages, jobs & runners</span><span class="topic">.gitlab-ci.yml</span><span class="topic">quality gates (coverage, Sonar)</span><span class="topic">blocking a merge on failure</span></div></td></tr>
+<tr><td class="ch">Scheduling & reporting</td><td><div class="topics"><span class="topic">scheduled runs</span><span class="topic">publishing reports</span><span class="topic">notifications</span><span class="topic">dashboards</span></div></td></tr>
+<tr><td class="ch">Flake management</td><td><div class="topics"><span class="topic">detecting flakes</span><span class="topic">quarantine</span><span class="topic">retries</span><span class="topic">stability practices</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="checkpoint"><b>🚀 Checkpoint · Automate BuggyShop, end to end</b><p>Build a Selenium + Java POM framework AND a Playwright TS suite against BuggyShop, running green in GitHub Actions. Portfolio repos #2 (UI automation) and the CI pipeline employers screen for.</p></div>
+</section>
+<div class="milestone light"><span class="ms-badge">🚀 ALSO EMPLOYABLE — Automation-adjacent junior</span><div><b>A second, distinct job pool opens up.</b><p>Manual-only junior QA and manual+automation junior QA are genuinely different hiring buckets — different postings, often different pay. Track C got you the first pool; Track D adds the second: Selenium/Playwright, a real framework, BDD, and green CI. Tracks E–F are the junior→mid specialization ladder — take only the parts your target jobs ask for, in any order.</p></div></div>
+<section class="track">
+  <div class="track-head"><span class="track-id">Track E</span><h2>Specialized Testing</h2></div>
+  <p class="desc">The high-value niches employers ask for — now with real API automation, since the fundamentals moved early.</p>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M32</span><h3>API test automation</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">UPGRADED</span></div>
+<div class="mod-note">Upgraded — was “API testing”. Manual API skills moved to Track C; this is the automation layer: REST Assured, pytest + requests, and contract testing.</div>
+<table class="chapters">
+<tr><td class="ch">REST Assured (Java)</td><td><div class="topics"><span class="topic">setup & first test</span><span class="topic">given / when / then style</span><span class="topic">validating JSON & status</span><span class="topic">auth in REST Assured</span></div></td></tr>
+<tr><td class="ch">Python API testing</td><td><div class="topics"><span class="topic">requests + pytest</span><span class="topic">fixtures for APIs</span><span class="topic">parameterized endpoint tests</span><span class="topic">sessions & auth</span></div></td></tr>
+<tr><td class="ch">Contract & schema testing</td><td><div class="topics"><span class="topic">OpenAPI as the contract</span><span class="topic">schema validation</span><span class="topic">consumer-driven contracts</span><span class="topic">breaking-change detection</span></div></td></tr>
+<tr><td class="ch">GraphQL & SOAP testing</td><td><div class="topics"><span class="topic">how GraphQL differs from REST</span><span class="topic">queries, mutations & the schema</span><span class="topic">testing a GraphQL API</span><span class="topic">SOAP/WSDL, when you meet it</span></div></td></tr>
+<tr><td class="ch">API tests in CI (Newman)</td><td><div class="topics"><span class="topic">running Postman collections headlessly</span><span class="topic">Newman + CI pipeline</span><span class="topic">scheduled API regression</span><span class="topic">reporting API results</span></div></td></tr>
+<tr><td class="ch">Real-world API suites</td><td><div class="topics"><span class="topic">test pyramids for APIs</span><span class="topic">data setup via API</span><span class="topic">chaining & state</span><span class="topic">full API suite on BuggyAPI</span></div></td></tr>
+<tr><td class="ch">Mocking & service virtualization</td><td><div class="topics"><span class="topic">stubs, mocks & fakes</span><span class="topic">WireMock hands-on</span><span class="topic">record & playback</span><span class="topic">simulating errors, latency & chaos</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M33</span><h3>Relational databases, engineer-level</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">UPGRADED</span></div>
+<div class="mod-note">Rebuilt in v3.1 (was “Database testing, deeper”) — reaches real backend-developer depth, verified hands-on against the BuggyAPI Postgres schema.</div>
+<table class="chapters">
+<tr><td class="ch">SQL mastery</td><td><div class="topics"><span class="topic">subqueries & CTEs</span><span class="topic">window functions</span><span class="topic">set operators (UNION/EXCEPT)</span><span class="topic">date, time & timezone handling</span></div></td></tr>
+<tr><td class="ch">Schema design</td><td><div class="topics"><span class="topic">ER modeling from requirements</span><span class="topic">keys & relationships</span><span class="topic">normalization 1NF→3NF</span><span class="topic">when to denormalize (and why)</span></div></td></tr>
+<tr><td class="ch">Indexes & performance</td><td><div class="topics"><span class="topic">how an index actually works</span><span class="topic">clustered vs non-clustered</span><span class="topic">reading EXPLAIN / execution plans</span><span class="topic">query tuning & over-indexing writes</span></div></td></tr>
+<tr><td class="ch">Transactions & concurrency</td><td><div class="topics"><span class="topic">ACID, properly</span><span class="topic">isolation levels & anomalies</span><span class="topic">locks & deadlocks</span><span class="topic">testing concurrent behavior</span></div></td></tr>
+<tr><td class="ch">Programmable objects</td><td><div class="topics"><span class="topic">stored procedures & functions</span><span class="topic">triggers</span><span class="topic">testing procs (inputs, outputs, side effects)</span><span class="topic">error handling in SQL</span></div></td></tr>
+<tr><td class="ch">Data integrity at scale</td><td><div class="topics"><span class="topic">constraints & referential integrity</span><span class="topic">finding orphans & duplicates</span><span class="topic">migrations & ETL verification</span><span class="topic">auditing data changes</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M34</span><h3>NoSQL & modern data</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v3.1 — the other half of real-world data work: document stores, caching, and the consistency bugs they breed.</div>
+<table class="chapters">
+<tr><td class="ch">The NoSQL landscape</td><td><div class="topics"><span class="topic">document / key-value / graph / columnar</span><span class="topic">SQL vs NoSQL — choosing honestly</span><span class="topic">CAP theorem in plain words</span><span class="topic">where each shines</span></div></td></tr>
+<tr><td class="ch">MongoDB hands-on</td><td><div class="topics"><span class="topic">documents & collections</span><span class="topic">CRUD & query operators</span><span class="topic">embedding vs referencing</span><span class="topic">aggregation pipeline, gently</span></div></td></tr>
+<tr><td class="ch">Redis & caching bugs</td><td><div class="topics"><span class="topic">what caching solves</span><span class="topic">TTLs & eviction</span><span class="topic">stale-data bugs & cache invalidation</span><span class="topic">testing around a cache</span></div></td></tr>
+<tr><td class="ch">Distributed data, gently</td><td><div class="topics"><span class="topic">replication & sharding</span><span class="topic">eventual consistency bugs</span><span class="topic">backups & recovery checks</span><span class="topic">testing data pipelines</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M35</span><h3>Docker & containers for testers</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v3.1 — kills “works on my machine” and unlocks disposable test environments.</div>
+<table class="chapters">
+<tr><td class="ch">Containers in plain words</td><td><div class="topics"><span class="topic">VM vs container</span><span class="topic">images, containers & registries</span><span class="topic">why QA cares</span><span class="topic">install & first run</span></div></td></tr>
+<tr><td class="ch">Docker hands-on</td><td><div class="topics"><span class="topic">run / exec / logs / stop</span><span class="topic">ports & volumes</span><span class="topic">env vars & networks</span><span class="topic">debugging a container</span></div></td></tr>
+<tr><td class="ch">Dockerfiles & Compose</td><td><div class="topics"><span class="topic">writing a Dockerfile</span><span class="topic">multi-stage builds</span><span class="topic">docker-compose: app + DB together</span><span class="topic">a disposable test environment</span></div></td></tr>
+<tr><td class="ch">Containers in automation</td><td><div class="topics"><span class="topic">Selenium Grid in Docker</span><span class="topic">running your suite in a container</span><span class="topic">Testcontainers for DB fixtures</span><span class="topic">containers in CI</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M36</span><h3>Kubernetes & test infrastructure</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v3.1 — intro-level on purpose: enough to work with real deployments and stand out in interviews, not to become a cluster admin.</div>
+<table class="chapters">
+<tr><td class="ch">Kubernetes in plain words</td><td><div class="topics"><span class="topic">what K8s solves</span><span class="topic">pods, deployments, services</span><span class="topic">kubectl survival kit</span><span class="topic">namespaces & contexts</span></div></td></tr>
+<tr><td class="ch">Test workloads on K8s</td><td><div class="topics"><span class="topic">running tests as Jobs</span><span class="topic">Selenium Grid on K8s (dynamic grid)</span><span class="topic">reading pod logs</span><span class="topic">port-forward to debug</span></div></td></tr>
+<tr><td class="ch">Releases & environments</td><td><div class="topics"><span class="topic">how teams deploy</span><span class="topic">staging vs production</span><span class="topic">config & secrets</span><span class="topic">what QA verifies after a deploy</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M37</span><h3>Performance testing</h3>
+      <span class="lv Advanced">Advanced</span></div>
+<table class="chapters">
+<tr><td class="ch">Load vs stress vs soak</td><td><div class="topics"><span class="topic">types of perf testing</span><span class="topic">goals</span><span class="topic">recovery</span><span class="topic">scalability</span></div></td></tr>
+<tr><td class="ch">Metrics</td><td><div class="topics"><span class="topic">latency & throughput</span><span class="topic">percentiles vs averages</span><span class="topic">error rate</span><span class="topic">resource use</span></div></td></tr>
+<tr><td class="ch">Tools intro</td><td><div class="topics"><span class="topic">JMeter</span><span class="topic">k6</span><span class="topic">designing a test</span><span class="topic">reading results</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M38</span><h3>Security testing — web</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">UPGRADED</span></div>
+<div class="mod-note">Rebuilt in v4 (senior-QA review flagged the old single module as a survey) — web-app security to real competence.</div>
+<table class="chapters">
+<tr><td class="ch">OWASP Top 10, properly</td><td><div class="topics"><span class="topic">the 2021 list & how to use it</span><span class="topic">broken access control</span><span class="topic">cryptographic & config failures</span><span class="topic">mapping findings to the list</span></div></td></tr>
+<tr><td class="ch">Injection & client-side</td><td><div class="topics"><span class="topic">SQL injection by hand</span><span class="topic">XSS: reflected / stored / DOM</span><span class="topic">command & template injection</span><span class="topic">CSRF & clickjacking</span></div></td></tr>
+<tr><td class="ch">Authentication testing</td><td><div class="topics"><span class="topic">auth vs authorization (distinct skills)</span><span class="topic">session & cookie attacks</span><span class="topic">password & reset flows</span><span class="topic">MFA bypass patterns</span></div></td></tr>
+<tr><td class="ch">Authorization & access</td><td><div class="topics"><span class="topic">IDOR / BOLA by hand</span><span class="topic">privilege escalation</span><span class="topic">forced browsing</span><span class="topic">function-level checks (BFLA)</span></div></td></tr>
+<tr><td class="ch">Tools & reporting</td><td><div class="topics"><span class="topic">Burp Suite basics</span><span class="topic">OWASP ZAP</span><span class="topic">writing a security finding devs act on</span><span class="topic">responsible disclosure</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M39</span><h3>API & modern security</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v4 (senior-QA review) — API and GraphQL are a different attack surface than web: a REST-shaped checklist misses a large share of GraphQL-specific issues (introspection, query depth, batching), so they get their own coverage.</div>
+<table class="chapters">
+<tr><td class="ch">OWASP API Security Top 10 (2023)</td><td><div class="topics"><span class="topic">BOLA & BFLA</span><span class="topic">broken auth for APIs</span><span class="topic">unrestricted resource consumption</span><span class="topic">the full API list</span></div></td></tr>
+<tr><td class="ch">REST API attacks</td><td><div class="topics"><span class="topic">mass assignment</span><span class="topic">SSRF</span><span class="topic">rate-limit & abuse testing</span><span class="topic">excessive data exposure</span></div></td></tr>
+<tr><td class="ch">JWT & token attacks</td><td><div class="topics"><span class="topic">alg:none & weak secrets</span><span class="topic">expiry & replay</span><span class="topic">scope & audience abuse</span><span class="topic">key confusion</span></div></td></tr>
+<tr><td class="ch">GraphQL security</td><td><div class="topics"><span class="topic">introspection leakage</span><span class="topic">query depth & complexity DoS</span><span class="topic">batching & alias abuse</span><span class="topic">field-level auth & mutation mass assignment</span></div></td></tr>
+<tr><td class="ch">Auditing BuggyAPI</td><td><div class="topics"><span class="topic">threat-modeling an API</span><span class="topic">a repeatable audit checklist</span><span class="topic">chaining findings</span><span class="topic">the write-up (like a real report)</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M40</span><h3>Accessibility testing</h3>
+      <span class="lv Advanced">Advanced</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v4 (senior-QA review) — a11y is a real hiring driver (ADA/EAA pressure) and deserves competence, not fragments across other modules.</div>
+<table class="chapters">
+<tr><td class="ch">Why accessibility matters</td><td><div class="topics"><span class="topic">disabilities & assistive tech</span><span class="topic">the business & legal case (ADA/EAA)</span><span class="topic">WCAG 2.2 A / AA / AAA</span><span class="topic">POUR principles</span></div></td></tr>
+<tr><td class="ch">Manual a11y testing</td><td><div class="topics"><span class="topic">keyboard-only navigation</span><span class="topic">screen readers (NVDA / VoiceOver)</span><span class="topic">focus order & visible focus</span><span class="topic">contrast & zoom / reflow</span></div></td></tr>
+<tr><td class="ch">Automated a11y audits</td><td><div class="topics"><span class="topic">axe DevTools & Lighthouse</span><span class="topic">WAVE</span><span class="topic">what automation catches vs misses</span><span class="topic">CI a11y checks</span></div></td></tr>
+<tr><td class="ch">Reporting & fixing</td><td><div class="topics"><span class="topic">writing a11y findings devs act on</span><span class="topic">ARIA: help & harm</span><span class="topic">semantic HTML first</span><span class="topic">re-testing a fix</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M41</span><h3>Mobile testing</h3>
+      <span class="lv Advanced">Advanced</span></div>
+<table class="chapters">
+<tr><td class="ch">Device & OS matrix</td><td><div class="topics"><span class="topic">fragmentation</span><span class="topic">building a matrix</span><span class="topic">real vs emulated</span><span class="topic">device farms</span></div></td></tr>
+<tr><td class="ch">Gestures, interrupts, networks</td><td><div class="topics"><span class="topic">touch gestures</span><span class="topic">interrupts</span><span class="topic">network conditions</span><span class="topic">orientation</span></div></td></tr>
+<tr><td class="ch">Appium intro</td><td><div class="topics"><span class="topic">what Appium is</span><span class="topic">setup</span><span class="topic">first mobile test</span><span class="topic">mobile locators</span></div></td></tr>
+<tr><td class="ch">Mobile specifics</td><td><div class="topics"><span class="topic">permissions</span><span class="topic">battery & performance</span><span class="topic">app lifecycle</span><span class="topic">store testing</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="checkpoint"><b>🚀 Checkpoint · Specialist audit of BuggyAPI</b><p>Ship an API automation suite (REST Assured or pytest) against BuggyAPI — REST, OAuth2, GraphQL — plus a DB integrity pass and an API security audit (REST + GraphQL) written up like a real report. Portfolio repo #3: the API suite.</p></div>
+</section>
+<section class="track">
+  <div class="track-head"><span class="track-id">Track F</span><h2>Process & Team</h2></div>
+  <p class="desc">How testing fits a real team — agile ceremonies, pipelines, and the tools you’ll live in.</p>
+<div class="module">
+    <div class="mod-head"><span class="mod-num">M42</span><h3>Agile & DevOps for testers</h3>
+      <span class="lv CoreQA">Core QA</span></div>
+<table class="chapters">
+<tr><td class="ch">Scrum & Kanban</td><td><div class="topics"><span class="topic">Scrum roles & ceremonies</span><span class="topic">Kanban</span><span class="topic">backlog & stories</span><span class="topic">estimation</span></div></td></tr>
+<tr><td class="ch">Tester in a sprint</td><td><div class="topics"><span class="topic">definition of done</span><span class="topic">in-sprint testing</span><span class="topic">acceptance criteria</span><span class="topic">collaboration</span></div></td></tr>
+<tr><td class="ch">Shift-left & CI/CD</td><td><div class="topics"><span class="topic">shift-left</span><span class="topic">the CI/CD pipeline</span><span class="topic">quality gates</span><span class="topic">continuous testing</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M43</span><h3>Test management & reporting</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Split out of the old career module — job posts ask for TestRail/Xray experience and stakeholder reporting by name.</div>
+<table class="chapters">
+<tr><td class="ch">Test management tools</td><td><div class="topics"><span class="topic">JIRA & boards, deeper</span><span class="topic">TestRail / Xray / Zephyr</span><span class="topic">organizing suites & runs</span><span class="topic">linking bugs to cases</span></div></td></tr>
+<tr><td class="ch">Metrics & reporting</td><td><div class="topics"><span class="topic">test summary reports</span><span class="topic">coverage & pass-rate metrics</span><span class="topic">dashboards</span><span class="topic">reporting to stakeholders</span></div></td></tr>
+<tr><td class="ch">Docs & communication</td><td><div class="topics"><span class="topic">Confluence / wikis</span><span class="topic">writing for developers</span><span class="topic">status updates</span><span class="topic">async communication</span></div></td></tr>
+<tr><td class="ch">Environments & test data</td><td><div class="topics"><span class="topic">dev / QA / staging / prod</span><span class="topic">environment parity & config</span><span class="topic">test data management & anonymization</span><span class="topic">GDPR & sensitive data in tests</span></div></td></tr>
+<tr><td class="ch">Risk & estimation</td><td><div class="topics"><span class="topic">risk-based testing</span><span class="topic">prioritizing what to test first</span><span class="topic">test estimation techniques</span><span class="topic">saying no with data</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M44</span><h3>AI & the modern tester</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<div class="mod-note">Added in v3.2 — using AI to test better, and testing systems that contain AI; the biggest 2026 shift in the field.</div>
+<table class="chapters">
+<tr><td class="ch">AI as your testing copilot</td><td><div class="topics"><span class="topic">LLMs for test ideas & cases</span><span class="topic">prompting for QA work</span><span class="topic">generating test data with AI</span><span class="topic">reviewing AI output critically</span></div></td></tr>
+<tr><td class="ch">AI-powered test automation</td><td><div class="topics"><span class="topic">self-healing tests</span><span class="topic">AI test generation tools</span><span class="topic">autonomous testing agents</span><span class="topic">when AI automation lies</span></div></td></tr>
+<tr><td class="ch">Testing AI systems</td><td><div class="topics"><span class="topic">why AI apps break differently</span><span class="topic">evaluating LLM outputs (DeepEval / RAGAS ideas)</span><span class="topic">hallucinations, bias & safety</span><span class="topic">regression for prompts & models</span></div></td></tr>
+<tr><td class="ch">Staying employable in the AI era</td><td><div class="topics"><span class="topic">what AI won’t replace</span><span class="topic">the tester’s judgment premium</span><span class="topic">learning loop for new tools</span><span class="topic">AI on your resume, honestly</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+</section>
+<section class="track">
+  <div class="track-head"><span class="track-id">Track G</span><h2>Your First Job</h2><span class="tag">· NEW TRACK</span></div>
+  <p class="desc">The last mile almost nobody teaches — turning the work you just did into interviews, offers, and a strong first 90 days.</p>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M45</span><h3>A portfolio that gets interviews</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<table class="chapters">
+<tr><td class="ch">The 3-repo portfolio</td><td><div class="topics"><span class="topic">repo 1: documented manual project</span><span class="topic">repo 2: UI automation suite</span><span class="topic">repo 3: API suite + CI</span><span class="topic">READMEs that sell</span></div></td></tr>
+<tr><td class="ch">Show your work</td><td><div class="topics"><span class="topic">packaging BuggyShop / BuggyAPI work</span><span class="topic">architecture diagrams</span><span class="topic">demo GIFs & reports</span><span class="topic">what recruiters actually open</span></div></td></tr>
+<tr><td class="ch">Profiles</td><td><div class="topics"><span class="topic">GitHub profile polish</span><span class="topic">LinkedIn for QA</span><span class="topic">personal brand basics</span><span class="topic">posting your progress</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M46</span><h3>Résumé & applications</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<table class="chapters">
+<tr><td class="ch">The QA résumé</td><td><div class="topics"><span class="topic">structure that works</span><span class="topic">skills & keywords (ATS)</span><span class="topic">numbers & impact</span><span class="topic">common mistakes</span></div></td></tr>
+<tr><td class="ch">Applying smart</td><td><div class="topics"><span class="topic">reading job posts</span><span class="topic">tailoring per role</span><span class="topic">cover letters, short</span><span class="topic">tracking applications</span></div></td></tr>
+<tr><td class="ch">Certifications, honestly</td><td><div class="topics"><span class="topic">ISTQB — worth it or not</span><span class="topic">when certs matter</span><span class="topic">free alternatives</span><span class="topic">learning in public</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M47</span><h3>Interviews</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<table class="chapters">
+<tr><td class="ch">Manual QA questions</td><td><div class="topics"><span class="topic">classic questions & answers</span><span class="topic">test-design exercises</span><span class="topic">“test this pen” scenarios</span><span class="topic">talking through bugs</span></div></td></tr>
+<tr><td class="ch">Technical rounds</td><td><div class="topics"><span class="topic">automation & coding questions</span><span class="topic">SQL questions</span><span class="topic">API questions</span><span class="topic">take-home assignments</span></div></td></tr>
+<tr><td class="ch">Behavioral & scenarios</td><td><div class="topics"><span class="topic">STAR stories</span><span class="topic">conflict & priority scenarios</span><span class="topic">questions to ask them</span><span class="topic">salary conversations</span></div></td></tr>
+<tr><td class="ch">Mock practice</td><td><div class="topics"><span class="topic">mock interview drills</span><span class="topic">recording yourself</span><span class="topic">feedback loops</span><span class="topic">handling rejection</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="module is-new">
+    <div class="mod-head"><span class="mod-num">M48</span><h3>Your first 90 days</h3>
+      <span class="lv CoreQA">Core QA</span><span class="badge-new">NEW</span></div>
+<table class="chapters">
+<tr><td class="ch">Landing well</td><td><div class="topics"><span class="topic">onboarding as a QA</span><span class="topic">learning the product fast</span><span class="topic">your first bug report at work</span><span class="topic">building trust</span></div></td></tr>
+<tr><td class="ch">Working solo (the mentor gap)</td><td><div class="topics"><span class="topic">being the only QA</span><span class="topic">asking good questions</span><span class="topic">using the community</span><span class="topic">when to escalate</span></div></td></tr>
+<tr><td class="ch">Growing from here</td><td><div class="topics"><span class="topic">junior → mid roadmap</span><span class="topic">specializing</span><span class="topic">keeping a brag doc</span><span class="topic">continued learning</span></div></td></tr>
+<tr><td class="ch">Domains & specializations</td><td><div class="topics"><span class="topic">payments & fintech testing</span><span class="topic">ERP / CRM & enterprise</span><span class="topic">games, IoT & embedded</span><span class="topic">picking a niche deliberately</span></div></td></tr>
+</table>
+<div class="mod-meta">🔧 opens with a setup guide · 🔗 closes with 3–5 curated free resources</div>
+</div>
+<div class="checkpoint"><b>🚀 Checkpoint · Ship it</b><p>Portfolio public, résumé tailored, three mock interviews done — start applying. The community is your senior QA while you do.</p></div>
+</section>
+<section class="panel">
+  <h2>Validated against</h2>
+  <ul class="sources" style="margin:12px 0 0; padding-left:20px">
+<li><b>QA Engineer Roadmap 2026 (BirJob)</b> — 12-month zero→SDET path: Postman + SQL in months 1–3, Playwright default, 3-repo portfolio, contract testing</li>
+<li><b>Rahul Shetty — Udemy best-seller (100k+ 5★)</b> — wins on framework-building end-to-end + Cucumber + interview prep + résumé section — not on topic count</li>
+<li><b>Test Automation University (free)</b> — short course per tool, Java/Python/JS parallel tracks, API paths, career courses — validates our track model</li>
+<li><b>StarAgile / Guru99 / roadmap.sh (Jul 2 research)</b> — manual → programming → Selenium → API → CI sequencing; beginner tracks start at computer basics</li>
+</ul>
+</section>
+
+<section class="panel cta">
+  <p><b>v4.1 refines the review: the second (automation) employability marker is now visually lighter and framed as a distinct hiring pool, an unsourced GraphQL stat was removed, and forward-pointing prose was de-numbered. v4 groundwork: DevTools + web-platform pulled early, security rebuilt into two modules (web + API/GraphQL), exploratory + accessibility promoted.</b> Next: the wiki taxonomy is rebuilt to this map, and <b>Track A · Module 1</b> is written first,
+  live in the platform with the full mentor format, for your review — then the rest of Track A, then Tracks B→G, checkpoint by checkpoint.</p>
+</section>
+</div></body></html>

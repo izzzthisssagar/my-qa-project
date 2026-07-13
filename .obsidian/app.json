@@ -1,0 +1,13 @@
+{
+  "alwaysUpdateLinks": true,
+  "newLinkFormat": "shortest",
+  "useMarkdownLinks": false,
+  "attachmentFolderPath": "Resources/attachments",
+  "userIgnoreFilters": [
+    "qa-mastery/",
+    "graphify-out/",
+    "Marketing/06-video/node_modules/",
+    "Product/qa-mastery-site/",
+    "Product/landing-site/"
+  ]
+}

@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><title>QA Mastery — Curriculum (offline)</title>
+<style>
+  :root { --ground:#f4f7f6; --surface:#fff; --ink:#141a18; --muted:#5b6663; --border:#dfe6e3;
+    --accent:#0f9b78; --accent-soft:#e3f4ee; --new:#b4540a; }
+  @media (prefers-color-scheme: dark) { :root { --ground:#0c1110; --surface:#131a18; --ink:#e6edea;
+    --muted:#9aa8a3; --border:#243029; --accent:#2dd4a7; --accent-soft:#12352b; --new:#f0954a; } }
+  * { box-sizing:border-box; } a { color:inherit; text-decoration:none; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.55; }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 24px 80px; }
+  h1 { font-size:26px; margin:0 0 6px; } .sub { color:var(--muted); margin:0 0 28px; }
+  .card { display:block; background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    padding:16px 20px; margin-bottom:12px; }
+  .card:hover { border-color:var(--accent); }
+  .card:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  .card b { font-size:15.5px; } .card span { display:block; font-size:13px; color:var(--muted); margin-top:3px; }
+  .tag { font-size:11px; font-weight:700; letter-spacing:.06em; color:var(--accent); background:var(--accent-soft);
+    padding:2px 9px; border-radius:99px; margin-left:8px; }
+  .tag.pending { color:var(--new); background:transparent; border:1px solid var(--new); }
+  .note { font-size:12.5px; color:var(--muted); margin-top:24px; }
+</style>
+<div class="wrap">
+  <h1>QA Mastery — Notes Curriculum</h1>
+  <p class="sub">Offline copy · everything works without internet (external links in the library need a connection).</p>
+  <a class="card" href="01-master-curriculum-map.html"><b>Master curriculum map</b><span class="tag">v4.1 · SR-QA REVIEWED ×2</span>
+    <span>v4 (senior-QA reviewed): 7 tracks, 48 modules, ~876 topics. Hireable by Track C; the rest is specialization.</span></a>
+  <a class="card" href="02-sample-rich-note.html"><b>Sample rich note — Boundary Value Analysis</b><span class="tag">FORMAT APPROVED</span>
+    <span>The interactive mentor-note format every topic is written in. Try the animation, tool & quiz.</span></a>
+  <a class="card" href="03-deep-dive-additions-v3-1.html"><b>Deep-dive additions (v3.1)</b><span class="tag">APPROVED · MERGED</span>
+    <span>Databases to engineer level, Linux, Docker/K8s, DevTools, tester's toolbox — the record of what was added.</span></a>
+  <a class="card" href="04-final-gap-check-v3-2.html"><b>Final gap check (v3.2)</b><span class="tag">APPROVED · MERGED</span>
+    <span>QA history, system design & AI modules, 9 gap chapters, and the 39-link resource library.</span></a>
+  <p class="note">Rebuild any page: edit the matching generator-*.py and run it with python3. Source of truth for progress: Claude's memory + qa-mastery repo.</p>
+</div></body></html>

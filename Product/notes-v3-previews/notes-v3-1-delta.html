@@ -1,0 +1,227 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><title>Notes Curriculum — v3.1 Update Proposal</title>
+<style>
+  :root {
+    --ground:#f4f7f6; --surface:#ffffff; --ink:#141a18; --muted:#5b6663;
+    --faint:#87928e; --border:#dfe6e3; --accent:#0f9b78; --accent-ink:#0b7a5f;
+    --accent-soft:#e3f4ee; --new:#b4540a; --new-soft:#fcefe2; --chip:#eef2f0;
+    --core:#0f9b78; --core-soft:#e3f4ee; --advanced:#6d5bd0; --advanced-soft:#edeafb;
+  }
+  @media (prefers-color-scheme: dark) { :root {
+    --ground:#0c1110; --surface:#131a18; --ink:#e6edea; --muted:#9aa8a3;
+    --faint:#6e7b76; --border:#243029; --accent:#2dd4a7; --accent-ink:#2dd4a7;
+    --accent-soft:#12352b; --new:#f0954a; --new-soft:#3a2413; --chip:#1b2420;
+    --core:#2dd4a7; --core-soft:#12352b; --advanced:#a78bfa; --advanced-soft:#251d45;
+  } }
+  :root[data-theme="dark"] {
+    --ground:#0c1110; --surface:#131a18; --ink:#e6edea; --muted:#9aa8a3;
+    --faint:#6e7b76; --border:#243029; --accent:#2dd4a7; --accent-ink:#2dd4a7;
+    --accent-soft:#12352b; --new:#f0954a; --new-soft:#3a2413; --chip:#1b2420;
+    --core:#2dd4a7; --core-soft:#12352b; --advanced:#a78bfa; --advanced-soft:#251d45;
+  }
+  :root[data-theme="light"] {
+    --ground:#f4f7f6; --surface:#ffffff; --ink:#141a18; --muted:#5b6663;
+    --faint:#87928e; --border:#dfe6e3; --accent:#0f9b78; --accent-ink:#0b7a5f;
+    --accent-soft:#e3f4ee; --new:#b4540a; --new-soft:#fcefe2; --chip:#eef2f0;
+    --core:#0f9b78; --core-soft:#e3f4ee; --advanced:#6d5bd0; --advanced-soft:#edeafb;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; line-height:1.55; }
+  .wrap { max-width:980px; margin:0 auto; padding:40px 24px 80px; }
+  h1,h2,h3 { text-wrap:balance; margin:0; }
+  .eyebrow { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--new); font-weight:700; }
+  header.top h1 { font-size:29px; letter-spacing:-.01em; margin:6px 0 10px; }
+  header.top p { color:var(--muted); max-width:70ch; margin:0 0 20px; }
+  .stats { display:flex; flex-wrap:wrap; gap:12px; }
+  .stat { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:11px 18px; }
+  .stat b { display:block; font-size:22px; font-variant-numeric:tabular-nums; color:var(--new); }
+  .stat span { font-size:12.5px; color:var(--muted); }
+  section.area { margin-top:42px; }
+  .area-head { display:flex; gap:12px; align-items:baseline; }
+  .area-head .ic { font-size:22px; }
+  .area-head h2 { font-size:20px; }
+  .area p.lede { color:var(--muted); font-size:14.5px; margin:8px 0 4px; max-width:80ch; }
+  .research { font-size:13px; color:var(--muted); background:var(--accent-soft); border-radius:8px;
+    padding:9px 13px; margin:10px 0 14px; max-width:86ch; }
+  .research b { color:var(--accent-ink); }
+  .module { background:var(--surface); border:1px solid var(--new); border-radius:12px;
+    padding:18px 20px; margin-bottom:14px; }
+  .mod-head { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .mod-head h3 { font-size:16.5px; }
+  .kind { color:var(--new); background:var(--new-soft); padding:2px 10px; border-radius:99px;
+    font-weight:700; font-size:11.5px; letter-spacing:.06em; }
+  .lv { padding:2px 10px; border-radius:99px; font-weight:600; font-size:12px; }
+  .lv.CoreQA { color:var(--core); background:var(--core-soft); }
+  .lv.Advanced { color:var(--advanced); background:var(--advanced-soft); }
+  .place { font-size:12.5px; color:var(--faint); margin-top:3px; }
+  .place b { color:var(--accent-ink); font-weight:600; }
+  .why { font-size:13.5px; color:var(--muted); margin:8px 0 4px; max-width:82ch; }
+  table.chapters { width:100%; border-collapse:collapse; margin-top:10px; }
+  .chapters td { padding:7px 0; vertical-align:top; border-top:1px solid var(--border); font-size:13.5px; }
+  .chapters td.ch { width:225px; font-weight:600; padding-right:14px; }
+  .topics { display:flex; flex-wrap:wrap; gap:6px; }
+  .topic { background:var(--chip); border-radius:6px; padding:2px 9px; font-size:12.5px; color:var(--muted); }
+  .panel { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 24px; margin-top:40px; }
+  .panel h2 { font-size:18px; margin-bottom:10px; }
+  .sources li { font-size:13.5px; color:var(--muted); margin-bottom:7px; }
+  .sources b { color:var(--ink); }
+  .cta { border-color:var(--accent); }
+  .cta p { margin:0; font-size:14.5px; }
+  .untouched { font-size:13px; color:var(--faint); margin-top:14px; }
+  @media (max-width:640px){ .chapters td.ch { width:130px; } }
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">v3.1 update proposal · additions only · nothing else moves</div>
+  <h1>Deep-dive additions: databases, Linux, DevOps, DevTools & the tester’s toolbox</h1>
+  <p>Everything you approved in v3 stays exactly as it is. This page shows <b>only what gets added or upgraded</b>,
+  each backed by fresh research. Approve it (or mark changes) and it folds into the master map.</p>
+  <div class="stats">
+    <div class="stat"><b>7</b><span>new modules</span></div>
+    <div class="stat"><b>1</b><span>module upgraded (CI/CD)</span></div>
+    <div class="stat"><b>+38</b><span>chapters</span></div>
+    <div class="stat"><b>+152</b><span>topics (notes)</span></div>
+  </div>
+</header>
+
+<section class="area">
+  <div class="area-head"><span class="ic">🗄</span><h2>Databases — from tester basics to engineer-level</h2></div>
+  <p class="lede">Your call: databases should go deep enough to help in development, not just QA. The early Track C module stays as the gentle entry; Track E's small “Database testing, deeper” module is replaced by a two-module arc that reaches real backend-engineer depth.</p>
+  <div class="research"><b>Research says:</b> Validated against the Scaler DBMS 2026 roadmap, database-design engineering references, and SQL-for-SDET interview banks: the skills employers probe are execution plans, indexing trade-offs, transactions/isolation, schema design — and increasingly MongoDB/Redis literacy.</div>
+<div class="module">
+    <div class="mod-head"><h3>Relational databases, engineer-level</h3><span class="lv Advanced">Advanced</span>
+      <span class="kind">NEW MODULE</span></div>
+    <div class="place">Track <b>E</b> · replaces “Database testing, deeper”</div>
+    <p class="why">Everything a backend developer is expected to know about SQL databases — taught through a tester's lens, verified on the real BuggyAPI Postgres schema.</p>
+    <table class="chapters">
+<tr><td class="ch">SQL mastery</td><td><div class="topics"><span class="topic">subqueries & CTEs</span><span class="topic">window functions</span><span class="topic">set operators (UNION/EXCEPT)</span><span class="topic">date, time & timezone handling</span></div></td></tr>
+<tr><td class="ch">Schema design</td><td><div class="topics"><span class="topic">ER modeling from requirements</span><span class="topic">keys & relationships</span><span class="topic">normalization 1NF→3NF</span><span class="topic">when to denormalize (and why)</span></div></td></tr>
+<tr><td class="ch">Indexes & performance</td><td><div class="topics"><span class="topic">how an index actually works</span><span class="topic">clustered vs non-clustered</span><span class="topic">reading EXPLAIN / execution plans</span><span class="topic">query tuning & over-indexing writes</span></div></td></tr>
+<tr><td class="ch">Transactions & concurrency</td><td><div class="topics"><span class="topic">ACID, properly</span><span class="topic">isolation levels & anomalies</span><span class="topic">locks & deadlocks</span><span class="topic">testing concurrent behavior</span></div></td></tr>
+<tr><td class="ch">Programmable objects</td><td><div class="topics"><span class="topic">stored procedures & functions</span><span class="topic">triggers</span><span class="topic">testing procs (inputs, outputs, side effects)</span><span class="topic">error handling in SQL</span></div></td></tr>
+<tr><td class="ch">Data integrity at scale</td><td><div class="topics"><span class="topic">constraints & referential integrity</span><span class="topic">finding orphans & duplicates</span><span class="topic">migrations & ETL verification</span><span class="topic">auditing data changes</span></div></td></tr>
+</table></div>
+<div class="module">
+    <div class="mod-head"><h3>NoSQL & modern data</h3><span class="lv Advanced">Advanced</span>
+      <span class="kind">NEW MODULE</span></div>
+    <div class="place">Track <b>E</b> · new, right after the module above</div>
+    <p class="why">The other half of real-world data work — document stores, caching, and the consistency bugs they breed.</p>
+    <table class="chapters">
+<tr><td class="ch">The NoSQL landscape</td><td><div class="topics"><span class="topic">document / key-value / graph / columnar</span><span class="topic">SQL vs NoSQL — choosing honestly</span><span class="topic">CAP theorem in plain words</span><span class="topic">where each shines</span></div></td></tr>
+<tr><td class="ch">MongoDB hands-on</td><td><div class="topics"><span class="topic">documents & collections</span><span class="topic">CRUD & query operators</span><span class="topic">embedding vs referencing</span><span class="topic">aggregation pipeline, gently</span></div></td></tr>
+<tr><td class="ch">Redis & caching bugs</td><td><div class="topics"><span class="topic">what caching solves</span><span class="topic">TTLs & eviction</span><span class="topic">stale-data bugs & cache invalidation</span><span class="topic">testing around a cache</span></div></td></tr>
+<tr><td class="ch">Distributed data, gently</td><td><div class="topics"><span class="topic">replication & sharding</span><span class="topic">eventual consistency bugs</span><span class="topic">backups & recovery checks</span><span class="topic">testing data pipelines</span></div></td></tr>
+</table></div>
+</section>
+<section class="area">
+  <div class="area-head"><span class="ic">🐧</span><h2>Linux — the OS your test environments run on</h2></div>
+  <p class="lede">New full module in Track B, right after Git. Servers, CI runners, and Docker images are all Linux — log-digging over SSH is week-one QA work in most companies.</p>
+  <div class="research"><b>Research says:</b> QAbash/Udemy “Linux for testers” syllabi converge on the same core: navigation, log analysis (grep/tail), SSH, permissions, processes, then bash + cron for automation.</div>
+<div class="module">
+    <div class="mod-head"><h3>Linux for testers</h3><span class="lv CoreQA">Core QA</span>
+      <span class="kind">NEW MODULE</span></div>
+    <div class="place">Track <b>B</b> · after “Version control with Git”</div>
+    <p class="why">From “what is a terminal” (Track A) to comfortably investigating a bug on a remote server.</p>
+    <table class="chapters">
+<tr><td class="ch">Linux essentials</td><td><div class="topics"><span class="topic">why servers run Linux</span><span class="topic">distros & the filesystem layout</span><span class="topic">the shell, properly</span><span class="topic">man pages & getting help</span></div></td></tr>
+<tr><td class="ch">Everyday commands</td><td><div class="topics"><span class="topic">navigating & managing files</span><span class="topic">find & wildcards</span><span class="topic">viewing files (cat/less/head/tail)</span><span class="topic">pipes & redirection</span></div></td></tr>
+<tr><td class="ch">Logs & investigation</td><td><div class="topics"><span class="topic">tail -f a live log</span><span class="topic">grep + basic regex</span><span class="topic">cut / sort / uniq / wc</span><span class="topic">from log line to bug report</span></div></td></tr>
+<tr><td class="ch">Remote servers</td><td><div class="topics"><span class="topic">SSH & keys</span><span class="topic">scp / rsync</span><span class="topic">tmux basics</span><span class="topic">collecting evidence remotely</span></div></td></tr>
+<tr><td class="ch">Permissions & processes</td><td><div class="topics"><span class="topic">chmod & chown in plain words</span><span class="topic">ps / top / kill</span><span class="topic">disk & memory (df/du/free)</span><span class="topic">environment variables</span></div></td></tr>
+<tr><td class="ch">Bash scripting for QA</td><td><div class="topics"><span class="topic">variables, ifs & loops</span><span class="topic">your first useful script</span><span class="topic">cron scheduling</span><span class="topic">automating repetitive checks</span></div></td></tr>
+</table></div>
+</section>
+<section class="area">
+  <div class="area-head"><span class="ic">🐳</span><h2>CI/CD, Docker & Kubernetes — test infrastructure you own</h2></div>
+  <p class="lede">The existing CI/CD module grows Jenkins + GitLab + quality gates, and two new modules take you from “what is a container” to running a Selenium Grid on Kubernetes — the exact stack QA job posts now list.</p>
+  <div class="research"><b>Research says:</b> 2026 QA-infrastructure guides (containerization-for-testing, Selenium Grid 4.41 dynamic K8s grid, Testcontainers docs) all frame this as the QA→SDET differentiator; CI/CD guides converge on Actions + Jenkins + GitLab as the big three, with quality gates as the pipeline skill.</div>
+<div class="module">
+    <div class="mod-head"><h3>Automation in CI/CD — expanded</h3><span class="lv Advanced">Advanced</span>
+      <span class="kind">UPGRADED MODULE</span></div>
+    <div class="place">Track <b>D</b> · upgrade to “Automation in CI/CD”</div>
+    <p class="why">Two new chapters so all three major CI systems and pipeline quality gates are covered, not just GitHub Actions.</p>
+    <table class="chapters">
+<tr><td class="ch">Jenkins</td><td><div class="topics"><span class="topic">jobs & the classic UI</span><span class="topic">Jenkinsfile — pipeline as code</span><span class="topic">agents & plugins</span><span class="topic">when teams still pick Jenkins</span></div></td></tr>
+<tr><td class="ch">GitLab CI & quality gates</td><td><div class="topics"><span class="topic">stages, jobs & runners</span><span class="topic">.gitlab-ci.yml</span><span class="topic">quality gates (coverage, Sonar)</span><span class="topic">blocking a merge on failure</span></div></td></tr>
+</table></div>
+<div class="module">
+    <div class="mod-head"><h3>Docker & containers for testers</h3><span class="lv Advanced">Advanced</span>
+      <span class="kind">NEW MODULE</span></div>
+    <div class="place">Track <b>E</b> · new module, before Performance</div>
+    <p class="why">Kills “works on my machine” and unlocks disposable test environments.</p>
+    <table class="chapters">
+<tr><td class="ch">Containers in plain words</td><td><div class="topics"><span class="topic">VM vs container</span><span class="topic">images, containers & registries</span><span class="topic">why QA cares</span><span class="topic">install & first run</span></div></td></tr>
+<tr><td class="ch">Docker hands-on</td><td><div class="topics"><span class="topic">run / exec / logs / stop</span><span class="topic">ports & volumes</span><span class="topic">env vars & networks</span><span class="topic">debugging a container</span></div></td></tr>
+<tr><td class="ch">Dockerfiles & Compose</td><td><div class="topics"><span class="topic">writing a Dockerfile</span><span class="topic">multi-stage builds</span><span class="topic">docker-compose: app + DB together</span><span class="topic">a disposable test environment</span></div></td></tr>
+<tr><td class="ch">Containers in automation</td><td><div class="topics"><span class="topic">Selenium Grid in Docker</span><span class="topic">running your suite in a container</span><span class="topic">Testcontainers for DB fixtures</span><span class="topic">containers in CI</span></div></td></tr>
+</table></div>
+<div class="module">
+    <div class="mod-head"><h3>Kubernetes & test infrastructure</h3><span class="lv Advanced">Advanced</span>
+      <span class="kind">NEW MODULE</span></div>
+    <div class="place">Track <b>E</b> · new module, after Docker</div>
+    <p class="why">Intro-level on purpose — enough to work with real deployments and stand out in interviews, not to become a cluster admin.</p>
+    <table class="chapters">
+<tr><td class="ch">Kubernetes in plain words</td><td><div class="topics"><span class="topic">what K8s solves</span><span class="topic">pods, deployments, services</span><span class="topic">kubectl survival kit</span><span class="topic">namespaces & contexts</span></div></td></tr>
+<tr><td class="ch">Test workloads on K8s</td><td><div class="topics"><span class="topic">running tests as Jobs</span><span class="topic">Selenium Grid on K8s (dynamic grid)</span><span class="topic">reading pod logs</span><span class="topic">port-forward to debug</span></div></td></tr>
+<tr><td class="ch">Releases & environments</td><td><div class="topics"><span class="topic">how teams deploy</span><span class="topic">staging vs production</span><span class="topic">config & secrets</span><span class="topic">what QA verifies after a deploy</span></div></td></tr>
+</table></div>
+</section>
+<section class="area">
+  <div class="area-head"><span class="ic">🔍</span><h2>Browser DevTools — how, what, when, why</h2></div>
+  <p class="lede">New full module in Track C. DevTools was only a “peek” in Track A and scattered mentions — it becomes a first-class skill: every panel, when to open it, and what evidence to pull from it for a bug report.</p>
+  <div class="research"><b>Research says:</b> Ministry of Testing’s “10 powerful tests with DevTools”, Chrome’s own docs, and QA handbooks agree the Console + Network panels are the highest-signal tools a manual tester has.</div>
+<div class="module">
+    <div class="mod-head"><h3>Browser DevTools mastery</h3><span class="lv CoreQA">Core QA</span>
+      <span class="kind">NEW MODULE</span></div>
+    <div class="place">Track <b>C</b> · after “Defect management”</div>
+    <p class="why">The tester's microscope — taught panel by panel with how / what / when / why for each.</p>
+    <table class="chapters">
+<tr><td class="ch">Elements & styles</td><td><div class="topics"><span class="topic">inspecting the DOM</span><span class="topic">editing HTML/CSS live</span><span class="topic">finding locators</span><span class="topic">debugging layout & spacing</span></div></td></tr>
+<tr><td class="ch">Console</td><td><div class="topics"><span class="topic">reading JS errors</span><span class="topic">warnings vs errors</span><span class="topic">filtering the noise</span><span class="topic">what to paste into a bug report</span></div></td></tr>
+<tr><td class="ch">Network</td><td><div class="topics"><span class="topic">anatomy of a request</span><span class="topic">status, timing & headers</span><span class="topic">copy as cURL</span><span class="topic">HAR export as bug evidence</span></div></td></tr>
+<tr><td class="ch">Throttling & emulation</td><td><div class="topics"><span class="topic">slow 3G & offline mode</span><span class="topic">device emulation</span><span class="topic">geolocation & sensors</span><span class="topic">testing what users really feel</span></div></td></tr>
+<tr><td class="ch">Application & storage</td><td><div class="topics"><span class="topic">cookies & local storage</span><span class="topic">session & cache</span><span class="topic">clearing state properly</span><span class="topic">service workers, gently</span></div></td></tr>
+<tr><td class="ch">Audits & performance</td><td><div class="topics"><span class="topic">Lighthouse reports</span><span class="topic">accessibility signals</span><span class="topic">performance recording, gently</span><span class="topic">when to escalate to devs</span></div></td></tr>
+</table></div>
+</section>
+<section class="area">
+  <div class="area-head"><span class="ic">🧰</span><h2>The tester’s toolbox — extensions & everyday tools</h2></div>
+  <p class="lede">New module in Track C covering the ecosystem you already live in (Check My Links, form fillers…) — organized by job-to-be-done, each tool taught as how / what / when / why, with free picks first.</p>
+  <div class="research"><b>Research says:</b> Compared the 2026 curated lists (aqua cloud’s 13, QA Madness’s 25, PlusQA’s 16) — the union clusters into six stable tool families below; specific tools rotate, the families don’t.</div>
+<div class="module">
+    <div class="mod-head"><h3>The tester’s toolbox</h3><span class="lv CoreQA">Core QA</span>
+      <span class="kind">NEW MODULE</span></div>
+    <div class="place">Track <b>C</b> · after “Browser DevTools mastery”</div>
+    <p class="why">Tools change — so every topic teaches the family and the current best free pick, plus how to evaluate a new one.</p>
+    <table class="chapters">
+<tr><td class="ch">Edge-case & form data</td><td><div class="topics"><span class="topic">Bug Magnet (tricky inputs)</span><span class="topic">form fillers</span><span class="topic">test credit cards & emails</span><span class="topic">generating data: Mockaroo & Faker</span></div></td></tr>
+<tr><td class="ch">Link, page & UI checks</td><td><div class="topics"><span class="topic">Check My Links</span><span class="topic">GoFullPage & screenshot tools</span><span class="topic">Window Resizer / responsive checks</span><span class="topic">WhatFont, PerfectPixel, Page Ruler</span></div></td></tr>
+<tr><td class="ch">Cookies, JSON & sessions</td><td><div class="topics"><span class="topic">cookie editors</span><span class="topic">JSON formatters</span><span class="topic">Clear Cache</span><span class="topic">managing multi-account testing</span></div></td></tr>
+<tr><td class="ch">Locator & recorder helpers</td><td><div class="topics"><span class="topic">SelectorsHub</span><span class="topic">CSS selector helpers</span><span class="topic">recorder extensions</span><span class="topic">from recorder to real script</span></div></td></tr>
+<tr><td class="ch">Accessibility & quality</td><td><div class="topics"><span class="topic">WAVE</span><span class="topic">axe DevTools</span><span class="topic">contrast & screen-reader checks</span><span class="topic">Lighthouse as an extension of QA</span></div></td></tr>
+<tr><td class="ch">Beyond the browser</td><td><div class="topics"><span class="topic">debugging proxies (Requestly / Charles / mitmproxy)</span><span class="topic">email testing (Mailinator / Mailpit)</span><span class="topic">tunnels (ngrok) & sharing localhost</span><span class="topic">screen recorders for bug repro</span></div></td></tr>
+<tr><td class="ch">Choosing tools wisely</td><td><div class="topics"><span class="topic">how / what / when / why framework</span><span class="topic">free vs paid honestly</span><span class="topic">tool sprawl & when to stop</span><span class="topic">keeping your kit current</span></div></td></tr>
+</table></div>
+</section>
+<section class="panel">
+  <h2>Research trail</h2>
+  <ul class="sources" style="margin:0; padding-left:20px">
+<li><b>Scaler — DBMS Roadmap 2026 + database-design engineering references</b> — schema design, indexing/EXPLAIN, transactions, NoSQL choice as core 2026 data skills</li>
+<li><b>SQL-for-SDET interview banks (SoftwareTestingHelp, Careerist, H2K)</b> — what DB knowledge is actually probed in QA interviews</li>
+<li><b>QAbash “Linux for testers” + Udemy Linux-for-QA syllabi</b> — logs/grep/SSH/permissions/bash+cron as the tester core</li>
+<li><b>Yuri Kan — Containerization for Testing (Docker, K8s, Testcontainers)</b> — the QA→SDET infrastructure path; Selenium Grid 4.41 dynamic K8s grid</li>
+<li><b>Master-DevOps CI/CD 2026 guide + Sonar quality-gate guides</b> — Actions + Jenkins + GitLab as the big three; gates as the pipeline skill</li>
+<li><b>Ministry of Testing + Chrome docs (DevTools)</b> — panel-by-panel QA usage; Console & Network as highest-signal</li>
+<li><b>aqua cloud (13) · QA Madness (25) · PlusQA (16) extension lists, 2026</b> — the six stable tool families in the toolbox module</li>
+</ul>
+</section>
+
+<section class="panel cta">
+  <p><b>Your approval unlocks the merge.</b> Say yes (or mark changes) and these fold into the master v3 map —
+  new totals become roughly <b>41 modules / ~168 chapters / ~670 topics</b>. Every new note keeps the full
+  mentor anatomy, the 🔧 setup guide and 🔗 curated resources, and slots into the same
+  BuggyShop + BuggyAPI project spine (the Docker/K8s and DB modules practice on the real apps you built).</p>
+  <p class="untouched">Not touched by this update: every v3 track, module, chapter, checkpoint and your locked choices.</p>
+</section>
+</div></body></html>

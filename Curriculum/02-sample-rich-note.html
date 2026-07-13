@@ -1,0 +1,400 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head><body><title>Sample Note — Boundary Value Analysis (rich format)</title>
+<style>
+  :root {
+    --bg: #0a0d0e;
+    --surface: #12171a;
+    --surface-2: #171d20;
+    --border: #232b2e;
+    --ink: #e9efec;
+    --muted: #93a49e;
+    --faint: #6a7b76;
+    --accent: #2dd4a7;
+    --accent-dim: #1c8f70;
+    --amber: #f5b948;
+    --violet: #a78bfa;
+    --rose: #fb7185;
+    --ok: #34d399;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.68; -webkit-font-smoothing: antialiased;
+  }
+  .progress-top {
+    position: sticky; top: 0; left: 0; height: 3px; background: transparent; z-index: 50;
+  }
+  .progress-top > i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); transition: width .1s linear; }
+
+  .shell { max-width: 760px; margin: 0 auto; padding: 0 22px 120px; }
+
+  /* top bar */
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0 6px; flex-wrap: wrap; }
+  .crumb { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--faint); letter-spacing: .02em; }
+  .crumb b { color: var(--accent); font-weight: 600; }
+  .stats { display: flex; gap: 8px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+    padding: 5px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
+  }
+  .chip.streak { color: var(--amber); }
+  .chip.xp { color: var(--accent); }
+  .chip #xpval { font-variant-numeric: tabular-nums; }
+
+  h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 22px 0 12px; text-wrap: balance; font-weight: 680; }
+  .meta { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12.5px; color: var(--faint); font-family: ui-monospace, Menlo, monospace; margin-bottom: 26px; }
+  .meta .lvl { color: var(--accent); }
+
+  h2 { font-size: 21px; letter-spacing: -0.01em; margin: 40px 0 10px; font-weight: 660; }
+  p { margin: 0 0 16px; }
+  .lead { font-size: 18px; color: #cdd8d3; }
+  a { color: var(--accent); }
+
+  /* hook */
+  .hook {
+    border-left: 3px solid var(--accent); background: linear-gradient(90deg, rgba(45,212,167,.09), transparent);
+    padding: 14px 18px; border-radius: 0 12px 12px 0; margin: 0 0 26px; font-size: 17px; color: #dce7e2;
+  }
+  .hook b { color: var(--accent); }
+
+  /* callouts */
+  .callout { display: flex; gap: 12px; padding: 14px 16px; border-radius: 12px; margin: 20px 0; font-size: 15px; border: 1px solid var(--border); background: var(--surface); }
+  .callout .ico { font-size: 18px; line-height: 1.4; flex-shrink: 0; }
+  .callout.analogy { border-color: #3a3357; background: linear-gradient(180deg, rgba(167,139,250,.08), var(--surface)); }
+  .callout.analogy .ico { color: var(--violet); }
+  .callout.tip { border-color: #1f5a49; }
+  .callout.tip .ico { color: var(--accent); }
+  .callout.warn { border-color: #6b5420; }
+  .callout.warn .ico { color: var(--amber); }
+  .callout b { color: var(--ink); }
+
+  /* figure */
+  figure { margin: 26px 0; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px 20px 16px; }
+  figure canvas { width: 100%; height: 150px; display: block; }
+  figcaption { text-align: center; font-size: 13px; color: var(--muted); margin-top: 12px; }
+  .fig-btn { display: block; margin: 4px auto 0; background: var(--surface-2); border: 1px solid var(--border); color: var(--accent); font-size: 12.5px; font-weight: 600; padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+  .fig-btn:hover { border-color: var(--accent-dim); }
+
+  /* try-it */
+  .tryit { background: var(--surface); border: 1px solid #2a3a52; border-radius: 16px; padding: 20px; margin: 26px 0; }
+  .tryit .hd { display: flex; align-items: center; gap: 8px; font-weight: 660; margin-bottom: 4px; }
+  .tryit .hd .tag { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: #7cc0ff; background: rgba(90,160,255,.12); padding: 3px 8px; border-radius: 999px; }
+  .tryit p.sub { color: var(--muted); font-size: 14px; margin: 2px 0 16px; }
+  .tryit .inputs { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 16px; }
+  .field label { display: block; font-size: 12px; color: var(--faint); margin-bottom: 5px; font-family: ui-monospace, Menlo, monospace; text-transform: uppercase; letter-spacing: .06em; }
+  .field input { width: 110px; background: var(--bg); border: 1px solid var(--border); color: var(--ink); border-radius: 10px; padding: 10px 12px; font-size: 16px; font-variant-numeric: tabular-nums; outline: none; }
+  .field input:focus { border-color: var(--accent); }
+  .vals { display: flex; flex-wrap: wrap; gap: 8px; }
+  .val { font-family: ui-monospace, Menlo, monospace; font-size: 14px; font-weight: 600; padding: 8px 12px; border-radius: 10px; display: flex; flex-direction: column; gap: 2px; align-items: center; min-width: 62px; }
+  .val small { font-size: 9.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .8; }
+  .val.reject { background: rgba(251,113,133,.13); color: #fda4b0; border: 1px solid rgba(251,113,133,.3); }
+  .val.accept { background: rgba(52,211,153,.13); color: #6ee7b7; border: 1px solid rgba(52,211,153,.3); }
+
+  /* worked example */
+  details.ex { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin: 24px 0; overflow: hidden; }
+  details.ex summary { cursor: pointer; padding: 15px 18px; font-weight: 620; list-style: none; display: flex; align-items: center; gap: 10px; }
+  details.ex summary::-webkit-details-marker { display: none; }
+  details.ex summary .caret { color: var(--accent); transition: transform .2s; }
+  details.ex[open] summary .caret { transform: rotate(90deg); }
+  details.ex .body { padding: 0 18px 18px; border-top: 1px solid var(--border); }
+  table.tbl { width: 100%; border-collapse: collapse; margin: 14px 0 4px; font-size: 14px; }
+  table.tbl th, table.tbl td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  table.tbl th { color: var(--faint); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  table.tbl td.r { color: #fda4b0; } table.tbl td.a { color: #6ee7b7; }
+  code { font-family: ui-monospace, Menlo, monospace; background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-size: 0.9em; }
+
+  /* video */
+  .video { position: relative; display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin: 26px 0; transition: border-color .2s; }
+  .video:hover { border-color: var(--accent-dim); }
+  .video .play { width: 52px; height: 52px; border-radius: 50%; background: rgba(45,212,167,.14); border: 1px solid var(--accent-dim); display: grid; place-items: center; flex-shrink: 0; color: var(--accent); font-size: 18px; }
+  .video .vmeta small { color: var(--faint); font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; }
+  .video .vmeta div { font-weight: 620; margin-top: 2px; }
+
+  /* quiz */
+  .quiz { background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--border); border-radius: 16px; padding: 22px; margin: 30px 0; }
+  .quiz .hd { display: flex; align-items: center; gap: 8px; font-weight: 660; font-size: 17px; margin-bottom: 3px; }
+  .quiz .hd .ico { color: var(--amber); }
+  .quiz > p.q { font-weight: 560; margin: 14px 0 12px; font-size: 16px; }
+  .opts { display: flex; flex-direction: column; gap: 9px; }
+  .opt { text-align: left; background: var(--bg); border: 1px solid var(--border); color: var(--ink); border-radius: 11px; padding: 12px 14px; font-size: 15px; cursor: pointer; transition: border-color .15s, background .15s; display: flex; align-items: center; gap: 10px; }
+  .opt:hover:not(:disabled) { border-color: var(--accent-dim); }
+  .opt .mk { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--faint); flex-shrink: 0; display: grid; place-items: center; font-size: 12px; }
+  .opt.correct { border-color: var(--ok); background: rgba(52,211,153,.1); }
+  .opt.correct .mk { border-color: var(--ok); color: var(--ok); }
+  .opt.wrong { border-color: var(--rose); background: rgba(251,113,133,.1); }
+  .opt.wrong .mk { border-color: var(--rose); color: var(--rose); }
+  .fb { margin-top: 12px; font-size: 14.5px; padding: 12px 14px; border-radius: 11px; display: none; }
+  .fb.show { display: block; }
+  .fb.right { background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); color: #a7f3d0; }
+  .fb.no { background: rgba(251,191,72,.1); border: 1px solid rgba(251,191,72,.3); color: #fcd77f; }
+
+  /* takeaways */
+  .takeaways { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; margin: 32px 0; }
+  .takeaways h3 { margin: 0 0 12px; font-size: 15px; letter-spacing: .02em; }
+  .takeaways ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .takeaways li { padding-left: 26px; position: relative; font-size: 15px; }
+  .takeaways li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 700; }
+
+  /* complete */
+  .complete { text-align: center; margin: 40px 0 0; }
+  .cbtn { position: relative; background: var(--accent); color: #04120d; border: none; font-weight: 700; font-size: 16px; padding: 15px 34px; border-radius: 14px; cursor: pointer; transition: transform .12s, filter .2s; }
+  .cbtn:hover { filter: brightness(1.06); } .cbtn:active { transform: scale(.97); }
+  .cbtn.done { background: var(--surface); color: var(--accent); border: 1px solid var(--accent-dim); cursor: default; }
+  .next { display: flex; justify-content: space-between; gap: 12px; margin-top: 26px; }
+  .next a { flex: 1; text-decoration: none; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; transition: border-color .2s; }
+  .next a:hover { border-color: var(--accent-dim); }
+  .next small { color: var(--faint); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; font-family: ui-monospace, Menlo, monospace; }
+  .next div { font-weight: 620; margin-top: 3px; color: var(--ink); }
+  .next .r { text-align: right; }
+
+  .note-banner { font-size: 12.5px; color: var(--faint); text-align: center; border-top: 1px solid var(--border); margin-top: 46px; padding-top: 18px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto; } }
+</style>
+
+<div class="progress-top"><i id="pbar"></i></div>
+
+<div class="shell">
+  <div class="topbar">
+    <div class="crumb">Notes · <b>QA &amp; Manual Testing</b> · Test design techniques</div>
+    <div class="stats">
+      <span class="chip streak">🔥 3-day streak</span>
+      <span class="chip xp">✦ <span id="xpval">120</span> XP</span>
+    </div>
+  </div>
+
+  <h1>Boundary Value Analysis</h1>
+  <div class="meta">
+    <span class="lvl">● Core QA</span>
+    <span>⏱ 6 min read</span>
+    <span>Topic 2 of 4 · Test design</span>
+  </div>
+
+  <div class="hook">
+    Most bugs don't hide in the middle of a range — they lurk right at the <b>edges</b>.
+    Off-by-one, <code>&lt;</code> vs <code>&lt;=</code>, the "1" and the "100". Learn to hunt the edges and
+    you'll find bugs other testers walk straight past.
+  </div>
+
+  <p class="lead">Boundary Value Analysis (BVA) is a test-design technique that targets the
+    <em>edges</em> of input ranges, because that's where developers make mistakes.</p>
+
+  <div class="callout analogy">
+    <span class="ico">🏙️</span>
+    <div><b>Real-life analogy.</b> Think of a speed limit sign that says <b>60</b>. The interesting
+      moments aren't driving at 40 — they're at <b>59, 60, and 61</b>. That's exactly where a ticket
+      is or isn't issued. BVA tests those three numbers instead of every speed on the road.</div>
+  </div>
+
+  <h2>The idea, in one picture</h2>
+  <p>For a field that accepts <b>1 to 100</b>, you don't test every value. You test the boundaries
+    and the values just inside and outside them:</p>
+
+  <figure>
+    <canvas id="numline" width="1400" height="300" aria-label="Number line showing boundary values"></canvas>
+    <figcaption>The six values worth testing around a 1–100 range.</figcaption>
+    <button class="fig-btn" id="animBtn" type="button">▶ Animate the boundaries</button>
+  </figure>
+
+  <div class="tryit">
+    <div class="hd"><span class="tag">Try it</span> Boundary explorer</div>
+    <p class="sub">Type any min and max — the note figures out exactly which values you should test.</p>
+    <div class="inputs">
+      <div class="field"><label>Minimum</label><input id="minIn" type="number" value="1"></div>
+      <div class="field"><label>Maximum</label><input id="maxIn" type="number" value="100"></div>
+    </div>
+    <div class="vals" id="vals"></div>
+  </div>
+
+  <h2>A worked example</h2>
+  <p>Say an age field accepts <b>18–65</b>. Here's the full boundary test set a strong tester writes:</p>
+
+  <details class="ex" open>
+    <summary><span class="caret">▶</span> Boundary test cases for “age 18–65”</summary>
+    <div class="body">
+      <table class="tbl">
+        <thead><tr><th>Value</th><th>Position</th><th>Expected</th></tr></thead>
+        <tbody>
+          <tr><td>17</td><td>just below min</td><td class="r">Rejected</td></tr>
+          <tr><td>18</td><td>minimum</td><td class="a">Accepted</td></tr>
+          <tr><td>19</td><td>just inside min</td><td class="a">Accepted</td></tr>
+          <tr><td>64</td><td>just inside max</td><td class="a">Accepted</td></tr>
+          <tr><td>65</td><td>maximum</td><td class="a">Accepted</td></tr>
+          <tr><td>66</td><td>just above max</td><td class="r">Rejected</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <div class="callout tip">
+    <span class="ico">💡</span>
+    <div><b>Pro tip.</b> BVA pairs with <a href="#">Equivalence Partitioning</a>: partitioning tells you
+      <em>which ranges</em> exist, BVA tells you <em>which points</em> in them are riskiest.</div>
+  </div>
+
+  <a class="video" href="https://www.youtube.com/results?search_query=boundary+value+analysis" target="_blank" rel="noopener">
+    <span class="play">▶</span>
+    <span class="vmeta"><small>Watch · 4 min</small><div>Boundary Value Analysis, explained visually</div></span>
+  </a>
+
+  <div class="quiz" id="quiz">
+    <div class="hd"><span class="ico">🧠</span> Quick check</div>
+    <p class="q">A field accepts values <b>10 to 50</b>. Which set best follows BVA?</p>
+    <div class="opts" id="opts">
+      <button class="opt" data-ok="0"><span class="mk"></span> 10, 20, 30, 40, 50</button>
+      <button class="opt" data-ok="1"><span class="mk"></span> 9, 10, 11, 49, 50, 51</button>
+      <button class="opt" data-ok="0"><span class="mk"></span> 0, 25, 100</button>
+    </div>
+    <div class="fb" id="fb"></div>
+  </div>
+
+  <div class="takeaways">
+    <h3>Key takeaways</h3>
+    <ul>
+      <li>Bugs cluster at boundaries — test the edge, and one step either side of it.</li>
+      <li>For a range L–U, test: <code>L−1, L, L+1, U−1, U, U+1</code>.</li>
+      <li>Always test invalid boundaries too — that's where missing validation shows.</li>
+      <li>Use BVA together with Equivalence Partitioning for full, efficient coverage.</li>
+    </ul>
+  </div>
+
+  <div class="complete">
+    <button class="cbtn" id="doneBtn" type="button">Mark complete · +10 XP</button>
+    <div class="next">
+      <a href="#"><small>← Previous</small><div>Equivalence partitioning</div></a>
+      <a href="#" class="r"><small>Next →</small><div>Decision tables</div></a>
+    </div>
+  </div>
+
+  <p class="note-banner">This is a <b>sample</b> of the note format — every topic in the wiki would be built like this:
+    hook → analogy → figure → try-it → example → video → quiz → takeaways → XP. Tell me what to add or change.</p>
+</div>
+
+<script>
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // reading progress
+  var pbar = document.getElementById("pbar");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    pbar.style.width = Math.min(100, Math.max(0, pct)) + "%";
+  });
+
+  // number-line figure
+  var cv = document.getElementById("numline"), ctx = cv.getContext("2d");
+  var reveal = reduce ? 6 : 0;
+  function draw() {
+    var W = cv.width, H = cv.height; ctx.clearRect(0, 0, W, H);
+    var y = H * 0.55, x0 = 90, x1 = W - 90;
+    // base line
+    ctx.strokeStyle = "#2a3336"; ctx.lineWidth = 4; ctx.beginPath();
+    ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
+    // accepted band (1..100 mapped inside)
+    var pts = [
+      {t:"0",  x: x0 + 40,  ok:false, lbl:"below"},
+      {t:"1",  x: x0 + 130, ok:true,  lbl:"min"},
+      {t:"2",  x: x0 + 220, ok:true,  lbl:"inside"},
+      {t:"99", x: x1 - 220, ok:true,  lbl:"inside"},
+      {t:"100",x: x1 - 130, ok:true,  lbl:"max"},
+      {t:"101",x: x1 - 40,  ok:false, lbl:"above"}
+    ];
+    // valid band
+    ctx.strokeStyle = "rgba(45,212,167,.5)"; ctx.lineWidth = 8; ctx.beginPath();
+    ctx.moveTo(pts[1].x, y); ctx.lineTo(pts[4].x, y); ctx.stroke();
+    for (var i = 0; i < pts.length; i++) {
+      if (i >= reveal) continue;
+      var p = pts[i];
+      ctx.beginPath(); ctx.arc(p.x, y, 15, 0, Math.PI * 2);
+      ctx.fillStyle = p.ok ? "#2dd4a7" : "#fb7185"; ctx.fill();
+      ctx.fillStyle = "#0a0d0e"; ctx.font = "bold 22px ui-monospace, monospace";
+      ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(p.t, p.x, y);
+      ctx.fillStyle = p.ok ? "#6ee7b7" : "#fda4b0"; ctx.font = "600 15px system-ui";
+      ctx.fillText(p.lbl, p.x, y - 34);
+      ctx.fillStyle = p.ok ? "#6ee7b7" : "#fda4b0"; ctx.font = "700 13px system-ui";
+      ctx.fillText(p.ok ? "accept" : "reject", p.x, y + 40);
+    }
+  }
+  draw();
+  document.getElementById("animBtn").addEventListener("click", function () {
+    if (reduce) { reveal = 6; draw(); return; }
+    reveal = 0; draw();
+    var iv = setInterval(function () { reveal++; draw(); if (reveal >= 6) clearInterval(iv); }, 320);
+  });
+
+  // try-it explorer
+  var minIn = document.getElementById("minIn"), maxIn = document.getElementById("maxIn"), vals = document.getElementById("vals");
+  function explore() {
+    var lo = parseInt(minIn.value, 10), hi = parseInt(maxIn.value, 10); vals.innerHTML = "";
+    if (isNaN(lo) || isNaN(hi) || hi <= lo) { vals.innerHTML = '<span style="color:var(--faint);font-size:14px">Enter a valid min &lt; max…</span>'; return; }
+    var set = [
+      {v: lo - 1, ok:false, l:"below"}, {v: lo, ok:true, l:"min"}, {v: lo + 1, ok:true, l:"inside"},
+      {v: hi - 1, ok:true, l:"inside"}, {v: hi, ok:true, l:"max"}, {v: hi + 1, ok:false, l:"above"}
+    ];
+    set.forEach(function (s) {
+      var d = document.createElement("div");
+      d.className = "val " + (s.ok ? "accept" : "reject");
+      d.innerHTML = s.v + "<small>" + s.l + "</small>";
+      vals.appendChild(d);
+    });
+  }
+  minIn.addEventListener("input", explore); maxIn.addEventListener("input", explore); explore();
+
+  // quiz
+  var answered = false;
+  document.querySelectorAll("#opts .opt").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (answered) return; answered = true;
+      var ok = btn.getAttribute("data-ok") === "1";
+      document.querySelectorAll("#opts .opt").forEach(function (b) {
+        b.disabled = true;
+        if (b.getAttribute("data-ok") === "1") { b.classList.add("correct"); b.querySelector(".mk").textContent = "✓"; }
+      });
+      if (!ok) { btn.classList.add("wrong"); btn.querySelector(".mk").textContent = "✕"; }
+      var fb = document.getElementById("fb");
+      fb.className = "fb show " + (ok ? "right" : "no");
+      fb.innerHTML = ok
+        ? "<b>Exactly right.</b> You hit each boundary (10, 50) plus one value on each side — that's textbook BVA."
+        : "<b>Not quite.</b> BVA needs the edges <em>and</em> one step either side: <b>9, 10, 11, 49, 50, 51</b>.";
+      if (ok) addXp(5);
+    });
+  });
+
+  // xp + complete
+  var xpEl = document.getElementById("xpval");
+  function addXp(n) {
+    var cur = parseInt(xpEl.textContent, 10), target = cur + n, t0 = null;
+    if (reduce) { xpEl.textContent = target; return; }
+    function step(ts) { if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / 500);
+      xpEl.textContent = Math.round(cur + (target - cur) * k); if (k < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  var done = false, dBtn = document.getElementById("doneBtn");
+  dBtn.addEventListener("click", function () {
+    if (done) return; done = true;
+    dBtn.classList.add("done"); dBtn.textContent = "✓ Completed · +10 XP earned";
+    addXp(10); burst();
+  });
+  function burst() {
+    if (reduce) return;
+    var r = dBtn.getBoundingClientRect();
+    var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var colors = ["#2dd4a7", "#f5b948", "#a78bfa", "#34d399"];
+    for (var i = 0; i < 26; i++) {
+      var s = document.createElement("span"); s.textContent = "✦";
+      s.style.cssText = "position:fixed;left:" + cx + "px;top:" + cy + "px;pointer-events:none;z-index:99;font-size:" +
+        (10 + Math.random() * 10) + "px;color:" + colors[i % 4] + ";transition:transform 1s ease-out,opacity 1s;";
+      document.body.appendChild(s);
+      (function (el) {
+        requestAnimationFrame(function () {
+          var a = Math.random() * Math.PI * 2, d = 60 + Math.random() * 90;
+          el.style.transform = "translate(" + Math.cos(a) * d + "px," + (Math.sin(a) * d + 40) + "px) rotate(" + (Math.random()*360) + "deg)";
+          el.style.opacity = "0";
+        });
+        setTimeout(function () { el.remove(); }, 1050);
+      })(s);
+    }
+  }
+</script>
+</body></html>
