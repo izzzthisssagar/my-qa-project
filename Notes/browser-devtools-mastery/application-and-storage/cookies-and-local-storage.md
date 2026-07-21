@@ -1,0 +1,313 @@
+---
+title: "Cookies & local storage"
+tags: ["browser-devtools-mastery", "application-and-storage", "track-c"]
+updated: "2026-07-14"
+---
+
+# Cookies & local storage
+
+*The Application panel's cookies table is a tester's read-out: name, value, domain, path, expiry, HttpOnly, Secure, SameSite — each column a claim worth checking. Plus localStorage vs sessionStorage, and editing stored values to force app states on demand.*
+
+> You already met the **session** in the accounts note — the wristband the server staples to your
+> browser at login so you don't retype your password every click. This note opens the drawer where
+> that wristband is actually kept, and shows you the label printed on it. Press **F12**, open
+> **Application → Storage → Cookies**, and there it is: a spreadsheet of every little text tag the site
+> has slapped on you, with a column for each promise it made. Most testers glance at this table and
+> close it. You're about to learn to *read* it — because every one of those columns is a claim a
+> developer made about safety and behaviour, and half of them are wrong more often than anyone admits.
+
+> **In real life**
+>
+> A cookie is a **coat-check tag**, and the cookies table is the cloakroom ledger. When you hand over
+> your coat (log in), you get a numbered tag; every time you want your coat back, you show the tag and
+> nobody re-asks your name. Now read the fine print on the tag. **HttpOnly** is a tag the attendant
+> keeps behind the counter where your sticky fingers (JavaScript) can't reach it. **Secure** is a tag
+> that's only valid inside the armoured van (an https connection) and worthless out on the street.
+> **SameSite** is a tag stamped 'this cloakroom only' — so when a *different* shop across the road
+> tries to wave your tag and grab your coat, the attendant refuses. The tester's job is to walk the
+> ledger and check every tag actually carries the stamps it should.
+
+**cookie**: A small named piece of text a website asks your browser to store and then send back automatically on every later request to that same site. Cookies are how a site remembers you between clicks and page loads, most importantly your logged-in session. Each cookie has a name and value plus attributes that control it: which domain and path it belongs to, when it expires, and the safety flags HttpOnly, Secure and SameSite. In DevTools they live under Application → Storage → Cookies, one row per cookie, one column per attribute.
+
+## Reading the cookies table like a tester
+
+The cookies table has one row per cookie and a column for every attribute, and a tester reads it
+left to right as a list of claims. **Name and Value** are the obvious pair — a session cookie is
+often called `session`, `sid`, or `auth`, and its value is the opaque token that IS your wristband.
+**Domain and Path** answer *where this cookie is sent*: domain `example.com` versus `.example.com`
+(the leading dot includes subdomains) changes who receives it, and path `/admin` means the cookie
+only rides on requests under that path. Get these wrong and you get either a cookie that leaks to
+places it shouldn't, or a login that mysteriously doesn't 'stick' on one section of the site.
+
+**Expires / Max-Age** is the lifespan. A blank expiry means a *session cookie* that dies when the
+browser closes; a real date means it survives restarts (this is the 'remember me' long wristband).
+Then the three flags that decide whether the whole thing is safe. **HttpOnly** on means JavaScript
+cannot read the cookie via `document.cookie` — so if the site has a cross-site-scripting hole,
+attacker script still can't scrape the session token. **Secure** on means the browser only sends the
+cookie over https, never plain http, so it can't be sniffed on open Wi-Fi (the padlock note's
+armoured tunnel). **SameSite** — `Strict`, `Lax`, or `None` — decides whether the cookie tags along
+on requests that a *different* site kicked off, which is the whole story behind cross-site request
+forgery. For a session cookie the tester's expectation is blunt: HttpOnly on, Secure on, SameSite
+`Lax` or `Strict`. Anything less on a cookie that carries a login is a defect worth writing up.
+
+Cookies are not the only drawer. Right below them sit **Local Storage** and **Session Storage** —
+the same idea the JavaScript note flagged as 'where stale-state bugs breed'. Both store plain
+`key: value` text (never sent to the server automatically, unlike cookies), but they differ in
+lifespan. **localStorage** persists forever until code or a human deletes it — close the tab,
+reboot the laptop, it's still there next week. **sessionStorage** is wiped the moment you close the
+tab, and — the detail everyone forgets — it is *per-tab*: two tabs of the same site have separate
+sessionStorage, so a bug that only reproduces 'in a second tab' often lives right here.
+
+![A wall of numbered brass safe-deposit boxes (412, 413, 414) in a historic bank vault, each closed box showing only its number and a twin-pin lock, with box 413 pulled fully open to reveal an inner metal container with its own separate lock and handle](cookies-and-local-storage.jpg)
+*Safe-deposit boxes, Petschkův Palác vault, Prague — Wikimedia Commons, CC0 (Mojmír Churavý)*
+- **Box 413, pulled open = actually inspecting the value** — Every closed box in this wall looks identical - a number and a lock, nothing more. Only pulling 413 open reveals what's really inside. That's a cookie's Name column versus its Value: the name is the label on the outside, but you never know what's actually stored until you open DevTools and look. Most testers read the label and stop; the bug is always inside the box.
+- **The twin-pin lock = HttpOnly and Secure, two separate gates** — One lock, two distinct pin cylinders side by side - both have to release before this box opens at all. That's exactly how HttpOnly and Secure stack: HttpOnly locks out page JavaScript, Secure locks out plain http. A cookie carrying a login needs BOTH pins turned, and a blank HttpOnly is a lock quietly missing one of its pins.
+- **Box 412's number, nothing else visible = what a cookie shows before you open it** — From the outside, box 412 tells you exactly one thing: its number. Not what's inside, not who else can open it, not how long it's been sitting there. That's the whole reason the cookies table matters - each row LOOKS like just a name, and every other column (domain, path, expiry, the safety flags) is invisible until you go looking, same as this box.
+- **Box 414, sequential and identical in form = one row per cookie** — 412, 413, 414 - same size, same lock, same wall, differing only by number. The cookies table works the same way: one row per cookie, same columns every time, and the only way to tell them apart at a glance is the Name column. Scanning a long cookie table is exactly like scanning this wall - fast, systematic, and each one deserves the same check.
+- **The brass frame between columns = Domain and Path scoping** — That vertical strip is a real partition - boxes on one side of it are a physically separate group from boxes on the other. Domain and Path do the same job logically: they decide which requests a cookie rides on. A cookie scoped to the wrong domain or path is a box whose contents never reach the vault section that actually needed them.
+
+**A cookie's life — from Set-Cookie to the Application panel — press Play**
+
+1. **Login response carries Set-Cookie** — You submit the login form. The server's response includes a header like Set-Cookie: sessionid=abc123; HttpOnly; Secure; SameSite=Lax. You can see this exact header in the Network tab on the login request's Response Headers. This single line is the birth certificate of the wristband — every attribute you'll later read in the table is decided right here.
+2. **The browser files it in the cookie jar** — The browser reads that header and stores the cookie, attributes and all, in its per-site cookie store. Nothing is on screen yet — the drawer just got a new tag. This is the moment the Application panel is built to show you: open Application -> Storage -> Cookies and the new row appears, one column per attribute the server set.
+3. **Every later request carries it back** — From now on the browser AUTOMATICALLY attaches the cookie to matching requests — same domain, matching path, https if Secure, and only same-site unless SameSite allows otherwise. This is why you click around logged in without re-entering anything. In the Network tab, each request's Request Headers shows the Cookie header doing exactly this, silently, thousands of times.
+4. **You read it — and judge it — in the table** — The tester opens the cookies table and reads the row as a checklist: session cookie present, HttpOnly ticked, Secure ticked, SameSite Lax or Strict, expiry matching the remember-me choice. Any gap is a written-up finding. This is the whole skill: the table turns invisible server decisions into a spreadsheet you can audit line by line.
+5. **You edit it to break things on purpose** — Double-click a value, change it, reload — or delete the row entirely. Delete the session cookie and reload: you're logged out, because the wristband is gone. Tamper with the value and reload: a well-built app rejects the now-invalid token and logs you out cleanly; a broken one throws a 500 or, worse, trusts it. Editing storage is how you test states you can't reach by clicking.
+
+Time to make it runnable. Here is a tiny cookie auditor in Python — hand it a `Set-Cookie` header the
+way you'd read a row in the table, and it flags the risky flags for you. Read the output comments to
+see it judge a locked-down session cookie, a dangerously bare one, and a harmless preference cookie:
+
+*Run it — a cookie flag auditor (Python)*
+
+```python
+# Read a Set-Cookie header the way a tester reads the Application panel,
+# and flag the cookies whose safety stamps are missing.
+
+def audit(header):
+    parts = [p.strip() for p in header.split(';')]
+    name = parts[0].split('=')[0]
+    flags = [p.lower() for p in parts[1:]]
+    has_secure = any(f == 'secure' for f in flags)
+    has_httponly = any(f == 'httponly' for f in flags)
+    samesite = 'NONE (unset)'
+    for p in parts[1:]:
+        if p.lower().startswith('samesite='):
+            samesite = p.split('=')[1]
+
+    risks = []
+    if not has_httponly:
+        risks.append('no HttpOnly -> page JavaScript can read it; an XSS hole can steal the session')
+    if not has_secure:
+        risks.append('no Secure -> it rides along over plain http, sniffable on open Wi-Fi')
+    if samesite.upper().startswith('NONE'):
+        risks.append('SameSite None/unset -> attached on cross-site requests; CSRF surface')
+    return name, has_secure, has_httponly, samesite, risks
+
+cookies = [
+    'sessionid=abc123XYZ; Path=/; HttpOnly; Secure; SameSite=Lax',   # the good one
+    'sessionid=abc123XYZ; Path=/',                                    # the scary one
+    'theme=dark; Path=/; Max-Age=31536000',                          # low-stakes preference
+]
+
+for c in cookies:
+    name, sec, http, ss, risks = audit(c)
+    print('cookie:', name, '| Secure:', sec, '| HttpOnly:', http, '| SameSite:', ss)
+    if risks:
+        for r in risks:
+            print('   RISK:', r)
+    else:
+        print('   looks locked down')
+    print()
+
+# cookie: sessionid | Secure: True | HttpOnly: True | SameSite: Lax
+#    looks locked down
+#
+# cookie: sessionid | Secure: False | HttpOnly: False | SameSite: NONE (unset)
+#    RISK: no HttpOnly -> page JavaScript can read it; an XSS hole can steal the session
+#    RISK: no Secure -> it rides along over plain http, sniffable on open Wi-Fi
+#    RISK: SameSite None/unset -> attached on cross-site requests; CSRF surface
+#
+# cookie: theme | Secure: False | HttpOnly: False | SameSite: NONE (unset)
+#    RISK: no HttpOnly -> page JavaScript can read it; an XSS hole can steal the session
+#    RISK: no Secure -> it rides along over plain http, sniffable on open Wi-Fi
+#    RISK: SameSite None/unset -> attached on cross-site requests; CSRF surface
+```
+
+The same auditor in Java — note it flags the `theme` cookie identically to the bare session cookie,
+which is the point of the tip below: the *tool* judges flags, but the *tester* judges consequences.
+
+*Run it — a cookie flag auditor (Java)*
+
+```java
+import java.util.*;
+
+class Main {
+    static List<String> audit(String header) {
+        String[] parts = header.split(";");
+        String name = parts[0].trim().split("=")[0];
+        boolean secure = false, httpOnly = false;
+        String sameSite = "NONE (unset)";
+        for (int i = 1; i < parts.length; i++) {
+            String p = parts[i].trim();
+            String low = p.toLowerCase();
+            if (low.equals("secure")) secure = true;
+            if (low.equals("httponly")) httpOnly = true;
+            if (low.startsWith("samesite=")) sameSite = p.substring(p.indexOf('=') + 1);
+        }
+        List<String> out = new ArrayList<>();
+        out.add(name);
+        out.add(String.valueOf(secure));
+        out.add(String.valueOf(httpOnly));
+        out.add(sameSite);
+        if (!httpOnly) out.add("no HttpOnly -> page JavaScript can read it; an XSS hole can steal the session");
+        if (!secure) out.add("no Secure -> it rides along over plain http, sniffable on open Wi-Fi");
+        if (sameSite.toUpperCase().startsWith("NONE")) out.add("SameSite None/unset -> attached on cross-site requests; CSRF surface");
+        return out;
+    }
+
+    public static void main(String[] args) {
+        String[] cookies = {
+            "sessionid=abc123XYZ; Path=/; HttpOnly; Secure; SameSite=Lax",
+            "sessionid=abc123XYZ; Path=/",
+            "theme=dark; Path=/; Max-Age=31536000"
+        };
+        for (String c : cookies) {
+            List<String> r = audit(c);
+            System.out.println("cookie: " + r.get(0) + " | Secure: " + r.get(1)
+                + " | HttpOnly: " + r.get(2) + " | SameSite: " + r.get(3));
+            if (r.size() > 4)
+                for (int i = 4; i < r.size(); i++) System.out.println("   RISK: " + r.get(i));
+            else
+                System.out.println("   looks locked down");
+            System.out.println();
+        }
+    }
+}
+// cookie: sessionid | Secure: true | HttpOnly: true | SameSite: Lax
+//    looks locked down
+//
+// cookie: sessionid | Secure: false | HttpOnly: false | SameSite: NONE (unset)
+//    RISK: no HttpOnly -> page JavaScript can read it; an XSS hole can steal the session
+//    RISK: no Secure -> it rides along over plain http, sniffable on open Wi-Fi
+//    RISK: SameSite None/unset -> attached on cross-site requests; CSRF surface
+//
+// cookie: theme | Secure: false | HttpOnly: false | SameSite: NONE (unset)
+//    RISK: (same three lines — the tool can't tell theme from a session token)
+```
+
+> **Tip**
+>
+> Not every cookie needs every stamp — **match the flags to the stakes.** A `theme=dark` cookie
+> leaking to JavaScript is a shrug; the same gap on the session cookie is a breach, because that token
+> IS the login. So when you read the table, sort by importance in your head: find the cookie that
+> carries authentication first (the one that vanishing logs you out), and hold *that* one to the strict
+> standard — HttpOnly on, Secure on, SameSite `Lax` or `Strict`. Preference cookies get a lighter
+> touch. The auditor above flags flags blindly; your value as a tester is knowing which missing flag is
+> a filed bug and which is a footnote.
+
+### Your first time: Your mission: read your own session, then break it
+
+- [ ] Open the drawer — On any site you're logged into, press F12, open Application, and in the left sidebar under Storage click Cookies, then the site's origin. The table appears — one row per cookie, columns for every attribute. Widen the panel so you can see HttpOnly, Secure and SameSite; they're easy to miss squeezed off the right edge.
+- [ ] Find the wristband — Look for a cookie named session, sid, auth, or similar with a long opaque value — that's almost certainly your session token. Confirm it: note its value, then in another test log out and back in, and check the value CHANGED. A session cookie whose value never rotates on re-login is worth a second look.
+- [ ] Audit its three flags — On that session cookie, read HttpOnly, Secure and SameSite across the row. Ticked, ticked, Lax-or-Strict is the pass. Any blank on a login cookie is a finding — write down which flag and on which cookie, exactly as the auditor prints it.
+- [ ] Delete it and reload — Right-click the session cookie row, Delete, then reload the page. You should be logged out, because you just cut the wristband off. This proves to yourself that the cookie IS the login — no magic, one row of text.
+- [ ] Compare local vs session storage — Under Storage, click Local Storage then Session Storage for the same origin. Note what each holds. Open a SECOND tab of the same site: Local Storage is shared, Session Storage is separate per tab. That per-tab split is the source of many 'only happens in a new tab' bugs.
+
+You've now located your own session token, judged its safety flags, proved deleting it logs you out, and seen the local-vs-session storage split with your own eyes — the exact moves a tester makes on a real auth review.
+
+- **The session cookie has no HttpOnly flag (the column is blank).**
+  This is a real, high-value finding — file it. Without HttpOnly, page JavaScript can read the token via document.cookie, so any cross-site-scripting hole anywhere on the site becomes a full session-theft. The fix is server-side: set HttpOnly on the auth cookie. As a tester you don't fix it, you evidence it — screenshot the row, name the cookie, and note that the token is script-readable.
+- **Login works on the main site but you're mysteriously logged out inside one section.**
+  Read the Domain and Path columns. A cookie scoped to Path=/app is not sent on requests under /admin, so that section sees no session and bounces you to login. Same story if Domain is set too narrowly for a subdomain. The mismatch is visible in the table — compare the cookie's path/domain against the URL of the section that logs you out.
+- **A change you made (theme, cart, draft) survives a browser restart when it shouldn't — or vanishes when it shouldn't.**
+  You're looking at the wrong storage lifespan. localStorage persists across restarts; sessionStorage dies with the tab; a session cookie dies when the browser closes; a dated cookie survives. If a 'temporary' choice sticks forever, it was written to localStorage or a long cookie by mistake. Open the relevant store, find the key, and check where the value actually lives against where the spec says it should.
+- **Editing a cookie value and reloading throws a 500 or shows a broken page instead of logging you out.**
+  The app trusts the token without validating it. A robust app treats a tampered or unknown session cookie as 'not logged in' and shows the login page cleanly; a fragile one tries to use the garbage token, hits a lookup that returns nothing, and crashes. Reproduce by corrupting one character of the value and reloading — a clean logout passes, a 500 or a leaked stack trace is a bug.
+
+### Where to check
+
+Cookies and web storage sit underneath a surprising amount of the UI you test, and each spot has a
+signature failure:
+
+- **Login and logout flows** — after login the session cookie must appear; after logout it (and the server session) must be gone. A logout that clears local state but leaves the cookie alive is the pocketed-wristband bug from the accounts note, visible right here.
+- **Remember-me checkboxes** — tick it and the cookie should get a future expiry; leave it unticked and the cookie should be session-scoped (blank expiry). The Expires column is the receipt that proves the checkbox does what its label claims.
+- **Any 'saved locally' feature** — drafts, cart, recently viewed, theme, cookie-consent choice. These live in localStorage or cookies; test that they persist (or don't) exactly as promised, across reload, restart, and a second tab.
+- **Multi-tab behaviour** — because sessionStorage is per-tab and localStorage is shared, features that sync (or fail to sync) across tabs expose bugs you'll only see with two tabs open. Log out in one tab and watch the other.
+- **Security review of auth cookies** — HttpOnly, Secure, SameSite on the session cookie. Three columns, one glance, and one of the highest-signal manual checks you can make on any authenticated app.
+
+Tester's habit: **every column in the cookies table is a claim, and the table is free evidence.**
+When behaviour around login, persistence, or 'it remembered me' looks wrong, open the drawer and
+read the row before you guess — the answer is usually printed in a column you weren't looking at.
+
+### Worked example: the logout that didn't log out
+
+1. **The report:** "Security flagged it: on a shared library computer, a user logged out, walked away, and the next person hit Back and was still inside the first user's account. But our logout button definitely works — we tested it."
+2. **The tester reproduces it** with two things open at once: the page and the Application panel, Cookies selected. They log in — the session cookie appears. They click Logout — the page returns to the login screen, looking perfectly logged out.
+3. **But the tester reads the table instead of trusting the screen.** The session cookie is *still there*. Same name, same value, unchanged. The UI navigated to the login page, but the wristband was never cut.
+4. **They confirm the consequence directly.** With the cookie still present, they manually visit an account URL — and the app serves the logged-in page. The session is alive; only the front-end pretended otherwise.
+5. **Now the symptom explains itself.** Logout ran a client-side redirect to `/login` but never called the server endpoint that destroys the session and clears the cookie — exactly the missing `sessions.pop()` the accounts note warned about, one layer up. Back button, or any saved URL, walks straight back in.
+6. **The fix is server-side:** logout must invalidate the session server-side AND send a Set-Cookie that expires the cookie immediately, so both halves of the wristband are gone. The front-end redirect stays, but it can no longer be the *only* thing that happens.
+7. **The tester's angle.** The happy-path test passed because it checked the screen ('am I on the login page?') not the storage ('is the wristband actually gone?'). The bug was invisible to anyone who didn't open the cookies table — and glaring to anyone who did.
+8. **The lesson for a tester.** 'Logged out' is a claim about storage and the server, not about which page is showing. Verify logout by confirming the session cookie is gone from the table (and that a saved account URL now bounces to login), not by trusting the redirect. The screen is the easiest thing in the system to fake.
+
+> **Common mistake**
+>
+> Trusting the **screen** over the **storage**. The page says 'logged out', the form says 'saved',
+> the banner says 'preferences cleared' — and none of that is evidence, because the front-end can show
+> any words it likes regardless of what's really stored. The cookies and storage tables are the ground
+> truth: they show what the browser will actually send on the next request and what will actually
+> survive a reload. When a state-related claim ('you're logged out', 'we remembered you', 'it's saved')
+> matters, read the drawer. Testers who verify auth and persistence by looking at the UI alone ship the
+> logout-that-didn't-log-out — every single time.
+
+**Quiz.** You're reviewing a site's session cookie in the Application panel. Which single finding is the most serious to file?
+
+- [x] HttpOnly is blank on the session cookie — page JavaScript can read the token, so any XSS hole becomes full session theft
+- [ ] The cookie's Value is a long string of random-looking characters you can't decode
+- [ ] There is also a separate theme=dark cookie with no Secure flag
+- [ ] Local Storage contains a key called lastVisitedPage
+
+*A blank HttpOnly on the SESSION cookie is the serious one: it means document.cookie can read the login token, so a single cross-site-scripting bug anywhere on the site escalates into stealing users' sessions wholesale. The random-looking value is normal and good — session tokens are SUPPOSED to be opaque and unguessable; that's not a defect. The theme cookie missing Secure is low-stakes because it carries no authentication (the tip's whole point: match flags to consequences), and lastVisitedPage in localStorage is a harmless UI convenience. The skill on show is triage: the cookies table hands you many facts, and a tester's value is knowing that a missing safety flag ON THE COOKIE THAT CARRIES THE LOGIN outranks everything else in the row.*
+
+- **What is a cookie, in one breath?** — A small named piece of text the site asks your browser to store and send back automatically on every later request to that site. Its most important job is remembering your logged-in session — the wristband from the accounts note. Lives in Application -> Storage -> Cookies.
+- **The three safety flags on a session cookie** — HttpOnly (page JavaScript can't read it — blocks XSS theft), Secure (only sent over https — can't be sniffed), SameSite (Strict/Lax/None — controls whether it's sent on cross-site requests, the anti-CSRF control). Expected on any login cookie: HttpOnly on, Secure on, SameSite Lax or Strict.
+- **Domain and Path columns — what they control** — WHERE the cookie is sent. Domain: which hosts (a leading dot includes subdomains). Path: which URL prefix. A cookie scoped too narrowly makes login 'not stick' in one section; scoped too widely leaks it where it shouldn't go.
+- **localStorage vs sessionStorage** — Both store key:value text, never auto-sent to the server. localStorage persists across restarts until deleted; sessionStorage dies when the tab closes AND is separate per-tab. The per-tab split is behind many 'only in a new tab' bugs.
+- **Session cookie vs persistent cookie** — Session cookie has a blank Expires and dies when the browser closes. Persistent cookie has a real Expires/Max-Age date and survives restarts — the remember-me long wristband. The Expires column is the receipt for whether remember-me behaved as labelled.
+- **How to verify logout for real** — Don't trust the redirect to /login. Confirm the SESSION COOKIE is gone from the cookies table, and that visiting a saved account URL now bounces to login. A logout that clears the screen but leaves the cookie (or server session) alive is the pocketed-wristband bug.
+
+### Challenge
+
+On a site you're logged into: (1) find the session cookie and record its Name, Value, HttpOnly,
+Secure, SameSite, and Expires — write a one-line verdict on whether the three flags pass. (2) Change
+the theme or a preference, then hunt down where it was stored — cookie, localStorage, or
+sessionStorage — and say whether that lifespan matches how permanent the setting should be.
+(3) Delete the session cookie, reload, and confirm you're logged out. Finish with one sentence: why
+is reading the cookies table stronger evidence than reading the page when you're verifying a logout?
+
+### Ask the community
+
+> Cookie/storage question: I'm looking at `[a session cookie / a saved preference / localStorage vs sessionStorage]` on `[which flow]`. What I see in the table: name `[name]`, HttpOnly `[on/off/blank]`, Secure `[on/off]`, SameSite `[Strict/Lax/None/blank]`, Expires `[blank / a date]`. The behaviour that looks wrong: `[what happened]`. Is this a finding or expected?
+
+Most cookie questions resolve to two checks: does the SESSION cookie carry HttpOnly + Secure +
+SameSite (Lax or Strict), and does each stored value's LIFESPAN match its promise (session cookie /
+localStorage / sessionStorage)? Paste the row exactly as the table shows it, name which cookie
+carries the login, and say what behaviour looked wrong — the diagnosis is usually one of those two.
+
+- [Chrome DevTools — inspecting and editing cookies in the Application panel](https://developer.chrome.com/docs/devtools/application/cookies/)
+- [MDN — HTTP cookies: attributes, HttpOnly, Secure, SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
+- [MDN — Web Storage API: localStorage vs sessionStorage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
+- [Chrome DevTools Application tab deep dive - debug cookies, localStorage, and session issues](https://www.youtube.com/watch?v=doyvCCZd-Qk)
+
+🎬 [Chrome DevTools Application tab deep dive: cookies, localStorage, session issues](https://www.youtube.com/watch?v=doyvCCZd-Qk) (7 min)
+
+- The cookies table is a row-per-cookie, column-per-attribute read-out: Name, Value, Domain, Path, Expires, HttpOnly, Secure, SameSite. Read it left to right as a list of claims a developer made — and check them.
+- For any cookie carrying a login, the bar is blunt: HttpOnly on (blocks XSS theft), Secure on (blocks sniffing), SameSite Lax or Strict (blocks CSRF). A blank HttpOnly on the session cookie is one of the highest-value manual findings there is.
+- localStorage persists across restarts until deleted; sessionStorage dies with the tab and is separate per-tab. Match every stored value's lifespan to how permanent the setting is supposed to be — mismatches are stale-state bugs.
+- Editing or deleting stored values is a testing superpower: delete the session cookie to force a logged-out state, tamper a value to test how the app handles bad tokens, reach states you can't get to by clicking.
+- 'Logged out', 'saved', 'remembered' are claims about STORAGE, not about which page shows. Verify them in the drawer, not on the screen — the front-end can display any words it likes regardless of what's really stored.
+
+
+---
+_Source: `packages/curriculum/content/notes/browser-devtools-mastery/application-and-storage/cookies-and-local-storage.mdx`_

@@ -39,7 +39,8 @@ navigating — cheaper than searching.
 
 - `Curriculum/` — HTML curriculum maps + Python generators: master map, sample rich note, deep-dive additions (v3.1), gap check (v3.2)
 - `Product/notes-v3-previews/` — curriculum-map generator + note-template preview HTML (v3.1 delta, v3.2 final check)
-- `qa-mastery/packages/curriculum/content/notes/` — **204 `.mdx` notes across 20 modules** (the built curriculum; own repo)
+- `qa-mastery/packages/curriculum/content/notes/` — **906 `.mdx` notes, MAP COMPLETE (0 planned stubs)** across every taxonomy module (the built curriculum; own repo) — mirrored into this vault at [[Notes/index|Notes/]]
+- Live: `qa-mastery-platform.vercel.app` (pushed to `main`, deployed 2026-07-21)
 
 ## Marketing
 
@@ -48,6 +49,7 @@ navigating — cheaper than searching.
 
 ## Logs
 
+- [[Logs/2026-07-21|2026-07-21]] — **map complete**: 906/906 notes, pushed to GitHub, deployed live on Vercel, vault re-synced
 - [[2026-07-13]] — curriculum build sprint: M7 + M8 complete, M9 16/16, M10 11/20; 204 notes total; vault refresh
 - [[2026-07-10 — QA Mastery Notes v2 build]] — dev log: Notes v2 template locked, M1 20/20 + M2 ch1 live
 

@@ -1,0 +1,235 @@
+---
+title: "Given / When / Then"
+tags: ["bdd-with-cucumber", "bdd-in-plain-words", "track-d"]
+updated: "2026-07-16"
+---
+
+# Given / When / Then
+
+*Given sets the starting state, When triggers one specific action, Then names the expected result - three distinct jobs that keep a scenario readable, unambiguous, and honest about what it actually verifies.*
+
+> Given, When, Then aren't three interchangeable ways to say "and then." Each one has a specific,
+> different job - and a scenario that blurs them together (two Whens, an assertion buried inside a
+> Given) becomes exactly the kind of ambiguous document BDD exists to replace.
+
+> **In real life**
+>
+> A vending machine's entire operation is one clean three-stage sequence. It's sitting idle, stocked,
+> displaying "Have a nice day" - a specific starting state, established before anything happens. A
+> button is pressed for one specific item - a single, deliberate action. An item drops into the tray -
+> a specific, checkable result. Nobody presses two buttons expecting one coherent outcome, and nobody
+> mistakes the machine's idle display for the result of an action that hasn't happened yet.
+
+**Given / When / Then**: Given, When, Then are the three structural keywords of a Gherkin scenario, each with a distinct job. Given establishes the starting context or preconditions - the state of the world BEFORE the behavior being tested happens; it sets up, it does not assert. When describes the single action or event being specified - ideally exactly one, since a scenario testing two actions at once becomes ambiguous about which one caused a subsequent failure. Then describes the expected, checkable outcome that should result - what changed, and how to verify it. Additional And / But steps continue whichever of the three they follow, without changing its role.
+
+## What each keyword is actually for
+
+```gherkin
+Scenario: Withdrawing cash with sufficient funds
+  Given the account balance is $100
+  And the card is valid
+  When the account holder requests $20
+  Then the ATM should dispense $20
+  And the account balance should be $80
+```
+
+- **Given** — pure setup. States facts about the world as it exists before anything happens. A Given
+  step should never contain an assertion - it's establishing context, not checking anything yet.
+- **When** — the one action being specified. A scenario with two `When` steps is usually testing two
+  separate behaviors that would be clearer as two separate scenarios - if either one could fail
+  independently, they need to be told apart.
+- **Then** — the checkable, specific outcome. Vague ("the system behaves correctly") is not a Then;
+  specific ("the account balance should be $80") is.
+- **And / But** — pure continuations. `And` after a `Given` is still setup; `And` after a `Then` is
+  still an assertion. They don't introduce a new role, just extend the current one.
+
+> **Tip**
+>
+> If a scenario is hard to write with exactly one `When`, that's often a sign the underlying feature
+> itself does too much in one step - worth raising as a design question, not just a scenario-writing
+> problem to work around with a longer `When` block.
+
+> **Common mistake**
+>
+> Writing an assertion inside a `Given` step - for example, `Given the user is logged in and sees their
+> correct name displayed`. That buries a checkable expectation ("correct name displayed") inside what's
+> supposed to be pure setup, where a failure there gets misreported as a setup problem rather than the
+> actual behavior under test failing.
+
+![A full-size snack vending machine showing rows of visible snack products behind glass, a numeric keypad selector with a small display reading HAVE A NICE DAY on the right side panel, and a dispensing flap at the bottom](given-when-then.jpg)
+*Snack food vending machine — Wikimedia Commons, CC BY-SA 3.0 AU (Bidgee). [Source](https://commons.wikimedia.org/wiki/File:Snack_food_vending_machine.jpg)*
+- **The idle display — "Have a nice day" — the Given state** — Stocked, powered on, waiting - a specific, established state of the world before anything happens. Not an action, not a result, just the honest starting point.
+- **The keypad — the When** — One specific button press for one specific item - a single, deliberate action, the same discipline a scenario's one When step should have.
+- **The stocked rows of products — visible context, not the outcome** — What's available is part of the Given (the machine's stocked state) - it's not itself the result of anything, the same way listing preconditions in a Given step isn't asserting an outcome.
+- **The dispensing tray — the Then** — A specific, checkable result: did the item you selected actually land here? Not a vague 'something happened' - exactly what a good Then should verify.
+
+**One scenario, three distinct jobs**
+
+1. **Given: the account balance is $100** — Pure setup - a fact about the world, no assertion.
+2. **And: the card is valid** — Still setup - continues the Given's role.
+3. **When: the account holder requests $20** — The ONE action being specified.
+4. **Then: the ATM should dispense $20** — A specific, checkable outcome.
+5. **And: the account balance should be $80** — Still an assertion - continues the Then's role.
+
+Keeping setup, action, and verification in three distinct, non-overlapping roles is really just:
+tag each step with its job, and never let one step's tag do a different job's work. Here's that shape
+as a small, generic simulation.
+
+*Run it - enforce that each scenario step plays exactly one role (Python)*
+
+```python
+scenario = [
+    ("given", "account balance is $100"),
+    ("given", "card is valid"),
+    ("when", "account holder requests $20"),
+    ("then", "ATM should dispense $20"),
+    ("then", "account balance should be $80"),
+]
+
+def validate(scenario):
+    when_count = sum(1 for role, _ in scenario if role == "when")
+    if when_count != 1:
+        return f"INVALID: expected exactly 1 'when' step, found {when_count}"
+    if scenario[0][0] != "given":
+        return "INVALID: scenario should start with 'given' (setup)"
+    return "VALID: one setup phase, one action, one or more checkable outcomes"
+
+print(validate(scenario))
+
+bad_scenario = scenario + [("when", "the user also requests $10 more")]
+print(validate(bad_scenario))
+```
+
+Same role-validation shape in Java.
+
+*Run it - enforce that each scenario step plays exactly one role (Java)*
+
+```java
+import java.util.*;
+
+public class Main {
+    record Step(String role, String description) {}
+
+    static String validate(List<Step> scenario) {
+        long whenCount = scenario.stream().filter(s -> s.role().equals("when")).count();
+        if (whenCount != 1) {
+            return "INVALID: expected exactly 1 'when' step, found " + whenCount;
+        }
+        if (!scenario.get(0).role().equals("given")) {
+            return "INVALID: scenario should start with 'given' (setup)";
+        }
+        return "VALID: one setup phase, one action, one or more checkable outcomes";
+    }
+
+    public static void main(String[] args) {
+        List<Step> scenario = new ArrayList<>(List.of(
+            new Step("given", "account balance is $100"),
+            new Step("given", "card is valid"),
+            new Step("when", "account holder requests $20"),
+            new Step("then", "ATM should dispense $20"),
+            new Step("then", "account balance should be $80")
+        ));
+
+        System.out.println(validate(scenario));
+
+        List<Step> badScenario = new ArrayList<>(scenario);
+        badScenario.add(new Step("when", "the user also requests $10 more"));
+        System.out.println(validate(badScenario));
+    }
+}
+```
+
+### Your first time: Your mission: write one clean scenario, then deliberately break its structure
+
+- [ ] Pick a real, simple behavior you know well (logging in, adding an item to a cart) — Write it as a Given/When/Then scenario with exactly one When step.
+- [ ] Now deliberately add a second When step to the same scenario — Read it back - notice how it becomes unclear which action a subsequent failure would actually be about.
+- [ ] Now move one of your Then assertions up into the Given instead — Read it back again - notice how a real failure there would now misleadingly look like a setup problem.
+
+You've now felt directly why each keyword's distinct job matters, not just memorized the rule.
+
+- **A scenario has two or three When steps and it's unclear which one a failure is actually about.**
+  Split it into separate scenarios, one action each - if the actions are genuinely meant to happen together as one atomic behavior, consider whether they should be described as a single, more accurately-named action instead.
+- **A Given step is failing, and it's confusing why - the actual bug is elsewhere.**
+  Check whether that Given step secretly contains an assertion (a mistake covered above) - if setup itself can 'fail' in a way that reports as the actual test failing, the roles have blurred.
+- **A Then step is vague ("the system behaves correctly") and doesn't actually catch anything.**
+  Rewrite it to name a specific, observable fact - a value, a visible message, a state change - anything checkable that a person reading the scenario could verify by eye.
+- **Team members disagree about whether something belongs in Given or is really part of the action being tested.**
+  Ask: did this happen BEFORE the behavior under test, or is it part of what's actually being verified? If it's genuinely ambiguous, the scenario may be trying to test more than one thing at once.
+
+### Where to check
+
+- **The scenario's own step count by keyword** — more than one `When` (excluding `And`/`But`
+  continuations) is worth a second look every time.
+- **Whether a Given step contains a checkable claim** — the "should," "correct," or "expected" wording
+  pattern is a common tell that an assertion has drifted into setup.
+- **A failing step's reported keyword in the test runner's output** — a failure reported against a
+  `Given` step is unusual enough to be worth investigating specifically.
+- **Cucumber's official Gherkin reference** — the definitive source for exact keyword semantics and
+  edge cases (like keyword-independent step matching) beyond this note's scope.
+
+### Worked example: a two-When scenario split into two scenarios that actually explain their own failures
+
+1. An original scenario reads: "Given a logged-in user, When they add an item to their cart and then
+   apply a promo code, Then the discounted total should be correct."
+2. It starts failing. The failure message names the `Then` step, but doesn't make clear whether the
+   item-adding half or the promo-code half of the combined `When` actually broke.
+3. It's split into two scenarios: one verifying "adding an item updates the cart total" (one When: add
+   item), a second verifying "applying a valid promo code discounts the total" (one When: apply code,
+   with the cart already Given to contain an item).
+4. The next time something breaks, the failing scenario's NAME alone identifies which specific
+   behavior is broken - no need to read the failure message closely to guess.
+5. Total diagnosis time for future failures drops, because the scenario's own structure now carries
+   the information a combined scenario had been hiding.
+
+**Quiz.** A scenario is written as: 'Given the user is on the checkout page and has a valid payment method saved, When they click Place Order, Then the order should be confirmed.' A teammate proposes rewriting the Given to: 'Given the user is on the checkout page with a valid payment method saved and ready to be charged correctly.' What's wrong with the proposed rewrite?
+
+- [ ] Nothing - it's just a more detailed, equally valid Given step
+- [x] "Ready to be charged correctly" smuggles a checkable claim (that charging works correctly) into what should be pure setup - if a real charging bug exists, it would misleadingly surface as a Given/setup failure instead of the actual Then assertion failing
+- [ ] The rewrite is too short compared to the original
+- [ ] Given steps are not allowed to mention payment methods at all
+
+*The note's mistake callout describes exactly this pattern - an assertion-shaped phrase buried inside a Given step misattributes a real failure to setup rather than to the actual behavior under test. Option one misses the substantive problem, treating it as a harmless style difference. Option three focuses on an irrelevant surface detail (length) instead of the actual structural issue. Option four invents an arbitrary restriction the note never states - Given steps can describe any relevant precondition, including payment methods; the issue is specifically the assertion language, not the topic.*
+
+- **Given's job** — Pure setup - establishes the state of the world BEFORE the behavior being tested happens. Never contains an assertion.
+- **When's job** — The single action or event being specified - ideally exactly one per scenario, so a failure clearly points to one specific cause.
+- **Then's job** — A specific, checkable expected outcome - not vague, something a reader could verify by eye.
+- **What do And/But actually do?** — Pure continuations - they extend whichever role (Given, When, or Then) they follow, without introducing a new one.
+- **The vending-machine analogy for Given/When/Then** — Idle, stocked display = Given (starting state); one button press = When (one action); item in the tray = Then (specific, checkable result).
+
+### Challenge
+
+Find three real scenarios (from your own project, an open-source repo, or written by a teammate).
+For each, count the actual number of When steps (excluding And/But continuations) and check whether
+any Given step contains assertion-shaped language ("should," "correct," "expected"). Rewrite any that
+violate either rule, and explain in one sentence per fix why the rewrite makes a future failure easier
+to diagnose.
+
+### Ask the community
+
+> I'm not sure whether `[describe the specific step]` belongs in Given, When, or Then for this scenario: `[paste or describe it]`.
+
+Describing the actual step and what it's meant to establish or check usually gets a fast, concrete
+answer - the Given/When/Then boundary is more often clear once someone else reads the specific
+wording than it is in the abstract.
+
+- [Cucumber — official Gherkin reference](https://cucumber.io/docs/gherkin/reference/)
+- [Martin Fowler — Given When Then](https://martinfowler.com/bliki/GivenWhenThen.html)
+
+🎬 [What is Gherkin — Gherkin Cucumber Tutorial — Study Simple](https://www.youtube.com/watch?v=JwrC1caEx5o) (9 min)
+
+- Given, When, Then each have a distinct job: pure setup, the single action being specified, and a specific checkable outcome, respectively.
+- A scenario with more than one When step is usually testing more than one behavior and is often clearer split into separate scenarios.
+- An assertion hidden inside a Given step misattributes real failures to setup instead of the actual behavior under test.
+- And/But are pure continuations - they extend whichever role they follow without changing it.
+- A vague Then ("behaves correctly") verifies nothing - a good Then names a specific, observable fact.
+
+
+## Related notes
+
+- [[Notes/bdd-with-cucumber/bdd-in-plain-words/what-bdd-solves|What BDD solves]]
+- [[Notes/bdd-with-cucumber/bdd-in-plain-words/bdd-vs-test-scripts|BDD vs test scripts]]
+- [[Notes/bdd-with-cucumber/bdd-in-plain-words/the-three-amigos|The three amigos]]
+
+
+---
+_Source: `packages/curriculum/content/notes/bdd-with-cucumber/bdd-in-plain-words/given-when-then.mdx`_

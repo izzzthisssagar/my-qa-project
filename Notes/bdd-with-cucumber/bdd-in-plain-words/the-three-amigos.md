@@ -1,0 +1,244 @@
+---
+title: "The three amigos"
+tags: ["bdd-with-cucumber", "bdd-in-plain-words", "track-d"]
+updated: "2026-07-16"
+---
+
+# The three amigos
+
+*A short working session before development starts, where a business voice, a developer, and a tester talk through a story's concrete examples together - each perspective catching a category of gap the other two would reliably miss on their own.*
+
+> A product owner reads a story and sees the customer problem it solves. A developer reads the same
+> story and sees an API that doesn't exist yet. A tester reads it and immediately wonders what happens
+> when the discount code expires mid-checkout. None of them is wrong - and none of them, alone, sees
+> the whole story. The three amigos session exists to put those three ways of reading in one room,
+> for twenty minutes, before any code gets written.
+
+> **In real life**
+>
+> A jazz trio - piano, double bass, drums - works because each instrument covers something the other
+> two physically can't: melody and harmony, the low end holding it together, the pulse everyone locks
+> to. Take any one away and the hole is instantly audible; no amount of extra effort from the remaining
+> two fills it. And a trio is small enough that everyone genuinely hears everyone else in real time -
+> add ten more players and that listening becomes impossible. The three amigos works on exactly the
+> same two principles: three genuinely different instruments, and a group small enough to actually
+> listen to each other.
+
+**The three amigos**: The three amigos is a short, collaborative working session held before development starts on a story, bringing together three distinct perspectives: someone representing the BUSINESS or product view (what problem are we solving, what does success look like), a DEVELOPER (can this actually be built, what technical constraints and edge cases apply), and a TESTER (what could go wrong, what boundary and exception behavior has nobody mentioned yet). Each perspective catches a category of gap the other two would miss alone. The session's output is not meeting minutes - it's the set of concrete, agreed examples of behavior that become the story's Gherkin scenarios. Three is deliberate: small enough for a real conversation, diverse enough to cover the three ways a requirement actually fails.
+
+## Three perspectives, three categories of gap
+
+- **The business voice** (product owner, BA, or whoever holds the intent) — answers "what problem
+  does this solve, and what does done actually look like?" Without them, the other two are guessing
+  at intent and will optimize for the wrong thing confidently.
+- **The developer** — answers "can this be built as described, and what does the system already do
+  that constrains it?" They catch the cases the business never sees: the third-party API that times
+  out, the existing feature this quietly conflicts with, the data that won't exist yet at that point
+  in the flow.
+- **The tester** — answers "what happens at the boundaries, and when things go wrong?" Exactly-equal
+  amounts, empty inputs, the user who clicks twice, the session that expires mid-flow - the exception
+  paths that neither intent nor implementation thinking naturally surfaces.
+- **Why three, specifically** — one perspective produces confident blind spots; a huge committee
+  produces a meeting where nobody really talks. Three is the smallest group that covers all three
+  gap categories while staying small enough for genuine back-and-forth. Three *perspectives*, note -
+  not necessarily exactly three people or three job titles.
+- **What it produces** — concrete examples with agreed outcomes ("a $50.00 cart exactly: no free
+  shipping"), which become the Given/When/Then scenarios for the story. If the session ends without
+  examples, it wasn't a three amigos session - it was a briefing.
+
+> **Tip**
+>
+> Keep it short and keep it concrete. A good session is 20 to 30 minutes on ONE story, driven by
+> specific examples ("what should happen when...?") rather than abstract discussion. If a question
+> comes up that nobody in the room can answer, that's a genuinely useful outcome too - park the story
+> until someone can, rather than guessing on the spot and building on the guess.
+
+> **Common mistake**
+>
+> Holding a session where all three roles are physically present but only one perspective actually
+> operates - the product owner reads the acceptance criteria aloud, the developer and tester nod, and
+> everyone leaves. Attendance isn't the point; active questioning from each perspective is. A session
+> where the tester never asked "what happens when..." and the developer never said "that conflicts
+> with..." has the calendar entry of a three amigos session and none of its value.
+
+![A black-and-white photograph of a jazz trio on a small club stage: a pianist at an opened upright piano on the left, a double bassist standing in the center, and a drummer at his kit on the right, all facing inward toward each other](the-three-amigos.jpg)
+*Fergus McCreadie Trio at Oslo Jazzfestival — Wikimedia Commons, CC BY-SA 4.0 (Tore Sætre). [Source](https://commons.wikimedia.org/wiki/File:Fergus_McCreadie_Trio_Oslo_Jazzfestival_2023_(181344).jpg)*
+- **The piano — the business voice** — Carries the melody and harmony: where the piece is going and what it should sound like when it works - the intent everything else supports, the way the business perspective carries what the story is actually FOR.
+- **The double bass — the developer** — The structural low end: what the harmony can actually stand on, note by note. Unglamorous, constraint-shaped work - exactly the developer's question of what the system can really support.
+- **The drums — the tester** — Keeps honest time and exposes every rushed or dropped beat the other two would gloss over - the tester's job of catching the boundary case everyone else's momentum skips past.
+- **The stage layout — everyone arranged to hear everyone** — All three face inward on a stage small enough for real-time listening. Add ten players and this becomes impossible - the same reason three amigos is three, not a committee.
+
+**One story through a real three amigos session**
+
+1. **A story arrives: "free shipping on orders over $50"** — One sentence, about to be read three different ways.
+2. **Business explains the intent** — It's a conversion play - success means fewer abandoned carts at checkout.
+3. **The developer raises a constraint** — Shipping is calculated by a third-party service - does 'order total' mean before or after discounts are applied?
+4. **The tester asks the boundary question** — What about a cart at exactly $50.00? And if a refund later drops the total below it?
+5. **Agreed examples become Gherkin scenarios** — Exactly $50: no free shipping. After-discount total counts. Refunds don't retroactively charge shipping. Each one now a concrete scenario.
+
+Each perspective in the room exists to ask a distinct category of question - and a missing
+perspective means that whole category simply never gets asked. Here's that shape as a small,
+generic simulation.
+
+*Run it - see which question categories go unasked when a perspective is missing (Python)*
+
+```python
+question_categories = {
+    "business": "does this solve the right problem, and what does success look like?",
+    "developer": "can this be built as described, and what constraints already exist?",
+    "tester": "what happens at the boundaries, and when things go wrong?",
+}
+
+def review_coverage(attendees):
+    missing = [role for role in question_categories if role not in attendees]
+    if not missing:
+        return "COVERED: all three question categories were actively examined"
+    gaps = "; ".join(f"nobody asked '{question_categories[role]}'" for role in missing)
+    return f"GAPS: {gaps}"
+
+print(review_coverage(["business", "developer", "tester"]))
+
+# The product owner skips the session - "the ticket is self-explanatory":
+print(review_coverage(["developer", "tester"]))
+
+# Only the developer writes the scenarios alone, after the fact:
+print(review_coverage(["developer"]))
+```
+
+Same coverage-check shape in Java.
+
+*Run it - see which question categories go unasked when a perspective is missing (Java)*
+
+```java
+import java.util.*;
+
+public class Main {
+    static final Map<String, String> QUESTION_CATEGORIES = new LinkedHashMap<>() {{
+        put("business", "does this solve the right problem, and what does success look like?");
+        put("developer", "can this be built as described, and what constraints already exist?");
+        put("tester", "what happens at the boundaries, and when things go wrong?");
+    }};
+
+    static String reviewCoverage(List<String> attendees) {
+        List<String> gaps = new ArrayList<>();
+        for (var entry : QUESTION_CATEGORIES.entrySet()) {
+            if (!attendees.contains(entry.getKey())) {
+                gaps.add("nobody asked '" + entry.getValue() + "'");
+            }
+        }
+        if (gaps.isEmpty()) return "COVERED: all three question categories were actively examined";
+        return "GAPS: " + String.join("; ", gaps);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(reviewCoverage(List.of("business", "developer", "tester")));
+
+        // The product owner skips the session - "the ticket is self-explanatory":
+        System.out.println(reviewCoverage(List.of("developer", "tester")));
+
+        // Only the developer writes the scenarios alone, after the fact:
+        System.out.println(reviewCoverage(List.of("developer")));
+    }
+}
+```
+
+### Your first time: Your mission: run a miniature three amigos on one real story
+
+- [ ] Pick one real user story - from your project, or invent a plausible one ("users can save items to a wishlist") — Write the one-sentence version down exactly as a product owner would phrase it.
+- [ ] Ask it three rounds of questions, one perspective at a time — Business round: what problem does this solve, what does done look like? Developer round: what does the system already do that constrains this? Tester round: what happens at the boundaries and on failure?
+- [ ] Write down every concrete example the questions produce, with an agreed expected outcome for each — Aim for at least five, including at least one exactly-at-the-boundary case and one failure case.
+- [ ] Check honestly: which round produced examples the other two rounds never would have? — That difference is the entire argument for having all three perspectives in the room.
+
+You've now run the core of a three amigos session solo - and felt directly why each perspective
+finds gaps the others don't.
+
+- **Sessions keep happening with only two of the three perspectives in the room - usually the business voice is the one missing.**
+  Name the gap explicitly: without the business perspective, the developer and tester are agreeing with each other about their shared guess at intent. Reschedule around the missing role rather than proceeding - a two-amigos session silently drops an entire category of question.
+- **One person dominates every session and the other two mostly nod along.**
+  Change the format so each perspective must actively contribute: go around the room with each role required to propose at least one concrete example or boundary question before the story is accepted. Attendance without active questioning is the failure mode, not a lighter version of success.
+- **The meeting has drifted into a status update - progress reports, ticket walkthroughs, no new examples produced.**
+  Re-anchor on the output: a three amigos session exists to produce concrete, agreed examples for a story that hasn't been built yet. If a session ends without new examples with agreed outcomes, say so, and restructure the next one around one story and the question 'what should happen when...?'
+- **Sessions run over an hour, cover a whole sprint's stories at once, and everyone dreads them.**
+  Shrink the scope, not the practice: one story (or a tightly related few), 20 to 30 minutes, concrete examples only. Marathon batch sessions produce shallow agreement on everything and genuine shared understanding of nothing.
+
+### Where to check
+
+- **Who actually attended recent sessions** (calendar invites, meeting notes) — two-of-three
+  attendance is the single most common quiet failure, and it's visible in the invite list.
+- **Whether sessions produce example lists** — the real output artifact. Notes full of decisions
+  and action items but no concrete examples with expected outcomes are a status-update tell.
+- **Authorship of the resulting `.feature` scenarios** — scenarios written entirely by one person
+  days after the session suggest the session isn't actually feeding the Gherkin.
+- **Mid-sprint rework on stories that HAD a session** — recurring surprises in a category (always
+  boundary cases, always technical constraints) point at which perspective isn't genuinely
+  participating.
+
+### Worked example: one boundary question that repaid the whole twenty-minute session
+
+1. A story reads: "Customers get free shipping on orders over $50." The product owner opens the
+   session by explaining the intent: reduce cart abandonment at the shipping-cost step.
+2. The developer asks the constraint question: "Order total before or after discount codes? The
+   shipping service gets called before promo codes are applied today - if it's after, we're
+   reordering that flow." The product owner, who hadn't considered it, decides: after discounts.
+3. The tester asks the boundary question: "A cart at exactly $50.00 - free or not?" Silence. The
+   story says 'over', the marketing banner mock-up says 'orders of $50 or more'. Two different
+   behaviors, both already written down somewhere.
+4. The group agrees: $50.00 exactly qualifies, the story wording gets fixed, and three concrete
+   examples come out of the session - $49.99 pays shipping, $50.00 exactly ships free, and a
+   $55 cart with a $10 promo code pays shipping (post-discount total $45).
+5. Each example becomes a Given/When/Then scenario. The exact-boundary mismatch - which would have
+   shipped as a bug, been reported by a customer, and bounced between teams as 'works as designed' -
+   cost the team one question in a room instead.
+
+**Quiz.** A team holds a 'three amigos' session for every story: the product owner walks through the acceptance criteria on a screen share while the developer and tester listen, and the meeting ends when the walkthrough does. Stories still regularly hit mid-sprint surprises around edge cases and technical constraints. What's the most likely problem?
+
+- [ ] The sessions need more attendees from other teams to catch more gaps
+- [x] Only one of the three perspectives is actually operating - a one-way walkthrough means the developer's constraint questions and the tester's boundary questions never get asked, so those two categories of gap survive the session untouched
+- [ ] The three amigos practice doesn't work for this team and should be dropped
+- [ ] The product owner should send the acceptance criteria by email instead, saving the meeting time
+
+*The session has the attendance of a three amigos but the dynamics of a briefing - the note's mistake callout describes exactly this: all three roles present, one perspective operating. The surviving gap categories (edge cases, technical constraints) map precisely onto the two silent roles, which is the giveaway. Option one goes the wrong direction - the problem is participation quality, not headcount, and more attendees makes real conversation harder. Option three blames the practice for a failure to actually practice it. Option four would formalize the one-way broadcast that is the problem - email removes even the possibility of the questioning that makes the session valuable.*
+
+- **The three perspectives in a three amigos session, and each one's question** — Business: what problem does this solve, what does success look like? Developer: can this be built, what constraints exist? Tester: what happens at the boundaries and when things go wrong?
+- **Why three, specifically - not one, not a committee?** — One perspective produces confident blind spots; a big committee can't genuinely converse. Three is the smallest group covering all three gap categories while staying small enough for real back-and-forth.
+- **The real output of a three amigos session** — Concrete, agreed examples of behavior with expected outcomes - which become the story's Gherkin scenarios. A session that produces no examples was a briefing, not a working session.
+- **The most common three amigos failure modes** — Only two of three perspectives show up; one role dominates while the others nod; the session drifts into a status update that produces no new examples.
+- **The jazz trio analogy for the three amigos** — Piano, bass, drums: each covers what the other two can't, a missing instrument leaves an audible hole, and a trio is small enough that everyone genuinely hears everyone - the two principles the practice is built on.
+
+### Challenge
+
+Take one story from your current or most recent project that shipped with a surprise - a bug, a
+mid-sprint requirement change, or a "wait, that's not what I meant" moment. Classify the surprise:
+was it an intent gap (business), a constraint gap (developer), or a boundary gap (tester)? Then
+write the single question, from that perspective, that would have caught it in a twenty-minute
+session before development started - and the concrete example (with expected outcome) that question
+would have produced.
+
+### Ask the community
+
+> Our three amigos sessions keep sliding into a failure mode: `[describe what actually happens - who attends, who talks, what the session produces]`. Here's a recent story where a gap survived the session: `[describe it]`.
+
+Describing the session's actual dynamics - not just "it isn't working" - usually makes the missing
+or silent perspective obvious to an outside reader within one reply.
+
+- [Agile Alliance — Three Amigos (glossary)](https://www.agilealliance.org/glossary/three-amigos/)
+- [Automation Panda — The Behavior-Driven Three Amigos](https://automationpanda.com/2017/02/20/the-behavior-driven-three-amigos/)
+
+🎬 [#2 What are BDD Three Amigos Approach (BDD Testing) — Automation Testing with Joe Colantonio](https://www.youtube.com/watch?v=NcCrb6eUteA) (2 min)
+
+- The three amigos is a short working session before development starts, bringing the business, developer, and tester perspectives to one story at the same time.
+- Each perspective catches a distinct category of gap - intent, constraints, boundaries - and a missing perspective means that whole category of question never gets asked.
+- Three is deliberate: small enough for genuine conversation, diverse enough to cover all three gap categories - and it's three perspectives, not necessarily three exact job titles.
+- The session's real output is concrete, agreed examples with expected outcomes, which become the story's Gherkin scenarios - no examples means it was a briefing, not a working session.
+- The common failure modes are quiet ones: two of three roles attending, one voice dominating while others nod, or the session decaying into a status update - attendance without active questioning has none of the value.
+
+
+## Related notes
+
+- [[Notes/bdd-with-cucumber/bdd-in-plain-words/what-bdd-solves|What BDD solves]]
+- [[Notes/bdd-with-cucumber/bdd-in-plain-words/given-when-then|Given / When / Then]]
+- [[Notes/bdd-with-cucumber/bdd-in-plain-words/bdd-vs-test-scripts|BDD vs test scripts]]
+
+
+---
+_Source: `packages/curriculum/content/notes/bdd-with-cucumber/bdd-in-plain-words/the-three-amigos.mdx`_

@@ -1,0 +1,210 @@
+---
+title: "Reading errors & stack traces"
+tags: ["web-platform", "javascript", "debugging", "track-a"]
+updated: "2026-07-10"
+---
+
+# Reading errors & stack traces
+
+*A stack trace is not noise. It is a signed confession: what broke, in which file, on which line, and the exact chain of calls that led there. Learn to read one and you become the tester developers listen to.*
+
+> Most testers see a wall of red text and write "there's an error in the console." The
+> wall of red text is, in fact, a numbered confession. It names the crime, the street,
+> the house number, and lists — in order — everyone who was in the room, most recent
+> first. Learning to read it takes about ten minutes. Not learning to read it costs a
+> career's worth of vague bug reports.
+
+> **In real life**
+>
+> A stack trace is **a receipt for how the program got lost.** The top line is where it
+> finally crashed. Each line below is the function that called the one above it — a trail
+> of breadcrumbs running *backwards* from the disaster to the front door. You read it top
+> to bottom to learn what happened, and bottom to top to learn how it came to be
+> happening. The crash is at the top; the *reason* is usually further down.
+
+## The anatomy of an error
+
+```
+TypeError: Cannot read properties of undefined (reading 'name')
+    at renderProfile (profile.js:87:24)
+    at handleResponse (profile.js:42:5)
+    at fetchUser (api.js:18:11)
+```
+
+Four things, all useful:
+
+1. **The type** — `TypeError` (wrong kind of thing), `ReferenceError` (name doesn't exist), `SyntaxError` (the code is malformed), `NetworkError` (the request failed).
+2. **The message** — `Cannot read properties of undefined (reading 'name')`. Something was `undefined` and the code asked it for `.name`.
+3. **The location** — `profile.js:87:24` — file, line 87, column 24. Exact.
+4. **The **stack trace**: The list of function calls that were in progress when the error happened, most recent first. Each line names a function and the file and line it was executing. Reading downwards tells you how the program arrived at the crash.** — the call chain. `renderProfile` was called by `handleResponse`, which was called by `fetchUser`.
+
+![JavaScript source code, the kind a stack trace points into](javascript-code.png)
+*JavaScript source code — Wikimedia Commons, CC0. [Source](https://commons.wikimedia.org/wiki/File:SampleJavaScriptCode.png)*
+- **The top frame — where it actually died** — The first `at ...` line. This is the line of code that threw. Nine times out of ten, the fix goes near here — but the CAUSE is often further down the stack, in whoever passed it bad data.
+- **file.js:87:24 — line 87, column 24** — Precise to the character. Click it in DevTools and the Sources panel opens at that exact spot, with the offending expression highlighted. Testers who paste this line into a ticket save a developer the entire hunt.
+- **Each frame below = who called whom** — Read downwards: renderProfile was called by handleResponse, which was called by fetchUser. That chain tells you the data's journey — and where a bad value could have entered it.
+- **Your code vs library code** — Frames from `node_modules`, `react-dom` or a CDN are usually not the bug. Scan the trace for the FIRST line that belongs to the application itself. That's where a human made a decision you can question.
+- **Minified? `a.b is not a function`** — In production, code is compressed and names become single letters. Source maps un-minify it. If DevTools shows gibberish, check whether source maps are enabled — and if they're missing in production, that itself is worth reporting: it makes every future bug harder.
+
+**Reading a stack trace like a detective — press Play**
+
+1. **🔴 Start at the top: WHAT broke** — `TypeError: Cannot read properties of undefined (reading 'name')`. Translate it literally: something was `undefined`, and the code asked that nothing for its `.name`. You now know the failure mode without reading a single line of source.
+2. **📍 First frame: WHERE it broke** — `at renderProfile (profile.js:87:24)`. Click it. DevTools opens the file at that line. You'll see something like `user.name` — and now the question sharpens to exactly one thing: why was `user` undefined?
+3. **⬇️ Walk down: HOW it got there** — `handleResponse` called `renderProfile`. `fetchUser` called `handleResponse`. So the `user` value originated in a network response. The stack just handed you the data's whole journey, backwards.
+4. **🌐 Cross-check the Network panel** — Find that request. Status 200. Read the response body. Is there a `user` object? Is there a `name` field? Very often the answer is 'the API renamed it' or 'the API returned null for a deleted account'. The trace pointed; the wire confirmed.
+5. **📝 Now write the bug** — 'GET /api/user/42 returns `user: null` for deleted accounts; profile.js:87 assumes an object and throws TypeError, blanking the page.' You never read the whole file. You read four lines of red text and one response body. That is the entire skill.
+
+*Try it — read a stack trace, then produce one yourself*
+
+```python
+# Every language's stack trace has the same shape. Here's Python's, which you
+# can actually run — and the reading skill transfers to JavaScript exactly.
+
+def fetch_user(uid):          # bottom of the stack: where the journey began
+    response = {"user": None}  # the API returned null for a deleted account
+    return handle_response(response)
+
+def handle_response(response):  # middle frame: passed the bad value along
+    return render_profile(response["user"])
+
+def render_profile(user):       # top frame: where it actually dies
+    return user["name"]         # <- boom. 'user' is None.
+
+try:
+    fetch_user(42)
+except Exception as e:
+    import traceback
+    print("=== THE ERROR ===")
+    print(f"{type(e).__name__}: {e}")
+    print()
+    print("=== THE STACK (most recent call LAST in Python, FIRST in JS) ===")
+    traceback.print_exc()
+
+print()
+print("Read it: render_profile died. handle_response called it. fetch_user called that.")
+print("The bug is NOT at the crash site — 'user[\\'name\\']' is reasonable code.")
+print("The bug is that fetch_user accepted a null user and passed it on.")
+print("The crash tells you WHERE. The stack tells you WHO. Fix the who.")
+```
+
+## Reading the four common errors
+
+- **`TypeError: Cannot read properties of undefined (reading 'x')`** — the classic. Data didn't arrive, or arrived in a different shape. Go read the API response body.
+- **`ReferenceError: x is not defined`** — a name that doesn't exist. A typo, or a script that failed to load (check the Network panel for a 404 on a `.js` file).
+- **`SyntaxError`** — the file is malformed. Usually a build or deploy problem, and usually the *whole* script never ran.
+- **`Uncaught (in promise)`** — an async operation failed and nobody caught it. Your spinner is spinning forever because of this (last note).
+
+> **Tip**
+>
+> The tester's superpower is refusing to paraphrase. Do not write "there's a TypeError."
+> **Paste the whole thing** — type, message, and every `at ...` line. To a developer, that
+> block is a map to their own code. To you it's four lines of copying. This is the
+> highest ratio of effort-to-value in the entire craft: thirty seconds of Ctrl+C turns a
+> ticket that would bounce back with "cannot reproduce, need more info" into one that gets
+> fixed before lunch. In DevTools, right-click the error → **Copy stack trace**. It exists.
+> It's right there.
+
+### Your first time: Your mission: read a real trace
+
+- [ ] Cause a TypeError on purpose — Console: `const u = undefined; u.name`. Read the message: it tells you exactly what it tried and what wasn't there. This is the most common JS error in the world, and you just made one.
+- [ ] Cause a ReferenceError — Console: `totallyMadeUpThing()`. 'is not defined'. In a real app this usually means a script 404'd — check Network before you check the code.
+- [ ] Follow a real trace into the source — Browse a big site with the console open until you find a red error (it won't take long). Click the `file.js:line` link. DevTools opens the Sources panel at that line. You are now looking at production code that broke.
+- [ ] Find the first app frame — In that trace, scan past `react-dom`, `node_modules`, CDN files. The first line that looks like the app's own code is where a human made a decision. That's the frame to quote.
+- [ ] Copy a stack trace properly — Right-click the error in the console → 'Copy stack trace'. Paste it into a note. That's your bug report's most valuable paragraph, and it took one click.
+
+Two errors caused deliberately, one real trace followed into source, one trace copied the right way.
+
+- **The stack trace is gibberish: `t.a is not a function` at `main.4f2b.js:1:88213`.**
+  The code is minified — names compressed, everything on one line. DevTools can un-minify it if source maps are available (look for a `.map` file in the Network panel, or enable 'Enable JavaScript source maps' in settings). If maps are absent in production, that's worth its own report: it makes every future production bug dramatically harder to diagnose, and someone chose that trade-off, possibly without noticing.
+- **The error names a file I've never heard of, deep in `node_modules`.**
+  The crash happened inside a library, but a library rarely breaks on its own — it broke because YOUR code handed it something unexpected. Walk DOWN the stack to the first frame belonging to the application. That's the line to quote, and the place where a wrong value entered the system.
+- **The console shows an error but the page works fine.**
+  Common and still worth reporting. It usually means something failed in a path nobody's watching — an analytics script, an optional feature, a rejected promise nobody caught. It's a bug that hasn't hurt anyone yet. Note it, include the trace, mark severity honestly as low. Errors that 'don't matter' are how teams stop reading their consoles at all.
+- **`Uncaught (in promise) TypeError: Failed to fetch`**
+  The network request itself failed — not a 404 or a 500, but no response at all. Causes: CORS blocked it, the user went offline, the server didn't answer, or an ad-blocker ate it. Check the Network panel: a request shown as failed/cancelled with no status code confirms it. Then check the console for a separate CORS message, which is a completely different fix.
+
+### Where to check
+
+Everything a trace needs, in one screen:
+
+- **The console** — the error type, message, and stack. Right-click → **Copy stack trace**.
+- **The `file.js:line:col` link** — clicking it opens Sources at the exact character.
+- **The Network panel, immediately after** — the request that fed the bad data. Its status *and* its response body.
+- **`Preserve log`** (Network) and **`Preserve log`** (Console) — errors during a page navigation vanish without these. If a bug happens on submit and the page redirects, you get one shot to see it, and only if these boxes are ticked.
+- **DevTools → Sources → Pause on exceptions** (the ⏸ icon) — freezes the app the moment it throws, so you can inspect the actual variable values. This is the single most advanced thing in this note and it takes one click.
+
+Tester's rule: **the console error and the network response, side by side.** Nearly every
+JavaScript bug a tester meets is the gap between what the code expected and what the
+server actually sent. Two panels, one screenshot, one excellent bug report.
+
+### Worked example: the deleted account that blanked the profile page
+
+Four red lines, one response body, one fixed bug.
+
+1. **Report:** "The profile page is blank for some users." No error visible to the user — just white.
+2. **Console.** `TypeError: Cannot read properties of undefined (reading 'name')` at `renderProfile (profile.js:87:24)`, called by `handleResponse (profile.js:42:5)`, called by `fetchUser (api.js:18:11)`.
+3. **Translate the top line, literally.** Something was `undefined`; the code asked it for `.name`. No source reading required yet.
+4. **Click the link.** `profile.js:87` reads `return user.name;`. Perfectly reasonable code. So the question is not "what's wrong with line 87" — it's **"why was `user` undefined when it got here?"** The stack answers: it came from `fetchUser`.
+5. **Network panel.** `GET /api/user/903` → **200 OK**, body: `{"user": null, "deletedAt": "2026-06-30"}`. There it is. The account was deleted; the API says so politely; the front-end never considered the possibility.
+6. **Reproduce deliberately.** Any deleted account blanks the page. Not "some users" — a precise, testable class of users.
+7. **The report:** '`GET /api/user/:id` returns `user: null` for deleted accounts (200, with `deletedAt` set). `profile.js:87` assumes an object and throws TypeError, blanking the page. Repro: open the profile of a deleted account. Console trace and response body attached. Suggest rendering a "this account was deleted" state.'
+8. **What the tester did:** read four lines of red text, clicked one link, read one response body. They did not read `profile.js`. They did not understand the application's architecture. They produced a report a developer could fix in ten minutes — which is the entire job, done properly.
+
+> **Common mistake**
+>
+> Writing "there's an error in the console" and stopping there. That sentence contains
+> none of the four things the console gave you for free: the error type, the message, the
+> file-and-line, and the call chain. A developer reading it must reproduce your session
+> from scratch to recover information that was on your screen. Meanwhile the trace itself
+> was two clicks from your clipboard. Paraphrasing an error is like describing a fingerprint
+> from memory: technically communication, practically useless. Copy. Paste. Every time.
+
+**Quiz.** Console: `TypeError: Cannot read properties of undefined (reading 'name')` at `renderProfile (profile.js:87)`, called by `fetchUser (api.js:18)`. The Network panel shows `GET /api/user/903` → 200 with body `{user: null, deletedAt: '2026-06-30'}`. Where's the bug?
+
+- [ ] profile.js:87 is badly written and should be rewritten
+- [x] The API returns `user: null` for deleted accounts, and the front-end assumes an object. Line 87 is where it crashes, but the defect is the unhandled null — the page should render a 'deleted account' state instead of throwing.
+- [ ] The server should return a 404 instead of a 200
+- [ ] The user's browser cache is stale
+
+*The top frame tells you where the program died; the stack and the response body together tell you why. `user.name` is entirely reasonable code — it just received null, because the API represents deleted accounts that way and nobody wrote the branch for it. Note that option 3 is a defensible design opinion, and it is not the bug: a 200 with an explicit `deletedAt` is a legitimate contract. The front-end simply never honoured it. Reading the trace tells you where to look; reading the response tells you what to say.*
+
+- **The four parts of an error** — Type (TypeError, ReferenceError…), message (what it tried), location (file:line:col), and the stack (who called whom, most recent first).
+- **Read the stack how?** — Top = where it crashed. Downwards = how it got there. The fix is usually near the top; the cause is usually further down, where a bad value entered.
+- **TypeError: ... of undefined** — The most common JS error. Data didn't arrive or changed shape. Go read the API response body — that's half the diagnosis.
+- **ReferenceError: x is not defined** — The name doesn't exist. A typo, or a script that failed to load. Check the Network panel for a 404 on a .js file before reading any code.
+- **Minified traces** — `t.a is not a function` at main.4f2b.js:1:88213. Source maps un-minify it. Missing maps in production is itself worth reporting.
+- **The tester's rule** — Console error and network response, side by side. Nearly every JS bug is the gap between what the code expected and what the server sent.
+
+### Challenge
+
+Open the console on three sites you use daily and find a real error on each — you will,
+they're everywhere. For each, answer three questions without reading the source: what
+type of error, which file and line, and what was the *first application frame* (not a
+library). Then right-click → Copy stack trace and paste it somewhere. You've just done
+the exact work that turns "the site is broken" into a ticket someone can act on, three
+times, on software you don't own.
+
+### Ask the community
+
+> Error question: [paste the FULL stack trace — type, message, and every `at` line]. Clicking the top frame shows this code: [paste the line]. The related request `[method + url]` returned `[status]` with body: [paste]. Repro steps: [steps].
+
+Notice this template contains no interpretation whatsoever — just the trace, the line it
+points at, and the data that reached it. That's deliberate. Interpretation is what you're
+asking for; evidence is what you're bringing. Bring all four and you'll usually get an
+answer in one reply, often from someone who has never seen the codebase either.
+
+- [MDN — every JavaScript error, explained one by one](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors)
+- [Chrome DevTools — pause on exceptions and inspect the values](https://developer.chrome.com/docs/devtools/javascript/)
+- [Reading stack traces without fear](https://www.youtube.com/watch?v=W6NZfCO5SIk)
+
+🎬 [How to read a stack trace](https://www.youtube.com/watch?v=W6NZfCO5SIk) (11 min)
+
+- An error gives you four things free: type, message, file:line:col, and the call stack. Never paraphrase them — copy them.
+- Read the stack top-down for what broke and downward for how it got there. The crash site is rarely the cause; the frame that passed the bad value usually is.
+- `TypeError: ... of undefined` almost always means the API's data didn't arrive or changed shape. Put the console error and the response body side by side.
+- Skip library frames. The first frame belonging to the application is where a human made a decision you can question.
+- 'There's an error in the console' throws away everything the console told you. Right-click → Copy stack trace takes one second and rewrites the bug report.
+
+
+---
+_Source: `packages/curriculum/content/notes/the-web-platform-for-testers/javascript-for-readers/reading-errors-and-stack-traces.mdx`_

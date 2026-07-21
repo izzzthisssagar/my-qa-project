@@ -1,0 +1,31 @@
+# gate.yaml — safety gates for the qa-mastery curriculum loop
+# Model: cobusgreyling/loop-engineering. Phase L2 (assisted autonomy).
+
+phase: L2
+
+allow:
+  - read anything in the repo and vault
+  - local commits inside your own claimed lane paths
+  - append-only entries to "Claude Coordination.md"
+  - updates to Loop/STATE.md counters and claims
+  - taxonomy.ts edits limited to your own module's lines (isolated hunks,
+    verified with `git diff --cached --stat` before commit)
+  - sub-agents isolated to your lane's content/media dirs
+
+deny:
+  - git push (any remote, any branch)
+  - merging into shared branches (feat/notes-v2, main)
+  - deploying or publishing anything
+  - writing into another agent's claimed paths or media dirs
+  - editing or deleting other agents' Coordination log entries
+  - touching shared dirty-checkout files (demo.txt, task.md,
+    implementation_plan.md, claude1's untracked non-functional files)
+  - bulk taxonomy rewrites or reformatting
+  - deleting files outside your lane
+
+escalate_to_sajan:
+  - any push / merge / publish / deploy
+  - lane conflict not resolved after one full log round-trip
+  - the same verification gate failing twice on one unit
+  - deleting more than 5 files, even inside your own lane
+  - anything not covered above that feels irreversible

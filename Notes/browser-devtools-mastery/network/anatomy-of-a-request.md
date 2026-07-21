@@ -1,0 +1,296 @@
+---
+title: "Anatomy of a request"
+tags: ["browser-devtools-mastery", "network", "track-c"]
+updated: "2026-07-14"
+---
+
+# Anatomy of a request
+
+*Read the Network panel like a pro: what every column in a request row means (method, status, type, size, time), and what the Headers, Payload, Response and Timing tabs reveal when you click in. Request vs response headers, the Fetch/XHR filter, and the transcript of everything your app said.*
+
+> You've heard testers say "check the Network tab" the way gym bros say "just lift" — confidently,
+> vaguely, and with zero follow-up instructions. This note is the follow-up instructions. The Network
+> panel is a **transcript of every message your browser sent and every answer it got back** — the
+> request/response conversation you learned to read in the internet module, recorded live, one row
+> per message. Most people stare at that wall of rows like it's the Matrix. You're going to learn to
+> read one row in three seconds — method, URL, status, type, size, time — and then click into it and
+> read the whole letter: every header, the payload, the server's exact reply, and where the
+> milliseconds went. Once you can do that, "the button doesn't work" stops being a mystery and starts
+> being a row with a status code on it.
+
+> **In real life**
+>
+> The Network panel is an **airport departures board**. Each row is one flight: a number (the request
+> name), a destination (the URL), a status (departed fine, delayed, cancelled), and a time. You can
+> triage the whole airport in one glance — everything green, one row flashing red. But the board is
+> only the summary: click a flight and you get the full manifest — who's on board (the payload), what
+> paperwork travelled with it (the headers), and what came back on the return leg (the response). The
+> exact technical version: each Network row summarizes one HTTP request/response pair with its
+> method, status, type, size and duration, and clicking the row opens the detail tabs — Headers,
+> Payload, Response, Timing — which contain the complete, verbatim text of both messages. The board
+> tells you WHICH flight to worry about; the manifest tells you WHY.
+
+Before the columns, one filter that separates tourists from testers: the
+**Fetch/XHR**: Fetch/XHR is the Network panel filter that shows only the requests made by the page's JavaScript - API calls - hiding images, stylesheets, fonts and scripts. XHR (XMLHttpRequest) is the old API for making those calls, fetch() is the modern one; the panel groups both because they are the same idea: the page asking a server for data AFTER the page itself has loaded. When you test a button, a form, or anything that saves or loads data, the request you care about is almost always in Fetch/XHR - it is the app talking to its backend, with everything else muted.
+filter. A page load fires off dozens of requests — images, fonts, CSS, analytics beacons phoning
+home about your every move. When you're testing whether "Save" actually saved, you don't care about
+any of that. Click **Fetch/XHR** and the noise vanishes; what's left is the app talking to its
+backend. That's your channel.
+
+## The row: six columns, three seconds
+
+The internet module taught you that a request has four parts — method, URL, headers, body — and a
+response has three: status, headers, body. The Network row is those seven things compressed into
+columns. **Name** is the last chunk of the URL (hover for the full thing — `/api/orders?page=2`
+tells you the resource AND the query). **Method** is the verb: `GET` asks, `POST` creates,
+`PUT`/`PATCH` change, `DELETE` removes — exactly as taught, no new rules. **Status** is the verdict
+in one number: 2xx worked, 3xx look elsewhere, 4xx the client sent something wrong, 5xx the server
+broke. You already know the families; here they get a column.
+
+**Type** says what came back: `xhr` or `fetch` for API calls, `document` for the page itself,
+`script`, `stylesheet`, `img`, `font`. **Size** is how much travelled over the wire — and
+sometimes, instead of a number, it says `(memory cache)` or `(disk cache)`, meaning nothing
+travelled at all (next note's whole subplot). **Time** is how long the round trip took, and the
+**Waterfall** stripe next to it shows when it started and how long it overlapped with everything
+else. Six columns. Read left to right: what was asked, how, what the server said, what kind of
+thing came back, how big, how slow.
+
+Now the part beginners skip: **click the row.** The columns are the summary; the tabs are the
+evidence. **Headers** shows both letters' envelopes — the General block (final URL, method, status),
+then **Response Headers** (what the server attached to its reply) and **Request Headers** (what
+your browser attached going out). **Payload** shows what you SENT — form fields or the JSON body of
+a POST. **Response** shows what came BACK, verbatim, in the server's own words. **Timing** itemizes
+where the milliseconds went. Four tabs, two directions: Payload is outbound cargo, Response is
+inbound cargo, and Headers holds both sets of paperwork.
+
+![A split-flap departures board at Melbourne Airport: rows of flight numbers down the left, destinations like Singapore, Auckland and Los Angeles in yellow letters, departure times and counter numbers to the right, check-in statuses at the far edge, and a scrolling notice about liquids, aerosols and gels along the bottom](anatomy-of-a-request.jpg)
+*Melbourne Airport departures board, photo by Marek Ślusarczyk (Tupungato) — Wikimedia Commons, CC BY 3.0*
+- **One row = one request/response pair** — Every flight on the board is one complete round trip, and every Network row is one complete HTTP conversation: one letter out, one letter back, summarized in a handful of columns. A page load is dozens of these; a single button click is often just one or two. The skill is picking YOUR flight out of the schedule - which is what the Fetch/XHR filter and the Name column are for.
+- **The status edge = the verdict at a glance** — CHECK-IN, DELAYED, CANCELLED jump off a departures board without reading anything else, and status codes do the same in the panel: DevTools renders 4xx and 5xx rows in red. Triage order: scan the Status column first, colours before words. A red row is where the investigation starts; a board of all-200s with a broken screen means the bug is in the browser, not the backend - which is itself a finding.
+- **The destination = the URL, and hover shows all of it** — Two different flights both say LOS ANGELES - just like the Name column truncates '/api/v1/orders' and '/api/v2/orders?status=cancelled' to the same word 'orders', a difference that has solved real bugs. Hover the name (or click into Headers - General) for the full URL including the query string. The URL says exactly which resource was asked for; testers read it instead of assuming it.
+- **The time and counter columns = clicking a flight opens the manifest** — Dep. time and counter numbers are the board's summary; the manifest is the evidence. Clicking a Network row opens the detail tabs: Headers (both envelopes), Payload (what you sent), Response (what the server answered, verbatim), Timing (where the milliseconds went). Screenshot-level debugging reads the board; professional debugging opens the manifest.
+- **The scrolling notice at the bottom = enable Preserve log** — The board updates in place and yesterday's flights are gone forever - and the Network panel CLEARS itself on every page navigation, so a request that fires right before a redirect (like a login POST) vanishes before you can read it. The Preserve log checkbox stops the wipe and keeps the transcript across navigations. Losing your evidence to a redirect is a rite of passage; once is enough.
+
+**One button click, read through the panel - press Play**
+
+1. **You click 'Save' - a row appears** — The page's JavaScript fires a fetch() to the backend, and a new row lands in the panel: name 'orders', method POST, status '(pending)'. Filter is on Fetch/XHR so the analytics beacons and font requests stay out of your way. The transcript has begun; everything from here is recorded.
+2. **The status fills in: 500** — The server answered, and the verdict column now reads 500 in red. From the internet module's families: 5xx means the SERVER broke - this is not your form, not your browser, not your wifi. Three seconds in and the bug already has a jurisdiction. But 'it 500ed' is gossip; now you click the row for evidence.
+3. **Headers tab: both envelopes** — General shows the exact URL and method. Request Headers shows what the browser attached going out: Content-Type: application/json, the session cookie, an Authorization header. Response Headers shows the server's paperwork coming back. Two directions, clearly labelled - what the client claimed, and what the server stamped on its reply.
+4. **Payload tab: what you actually sent** — Here is the JSON your browser transmitted - and look: quantity is -3. The UI let a negative through and shipped it. Whatever the server did wrong by crashing, the client ALSO did something wrong by sending this. One tab, and the bug report just grew a second, better-aimed paragraph.
+5. **Response tab: the server's own words** — Verbatim body: an error object with a stack trace mentioning OrderQuantityValidator. Not 'something went wrong' - the actual reason, in the server's handwriting. This is the single most decisive artifact in web testing, and it lives one click deep in a panel most testers only screenshot from the outside.
+6. **Timing tab: where the time went** — Waiting for server response: 2.3 seconds before the 500 arrived - the server thought hard before dying. Next note dissects this tab properly (TTFB vs download, the waterfall); for now, register that even the FAILURE has a timing story, and it is itemized here for free.
+
+The panel shows you the anatomy; `curl -v` proves it's all just text. Same two letters, same
+parts, printed in a terminal — `>` lines are your request going out, `<` lines are the response
+coming back, exactly what the Headers tab reformats into sections:
+
+*Run it - the Headers tab, recreated in a terminal (curl)*
+
+```bash
+# -v (verbose) prints both envelopes. Lines with > go OUT, lines with < come BACK.
+curl -v https://api.example.com/orders/1042
+# > GET /orders/1042 HTTP/1.1          <- method + URL: columns 1 and 2 of the row
+# > Host: api.example.com
+# > User-Agent: curl/8.6.0
+# > Accept: */*                        <- these > lines ARE the Request Headers tab
+# >
+# < HTTP/1.1 200 OK                    <- the Status column
+# < Content-Type: application/json     <- Response Headers: what the body claims to be
+# < Content-Length: 83                 <- the Size column, before compression
+# < Cache-Control: no-store
+# <
+# {"id": 1042, "status": "shipped", "items": 2}    <- the Response tab, verbatim
+
+# -i is the lighter version: response headers + body, no outbound chatter
+curl -i https://api.example.com/orders/1042
+# HTTP/1.1 200 OK
+# Content-Type: application/json
+# ...
+
+# A POST with a body - now there is a Payload tab equivalent too
+curl -v -X POST https://api.example.com/orders \\
+  -H "Content-Type: application/json" \\
+  -d '{"item": "keyboard", "quantity": 2}'
+# > POST /orders HTTP/1.1
+# > Content-Type: application/json     <- request header describing the cargo
+# > Content-Length: 35
+# >
+# < HTTP/1.1 201 Created               <- 2xx family: it worked, resource created
+# {"id": 1043, "status": "created"}
+```
+
+And here's the whole request/response pair as raw text, parsed the way the Network panel parses it
+— run it, then delete a header and watch the "panel" change its display:
+
+*Run it - build the Network row and detail tabs from raw HTTP (Python)*
+
+```python
+# One HTTP exchange as plain text - what actually crosses the wire.
+request = """POST /api/orders?source=web HTTP/1.1
+Host: shop.example.com
+Content-Type: application/json
+Cookie: session=abc123
+Content-Length: 35
+
+{"item": "keyboard", "quantity": 2}"""
+
+response = """HTTP/1.1 201 Created
+Content-Type: application/json
+Set-Cookie: last_order=1043
+
+{"id": 1043, "status": "created"}"""
+
+def split_message(msg):
+    head, _, body = msg.partition("\\n\\n")
+    lines = head.split("\\n")
+    headers = dict(l.split(": ", 1) for l in lines[1:])
+    return lines[0], headers, body
+
+req_line, req_headers, req_body = split_message(request)
+res_line, res_headers, res_body = split_message(response)
+method, path, _ = req_line.split()
+status = res_line.split()[1]
+
+# THE ROW - the six-column summary the panel shows before you click
+print("=== THE ROW ===")
+name = path.split("?")[0].rsplit("/", 1)[-1]
+print(f"name={name}  method={method}  status={status}  type=fetch  size={len(res_body)} B")
+
+# THE TABS - what clicking the row reveals
+print()
+print("=== HEADERS TAB (two directions!) ===")
+print("General:          ", method, path, "->", status)
+for k, v in req_headers.items():
+    print("Request header:   ", k + ":", v)
+for k, v in res_headers.items():
+    print("Response header:  ", k + ":", v)
+
+print()
+print("=== PAYLOAD TAB (what the client SENT) ===")
+print(req_body)
+print()
+print("=== RESPONSE TAB (what the server ANSWERED) ===")
+print(res_body)
+print()
+print("Delete the Cookie line from the request above and re-run:")
+print("the Payload and Response stay put, but the Request Headers list shrinks -")
+print("exactly how a missing auth header looks in the real panel.")
+```
+
+> **Tip**
+>
+> Request headers and response headers live in the SAME tab, and mixing them up produces confidently
+> wrong bug reports. The rule: **request headers are claims, response headers are rulings.**
+> `Cookie`, `Authorization`, `Accept`, `Content-Type` on the way out — that's your browser claiming
+> an identity and describing its cargo. `Set-Cookie`, `Cache-Control`, `Content-Type` on the way
+> back — that's the server issuing tickets and instructions. Same header name can appear on both
+> sides meaning different things: request `Content-Type` describes the payload YOU sent; response
+> `Content-Type` describes the body the SERVER sent. When a dev asks "what headers did it send?",
+> ask back: "which direction?" — it's a senior-sounding question because it's the right one.
+
+### Your first time: Your mission: read one row all the way down
+
+- [ ] Open the panel BEFORE you act — DevTools (F12 or Cmd+Option+I) - Network tab. It only records while open, like a court stenographer who has to be in the room. Tick Preserve log so a redirect can't shred your evidence. Then click Fetch/XHR and watch the noise drop away.
+- [ ] Trigger one action, find its row — Click something that loads or saves data - a search, an Add to cart. Match the new row to your click: read Name for the resource, hover it for the full URL with the query string. That row is YOUR flight on the board.
+- [ ] Read the six columns aloud — Method, status, type, size, time. Literally say it: 'POST to orders, 201, fetch, 412 bytes, 180 milliseconds.' If you can narrate the row, you understand the row - and that sentence is already better than most bug report openings.
+- [ ] Open Headers and find both directions — Click the row. In the Headers tab, locate the Request Headers section and find Cookie or Authorization - the claim. Then Response Headers - find Content-Type, the ruling. Two envelopes, one tab, clearly labelled once you know to look.
+- [ ] Read Payload, then Response — For a POST: Payload shows exactly what your browser sent (is that what the form said?). Response shows exactly what the server answered, verbatim. If the UI shows 'something went wrong', the Response tab almost always shows something SPECIFIC. That gap is your bug report.
+- [ ] Right-click a row and read the menu — Don't click anything yet - just read: Copy as cURL, Save all as HAR. Those two menu items are the next two notes of this chapter. The panel doesn't just show evidence; it exports it.
+
+You picked one request out of the noise, narrated its row, and read all four tabs - both envelopes, the outbound cargo, and the server's verbatim reply. That's the full anatomy, on a real app.
+
+- **The Network panel is empty even though the page clearly loaded.**
+  The panel only records while DevTools is open - it is a stenographer, not a security camera, and it cannot show you requests it never saw. Refresh the page with the panel open and the transcript fills in. Also check you haven't left a filter active: a leftover Fetch/XHR filter hides the document and image rows, and a leftover text in the filter box hides nearly everything - clear the box and the invert checkbox before declaring the network silent.
+- **My request vanishes the instant it fires - I can never click it in time.**
+  The page navigated (a redirect after login is the classic) and the panel cleared itself, taking your POST with it. Tick Preserve log at the top of the panel: the transcript now survives navigations, and the login POST stays readable after the redirect lands. For requests fired as the page unloads, this checkbox is the difference between evidence and folklore.
+- **I clicked the row but the Response tab is empty or says 'failed to load response data'.**
+  Three usual suspects. The response genuinely has no body - a 204 No Content or a 304 says everything with its status and sends nothing, which is correct behaviour, not a bug. The request never completed - a cancelled or blocked request has no response to show; check the Status column for (canceled) or a CORS message. Or the page navigated away and the body was discarded before you clicked - Preserve log keeps the row but not always the body, so re-trigger the request and read the Response tab while the page stays put.
+- **The row shows a red CORS error but the backend team says the request arrived fine.**
+  Both are right, and the internet module predicted this one: the browser sent the request, the server answered, and then the browser REFUSED to hand the response to the page because the server's response headers didn't grant permission (the Access-Control-Allow-Origin ruling). The evidence is in the Headers tab - response headers missing the CORS grant. It works in curl precisely because curl doesn't enforce browser rules. File it as a server configuration bug with the response headers attached, not as 'the API is down'.
+
+### Where to check
+
+Where the anatomy shows up, panel by panel:
+
+- **Network → the row** — the six-column triage: method, URL (hover for the full thing), status, type, size, time. Red rows first; a wall of 200s under a broken UI points the finger at the client.
+- **Network → Headers tab** — both envelopes. Request Headers for the claims (`Cookie`, `Authorization`, `Content-Type` of the cargo); Response Headers for the rulings (`Set-Cookie`, `Cache-Control`, `Content-Type` of the reply).
+- **Network → Payload tab** — the outbound cargo. Is the form data actually what the form showed? Negative quantities, empty required fields, and doubled requests all confess here.
+- **Network → Response tab** — the inbound cargo, verbatim. The most decisive artifact in web testing; read it before theorizing.
+- **Network → filter bar** — Fetch/XHR to isolate API calls; the text box filters by name; status filters like `status-code:500` narrow a busy transcript fast.
+- **`curl -v <url>`** — the same anatomy without a browser, `>` out and `<` back. The linux module taught the flags; this chapter's third note weaponizes them.
+
+The habit: **columns to triage, tabs to prove.** Never report from the row alone — the row says
+THAT it failed; the tabs say WHY, in the server's own words.
+
+### Worked example: the search box that 'randomly' showed nothing
+
+1. **The report:** "Search sometimes shows no results even for products we definitely stock. Refresh and it works. It's random." Filed three times, closed twice as cannot-reproduce. Classic.
+2. **The tester opens Network → Fetch/XHR, ticks Preserve log,** and searches for 'keyboard' until it fails. On the fourth try: empty results screen. But the transcript caught everything.
+3. **Read the rows.** Two requests fired for that one search: `search?q=keyboard` — and then `search?q=keyboar`, fired 300 ms earlier, which returned AFTER the complete one. Both status 200. Nothing red. The board looks healthy.
+4. **Click into each row.** First request's Response tab: 14 results for 'keyboard'. Second request's Response tab: `{"results": []}` — zero hits for 'keyboar', a word no one typed on purpose. The Payload/query of each row shows exactly what was asked.
+5. **The anatomy tells the story.** The app fires a search per keystroke and renders whichever response arrives LAST. When the truncated query's response arrived late — network jitter, nothing more — it overwrote the good results. The 'randomness' was a race, visible as two rows with reversed completion order.
+6. **The report writes itself:** "Search fires one request per keystroke and renders the last response to ARRIVE, not the last QUERY. Repro: type fast, observe two rows; the stale `q=keyboar` response (empty, 200) lands after `q=keyboard` (14 results) and wins. Evidence: both rows' URLs and Response bodies attached. Fix direction: cancel or ignore stale requests."
+7. **Notice what closed the case:** no source code, no backend access — two rows, their query strings, and their Response tabs. And notice what made it possible: the panel was open BEFORE the repro, with Preserve log on. Anatomy reading is cheap; it just has to be running when the crime happens.
+8. **The tester's lesson:** 'random' UI bugs are often perfectly deterministic network stories. When the screen misbehaves under all-200 rows, compare the requests to each other — order, queries, payloads — not just each request to its own response.
+
+> **Common mistake**
+>
+> Screenshotting the row and calling it a bug report. A picture of `POST /orders — 500` is a headline
+> with no article: the developer's first three questions — what did the client send, what did the
+> server answer, what headers rode along — are all answered one click deeper, in Payload, Response,
+> and Headers. The log-investigation chapter's rule applies with full force here: **paste text, not
+> pictures of text.** Right-click the row and copy the URL; open the Response tab and copy the body;
+> copy the request payload. Verbatim, searchable, quotable. The row is where you NOTICE the bug; the
+> tabs are where the evidence lives — and a report built from the tabs gets fixed on Tuesday instead
+> of bounced back with questions.
+
+**Quiz.** A tester clicks 'Save', and the Network panel shows: POST /api/orders, status 500. What should they read NEXT before filing the bug?
+
+- [ ] Nothing - a 500 is a server bug, so the status code alone is a complete report
+- [ ] The browser console, because the Network panel cannot show anything more about a failed request
+- [x] The row's detail tabs: Payload (what the client actually sent) and Response (the server's verbatim error body), plus Request Headers - because a 500 report with the exact request and the server's own words gets diagnosed in minutes instead of bounced back
+- [ ] The Timing tab only, since a 500 is always a timeout
+
+*The status code gives jurisdiction (5xx: the server broke) but not a diagnosis. The row is a summary; the evidence lives one click deeper. The Payload tab shows exactly what the client sent - if the payload was malformed or surprising (a negative quantity, a missing field), that context changes the whole bug. The Response tab shows the server's verbatim error body, which frequently names the failing component outright. Request Headers show what identity and content-type rode along. A 500 with payload + response body + headers attached is a report a developer can act on immediately; a bare '500 happened' screenshot triggers a round of questions you could have pre-answered in ninety seconds. And no - a 500 is not always a timeout; the Timing tab is a supporting witness here, not the star.*
+
+- **The six things a Network row tells you** — Name (end of the URL - hover for the full thing), Method (the verb), Status (the verdict: 2xx/3xx/4xx/5xx), Type (xhr/fetch, document, img...), Size (bytes over the wire, or a cache note), Time (round-trip duration, with the waterfall stripe).
+- **The four detail tabs, one line each** — Headers: both envelopes (request AND response headers). Payload: what the client SENT. Response: what the server ANSWERED, verbatim. Timing: where the milliseconds went. Payload is outbound cargo, Response is inbound.
+- **Request headers vs response headers** — Request headers are CLAIMS (Cookie, Authorization, Accept - attached by the browser going out). Response headers are RULINGS (Set-Cookie, Cache-Control - attached by the server coming back). Same tab, two clearly-labelled directions.
+- **The Fetch/XHR filter** — Shows only requests made by the page's JavaScript - the API calls - hiding images, fonts, CSS and analytics. When testing whether an action worked, this filter is step one: it leaves only the app talking to its backend.
+- **Preserve log - what and why** — A checkbox that stops the panel clearing itself on page navigation. Without it, a request that fires right before a redirect (the login POST is the classic) vanishes before you can read it. Tick it before any repro that navigates.
+- **Why the panel is sometimes empty** — It only records while DevTools is open - a stenographer, not a security camera. Refresh with the panel open. Also check for leftover filters: filter text or Fetch/XHR can hide everything and make a busy page look silent.
+
+### Challenge
+
+Open any real app with Network → Fetch/XHR filtered and Preserve log on. Perform ONE action —
+a search, an add-to-cart, a login — and find its row. Now write, in text, the full anatomy: method,
+full URL (hover!), status, type, size, time; then three request headers and what each claims; the
+payload if there is one; and the first line of the response body. Ten lines, no screenshots.
+Congratulations: you've just produced better evidence for a working feature than most bug reports
+contain for a broken one — and next time the status isn't 2xx, you already know exactly what to
+capture.
+
+### Ask the community
+
+> Network panel question: action is [what you clicked], the row shows [method] [url] -> [status] in [time]. Request headers include: [Cookie? Authorization? Content-Type?]. Payload: [paste]. Response body: [paste first lines]. What I expected instead: [describe].
+
+That template IS the anatomy of this note — row summary, both envelopes, outbound cargo, inbound
+cargo. Fill it honestly and half the time you'll diagnose the bug yourself before posting; the
+other half, the first reply can actually help because the evidence is already on the table.
+
+- [Chrome DevTools docs - inspect network activity (the official tour)](https://developer.chrome.com/docs/devtools/network)
+- [MDN - HTTP messages: the raw anatomy the panel renders](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages)
+- [Chrome DevTools network reference - every column, filter and checkbox](https://developer.chrome.com/docs/devtools/network/reference)
+- [Chrome for Developers - Inspect Network Activity (DevTools 101)](https://www.youtube.com/watch?v=e1gAyQuIFQo)
+
+🎬 [Inspect Network Activity - Chrome DevTools 101](https://www.youtube.com/watch?v=e1gAyQuIFQo) (9 min)
+
+- The Network panel is the live transcript of the request/response conversation from the internet module: one row per HTTP pair, recorded only while DevTools is open - so open it BEFORE you reproduce, with Preserve log ticked.
+- Read a row in six columns: name/URL, method, status, type, size, time. Status triages in seconds (4xx client, 5xx server, all-200s under a broken UI means look at the client); Fetch/XHR filters the transcript down to the app talking to its backend.
+- The tabs are the evidence: Payload is what the client sent, Response is the server's verbatim answer (the most decisive artifact in web testing), Headers holds BOTH envelopes, Timing itemizes the wait.
+- Request headers are claims (Cookie, Authorization, outbound Content-Type); response headers are rulings (Set-Cookie, Cache-Control). Always say which direction you mean.
+- Report from the tabs, not the row: paste the URL, payload, and response body as text - a status code alone is a headline without the article, and screenshots of text are gossip.
+
+
+---
+_Source: `packages/curriculum/content/notes/browser-devtools-mastery/network/anatomy-of-a-request.mdx`_

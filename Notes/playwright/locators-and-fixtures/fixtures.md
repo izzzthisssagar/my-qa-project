@@ -1,0 +1,236 @@
+---
+title: "Fixtures"
+tags: ["playwright", "locators-and-fixtures", "track-d"]
+updated: "2026-07-16"
+---
+
+# Fixtures
+
+*A fixture is a named, reusable piece of test setup that Playwright creates only when a test actually asks for it by name, and tears down automatically once the test finishes.*
+
+> `{ page }` shows up as an argument to every Playwright test without a single line of setup code
+> anywhere in sight. It isn't magic and it isn't global state - it's a fixture, requested by name,
+> created fresh the moment this specific test asks for it, and quietly cleaned up the moment the test
+> finishes. Every other resource a test needs can work exactly the same way.
+
+> **In real life**
+>
+> A hotel concierge doesn't hand every guest a copy of every room key at check-in. A guest asks for
+> theirs by room number, the concierge pulls exactly that one key from a wall of dozens still hanging
+> untouched, hands it over, and it goes back on the hook when the guest checks out. Nothing is prepared
+> until it's actually asked for, and nothing lingers after the person who needed it is done.
+
+**Fixture**: A Playwright fixture is a named, reusable resource - like the built-in page, context, browser, and request fixtures - that Playwright's test runner creates automatically and injects into any test function that declares it as a parameter, but only if that test actually uses it. A fixture is created lazily (only on first use within a test), torn down automatically after the test completes, and can be composed of other fixtures. Custom fixtures are defined with test.extend(), letting a team package its own reusable setup - a logged-in page, seeded test data, a configured API client - behind a single named parameter every test can request.
+
+## What makes a fixture different from a plain setup function
+
+- **Requested by name, not called explicitly** — a test declares `async ({ page, myFixture }) => {...}`
+  and Playwright resolves and injects each one; there's no `setup()` call to remember.
+- **Lazy** — a fixture only runs if the test actually destructures it. A test that never touches
+  `request` never pays for creating an API client, even if it's defined project-wide.
+- **Scoped and composable** — fixtures can depend on other fixtures (a custom `loggedInPage` fixture
+  can itself request the built-in `page` fixture and perform a login before handing it back).
+- **Torn down automatically** — anything after a fixture function's `await use(value)` line runs as
+  cleanup, guaranteed to execute even if the test itself fails.
+
+```
+import { test as base } from '@playwright/test';
+
+export const test = base.extend({
+  loggedInPage: async ({ page }, use) => {
+    await page.goto('/login');
+    await page.getByLabel('Email').fill('tester@example.com');
+    await page.getByLabel('Password').fill('secret');
+    await page.getByRole('button', { name: 'Sign in' }).click();
+    await use(page);          // the test runs here, using the logged-in page
+    // anything after use() is teardown - runs after the test finishes
+  },
+});
+```
+
+> **Tip**
+>
+> Push repeated setup into a custom fixture the moment more than one test needs it, rather than copying
+> the same three lines of `beforeEach`-style code into every file. A fixture makes that setup a single
+> named thing every test can request explicitly, instead of implicit shared logic a reader has to go
+> find.
+
+> **Common mistake**
+>
+> Defining a fixture that does expensive setup unconditionally at module load time instead of inside the
+> fixture function itself. That defeats laziness entirely - the whole point of a fixture is that its
+> cost is only paid by tests that actually request it, not by every test in the file whether they need
+> it or not.
+
+![A hotel concierge at a front desk holding up a single room key with a visible number tag while speaking on a corded telephone, with a large wall of mostly-full numbered wooden key pigeonholes visible in soft focus behind him](fixtures.jpg)
+*A hotel concierge handing room keys, Rome — Wikimedia Commons, CC BY-SA 3.0 (Jorge Royan). [Source](https://commons.wikimedia.org/wiki/File:A_hotel_concierge_handing_room_keys,_Rome_-_3566.jpg)*
+- **The one key actually pulled out** — Requested by number, retrieved on demand - exactly what a fixture is: created the moment something specifically asks for it, not before.
+- **Dozens of other slots, still full, untouched** — Every key nobody has asked for yet stays exactly where it is - the same reason a fixture nobody's test destructures never runs its setup at all.
+- **The paper on the counter — the eventual teardown** — A hotel key gets logged back in at checkout; a fixture's code after await use() runs as guaranteed cleanup once the test that requested it finishes.
+
+**A custom loggedInPage fixture, start to finish**
+
+1. **Playwright resolves the dependency** — loggedInPage itself requests the built-in page fixture first.
+2. **Setup runs: login happens** — Navigate, fill credentials, submit - all before the test body executes.
+3. **await use(page) — the test body runs** — The actual test code executes here, with an already-logged-in page.
+4. **Teardown runs automatically** — Anything written after use() executes once the test finishes, pass or fail.
+
+A fixture is really just: create something lazily, hand it to whoever asked, then clean up
+afterward - a request/provide/cleanup shape. Here's that pattern as a small, generic simulation.
+
+*Run it - a lazy, named resource created only when requested, cleaned up after (Python)*
+
+```python
+created = {}
+
+def get_fixture(name, factory, cleanup):
+    if name not in created:
+        print(f"{name}: creating (first request)")
+        created[name] = factory()
+    else:
+        print(f"{name}: already created, reusing within this scope")
+    return created[name]
+
+def teardown(name, cleanup):
+    if name in created:
+        cleanup(created[name])
+        print(f"{name}: torn down")
+        del created[name]
+
+# A test that only requests "database_connection", never "email_client"
+db = get_fixture("database_connection", lambda: "conn-object", lambda c: None)
+print(f"test runs using: {db}")
+teardown("database_connection", lambda c: None)
+print(f"email_client requested this run? {'email_client' in created}")
+```
+
+Same lazy-create/use/teardown shape in Java.
+
+*Run it - a lazy, named resource created only when requested, cleaned up after (Java)*
+
+```java
+import java.util.*;
+import java.util.function.*;
+
+public class Main {
+    static Map<String, String> created = new HashMap<>();
+
+    static String getFixture(String name, Supplier<String> factory) {
+        if (!created.containsKey(name)) {
+            System.out.println(name + ": creating (first request)");
+            created.put(name, factory.get());
+        } else {
+            System.out.println(name + ": already created, reusing within this scope");
+        }
+        return created.get(name);
+    }
+
+    static void teardown(String name) {
+        if (created.containsKey(name)) {
+            created.remove(name);
+            System.out.println(name + ": torn down");
+        }
+    }
+
+    public static void main(String[] args) {
+        String db = getFixture("database_connection", () -> "conn-object");
+        System.out.println("test runs using: " + db);
+        teardown("database_connection");
+        System.out.println("email_client requested this run? " + created.containsKey("email_client"));
+    }
+}
+```
+
+### Your first time: Your mission: build your own custom fixture
+
+- [ ] In your scratch Playwright project, create a fixtures file that extends the base test with test.extend() — Start with something simple: a fixture that navigates to a known starting page before the test body runs.
+- [ ] Add a console.log inside the fixture, before await use() — This marks setup running.
+- [ ] Add a second console.log after await use() — This marks teardown running.
+- [ ] Write two tests: one that uses the fixture, one that doesn't — Run both and confirm the setup/teardown logs appear only for the test that actually requested the fixture.
+
+You've now seen laziness proven directly: a fixture's cost only applies to tests that actually ask for
+it.
+
+- **A custom fixture's setup code seems to run even for tests that never use it.**
+  Check whether the expensive work was accidentally placed outside the fixture function (e.g. at module scope) rather than inside it, before await use() - fixture bodies only run on actual first request within a test that destructures them.
+- **Teardown code after await use() never seems to run.**
+  Confirm the fixture function is an async function using await use(value) (not returning a value directly) - teardown is specifically the code that executes after that awaited call resolves.
+- **Two custom fixtures both need the database connection and it gets created twice.**
+  Have both fixtures depend on a shared third fixture for the connection itself, rather than each creating their own - Playwright deduplicates a fixture within a single test's dependency graph automatically.
+- **A fixture works fine in isolation but a teammate's test using it fails with an unrelated error.**
+  Check whether their test relies on fixture teardown ORDER relative to another fixture they're also using - dependencies determine teardown order (reverse of setup), which can matter if two fixtures touch shared state.
+
+### Where to check
+
+- **The fixtures file itself** (often `fixtures.ts` by convention) — the single source of truth for
+  what custom fixtures exist and what each actually does in setup/teardown.
+- **A test's own parameter list** — `async ({ page, loggedInPage }) => {...}` is a complete,
+  explicit list of every fixture that specific test actually depends on.
+- **Playwright's trace viewer** (covered later in this module) — shows fixture setup and teardown as
+  distinct steps in a test's timeline, useful for confirming ordering.
+- **`test.extend()`'s own type signature** — in a TypeScript project, hovering over a custom fixture
+  name shows exactly what type it resolves to, without needing to open the fixtures file.
+
+### Worked example: turning three copy-pasted setup lines into one shared fixture
+
+1. Twelve test files across a suite each start with the same three lines: navigate to `/login`, fill
+   in a test account's credentials, click sign in - copy-pasted independently in every file.
+2. A change to the login form (a renamed field label) now requires editing all twelve files
+   identically, and one file gets missed, silently breaking that suite's setup.
+3. The fix: a single `loggedInPage` custom fixture defined once in a shared fixtures file, requesting
+   the built-in `page` fixture and performing the same three steps internally.
+4. All twelve test files are rewritten to declare `async ({ loggedInPage }) => {...}` instead of
+   `async ({ page }) => {...}` plus the copy-pasted login block.
+5. The next login form change requires editing exactly one function, in one file - every test using
+   the fixture picks up the fix automatically, and none can silently drift out of sync with the others
+   again.
+
+**Quiz.** A custom fixture named apiClient is defined in a shared fixtures file used by an entire test suite. A specific test's function signature is async ({ page }) => {...} - it never mentions apiClient. Does that test still pay the cost of creating the API client?
+
+- [ ] Yes, because all fixtures defined in the file run for every test in that file automatically
+- [x] No - fixtures are lazy, and apiClient's setup code only runs for a test that actually declares it as a parameter and uses it; a test that only requests page never triggers apiClient at all
+- [ ] Only if the test file imports the fixtures file at the top
+- [ ] It depends on whether apiClient was defined before or after page in the fixtures file
+
+*The note is explicit that fixtures are lazy: a fixture only runs if the test actually destructures it in its parameter list. Option one describes the opposite of how fixtures work - defining a fixture doesn't force every test to pay for it. Option three is a real prerequisite (the fixtures file's extended test object does need to be imported and used), but doesn't change the laziness behavior itself once it is imported. Option four invents an ordering dependency the note never describes - laziness is about which fixtures a given TEST requests, not the order fixtures are defined in the file.*
+
+- **What makes a fixture "lazy"?** — Its setup code only runs when a test actually declares it as a parameter and uses it - a fixture nobody's test requests never runs at all.
+- **Where does fixture teardown code live?** — After the fixture function's await use(value) call - that code runs automatically once the requesting test finishes, pass or fail.
+- **Can a custom fixture depend on other fixtures?** — Yes - fixtures are composable; a custom fixture can request the built-in page fixture (or another custom one) as its own dependency.
+- **The hotel-concierge analogy for fixtures** — A key is only pulled from the rack when a specific guest asks for their specific room - nothing is prepared until requested, and it goes back on the hook (teardown) once that guest is done.
+
+### Challenge
+
+Find (or write) three tests in a scratch project that share at least two lines of identical setup
+code. Extract that setup into a single custom fixture using test.extend(), rewrite all three tests to
+use it, and confirm they still pass. Then add a fourth test that intentionally does NOT use the
+fixture, and confirm (via a console.log in the fixture) that its setup code never runs for that test.
+
+### Ask the community
+
+> My custom fixture `[fixture name]` isn't behaving as expected - `[describe: not running, running for every test, teardown not firing, etc.]`. Here's the fixture definition: `[paste it]`.
+
+Pasting the actual fixture function (especially where await use(...) sits relative to any cleanup
+code) is usually enough for someone to spot whether the setup/teardown boundary is in the wrong place.
+
+- [Playwright — official Fixtures docs](https://playwright.dev/docs/test-fixtures)
+- [CircleCI — Playwright fixtures: a deep dive](https://circleci.com/blog/playwright-fixtures-a-deep-dive/)
+
+🎬 [Playwright Fixtures — How They Actually Work, Simply Explained — Artem Bondar](https://www.youtube.com/watch?v=EO2WufLMuh0) (20 min)
+
+- A fixture is a named, reusable resource injected into any test that declares it as a parameter - the built-in page, context, browser, and request are all fixtures.
+- Fixtures are lazy: setup code only runs for a test that actually requests that specific fixture, never for tests that don't.
+- Teardown lives after a fixture's await use(value) call, and runs automatically once the requesting test finishes, pass or fail.
+- Custom fixtures, defined with test.extend(), turn copy-pasted setup logic into one named, composable thing every test can request explicitly.
+- Fixtures can depend on other fixtures - Playwright resolves and deduplicates the whole dependency graph automatically within a single test.
+
+
+## Related notes
+
+- [[Notes/playwright/locators-and-fixtures/user-facing-locators|User-facing locators]]
+- [[Notes/playwright/locators-and-fixtures/getbyrole-label-testid|getByRole / Label / TestId]]
+- [[Notes/playwright/locators-and-fixtures/test-isolation|Test isolation]]
+
+
+---
+_Source: `packages/curriculum/content/notes/playwright/locators-and-fixtures/fixtures.mdx`_

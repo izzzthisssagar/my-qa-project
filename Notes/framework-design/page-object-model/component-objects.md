@@ -1,0 +1,280 @@
+---
+title: "Component objects"
+tags: ["framework-design", "page-object-model", "track-d"]
+updated: "2026-07-17"
+---
+
+# Component objects
+
+*A nav bar, a modal, a cookie banner - the same widget shows up on many pages. A component object models it once, scoped to its own root element, and every page class that contains it holds a field instead of a duplicated copy of its locators.*
+
+> The site header - logo, search box, cart icon, account menu - sits on every single page. Without a
+> plan for that, twelve page classes each grow their own copy of `By.id("search-input")`. The header
+> gets redesigned once, and twelve classes need the identical one-line fix - the exact multi-file
+> disaster the Page Object Model was supposed to end, just moved one level up.
+
+> **In real life**
+>
+> A standard shipping container is the same steel box whether it rides a train through Mexico, sits
+> stacked on a container ship, or gets craned onto a truck chassis. Nobody redesigns the container
+> for each journey - its dimensions, corner fittings, and locking mechanism are fixed once, and every
+> vehicle that carries it is simply built to accept that one standard unit. Two identical containers
+> can even stack directly on the same flatcar, each one still just an instance of the same reusable
+> design, dropped wherever it's needed.
+
+**Component object**: A component object models one reusable piece of UI - a nav bar, a modal dialog, a cookie-consent banner, a pagination control, a single product card in a grid - that appears on more than one page, or more than once on the same page. It has the same anatomy as a page class (locators as fields, a constructor, public action methods), with one key difference: its constructor typically takes a ROOT element or locator that scopes it to just that piece of the DOM, rather than assuming it owns the whole page. A page class that contains the widget holds a component instance as a field and DELEGATES to it (header.search('shoes')) instead of re-declaring the widget's own locators. Because the component is scoped to a root, the same class can be instantiated once per occurrence when a widget repeats - one ProductCard object per card in a results grid, for example.
+
+## Composed into a page, not duplicated across pages
+
+```java
+// The reusable piece - scoped to its own root, not the whole page
+public class NavBar {
+    private final WebElement root;
+
+    public NavBar(WebElement root) {
+        this.root = root;
+    }
+
+    public void search(String query) {
+        root.findElement(By.id("search-input")).sendKeys(query);
+        root.findElement(By.id("search-submit")).click();
+    }
+
+    public int getCartCount() {
+        return Integer.parseInt(root.findElement(By.cssSelector(".cart-count")).getText());
+    }
+}
+
+// Every page that has the header COMPOSES it in, instead of re-declaring it
+public class ProductListPage {
+    private final WebDriver driver;
+    public final NavBar navBar;
+
+    public ProductListPage(WebDriver driver) {
+        this.driver = driver;
+        WebElement headerRoot = driver.findElement(By.cssSelector("header.site-header"));
+        this.navBar = new NavBar(headerRoot);   // one shared component, held as a field
+    }
+
+    public void openProduct(String name) {
+        driver.findElement(By.linkText(name)).click();
+    }
+}
+
+// The test reads naturally across both layers:
+productListPage.navBar.search("shoes");
+assertEquals(1, productListPage.navBar.getCartCount());
+```
+
+- **Same anatomy as a page class, one addition** — locators, a constructor, action methods - plus a
+  root element that scopes every lookup inside the component to just its slice of the DOM.
+- **Page classes hold components as fields, and delegate** — `page.navBar.search(...)`, never a
+  duplicated `search-input` locator living inside `ProductListPage` itself.
+- **Repeatable by construction** — because a component takes its own root, a results grid with
+  twenty product cards can hold twenty `ProductCard` instances, each one independently scoped and
+  correct, from the exact same class.
+- **The redesign math changes** — a header redesign that used to mean editing the same locator in
+  twelve page classes now means editing `NavBar` once; every page holding one picks it up for free.
+
+> **Tip**
+>
+> Reach for a component object the moment a locator or action shows up on a second page - not before.
+> One page class that happens to render a nav bar doesn't need the extra class yet; the second page
+> that renders the SAME nav bar is the actual trigger, because that's the moment duplication becomes
+> a real, growing cost instead of a hypothetical one.
+
+> **Common mistake**
+>
+> Building a component whose constructor assumes it owns the whole page - calling
+> `driver.findElement(...)` directly instead of scoping every lookup through its `root`. The moment a
+> second copy of that same widget needs to exist on one page (two comparison-mode product cards, a
+> modal opened over a page that also has its own matching field), the un-scoped component can't tell
+> its two instances apart and starts finding the wrong element. Scoping through a root isn't
+> ceremony - it's the entire reason the component can be instantiated more than once.
+
+![Two identical stacked green shipping containers branded TMM Linea Mexicana on a yellow-orange double-stack well-car railcar marked 125T and TTX, surrounded by trees](component-objects.jpg)
+*TMM Linea Mexicana double-stack containers on a TTX well car — Wikimedia Commons, CC BY-SA 2.0 (Jack Snell). [Source](https://commons.wikimedia.org/wiki/File:TMM_container_train.jpg)*
+- **The top container — one instance of a standard, reusable design** — Same fixed dimensions and fittings as every other container of its type - the way a component object's class is written once and instantiated wherever that widget appears.
+- **The identical container stacked below — a second instance, same class** — Two containers, same design, each sitting independently in its own slot - exactly like two ProductCard components on one results page, each scoped to its own root element.
+- **The TTX well car underneath — the page class that composes the piece in** — The railcar doesn't reinvent a container - it's built to carry one. A page class doesn't redeclare a nav bar's locators - it holds a NavBar field and delegates to it.
+- **The reporting marks — one identity, wherever the unit travels** — Whichever train it rides, the container keeps the same identity and behavior - a component's locators and methods stay identical no matter which page composes it in.
+
+**A header redesign, with and without a component object**
+
+1. **The site header gets a redesign: the search input's id changes** — A routine front-end change, shipped to every page at once.
+2. **Without a component: twelve page classes each own a copy of the locator** — All twelve go red for the identical one-line reason - the multi-file disaster POM exists to prevent, recreated inside twelve 'page' classes.
+3. **With a component: one NavBar class owns that locator, once** — Every page class holds a NavBar field and never declared the locator itself.
+4. **One edit, in NavBar** — The twelve page classes never change - they never knew the old id in the first place.
+5. **Twelve pages, one shared header, green again** — The fix landed exactly where the knowledge lived - one class, not twelve.
+
+Strip away the DOM and the pattern is just: shared knowledge lives in one place, and everything that
+uses it holds a reference rather than a copy. Here's that shape as a small, generic simulation.
+
+*Run it - one shared component versus each page owning its own copy (Python)*
+
+```python
+# Twelve pages all render the same header. Two ways to organize that knowledge.
+
+pages = [f"page_{i}" for i in range(1, 13)]
+
+# Without a component: every page carries its own copy of the header's locator
+duplicated = {page: {"search_input": "id=search-input"} for page in pages}
+
+# With a component: one NavBar owns it; pages hold a reference to the same instance
+class NavBar:
+    def __init__(self):
+        self.search_input = "id=search-input"
+
+shared_navbar = NavBar()
+composed = {page: shared_navbar for page in pages}   # all pages point at the SAME object
+
+def edits_needed_duplicated(owners, old_locator):
+    return [name for name, locs in owners.items() if locs["search_input"] == old_locator]
+
+def edits_needed_composed(shared_component, old_locator):
+    return 1 if shared_component.search_input == old_locator else 0
+
+old_locator = "id=search-input"
+print("Header redesign: search-input locator changes")
+print(f"Without a component: {len(edits_needed_duplicated(duplicated, old_locator))} files to edit")
+print(f"With a component:    {edits_needed_composed(shared_navbar, old_locator)} file to edit")
+print()
+print("Twelve pages, one header - the difference is only WHERE the locator lives.")
+```
+
+Same comparison in Java.
+
+*Run it - one shared component versus each page owning its own copy (Java)*
+
+```java
+import java.util.*;
+
+public class Main {
+    static class NavBar {
+        String searchInput = "id=search-input";
+    }
+
+    public static void main(String[] args) {
+        List<String> pages = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) pages.add("page_" + i);
+
+        // Without a component: every page carries its own copy of the locator
+        Map<String, String> duplicated = new LinkedHashMap<>();
+        for (String page : pages) duplicated.put(page, "id=search-input");
+
+        // With a component: one NavBar instance, every page holds the SAME reference
+        NavBar sharedNavBar = new NavBar();
+        Map<String, NavBar> composed = new LinkedHashMap<>();
+        for (String page : pages) composed.put(page, sharedNavBar);
+
+        String oldLocator = "id=search-input";
+
+        long duplicatedEdits = duplicated.values().stream()
+                .filter(loc -> loc.equals(oldLocator)).count();
+        long composedEdits = sharedNavBar.searchInput.equals(oldLocator) ? 1 : 0;
+
+        System.out.println("Header redesign: search-input locator changes");
+        System.out.println("Without a component: " + duplicatedEdits + " files to edit");
+        System.out.println("With a component:    " + composedEdits + " file to edit");
+        System.out.println();
+        System.out.println("Twelve pages, one header - the difference is only WHERE the locator lives.");
+    }
+}
+```
+
+### Your first time: Your mission: extract one component from two page classes that duplicate it
+
+- [ ] Find (or write) two page classes on a practice site that each re-declare the same header/footer/nav locators — SauceDemo's cart icon and menu button appear on every page - a realistic candidate.
+- [ ] Write the component class: a root-scoped constructor, its own locators, its own action methods — Every lookup inside it goes through root.findElement(...), never driver.findElement(...) directly.
+- [ ] Give each page class a field holding an instance of the component, constructed from that page's header root — Delete the duplicated locators from both page classes entirely.
+- [ ] Rewrite both pages' tests to call through the component field (page.navBar.search(...)) — Confirm both still pass, and that a locator change now needs editing only the component class.
+
+You've now turned a duplicated widget into a single owned piece of knowledge, composed wherever it
+actually appears.
+
+- **A component finds the WRONG instance of a repeated widget - the second product card's button clicks the first card's link.**
+  The component (or its caller) isn't scoping searches through its own root - it fell back to a driver-wide findElement somewhere, which always returns the first match in the DOM. Audit every lookup inside the component for root.findElement, not driver.findElement.
+- **Constructing a page throws because the component's root element isn't on the page yet.**
+  The component was instantiated before its root rendered (a modal component built at page-construction time, before anything opens the modal). Construct on-demand instead - a page method that returns a fresh component only once the trigger has been clicked and the root exists.
+- **Two different component classes duplicate a smaller shared piece (a rating widget inside both ProductCard and a review section).**
+  Components can compose each other exactly like pages compose components - extract the rating widget into its own root-scoped class and hold it as a field inside both parents, one level deeper.
+- **A page class exposes its component's internals directly (page.navBar.getRoot()) and callers start bypassing the component's methods.**
+  That's the same locator-leak mistake page classes guard against, one level up. Keep the root element private inside the component; expose only named actions and state queries through it.
+
+### Where to check
+
+- **Any locator that appears in more than one page class** — the first sign a widget should become a
+  component instead of staying duplicated.
+- **A component's method bodies, for `driver.findElement` instead of `root.findElement`** — the
+  fastest scoping-bug detector; every lookup should go through the root it was given.
+- **Where components get constructed relative to when their root actually renders** — modals and
+  other conditionally-shown widgets need on-demand construction, not eager construction in the page
+  constructor.
+- **Selenium's official Page Object Models documentation** — its guidance on composing smaller
+  objects together is the canonical source this note's component pattern builds on.
+
+### Worked example: the header redesign that touched one file instead of nine
+
+1. A retail site's suite has nine page classes; every one of them, written over months by different
+   testers, has its own copy of the header's cart-count locator to power a "cart is empty" check.
+2. The header ships a redesign: `.cart-count` becomes `[data-testid='cart-badge']`. All nine pages'
+   cart checks fail overnight, each for the identical reason.
+3. Triage takes a while precisely because the failures are scattered across nine unrelated-looking
+   files, and nothing in the codebase says these nine locators were ever the same fact.
+4. The team extracts a `NavBar` component (root-scoped, one `getCartCount()` method) and gives all
+   nine page classes a `navBar` field, deleting each page's private copy of the locator.
+5. Three months later the badge markup changes again. This time the fix is one line in `NavBar`, one
+   commit, and every one of the nine pages is correct on the next run without being touched.
+
+**Quiz.** A team builds a ProductCard component to represent one card in a results grid of twenty cards. A tester writes `new ProductCard(driver)`, passing the whole driver instead of a specific card's root element. What breaks?
+
+- [ ] Nothing - a component works identically whether it's scoped to a root or to the whole driver
+- [x] It will only ever find the FIRST matching card's elements no matter which of the twenty cards the test actually meant, because every lookup resolves driver-wide instead of within one card's DOM subtree
+- [ ] Selenium throws a compile error, since components require a WebElement constructor argument
+- [ ] The test runs slower, but eventually finds the correct card through retries
+
+*A component's whole value depends on being scoped to its own root - drop that and every findElement inside it searches the entire page again, which for a repeated widget means it always resolves to the first match in the DOM, regardless of which of the twenty cards the test actually wanted. Option one ignores exactly the distinction this note makes between page classes and component objects. Option three is false - Java has no such enforcement; an unscoped component compiles fine and fails silently at runtime instead, which is the actually dangerous part. Option four invents a retry mechanism that doesn't exist here - the wrong element is found immediately and confidently, not slowly.*
+
+- **What does a component object model, that a page class doesn't?** — One reusable piece of UI (nav bar, modal, product card) that appears on more than one page, or more than once on the same page - scoped to its own root element rather than owning the whole page.
+- **The one structural addition a component has over a page class** — A root element or locator passed into its constructor, so every internal lookup is scoped to just that piece of the DOM instead of the whole page.
+- **How does a page class use a component, correctly?** — It holds the component as a field and delegates to it (page.navBar.search(...)) - it never re-declares the component's own locators itself.
+- **Why does root-scoping matter for repeated widgets?** — It's what lets the same component class be instantiated once per occurrence (twenty ProductCard objects for twenty cards) without each instance finding the wrong element.
+- **The shipping-container analogy for component objects** — One standard container design, built once, carried by many different vehicles - the way one component class is written once and composed into every page (or every repeated slot) that contains that widget.
+
+### Challenge
+
+Pick a real multi-page suite (yours, a teammate's, or an open-source example) and search for one
+locator string that appears in more than one page class file. Count exactly how many files contain
+it, then extract a component object for that widget, give every affected page class a field for it,
+and delete the duplicated locators. Report the before/after file count for a hypothetical rename of
+that locator.
+
+### Ask the community
+
+> I have a widget (`[describe it]`) that appears on `[N]` pages / `[M]` times per page. I'm not sure whether it needs its own component class or if it's simple enough to leave inline. Here's roughly what it looks like: `[describe or paste the markup/locators]`.
+
+Sharing the actual repeat count and markup usually settles it fast - experienced reviewers can spot
+in seconds whether the duplication is real enough to be worth a root-scoped class or still small
+enough to leave alone for now.
+
+- [Selenium — official Page Object Models documentation](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/)
+- [Martin Fowler — PageObject](https://martinfowler.com/bliki/PageObject.html)
+
+🎬 [Selenium Page Object Model Framework | Selenium POM | Selenium Tutorial For Beginners — Simplilearn](https://www.youtube.com/watch?v=N2ggGelTaTI) (8 min)
+
+- A component object models one reusable UI piece that appears on more than one page, or more than once on one page - a nav bar, a modal, a product card.
+- It shares a page class's anatomy plus one addition: a root element that scopes every internal lookup to just its slice of the DOM.
+- Page classes hold components as fields and delegate to them - they never re-declare a shared widget's own locators.
+- Root-scoping is what makes a component safely repeatable - instantiate it once per occurrence of the widget, and each instance stays correctly isolated.
+- The payoff mirrors POM's own: a widget-wide redesign is absorbed by editing one component class, not every page class that happens to render it.
+
+
+## Related notes
+
+- [[Notes/framework-design/page-object-model/the-pom-pattern|The POM pattern]]
+- [[Notes/framework-design/page-object-model/page-classes|Page classes]]
+- [[Notes/framework-design/reusable-components/base-classes|Base classes]]
+
+
+---
+_Source: `packages/curriculum/content/notes/framework-design/page-object-model/component-objects.mdx`_

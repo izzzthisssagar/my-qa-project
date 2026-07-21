@@ -1,0 +1,175 @@
+---
+title: "Output devices"
+tags: ["computer-basics", "hardware", "track-a"]
+updated: "2026-07-10"
+---
+
+# Output devices
+
+*Every way a computer talks back — screens, speakers, printers, vibrations and blinking lights — and why output is where bugs finally become visible.*
+
+> Here's a thought that will quietly reorganize your brain: **a bug that never reaches
+> an output device doesn't exist for the user.** Wrong math, corrupted data, crashed
+> process — until it hits a screen, a speaker or a printout, nobody knows. Output
+> devices are where software finally has to show its work. Which makes them, for a
+> future tester, the scene of every crime.
+
+> **In real life**
+>
+> If input devices are the computer's senses, output devices are its **voice, face and
+> body language**. The screen is its face (most expressive, watched constantly), the
+> speaker its voice, vibration its nudge on your shoulder, and the printer its
+> handwriting — famously terrible, frequently refused. You judge a person by face,
+> voice and gestures; users judge software the exact same way, through its outputs.
+
+## The output lineup
+
+- **Screen / monitor** — the overwhelming main channel. Chapter 1 covered its numbers (size, resolution, refresh rate); everything you test will be judged mostly here.
+- **Speakers & headphones** — alerts, calls, media. Also the betrayal channel: full-volume audio in a quiet office remains output's greatest prank.
+- **Printer** — digital → paper. Confidently malfunctioning since 1985 (still not forgiven from Chapter 1).
+- **Vibration / haptics** — your phone tapping your wrist or buzzing your pocket. Output you FEEL. Games and phones use it constantly.
+- **Status lights (LEDs)** — the humble heroes: charging light, disk activity, caps lock, webcam-on. One diode, one honest fact.
+
+Spot them on hardware you already know:
+
+![An open laptop viewed from the front, used here to identify its output devices](laptop-frontal.png)
+*Illustration: Wikimedia Commons, CC0 (public domain). [Source](https://commons.wikimedia.org/wiki/File:Black_laptop_computer_open_frontal.svg)*
+- **Screen — output channel #1** — Everything the machine wants you to know arrives here: UI, errors, this sentence. When testers write 'expected vs actual', both halves are usually describing this rectangle.
+- **Status LEDs — tiny truth-tellers** — Power, charging, disk activity. No software can fake them — when the screen is black, these lights are your only witnesses. Chapter 1's 'interrogate the lights' advice, now with its proper name: output.
+- **Webcam light — the honesty LED** — Wired so recording = light on. It's an OUTPUT device reporting on an INPUT device — hardware testifying about hardware. Testing that this light truly can't be bypassed is real security work.
+- **Speaker grilles & jack — the voice** — Sound out: alerts, calls, media. First diagnostic question when 'there's no sound': WHICH output is it trying to use? Laptops juggle speakers, headphones and HDMI audio — and love picking the wrong one.
+- **The keyboard — trick pin!** — Input, not output! ...Except the backlight and the Caps Lock LED, which ARE output. One object, both directions — the touchscreen lesson from last topic, mirrored.
+
+## Expected vs actual — the tester's native language
+
+Every bug report you will ever write has the same skeleton: **expected output** vs
+**actual output**. The button should say "Saved" (expected), it says "Error 500"
+(actual). The invoice should print two pages, it prints 47 blank ones (printer's
+gonna printer). Learning to describe outputs precisely — which screen, which state,
+which sound, which light — is learning to write bugs that developers can actually fix.
+
+> **Tip**
+>
+> Output has a quality bar beyond "correct": **is it perceivable?** An error message in
+> grey-on-grey, a success sound with no visual twin (deaf users), a red/green status
+> distinction (8% of men are red-green colorblind — that's why the notes' quiz buttons
+> also use ✓ and ✕, not just colors). Accessibility testing = checking outputs reach
+> ALL humans. Track C module, already waiting for you.
+
+### Your first time: Your mission: output audit
+
+- [ ] Count the output devices on your machine + phone — Screens, speakers, vibration motor, every LED. The average phone has 4+ output channels; most owners have never listed them.
+- [ ] Find your audio output switcher — Click the volume icon (Windows) / Control Centre (Mac): there's a MENU of output devices. Speakers vs headphones vs HDMI — now you know where the sound 'went' when it vanishes.
+- [ ] Catch a status LED being honest — Watch the charging light change when you plug/unplug, or the webcam light during a call. One diode, one fact, zero lies.
+- [ ] Trigger a haptic — Phone: type on the keyboard and feel the tick, or long-press an icon. That's output aimed at your skin — and yes, apps can get it wrong (buzzing too much = a real bug category).
+- [ ] Write one expected-vs-actual pair — Do anything in any app and describe it: 'Expected: X appears. Actual: X appeared.' Boring when it matches — but you just used the exact sentence structure of every bug report ever filed.
+
+Output channels: audited. Expected-vs-actual: rehearsed. You're speaking tester as a
+second language now.
+
+- **No sound. Nothing. The video plays, silence reigns.**
+  Follow the output chain: (1) volume up + not muted (including the APP's own volume slider), (2) the output switcher — is sound going to disconnected headphones or the TV via HDMI? (3) try another app (scopes it: one app vs system-wide). It's the wrong-output-selected case more than half the time. The sound wasn't missing; it was performing to an empty room.
+- **The screen has a stuck pixel — one dot never changes color.**
+  Run a full-screen solid color (search 'dead pixel test') to confirm. One stuck pixel: annoying, common, rarely covered by warranty. A growing cluster or lines: real panel damage, warranty conversation. Either way, you've just done a genuine display test — professionals literally run 'solid color' screens to inspect panels.
+- **The printer prints... eventually... sometimes... pages of symbols.**
+  The classic garbage-print is a driver mismatch — the computer is speaking the wrong dialect to the printer. Delete the print queue first (jobs pile up and re-fail forever), then reinstall/update the printer driver. And yes: turn the printer off and on. It is legally required to work at least once per ritual.
+- **My phone doesn't vibrate for messages anymore.**
+  Layers, in order: Do Not Disturb / Focus mode on? App's own notification settings allow vibration? System sound settings have vibration enabled? It's a permissions-and-modes onion, and the answer is almost always in one of the three layers — not a broken motor.
+- **Second screen mirrors when I want extend (or vice versa).**
+  One keystroke: Windows key+P cycles the modes (Mac: Displays settings → arrangement). While you're there, notice this is pure output CONFIGURATION — the hardware was fine all along, the routing was wrong. Output problems are routing problems surprisingly often.
+
+### Where to check
+
+Output devices report for duty in the same places as everything else:
+
+- **Sound:** the output-device menu (volume icon / Control Centre) — see EXACTLY where audio is routed right now.
+- **Displays:** Settings → Display — every connected screen, resolution, arrangement, mirror/extend.
+- **Printers:** Settings → Printers — including the queue where failed jobs go to sulk. Clearing it fixes more than any other printer action.
+- **Notifications/haptics:** the per-app notification settings — the onion's layers, all in one place.
+
+Routing first, hardware second: most 'broken output' is output pointed somewhere
+you're not looking. (Write that on a sticky note; it'll pay rent.)
+
+> **Common mistake**
+>
+> Reporting a bug as "it doesn't work" — the phrase every developer dreads. WHAT
+> doesn't work, on WHICH output? "No error appears on screen and no email arrives"
+> is two precise output failures; "doesn't work" is a shrug. You now know outputs
+> well enough to name them — so name them. This single habit separates bug reports
+> that get fixed from bug reports that get closed as 'cannot reproduce'.
+
+**From decision to perception — press Play**
+
+1. **🧠 App decides** — 'Show Saved ✓', 'play the ding', 'buzz the wrist' — the app chooses an output and asks the OS to make it real.
+2. **🎩 OS routes** — The manager picks the pathway: which screen, which audio device, which motor. The step where sound 'vanishes' into disconnected headphones.
+3. **🖥 Device performs** — Pixels light, cones vibrate, motors tick. Hardware does exactly what it was told — no more, no less.
+4. **👁 Human perceives — or doesn't** — Did it reach the user? Grey-on-grey text, sound with no visual twin, color-only signals — output that fires but isn't PERCEIVED is still a bug. Accessibility lives on this stage.
+
+*Try it — one message, every output channel*
+
+```python
+# The same fact, rendered for different output devices. Note what each channel needs.
+message = "Upload complete"
+
+print("SCREEN  :", message, "✓")
+print("SOUND   : *ding*  (needs a visual twin for deaf users)")
+print("HAPTIC  : bzzt-bzzt  (what phones say when pockets listen)")
+print("LED     : ● green  (plus the ✓ — never color alone, 8% of men can't see the difference)")
+```
+
+### Worked example: the vanished sound, traced through the routing
+
+Movie night, no audio, rising panic. The output chain, walked:
+
+1. **Layer 1 — the app:** its volume slider is up, the video is playing. Not muted there.
+2. **Layer 2 — the system:** volume icon → output device menu shows sound routed to "TV (HDMI)" — from a projector session two days ago. The laptop has been faithfully performing to a disconnected TV.
+3. **Act:** switch output to Speakers. Sound, instantly.
+4. **Verdict:** nothing was broken — output was **misrouted**: Which physical device the system sends a signal to. Misrouted output looks identical to broken output.. 'Routing first, hardware second' turned a movie-night crisis into a 90-second fix. Write the sticky note.
+
+🎬 [Techquickie — display types and what makes screens differ](https://www.youtube.com/watch?v=1KGDCJKihhc) (6 min)
+
+**Quiz.** A user says a notification 'didn't happen'. The app's logs show it WAS sent. Which output-thinking question cracks the case?
+
+- [ ] Was the notification ever really sent?
+- [x] Which output channels was it supposed to use — banner, sound, vibration — and which layer (Focus mode, app settings, system settings) might have swallowed it?
+- [ ] Is the phone too old for notifications?
+- [ ] Did the user imagine it?
+
+*Sent ≠ perceived. Between 'sent' and the human sit multiple output channels, each with mute switches (Focus modes, per-app toggles, volume). Tracing WHERE in the output chain it died is the whole diagnosis — and notice the logs already ruled out the input half. Chain-thinking: you'll use it weekly.*
+
+- **Output device** — Any channel of data OUT of the machine to a human: screen, speaker, printer, haptics, LEDs. Where software shows its work.
+- **Expected vs actual** — The skeleton of every bug report: what output SHOULD have appeared vs what DID. Precision here = fixable bugs.
+- **Output routing** — Sound to the wrong device, display mirrored not extended — 'broken' output is often just misdirected output. Check routing before hardware.
+- **Status LED** — One diode, one honest fact (power, charging, recording). When the screen is dark, the LEDs still testify.
+- **Perceivable output** — Correct isn't enough — outputs must reach ALL users: contrast for low vision, visual twins for sounds, never color alone. That's accessibility.
+
+### Challenge
+
+Break out the sticky note: **"Routing first, hardware second."** Then earn it — go
+change your audio output device on purpose, play a song, and route it back. Next,
+write one real expected-vs-actual pair from any app that mildly annoyed you this
+week. Keep it. When we reach bug reports in Track C, you'll upgrade that sentence
+into your first professional-grade bug.
+
+### Ask the community
+
+> Expected output: [what should happen, which channel]. Actual: [what happens]. Scope: [one app / system-wide]. Already checked: [routing/settings/layers]. What am I missing?
+
+Look at that prompt — it's literally a bug report template now. Output questions
+asked in expected-vs-actual form get answered fastest, because you've done the
+translation work. You're not learning to ask for help; you're learning the industry's
+native file format for problems.
+
+- [GCFGlobal — parts of a computer (output tour)](https://edu.gcfglobal.org/en/computerbasics/basic-parts-of-a-computer/1/)
+- [W3C — accessibility fundamentals (outputs for everyone)](https://www.w3.org/WAI/fundamentals/accessibility-intro/)
+- [Techquickie — display types & what makes screens differ](https://www.youtube.com/watch?v=1KGDCJKihhc)
+
+- Output = where software shows its work — and where every bug finally becomes visible to a human.
+- Expected vs actual output is the skeleton of all bug reporting. Name the channel, name the state.
+- Routing first, hardware second: 'broken' outputs are often just pointed somewhere you're not looking.
+- Status LEDs are incorruptible witnesses; the webcam light is output testifying about input.
+- Correct output isn't enough — it must be perceivable by all users. That's accessibility, and it's testable.
+
+
+---
+_Source: `packages/curriculum/content/notes/how-a-computer-works/input-and-output-devices/output-devices.mdx`_
