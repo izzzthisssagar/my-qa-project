@@ -208,7 +208,7 @@ cryptography, which was never the tester's job to re-verify.
 - **The browser's address bar during the login step** — the single fastest way to confirm credentials are being typed into the real authorization server's domain, not the client's.
 - **The decoded access token's scope claims** — compare against exactly what was approved on the consent screen; see [[api-testing-fundamentals/auth-manually/bearer-and-jwt]] for how to decode it.
 - **The provider's connected-apps / account settings page** — where a grant is revoked from the user's side; the natural place to trigger the revocation test.
-- **[[security/owasp/auth-failures]]** — scope escalation and broken revocation are both catalogued authentication/authorization failure classes this note's tests feed directly into.
+- **[[api-and-modern-security/owasp-api-security-top-10-2023/broken-auth-for-apis]]** — scope escalation and broken revocation are both catalogued authentication/authorization failure classes this note's tests feed directly into.
 
 ### Worked example: a scope-escalation bug found by decoding, not by reading docs
 
@@ -276,7 +276,7 @@ whether a behavior is disclosed and bounded or not.
 
 - [[Notes/api-testing-fundamentals/auth-manually/bearer-and-jwt|Bearer / JWT]]
 - [[Notes/api-testing-fundamentals/auth-manually/api-keys|API keys]]
-- [[Notes/security/owasp/auth-failures|Broken authentication]]
+- [[Notes/api-and-modern-security/owasp-api-security-top-10-2023/broken-auth-for-apis|Broken auth for APIs]]
 
 
 ---

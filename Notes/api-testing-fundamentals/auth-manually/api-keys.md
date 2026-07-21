@@ -189,7 +189,7 @@ You've tested a whole authentication scheme with five requests - and practiced t
 - **The API's own docs, auth section** — which header the key goes in, whether query-string keys are (regrettably) supported, and what scopes exist. Test against what's DOCUMENTED, then poke at what isn't.
 - **The provider's key-management dashboard** — where keys are created, scoped, rotated, and revoked; also usually where per-key usage shows up, which is how you confirm your test requests were attributed to the right key.
 - **Response headers on a 200** — many key-authed APIs return rate-limit headers (X-RateLimit-*) tied to the key; they're evidence of which caller the server thinks you are.
-- **[[security/owasp/auth-failures]]** — the wider catalog of authentication failures this chapter's checks feed into; a leaked or unrevokable key is one instance of a bigger pattern.
+- **[[api-and-modern-security/owasp-api-security-top-10-2023/broken-auth-for-apis]]** — the wider catalog of authentication failures this chapter's checks feed into; a leaked or unrevokable key is one instance of a bigger pattern.
 
 ### Worked example: the revoked key that kept working
 
@@ -242,7 +242,7 @@ The most useful replies will separate the deliberate ambiguities (unknown vs rev
 - [[Notes/api-testing-fundamentals/auth-manually/basic-auth|Basic auth]]
 - [[Notes/api-testing-fundamentals/auth-manually/bearer-and-jwt|Bearer / JWT]]
 - [[Notes/api-testing-fundamentals/postman-and-curl/collections-and-environments|Collections & environments]]
-- [[Notes/security/owasp/auth-failures|Broken authentication]]
+- [[Notes/api-and-modern-security/owasp-api-security-top-10-2023/broken-auth-for-apis|Broken auth for APIs]]
 
 
 ---

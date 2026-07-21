@@ -262,7 +262,7 @@ setup predates built-in Selenium Manager. Use the modern `new ChromeDriver()` fl
 
 ## Related notes
 
-- [[Notes/automation/frameworks/selenium-java|Selenium with Java]]
+- [[Notes/automation-foundations/the-tool-landscape/selenium|Selenium]]
 - [[Notes/selenium-webdriver/setup-and-architecture/drivers-and-selenium-manager|Drivers & Selenium Manager]]
 - [[Notes/selenium-webdriver/setup-and-architecture/first-script-python|First script (Python)]]
 

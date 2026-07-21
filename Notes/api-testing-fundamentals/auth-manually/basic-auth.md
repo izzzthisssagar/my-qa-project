@@ -245,7 +245,7 @@ The most useful replies will distinguish spec-correctness findings (missing chal
 - [[Notes/api-testing-fundamentals/auth-manually/api-keys|API keys]]
 - [[Notes/api-testing-fundamentals/auth-manually/bearer-and-jwt|Bearer / JWT]]
 - [[Notes/the-internet-and-the-web/domains-urls-and-hosting/https-and-the-padlock|HTTPS & the padlock]]
-- [[Notes/security/owasp/auth-failures|Broken authentication]]
+- [[Notes/api-and-modern-security/owasp-api-security-top-10-2023/broken-auth-for-apis|Broken auth for APIs]]
 
 
 ---

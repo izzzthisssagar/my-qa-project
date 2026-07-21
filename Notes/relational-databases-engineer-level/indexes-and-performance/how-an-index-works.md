@@ -157,7 +157,7 @@ Include the full plan and table scale; one node line is not a diagnosis.
 
 - [[Notes/relational-databases-engineer-level/indexes-and-performance/reading-explain-and-execution-plans|Reading EXPLAIN & execution plans]]
 - [[Notes/relational-databases-engineer-level/indexes-and-performance/query-tuning-and-over-indexing-writes|Query tuning & over-indexing writes]]
-- [[Notes/database/sql/select-basics|SELECT, JOIN & aggregate basics]]
+- [[Notes/sql-and-databases-for-testers/reading-data/select-and-where|SELECT & WHERE]]
 
 
 ---

@@ -196,7 +196,7 @@ public class Main {
 - High-stakes flows (checkout, authentication, payment) for a tighter confidence threshold than lower-risk pages, since a wrong silent substitution there costs the most.
 - [[ai-and-the-modern-tester/ai-powered-test-automation/when-ai-automation-lies]] for the broader pattern of automated tools reporting false confidence, which self-healing is one specific instance of.
 - [[ai-and-the-modern-tester/ai-powered-test-automation/ai-test-generation-tools]] for how the same fingerprint-and-score approach shows up in AI-generated test authoring, not just locator repair.
-- [[automation/fundamentals/locators]] for the underlying locator strategies self-healing tools are scoring against in the first place.
+- [[selenium-webdriver/locators/locator-strategy]] for the underlying locator strategies self-healing tools are scoring against in the first place.
 
 ### Worked example: a healed locator that quietly latched onto the wrong product
 
@@ -251,7 +251,7 @@ Set up a self-healing wrapper (Healenium or similar) on one small existing test.
 
 - [[Notes/ai-and-the-modern-tester/ai-powered-test-automation/ai-test-generation-tools|AI test generation tools]]
 - [[Notes/ai-and-the-modern-tester/ai-powered-test-automation/when-ai-automation-lies|When AI automation lies]]
-- [[Notes/automation/fundamentals/locators|Locators & selectors]]
+- [[Notes/selenium-webdriver/locators/locator-strategy|Locator strategy]]
 
 
 ---

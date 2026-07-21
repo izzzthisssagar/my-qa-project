@@ -205,7 +205,7 @@ You've exercised the three tests that matter most on any bearer scheme - decode,
 - **A token that worked ten minutes ago now returns 401, and nothing about the request changed.**
   Decode it and read exp - bearer tokens are short-lived by design, and an expired token is the single most common cause of a 'suddenly 401' report. Check whether the error body distinguishes expired from invalid; if there's a refresh-token flow, this is where it should have kicked in, and 'the client didn't refresh' is a real client-side bug worth its own ticket.
 - **A tampered token (edited claim) is ACCEPTED with a 200 instead of rejected.**
-  Stop - this is a critical finding, not a curiosity. Confirm it cleanly: take a valid token, change exactly one character in the payload segment, resend, capture the 200. Common root causes worth naming in the report: signature not verified at all, alg:none accepted, or the wrong key used. This is the OWASP-catalogued class of broken authentication - see [[security/owasp/auth-failures]] - and it means any user can self-promote.
+  Stop - this is a critical finding, not a curiosity. Confirm it cleanly: take a valid token, change exactly one character in the payload segment, resend, capture the 200. Common root causes worth naming in the report: signature not verified at all, alg:none accepted, or the wrong key used. This is the OWASP-catalogued class of broken authentication - see [[api-and-modern-security/owasp-api-security-top-10-2023/broken-auth-for-apis]] - and it means any user can self-promote.
 - **The same token works on some endpoints but 401s on others within the same API.**
   Decode the claims and compare against what each endpoint needs. A valid, correctly-signed token can still be refused for INSUFFICIENT scope/role - and that refusal should be 403 (authenticated but not allowed), not 401 (not authenticated). A 401 for a scope failure is the same 401-vs-403 confusion covered in the API keys note; a genuinely-expired-on-some-clocks token is the subtler case (server clock skew), worth checking if the exp is very close to now.
 
@@ -214,7 +214,7 @@ You've exercised the three tests that matter most on any bearer scheme - decode,
 - **jwt.io or Postman's token decoder** — paste any JWT to see its header and payload instantly; the fastest way to read exp, sub, and role without touching a secret.
 - **The 401 response body's error code** — `invalid_token`, `token_expired`, `invalid_signature`; a well-behaved API distinguishes these, and the distinction tells a client whether to refresh, re-login, or panic.
 - **The login/token response** — where you first receive the token and can confirm its claims match the account you authenticated as; also where a refresh token (if any) is issued.
-- **[[security/owasp/auth-failures]]** — the tamper test and alg:none check feed directly into this broader identification-and-authentication-failures category.
+- **[[api-and-modern-security/owasp-api-security-top-10-2023/broken-auth-for-apis]]** — the tamper test and alg:none check feed directly into this broader identification-and-authentication-failures category.
 
 ### Worked example: the token that lived in the URL
 
@@ -232,7 +232,7 @@ You've exercised the three tests that matter most on any bearer scheme - decode,
 - [ ] jwt.io must have the server's secret key, which is how it decoded the payload
 - [ ] The claims are readable only because this particular token used a weak algorithm; strong-algorithm JWTs hide their payloads
 
-*This note's Python playground decodes the payload with zero knowledge of the signing secret - because a JWT's header and payload are base64url-ENCODED, a reversible transport encoding, not encrypted. So readable claims are the normal, expected behavior of every standard JWT, and the real question is whether anything SENSITIVE (a password, full card number, internal secret) was put into claims that any token-holder can trivially read - that would be the actual finding. Option one confuses encoding with encryption; option three is wrong because decoding needs no key at all (only VERIFYING the signature needs the secret); option four is wrong because the signing algorithm protects the signature's strength, not the payload's readability - no standard JWT algorithm encrypts the payload (that would be JWE, a different construct). The tamper defense - not the readability - is what the signature provides, which is why [[security/owasp/auth-failures]] pairs the readable-payload fact with the edit-a-claim test.*
+*This note's Python playground decodes the payload with zero knowledge of the signing secret - because a JWT's header and payload are base64url-ENCODED, a reversible transport encoding, not encrypted. So readable claims are the normal, expected behavior of every standard JWT, and the real question is whether anything SENSITIVE (a password, full card number, internal secret) was put into claims that any token-holder can trivially read - that would be the actual finding. Option one confuses encoding with encryption; option three is wrong because decoding needs no key at all (only VERIFYING the signature needs the secret); option four is wrong because the signing algorithm protects the signature's strength, not the payload's readability - no standard JWT algorithm encrypts the payload (that would be JWE, a different construct). The tamper defense - not the readability - is what the signature provides, which is why [[api-and-modern-security/owasp-api-security-top-10-2023/broken-auth-for-apis]] pairs the readable-payload fact with the edit-a-claim test.*
 
 - **What 'Bearer' means** — Whoever holds the token is treated as authorized - no further proof asked. Possession IS authentication, so a leaked bearer token is the user until it expires.
 - **A JWT's three parts** — header.payload.signature, base64url-encoded and dot-joined. Header = alg/type; payload = claims (sub, role, iat, exp); signature = HMAC/asymmetric signature over the first two.
@@ -267,7 +267,7 @@ The most useful replies will sort your finding into the right bucket: a tamper-a
 - [[Notes/api-testing-fundamentals/auth-manually/basic-auth|Basic auth]]
 - [[Notes/api-testing-fundamentals/auth-manually/oauth2-for-testers|OAuth2, what a tester needs]]
 - [[Notes/api-testing-fundamentals/postman-and-curl/postman-tests-and-variables|Postman tests & variables]]
-- [[Notes/security/owasp/auth-failures|Broken authentication]]
+- [[Notes/api-and-modern-security/owasp-api-security-top-10-2023/broken-auth-for-apis|Broken auth for APIs]]
 
 
 ---

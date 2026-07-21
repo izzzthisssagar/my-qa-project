@@ -273,7 +273,7 @@ Share paths and versions, but remove usernames, access tokens, proxy credentials
 
 ## Related notes
 
-- [[Notes/automation/frameworks/selenium-java|Selenium with Java]]
+- [[Notes/automation-foundations/the-tool-landscape/selenium|Selenium]]
 - [[Notes/selenium-webdriver/setup-and-architecture/webdriver-architecture|WebDriver architecture]]
 - [[Notes/selenium-webdriver/setup-and-architecture/first-script-java|First script (Java)]]
 - [[Notes/selenium-webdriver/setup-and-architecture/first-script-python|First script (Python)]]
